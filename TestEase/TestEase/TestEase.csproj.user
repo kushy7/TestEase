@@ -12,9 +12,6 @@
     <None Update="AppShell.xaml">
       <SubType>Designer</SubType>
     </None>
-    <None Update="MainPage.xaml">
-      <SubType>Designer</SubType>
-    </None>
     <None Update="Platforms\Windows\App.xaml">
       <SubType>Designer</SubType>
     </None>
@@ -25,6 +22,18 @@
       <SubType>Designer</SubType>
     </None>
     <None Update="Resources\Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Views\AboutPage.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Views\ModbusPage.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Views\MQTTBrokerPage.xaml">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

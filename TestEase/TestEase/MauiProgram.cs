@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using TestEase.ViewModels;
+using TestEase.Views;
 
 namespace TestEase
 {
@@ -18,6 +20,20 @@ namespace TestEase
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddSingleton<AppShell>();
+
+            builder.Services.AddTransient<MainPageViewModel>();
+            builder.Services.AddTransient<MainPage>();
+
+            builder.Services.AddTransient<ModbusPageViewModel>();
+            builder.Services.AddTransient<ModbusPage>();
+
+            builder.Services.AddTransient<MQTTBrokerPageViewModel>();
+            builder.Services.AddTransient<MQTTBrokerPage>();
+
+            builder.Services.AddTransient<AboutPageViewModel>();
+            builder.Services.AddTransient<AboutPage>();
 
             return builder.Build();
         }
