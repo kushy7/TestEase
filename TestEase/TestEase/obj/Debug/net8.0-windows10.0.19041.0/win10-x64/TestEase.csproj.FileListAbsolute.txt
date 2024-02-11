@@ -177,3 +177,4 @@ C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\Tes
 C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
 C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\CommunityToolkit.Mvvm.dll
 C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\NModbus.dll
+C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\EasyModbus.dll

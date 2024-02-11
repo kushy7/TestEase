@@ -1,16 +1,42 @@
-﻿using System;
+﻿using ABI.System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace TestEase.Models
 {
-    public class RegisterModel
+    public abstract class RegisterModel(int address, RegisterType type, string name)
     {
-        public int Address { get; set; }
-        public int Value {  get; set; }
-        public RegisterType Type { get; set; }
-        public string? Name { get; set; }
+        public int Address { get; set; } = address;
+        public RegisterType Type { get; set; } = type;
+        public string Name { get; set; } = name;
+    }
+
+    public class Coil(int address, RegisterType type, string name) : RegisterModel(address, type, name)
+    {
+    }
+
+    public class Fixed<T>(int address, RegisterType type, string name, T value) : RegisterModel(address, type, name)
+    {
+        private T value = value;
+    }
+
+
+    public class Range<T>(int address, RegisterType type, string name, T startValue, T endValue) : RegisterModel(address, type, name)
+    {
+        private T startValue = startValue;
+        private T endValue = endValue;
+    }
+
+    public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue) : Range<T>(address, type, name, startValue, endValue)
+    {
+    }
+
+    public class Curve<T>(int address, RegisterType type, string name, T startValue, T endValue, int period) : Range<T>(address, type, name, startValue, endValue)
+    {
+        private int period = period;
     }
 }

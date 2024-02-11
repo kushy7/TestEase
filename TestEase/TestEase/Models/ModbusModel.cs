@@ -8,16 +8,11 @@ using Windows.Graphics.Printing3D;
 
 namespace TestEase.Models
 {
-    public class ModbusModel
+    public class ModbusModel(int port)
     {
-        public int Port { get; set; }
+        public int Port { get; set; } = port;
         public bool IsRunning { get; set; }
 
-        public List<RegisterModel> Registers { get; set; }
-        public ModbusModel(int port)
-        {
-            Port = port;
-            Registers = new List<RegisterModel>();
-        }
+        public ConfigurationModel WorkingConfiguration { get; set; } = new ConfigurationModel();
     }
 }
