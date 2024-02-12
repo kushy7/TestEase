@@ -91,9 +91,13 @@
               "version": "[8.0.1, )",
               "autoReferenced": true
             },
-            "NModbus": {
+            "UraniumUI": {
               "target": "Package",
-              "version": "[3.0.81, )"
+              "version": "[2.7.4, )"
+            },
+            "UraniumUI.Material": {
+              "target": "Package",
+              "version": "[2.7.4, )"
             }
           },
           "imports": [
@@ -150,9 +154,13 @@
               "version": "[8.0.1, )",
               "autoReferenced": true
             },
-            "NModbus": {
+            "UraniumUI": {
               "target": "Package",
-              "version": "[3.0.81, )"
+              "version": "[2.7.4, )"
+            },
+            "UraniumUI.Material": {
+              "target": "Package",
+              "version": "[2.7.4, )"
             }
           },
           "imports": [
@@ -209,9 +217,13 @@
               "version": "[8.0.1, )",
               "autoReferenced": true
             },
-            "NModbus": {
+            "UraniumUI": {
               "target": "Package",
-              "version": "[3.0.81, )"
+              "version": "[2.7.4, )"
+            },
+            "UraniumUI.Material": {
+              "target": "Package",
+              "version": "[2.7.4, )"
             }
           },
           "imports": [
@@ -263,9 +275,13 @@
               "target": "Package",
               "version": "[8.0.3, )"
             },
-            "NModbus": {
+            "UraniumUI": {
               "target": "Package",
-              "version": "[3.0.81, )"
+              "version": "[2.7.4, )"
+            },
+            "UraniumUI.Material": {
+              "target": "Package",
+              "version": "[2.7.4, )"
             }
           },
           "imports": [

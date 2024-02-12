@@ -78,6 +78,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -509,16 +529,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -2362,6 +2416,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -2793,16 +2867,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -4646,6 +4754,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -5077,16 +5205,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -6930,6 +7092,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -7361,16 +7543,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -9214,6 +9430,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -9645,16 +9881,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -11498,6 +11768,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -11929,16 +12219,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -13782,6 +14106,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -14213,16 +14557,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -16066,6 +16444,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -16497,16 +16895,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-android34.0/Plainer.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-android34.0/UraniumUI.Material.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -18337,6 +18769,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -18757,16 +19209,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -18835,6 +19321,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -19255,16 +19761,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -19333,6 +19873,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -19753,16 +20313,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -19831,6 +20425,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -20251,16 +20865,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -20329,6 +20977,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -20749,16 +21417,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -20827,6 +21529,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -21247,16 +21969,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -21325,6 +22081,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -21745,16 +22521,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -21823,6 +22633,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -22243,16 +23073,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-ios17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-ios17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -22321,6 +23185,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -22741,16 +23625,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -22819,6 +23737,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -23239,16 +24177,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -23317,6 +24289,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -23737,16 +24729,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -23815,6 +24841,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -24235,16 +25281,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -24313,6 +25393,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -24733,16 +25833,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -24811,6 +25945,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -25231,16 +26385,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -25309,6 +26497,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -25729,16 +26937,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -25807,6 +27049,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -26227,16 +27489,50 @@
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -26303,6 +27599,26 @@
         "runtime": {
           "lib/net40/EasyModbus.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
           }
         }
       },
@@ -26869,16 +28185,16 @@
           }
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -26897,6 +28213,40 @@
           "runtimes/win/lib/net8.0/System.Speech.dll": {
             "assetType": "runtime",
             "rid": "win"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
           }
         }
       }
@@ -26966,6 +28316,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -27501,16 +28871,16 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -27524,6 +28894,40 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -27592,6 +28996,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -28127,16 +29551,16 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -28150,6 +29574,40 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -28218,6 +29676,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -28753,16 +30231,16 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -28776,6 +30254,40 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -28844,6 +30356,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -29379,16 +30911,16 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -29402,6 +30934,40 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -29470,6 +31036,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -30005,16 +31591,16 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -30028,6 +31614,40 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -30096,6 +31716,26 @@
           }
         }
       },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/8.0.0": {
         "type": "package",
         "dependencies": {
@@ -30631,16 +32271,16 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -30654,6 +32294,40 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
         }
       }
     },
@@ -30719,6 +32393,26 @@
         "runtime": {
           "lib/net40/EasyModbus.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "InputKit.Maui/4.4.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
           }
         }
       },
@@ -31263,16 +32957,16 @@
           "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         },
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "related": ".xml"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "related": ".pdb"
           }
         }
       },
@@ -31286,6 +32980,40 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "type": "package",
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "related": ".pdb"
+          }
         }
       }
     }
@@ -31404,6 +33132,87 @@
         "lib/net6.0-android31.0/GoogleGson.aar",
         "lib/net6.0-android31.0/GoogleGson.dll",
         "lib/net6.0-android31.0/GoogleGson.xml"
+      ]
+    },
+    "InputKit.Maui/4.4.1": {
+      "sha512": "okUd7mMj6ig/mIXWmtfJnc36uCQInTtBnMxNHcd1mP7grstKBXxj3atg4xvI6E04lEbmsePlMV2Pf9qCOxK0nw==",
+      "type": "package",
+      "path": "inputkit.maui/4.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/icon512.png",
+        "contentFiles/any/net8.0-android34.0/icon512.png",
+        "contentFiles/any/net8.0-ios17.0/icon512.png",
+        "contentFiles/any/net8.0-maccatalyst17.0/icon512.png",
+        "contentFiles/any/net8.0-windows10.0.19041/icon512.png",
+        "contentFiles/any/net8.0/icon512.png",
+        "icon512.png",
+        "inputkit.maui.4.4.1.nupkg.sha512",
+        "inputkit.maui.nuspec",
+        "lib/net8.0-android34.0/InputKit.Maui.dll",
+        "lib/net8.0-android34.0/InputKit.Maui.pdb",
+        "lib/net8.0-android34.0/InputKit.Maui.xml",
+        "lib/net8.0-ios17.0/InputKit.Maui.dll",
+        "lib/net8.0-ios17.0/InputKit.Maui.pdb",
+        "lib/net8.0-ios17.0/InputKit.Maui.xml",
+        "lib/net8.0-maccatalyst17.0/InputKit.Maui.dll",
+        "lib/net8.0-maccatalyst17.0/InputKit.Maui.pdb",
+        "lib/net8.0-maccatalyst17.0/InputKit.Maui.xml",
+        "lib/net8.0-windows10.0.19041/InputKit.Maui.dll",
+        "lib/net8.0-windows10.0.19041/InputKit.Maui.pdb",
+        "lib/net8.0-windows10.0.19041/InputKit.Maui.xml",
+        "lib/net8.0/InputKit.Maui.dll",
+        "lib/net8.0/InputKit.Maui.pdb",
+        "lib/net8.0/InputKit.Maui.xml",
+        "src/InputKit.Maui/Handlers/InputKitHandlersCollectionExtension.cs",
+        "src/InputKit.Maui/Handlers/StatefulStackLayoutHandler.cs",
+        "src/InputKit.Maui/InputKit.Maui.csproj",
+        "src/InputKit.Maui/Platforms/Android/Handlers/StatefulStackLayoutHandler.Android.cs",
+        "src/InputKit.Maui/Platforms/MacCatalyst/Handlers/StatefulStackLayoutHandler.MacCatalys.cs",
+        "src/InputKit.Maui/Platforms/Windows/Handlers/StatefulStackLayoutHandler.Windows.cs",
+        "src/InputKit.Maui/Platforms/iOS/Handlers/StatefulStackLayoutHandler.iOS.cs",
+        "src/InputKit.Maui/Shared/Abstraction/ISelection.cs",
+        "src/InputKit.Maui/Shared/Abstraction/IValidatable.cs",
+        "src/InputKit.Maui/Shared/Configuration/GlobalSetting.cs",
+        "src/InputKit.Maui/Shared/Controls/AdvancedEntry.Validation.cs",
+        "src/InputKit.Maui/Shared/Controls/AdvancedEntry.cs",
+        "src/InputKit.Maui/Shared/Controls/AdvancedSlider.cs",
+        "src/InputKit.Maui/Shared/Controls/AutoCompleteEntry.cs",
+        "src/InputKit.Maui/Shared/Controls/AutoCompleteView.cs",
+        "src/InputKit.Maui/Shared/Controls/CheckBox.cs",
+        "src/InputKit.Maui/Shared/Controls/FormView.cs",
+        "src/InputKit.Maui/Shared/Controls/PredefinedShapes.cs",
+        "src/InputKit.Maui/Shared/Controls/RadioButton.cs",
+        "src/InputKit.Maui/Shared/Controls/RadioButtonGroupView.cs",
+        "src/InputKit.Maui/Shared/Controls/SelectionView.cs",
+        "src/InputKit.Maui/Shared/Enums.cs",
+        "src/InputKit.Maui/Shared/Helpers/ColorExtensions.cs",
+        "src/InputKit.Maui/Shared/Helpers/GeometryConverter.cs",
+        "src/InputKit.Maui/Shared/InputKitOptions.cs",
+        "src/InputKit.Maui/Shared/Layouts/StatefulStackLayout.cs",
+        "src/InputKit.Maui/Shared/Resources/arrow_down.png",
+        "src/InputKit.Maui/Shared/Utils/PopupMenu.cs",
+        "src/InputKit.Maui/Shared/Utils/SelectedItemChangedArgs.cs",
+        "src/InputKit.Maui/Shared/Validations/ComparableTypeConverter.cs",
+        "src/InputKit.Maui/Shared/Validations/DigitsOnlyValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/IValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/LettersOnlyValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/MaxLengthValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/MaxValueValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/MinLengthValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/MinValueValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/NumericValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/RegexValidation.cs",
+        "src/InputKit.Maui/Shared/Validations/RequiredValidation.cs",
+        "src/InputKit.Maui/obj/Release/net8.0-android/InputKit.Maui.GlobalUsings.g.cs",
+        "src/InputKit.Maui/obj/Release/net8.0-android/__Microsoft.Android.Resource.Designer.cs",
+        "src/InputKit.Maui/obj/Release/net8.0-ios/InputKit.Maui.GlobalUsings.g.cs",
+        "src/InputKit.Maui/obj/Release/net8.0-ios/InputKit.Maui.nfloat.g.cs",
+        "src/InputKit.Maui/obj/Release/net8.0-maccatalyst/InputKit.Maui.GlobalUsings.g.cs",
+        "src/InputKit.Maui/obj/Release/net8.0-maccatalyst/InputKit.Maui.nfloat.g.cs",
+        "src/InputKit.Maui/obj/Release/net8.0-windows10.0.19041/InputKit.Maui.GlobalUsings.g.cs",
+        "src/InputKit.Maui/obj/Release/net8.0/InputKit.Maui.GlobalUsings.g.cs"
       ]
     },
     "Microsoft.Extensions.Configuration/8.0.0": {
@@ -33505,25 +35314,51 @@
         "tools/x86/GenXbf.dll"
       ]
     },
-    "NModbus/3.0.81": {
-      "sha512": "EzKEp7CHD8ErBL36iMts+6IrZZ9FEqllaD7Y5XzhoRjlxt5yXRughQ1bxPs99QFYFkW5xfkANB0Qs1gAmYGP8Q==",
+    "Plainer.Maui/1.7.1": {
+      "sha512": "rou+ErJ0l2GkJyMYRKtPiPxEtOGngj7Lv7H5NVACG9baPy3D3tGLO5ma16Usem5/vddu8Ov6bZaXntPMQANXQw==",
       "type": "package",
-      "path": "nmodbus/3.0.81",
+      "path": "plainer.maui/1.7.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "lib/net46/NModbus.dll",
-        "lib/net46/NModbus.xml",
-        "lib/net6.0/NModbus.dll",
-        "lib/net6.0/NModbus.xml",
-        "lib/netstandard1.3/NModbus.dll",
-        "lib/netstandard1.3/NModbus.xml",
-        "lib/netstandard2.0/NModbus.dll",
-        "lib/netstandard2.0/NModbus.xml",
-        "nmodbus.3.0.81.nupkg.sha512",
-        "nmodbus.nuspec"
+        "icon.png",
+        "lib/net8.0-android34.0/Plainer.Maui.dll",
+        "lib/net8.0-android34.0/Plainer.Maui.pdb",
+        "lib/net8.0-android34.0/Plainer.Maui.xml",
+        "lib/net8.0-ios17.0/Plainer.Maui.dll",
+        "lib/net8.0-ios17.0/Plainer.Maui.pdb",
+        "lib/net8.0-maccatalyst17.0/Plainer.Maui.dll",
+        "lib/net8.0-maccatalyst17.0/Plainer.Maui.pdb",
+        "lib/net8.0-windows10.0.19041/Plainer.Maui.dll",
+        "lib/net8.0-windows10.0.19041/Plainer.Maui.pdb",
+        "lib/net8.0/Plainer.Maui.dll",
+        "lib/net8.0/Plainer.Maui.pdb",
+        "plainer.maui.1.7.1.nupkg.sha512",
+        "plainer.maui.nuspec",
+        "src/Plainer.Maui/Controls/DatePickerView.cs",
+        "src/Plainer.Maui/Controls/EditorView.cs",
+        "src/Plainer.Maui/Controls/EntryView.cs",
+        "src/Plainer.Maui/Controls/PickerView.cs",
+        "src/Plainer.Maui/Controls/TimePickerView.cs",
+        "src/Plainer.Maui/Handlers/DatePickerViewHandler.cs",
+        "src/Plainer.Maui/Handlers/EditorViewHandler.cs",
+        "src/Plainer.Maui/Handlers/EntryViewHandler.cs",
+        "src/Plainer.Maui/Handlers/PickerViewHandler.cs",
+        "src/Plainer.Maui/Handlers/TimePickerViewHandler.cs",
+        "src/Plainer.Maui/MauiHandlerCollectionExtensions.cs",
+        "src/Plainer.Maui/Plainer.Maui.csproj",
+        "src/Plainer.Maui/Platforms/Android/PlatformClass1.cs",
+        "src/Plainer.Maui/Platforms/MacCatalyst/PlatformClass1.cs",
+        "src/Plainer.Maui/Platforms/Windows/PlatformClass1.cs",
+        "src/Plainer.Maui/Platforms/iOS/PlatformClass1.cs",
+        "src/Plainer.Maui/obj/Release/net8.0-android/Plainer.Maui.GlobalUsings.g.cs",
+        "src/Plainer.Maui/obj/Release/net8.0-android/__Microsoft.Android.Resource.Designer.cs",
+        "src/Plainer.Maui/obj/Release/net8.0-ios/Plainer.Maui.GlobalUsings.g.cs",
+        "src/Plainer.Maui/obj/Release/net8.0-ios/Plainer.Maui.nfloat.g.cs",
+        "src/Plainer.Maui/obj/Release/net8.0-maccatalyst/Plainer.Maui.GlobalUsings.g.cs",
+        "src/Plainer.Maui/obj/Release/net8.0-maccatalyst/Plainer.Maui.nfloat.g.cs",
+        "src/Plainer.Maui/obj/Release/net8.0-windows10.0.19041.0/Plainer.Maui.GlobalUsings.g.cs",
+        "src/Plainer.Maui/obj/Release/net8.0/Plainer.Maui.GlobalUsings.g.cs"
       ]
     },
     "System.Speech/8.0.0-rc.2.23479.6": {
@@ -33550,6 +35385,52 @@
         "system.speech.8.0.0-rc.2.23479.6.nupkg.sha512",
         "system.speech.nuspec",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "UraniumUI/2.7.4": {
+      "sha512": "6N8FggX+VOTLsEhtonZtkg21AnZR+JEIswCESDI2xJ+viqICKNgIZVve/i+ayHimW4bLzUJ8zAYW2xyyJZaEfA==",
+      "type": "package",
+      "path": "uraniumui/2.7.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net8.0-android34.0/UraniumUI.dll",
+        "lib/net8.0-android34.0/UraniumUI.pdb",
+        "lib/net8.0-android34.0/UraniumUI.xml",
+        "lib/net8.0-ios17.0/UraniumUI.dll",
+        "lib/net8.0-ios17.0/UraniumUI.pdb",
+        "lib/net8.0-maccatalyst17.0/UraniumUI.dll",
+        "lib/net8.0-maccatalyst17.0/UraniumUI.pdb",
+        "lib/net8.0-windows10.0.19041/UraniumUI.dll",
+        "lib/net8.0-windows10.0.19041/UraniumUI.pdb",
+        "lib/net8.0/UraniumUI.dll",
+        "lib/net8.0/UraniumUI.pdb",
+        "logo_128.png",
+        "uraniumui.2.7.4.nupkg.sha512",
+        "uraniumui.nuspec"
+      ]
+    },
+    "UraniumUI.Material/2.7.4": {
+      "sha512": "efUX3+7R01BwMZ57WP/VMfG/o+GYVHGmf2CX9Bw7mFV6ZaaHemCpLBnsoYfuL6sKPBlxXWySY7H/RauoXh53Bw==",
+      "type": "package",
+      "path": "uraniumui.material/2.7.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net8.0-android34.0/UraniumUI.Material.dll",
+        "lib/net8.0-android34.0/UraniumUI.Material.pdb",
+        "lib/net8.0-android34.0/UraniumUI.Material.xml",
+        "lib/net8.0-ios17.0/UraniumUI.Material.dll",
+        "lib/net8.0-ios17.0/UraniumUI.Material.pdb",
+        "lib/net8.0-maccatalyst17.0/UraniumUI.Material.dll",
+        "lib/net8.0-maccatalyst17.0/UraniumUI.Material.pdb",
+        "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll",
+        "lib/net8.0-windows10.0.19041/UraniumUI.Material.pdb",
+        "lib/net8.0/UraniumUI.Material.dll",
+        "lib/net8.0/UraniumUI.Material.pdb",
+        "logo_128.png",
+        "uraniumui.material.2.7.4.nupkg.sha512",
+        "uraniumui.material.nuspec"
       ]
     },
     "Xamarin.Android.Glide/4.15.1.2": {
@@ -35599,7 +37480,8 @@
       "Microsoft.Maui.Controls >= 8.0.3",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.3",
       "Microsoft.NET.ILLink.Tasks >= 8.0.1",
-      "NModbus >= 3.0.81"
+      "UraniumUI >= 2.7.4",
+      "UraniumUI.Material >= 2.7.4"
     ],
     "net8.0-ios17.2": [
       "CommunityToolkit.Maui >= 7.0.1",
@@ -35609,7 +37491,8 @@
       "Microsoft.Maui.Controls >= 8.0.3",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.3",
       "Microsoft.NET.ILLink.Tasks >= 8.0.1",
-      "NModbus >= 3.0.81"
+      "UraniumUI >= 2.7.4",
+      "UraniumUI.Material >= 2.7.4"
     ],
     "net8.0-maccatalyst17.2": [
       "CommunityToolkit.Maui >= 7.0.1",
@@ -35619,7 +37502,8 @@
       "Microsoft.Maui.Controls >= 8.0.3",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.3",
       "Microsoft.NET.ILLink.Tasks >= 8.0.1",
-      "NModbus >= 3.0.81"
+      "UraniumUI >= 2.7.4",
+      "UraniumUI.Material >= 2.7.4"
     ],
     "net8.0-windows10.0.19041": [
       "CommunityToolkit.Maui >= 7.0.1",
@@ -35628,7 +37512,8 @@
       "Microsoft.Extensions.Logging.Debug >= 8.0.0",
       "Microsoft.Maui.Controls >= 8.0.3",
       "Microsoft.Maui.Controls.Compatibility >= 8.0.3",
-      "NModbus >= 3.0.81"
+      "UraniumUI >= 2.7.4",
+      "UraniumUI.Material >= 2.7.4"
     ]
   },
   "packageFolders": {
@@ -35722,9 +37607,13 @@
             "version": "[8.0.1, )",
             "autoReferenced": true
           },
-          "NModbus": {
+          "UraniumUI": {
             "target": "Package",
-            "version": "[3.0.81, )"
+            "version": "[2.7.4, )"
+          },
+          "UraniumUI.Material": {
+            "target": "Package",
+            "version": "[2.7.4, )"
           }
         },
         "imports": [
@@ -35781,9 +37670,13 @@
             "version": "[8.0.1, )",
             "autoReferenced": true
           },
-          "NModbus": {
+          "UraniumUI": {
             "target": "Package",
-            "version": "[3.0.81, )"
+            "version": "[2.7.4, )"
+          },
+          "UraniumUI.Material": {
+            "target": "Package",
+            "version": "[2.7.4, )"
           }
         },
         "imports": [
@@ -35840,9 +37733,13 @@
             "version": "[8.0.1, )",
             "autoReferenced": true
           },
-          "NModbus": {
+          "UraniumUI": {
             "target": "Package",
-            "version": "[3.0.81, )"
+            "version": "[2.7.4, )"
+          },
+          "UraniumUI.Material": {
+            "target": "Package",
+            "version": "[2.7.4, )"
           }
         },
         "imports": [
@@ -35894,9 +37791,13 @@
             "target": "Package",
             "version": "[8.0.3, )"
           },
-          "NModbus": {
+          "UraniumUI": {
             "target": "Package",
-            "version": "[3.0.81, )"
+            "version": "[2.7.4, )"
+          },
+          "UraniumUI.Material": {
+            "target": "Package",
+            "version": "[2.7.4, )"
           }
         },
         "imports": [

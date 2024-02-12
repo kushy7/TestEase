@@ -64,6 +64,24 @@ build_metadata.AdditionalFiles.ManifestResourceName = TestEase.Views.ModbusViews
 build_metadata.AdditionalFiles.TargetPath = Views\ModbusViews\RegisterConfigs.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ModbusViews\RegisterConfigs.xaml
 
+[C:/Users/ethan/Source/Repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/TestEase/TestEase/Views/ModbusViews/RegisterSettings.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TestEase.Views.ModbusViews.RegisterSettings.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ModbusViews\RegisterSettings.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ModbusViews\RegisterSettings.xaml
+
+[C:/Users/ethan/Source/Repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/TestEase/TestEase/Views/ModbusViews/RegisterTable.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TestEase.Views.ModbusViews.RegisterTable.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ModbusViews\RegisterTable.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ModbusViews\RegisterTable.xaml
+
+[C:/Users/ethan/Source/Repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/TestEase/TestEase/Views/ModbusViews/SavedConfigurations.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = TestEase.Views.ModbusViews.SavedConfigurations.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ModbusViews\SavedConfigurations.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ModbusViews\SavedConfigurations.xaml
+
 [C:/Users/ethan/Source/Repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/TestEase/TestEase/Views/ModbusViews/ServerMenu.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = TestEase.Views.ModbusViews.ServerMenu.xaml

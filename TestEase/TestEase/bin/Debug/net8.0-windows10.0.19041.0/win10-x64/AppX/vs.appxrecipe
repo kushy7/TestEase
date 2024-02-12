@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-02-11T23:37:26.424</Modified>
+      <Modified>2024-02-12T06:16:15.429</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-02-11T23:37:26.278</Modified>
+      <Modified>2024-02-12T06:16:15.344</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\TestEase.runtimeconfig.json">
       <PackagePath>TestEase.runtimeconfig.json</PackagePath>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\TestEase.dll">
       <PackagePath>TestEase.dll</PackagePath>
-      <Modified>2024-02-11T23:37:25.324</Modified>
+      <Modified>2024-02-12T06:16:15.077</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>TestEase.exe</PackagePath>
-      <Modified>2024-02-11T23:37:25.365</Modified>
+      <Modified>2024-02-12T06:16:15.081</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -288,7 +288,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\TestEase.deps.json">
       <PackagePath>TestEase.deps.json</PackagePath>
-      <Modified>2024-02-11T23:37:26.110</Modified>
+      <Modified>2024-02-12T05:41:05.884</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.31\lib\net6.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>

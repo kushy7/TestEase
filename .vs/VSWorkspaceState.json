@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\TestEase",
-    "\\TestEase\\TestEase\\bin",
-    "\\TestEase\\TestEase\\bin\\Debug",
-    "\\TestEase\\TestEase\\bin\\Debug\\net8.0-windows10.0.19041.0",
-    "\\TestEase\\TestEase\\bin\\Debug\\net8.0-windows10.0.19041.0\\win10-x64"
+    "\\TestEase"
   ],
-  "SelectedNode": "\\TestEase\\TestEase.sln",
   "PreviewInSolutionExplorer": false
 }

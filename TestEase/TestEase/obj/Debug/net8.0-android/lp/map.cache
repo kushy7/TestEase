@@ -160,3 +160,7 @@ Xamarin.Google.Crypto.Tink.Android.aar
 Xamarin.Google.ErrorProne.Annotations.aar
 CommunityToolkit.Maui.Core.dll
 CommunityToolkit.Maui.dll
+InputKit.Maui.dll
+Plainer.Maui.dll
+UraniumUI.dll
+UraniumUI.Material.dll

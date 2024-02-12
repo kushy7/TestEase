@@ -9,6 +9,15 @@
     <MauiXaml Update="Views\ModbusViews\RegisterConfigs.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Views\ModbusViews\RegisterSettings.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ModbusViews\RegisterTable.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\ModbusViews\SavedConfigurations.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\ModbusViews\ServerMenu.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

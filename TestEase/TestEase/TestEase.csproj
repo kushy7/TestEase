@@ -63,7 +63,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="NModbus" Version="3.0.81" />
+		<PackageReference Include="UraniumUI" Version="2.7.4" />
+		<PackageReference Include="UraniumUI.Material" Version="2.7.4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -83,6 +84,15 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\ModbusViews\RegisterConfigs.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ModbusViews\RegisterSettings.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ModbusViews\RegisterTable.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ModbusViews\SavedConfigurations.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ModbusViews\ServerMenu.xaml">

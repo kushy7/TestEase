@@ -8,6 +8,42 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Test Ease">
 
+    <Shell.TabBarBackgroundColor>black</Shell.TabBarBackgroundColor>
+    <Shell.TitleColor>Blue</Shell.TitleColor>
+    <Shell.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                FontFamily="MaterialIconsOutlined-Regular"
+                Glyph="&#xe51c;"
+                Color="white"
+                Size="20"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </Shell.ToolbarItems>
+    <Shell.TitleView>
+        <FlexLayout BackgroundColor="#EC001E">
+            <Label Text="TEST"
+                   FontFamily="Inter"
+                   TextColor="White"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   HeightRequest="40"
+                   FontSize="Title"
+                   FontAttributes="Bold,Italic"
+                   Padding="10"/>
+            <Label Text="EASE"
+                   FontFamily="Inter"
+                   TextColor="White"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   HeightRequest="40"
+                   FontSize="Title"
+                   FontAttributes="Italic"/>
+            <Switch 
+                HorizontalOptions="End"/>
+        </FlexLayout>
+    </Shell.TitleView>
 
     <TabBar>
         <Tab Title="Modbus">
