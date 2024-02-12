@@ -8,8 +8,5 @@
             Text="Register Table"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <material:DataGrid>
-            
-        </material:DataGrid>
     </VerticalStackLayout>
 </ContentView>

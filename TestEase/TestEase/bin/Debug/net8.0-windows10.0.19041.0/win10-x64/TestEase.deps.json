@@ -15,7 +15,8 @@
           "Microsoft.Extensions.Logging.Debug": "8.0.0",
           "Microsoft.Maui.Controls": "8.0.3",
           "Microsoft.Maui.Controls.Compatibility": "8.0.3",
-          "NModbus": "3.0.81",
+          "UraniumUI": "2.7.4",
+          "UraniumUI.Material": "2.7.4",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.19041.31"
         },
         "runtime": {
@@ -72,6 +73,14 @@
           "lib/net40/EasyModbus.dll": {
             "assemblyVersion": "5.6.0.0",
             "fileVersion": "5.6.0.0"
+          }
+        }
+      },
+      "InputKit.Maui/4.4.1": {
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/InputKit.Maui.dll": {
+            "assemblyVersion": "4.4.1.0",
+            "fileVersion": "4.4.1.0"
           }
         }
       },
@@ -482,11 +491,11 @@
           }
         }
       },
-      "NModbus/3.0.81": {
+      "Plainer.Maui/1.7.1": {
         "runtime": {
-          "lib/net6.0/NModbus.dll": {
-            "assemblyVersion": "3.0.81.0",
-            "fileVersion": "3.0.81.0"
+          "lib/net8.0-windows10.0.19041/Plainer.Maui.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -495,6 +504,30 @@
           "runtimes/win/lib/net8.0/System.Speech.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.23.47906"
+          }
+        }
+      },
+      "UraniumUI/2.7.4": {
+        "dependencies": {
+          "InputKit.Maui": "4.4.1",
+          "Microsoft.Maui.Controls": "8.0.3",
+          "Plainer.Maui": "1.7.1"
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.dll": {
+            "assemblyVersion": "2.7.4.0",
+            "fileVersion": "2.7.4.0"
+          }
+        }
+      },
+      "UraniumUI.Material/2.7.4": {
+        "dependencies": {
+          "UraniumUI": "2.7.4"
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041/UraniumUI.Material.dll": {
+            "assemblyVersion": "2.7.4.0",
+            "fileVersion": "2.7.4.0"
           }
         }
       }
@@ -538,6 +571,13 @@
       "sha512": "sha512-2a5a9smmIu0Tq5zdwMvgO+WDvUgH0JuNv/crAILrDKcNRb8P/AOx9PEyegBiMn1TGXLP3byu0zhsSSUrrVyyXw==",
       "path": "easymodbustcp/5.6.0",
       "hashPath": "easymodbustcp.5.6.0.nupkg.sha512"
+    },
+    "InputKit.Maui/4.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-okUd7mMj6ig/mIXWmtfJnc36uCQInTtBnMxNHcd1mP7grstKBXxj3atg4xvI6E04lEbmsePlMV2Pf9qCOxK0nw==",
+      "path": "inputkit.maui/4.4.1",
+      "hashPath": "inputkit.maui.4.4.1.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/8.0.0": {
       "type": "package",
@@ -693,12 +733,12 @@
       "path": "microsoft.windowsappsdk/1.3.230724000",
       "hashPath": "microsoft.windowsappsdk.1.3.230724000.nupkg.sha512"
     },
-    "NModbus/3.0.81": {
+    "Plainer.Maui/1.7.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-EzKEp7CHD8ErBL36iMts+6IrZZ9FEqllaD7Y5XzhoRjlxt5yXRughQ1bxPs99QFYFkW5xfkANB0Qs1gAmYGP8Q==",
-      "path": "nmodbus/3.0.81",
-      "hashPath": "nmodbus.3.0.81.nupkg.sha512"
+      "sha512": "sha512-rou+ErJ0l2GkJyMYRKtPiPxEtOGngj7Lv7H5NVACG9baPy3D3tGLO5ma16Usem5/vddu8Ov6bZaXntPMQANXQw==",
+      "path": "plainer.maui/1.7.1",
+      "hashPath": "plainer.maui.1.7.1.nupkg.sha512"
     },
     "System.Speech/8.0.0-rc.2.23479.6": {
       "type": "package",
@@ -706,6 +746,20 @@
       "sha512": "sha512-vWd/mmQQo2vXp5aDjwi/bj9DO4MABNMZtYpRhzYBFDzvDln68eZBgW+rYMT81egXmNcnt87+6+GbpZ8GW2VJ6w==",
       "path": "system.speech/8.0.0-rc.2.23479.6",
       "hashPath": "system.speech.8.0.0-rc.2.23479.6.nupkg.sha512"
+    },
+    "UraniumUI/2.7.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6N8FggX+VOTLsEhtonZtkg21AnZR+JEIswCESDI2xJ+viqICKNgIZVve/i+ayHimW4bLzUJ8zAYW2xyyJZaEfA==",
+      "path": "uraniumui/2.7.4",
+      "hashPath": "uraniumui.2.7.4.nupkg.sha512"
+    },
+    "UraniumUI.Material/2.7.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-efUX3+7R01BwMZ57WP/VMfG/o+GYVHGmf2CX9Bw7mFV6ZaaHemCpLBnsoYfuL6sKPBlxXWySY7H/RauoXh53Bw==",
+      "path": "uraniumui.material/2.7.4",
+      "hashPath": "uraniumui.material.2.7.4.nupkg.sha512"
     }
   }
 }

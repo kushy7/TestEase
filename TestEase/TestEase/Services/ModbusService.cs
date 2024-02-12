@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using EasyModbus;
 using TestEase.Models;
-using Windows.Graphics.Printing3D;
+//using Windows.Graphics.Printing3D;
 
 namespace TestEase.Services
 {
