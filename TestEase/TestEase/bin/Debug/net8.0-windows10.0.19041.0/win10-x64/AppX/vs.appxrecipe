@@ -30,25 +30,25 @@
     <AppXManifest Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-02-11T22:35:54.689</Modified>
+      <Modified>2024-02-11T23:37:26.424</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-02-11T22:35:54.539</Modified>
+      <Modified>2024-02-11T23:37:26.278</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\TestEase.runtimeconfig.json">
       <PackagePath>TestEase.runtimeconfig.json</PackagePath>
-      <Modified>2024-02-11T22:35:54.297</Modified>
+      <Modified>2024-02-11T22:55:16.278</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\TestEase.dll">
       <PackagePath>TestEase.dll</PackagePath>
-      <Modified>2024-02-11T22:35:53.327</Modified>
+      <Modified>2024-02-11T23:37:25.324</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>TestEase.exe</PackagePath>
-      <Modified>2024-02-11T22:35:53.371</Modified>
+      <Modified>2024-02-11T23:37:25.365</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -288,7 +288,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\Source\Repos\engr-csc-sdc\2024SpringTeam31-Hitachi-2\TestEase\TestEase\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\TestEase.deps.json">
       <PackagePath>TestEase.deps.json</PackagePath>
-      <Modified>2024-02-11T22:35:54.197</Modified>
+      <Modified>2024-02-11T23:37:26.110</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.31\lib\net6.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>
@@ -297,6 +297,14 @@
     <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.31\lib\net6.0\WinRT.Runtime.dll">
       <PackagePath>WinRT.Runtime.dll</PackagePath>
       <Modified>2023-10-16T19:41:06.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\communitytoolkit.maui\7.0.1\lib\net8.0-windows10.0.19041\CommunityToolkit.Maui.dll">
+      <PackagePath>CommunityToolkit.Maui.dll</PackagePath>
+      <Modified>2023-12-15T13:17:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\communitytoolkit.maui.core\7.0.1\lib\net8.0-windows10.0.19041\CommunityToolkit.Maui.Core.dll">
+      <PackagePath>CommunityToolkit.Maui.Core.dll</PackagePath>
+      <Modified>2023-12-15T13:17:16.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\communitytoolkit.mvvm\8.2.2\lib\net6.0\CommunityToolkit.Mvvm.dll">
       <PackagePath>CommunityToolkit.Mvvm.dll</PackagePath>
@@ -437,6 +445,10 @@
     <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\nmodbus\3.0.81\lib\net6.0\NModbus.dll">
       <PackagePath>NModbus.dll</PackagePath>
       <Modified>2023-10-31T06:09:00.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\system.speech\8.0.0-rc.2.23479.6\runtimes\win\lib\net8.0\System.Speech.dll">
+      <PackagePath>System.Speech.dll</PackagePath>
+      <Modified>2023-09-29T19:04:04.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ethan\.nuget\packages\microsoft.maui.controls.core\8.0.3\lib\net8.0-windows10.0.19041\ar\Microsoft.Maui.Controls.resources.dll">
       <PackagePath>ar\Microsoft.Maui.Controls.resources.dll</PackagePath>

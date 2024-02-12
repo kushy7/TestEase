@@ -8,7 +8,7 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Test Ease">
 
-    
+
     <TabBar>
         <Tab Title="Modbus">
             <ShellContent ContentTemplate="{DataTemplate views:ModbusPage}" />

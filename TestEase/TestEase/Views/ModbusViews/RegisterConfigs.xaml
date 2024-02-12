@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestEase.Views.ModbusViews.RegisterConfigs">
+    <VerticalStackLayout Spacing="10"> <!-- [0]:Title, [1] The rest-->
+        <Label 
+            Text="Register Configurations"
+            HorizontalTextAlignment="Center"
+            BackgroundColor="Grey"
+            Padding="5"
+            />
+        <HorizontalStackLayout Spacing="10"> <!-- [0] Bar+Settings+SavedConfigs, [1] Table -->
+            <VerticalStackLayout Spacing="10"> <!-- [0] Bar, [1] Settings, [2] SavedConfigs-->
+                <HorizontalStackLayout 
+                    BackgroundColor="Green" 
+                    WidthRequest="500" 
+                    HeightRequest="40">
+                    <!--MENU BAR-->
+                    <Button Text="New"></Button>
+                    <Button Text="Save"></Button>
+                    <Button Text="Save As"></Button>
+                    <Label Text="new config"
+                           VerticalTextAlignment="Center"
+                           Padding="20"/>
+                </HorizontalStackLayout>
+                <VerticalStackLayout
+                    BackgroundColor="Green"
+                    HeightRequest="400">
+                    <Label Text="Register Settings" Padding="5"
+                           BackgroundColor="Grey"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout
+                    BackgroundColor="Green"
+                    HeightRequest="400"
+                    Spacing="5">
+                    <Label Text="Saved Configurations" Padding="5"
+                            BackgroundColor="Grey"/>
+                    <SearchBar Placeholder="Search" 
+                               WidthRequest="250" 
+                               HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout 
+                BackgroundColor="BlanchedAlmond"
+                WidthRequest="400"
+                HeightRequest="860"> <!-- TABLE -->
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentView>
