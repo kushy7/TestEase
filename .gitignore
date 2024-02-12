@@ -3,5 +3,75 @@
 ################################################################################
 
 /TestEase/.vs/
+/TestEase/TestEase/bin/
+/TestEase/TestEase/obj/
 .vs/
 /.vs/slnx.sqlite
+
+# Build Results
+/TestEase/TestEase/bin/
+/TestEase/TestEase/obj/
+bin/
+obj/
+*.log
+*.log.*
+
+# User-Specific Files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.unoproj.user
+.vs/
+*.csproj.user
+*.vbproj.user
+
+# Tool-Specific Files
+.vscode/
+*.njsproj
+*.swp
+*.*proj.user
+*.mfractor
+*.pidb
+.DS_Store
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# Package Folders
+packages/
+**/[Pp]ackages/
+*.xap
+.paket/paket.exe
+
+# Build Output
+[Oo]ut/
+*.appx
+*.appxbundle
+*.bundle
+*.ipa
+*.apk
+*.aab
+
+# MAUI-Specific
+*.rd.xml
+wwwroot/
+**/node_modules/ # If using JS libraries or frameworks
+
+# Miscellaneous Files
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Global Configuration Files
+.DS_Store
+.Azure/
+.nuget/
+*.ncrunch*
+*crunch*.local.xml
+local.testsettings
+*.local.settings.json
