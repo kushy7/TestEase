@@ -9,25 +9,22 @@
     <Grid 
         RowSpacing="10" 
         ColumnSpacing="10"
-        Padding="10">
+        Padding="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="120" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <local:ServerMenu 
             Grid.Row="0" Grid.Column="0"
             BackgroundColor="Blue"
-            Padding="0"/>
+            Margin="-20,0,0,0"/>
 
         <local:RegisterConfigs
             Grid.Row="0" Grid.Column="1"
             Grid.ColumnSpan="3"
-            Padding="0"
             BackgroundColor="Red"
             />
     </Grid>

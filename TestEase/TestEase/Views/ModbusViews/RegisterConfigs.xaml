@@ -6,7 +6,7 @@
     <Grid 
         RowSpacing="10" 
         ColumnSpacing="10"
-        Padding="5"
+        Padding="10"
         >
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -31,7 +31,7 @@
                BackgroundColor="Grey"
                Grid.Row="0" Grid.Column="0"
                Grid.ColumnSpan="3"
-               Margin="-5"
+               Margin="-10,-10,-10,0"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
 
