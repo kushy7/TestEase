@@ -9,4 +9,5 @@ public partial class ModbusPage : ContentPage
 		InitializeComponent();
         this.BindingContext = vm;
     }
+
 }

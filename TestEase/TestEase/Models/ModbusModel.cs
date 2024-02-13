@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace TestEase.Models
 {
-    public class ModbusModel(int port)
+    public class ModbusModel
     {
-        public int Port { get; set; } = port;
-        public bool IsRunning { get; set; }
+        public ModbusServerModel SelectedServer { get; set; }
 
-        public ConfigurationModel WorkingConfiguration { get; set; } = new ConfigurationModel();
+        public ModbusModel()
+        {
+            SelectedServer = new ModbusServerModel(502);
+        }
     }
 }

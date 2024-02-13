@@ -16,7 +16,7 @@ namespace TestEase.Services
         private List<ModbusServer> modbusServers = new List<ModbusServer>();
 
         // Manages the servers through the ModbusModel
-        private List<ModbusModel> modbusModels = new List<ModbusModel>();
+        private List<ModbusServerModel> modbusModels = new List<ModbusServerModel>();
 
         public void CreateServer(int port)
         {
@@ -26,7 +26,7 @@ namespace TestEase.Services
             };
             modbusServers.Add(modbusServer);
 
-            ModbusModel modbusModel = new ModbusModel(port);
+            ModbusServerModel modbusModel = new ModbusServerModel(port);
             modbusModels.Add(modbusModel);
         }
         public void StartServer(int port)
@@ -55,6 +55,14 @@ namespace TestEase.Services
                 // Int16/short limited to -32768 to 32767
                 server.holdingRegisters[address] = (short)value;
             }
+        }
+
+        public short[] GetHoldingRegisters(int serverPort)
+        {
+            var server = modbusServers.FirstOrDefault(s => s.Port == serverPort);
+            if (server != null)
+                return server.holdingRegisters.localArray;
+            return null;
         }
 
     }

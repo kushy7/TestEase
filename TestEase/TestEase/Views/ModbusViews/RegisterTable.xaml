@@ -2,11 +2,55 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.RegisterTable"
-             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material">
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             >
     <VerticalStackLayout>
         <Label 
             Text="Register Table"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <material:TabView x:Name="RegisterTypeTab">
+
+
+            <material:TabItem Title="Discrete Inputs">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <Label Text="Discrete Inputs" />
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
+
+
+            <material:TabItem Title="Coils">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <Label Text="Coils" />
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
+
+            <material:TabItem Title="Input Registers">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <Label Text="Input Registers" />
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
+
+            <material:TabItem Title="Holding Registers">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
+        </material:TabView>
+
+
+        <material:DataGrid ItemsSource="{Binding HoldingItems}" UseAutoColumns="True" Margin="30" BackgroundColor="Yellow" />
+
+
     </VerticalStackLayout>
+
 </ContentView>
