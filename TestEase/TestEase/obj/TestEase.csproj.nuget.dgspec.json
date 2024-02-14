@@ -1,28 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ethan\\Source\\Repos\\engr-csc-sdc\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj": {}
+    "C:\\Users\\lukeg\\source\\repos\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ethan\\Source\\Repos\\engr-csc-sdc\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj": {
+    "C:\\Users\\lukeg\\source\\repos\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ethan\\Source\\Repos\\engr-csc-sdc\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj",
+        "projectUniqueName": "C:\\Users\\lukeg\\source\\repos\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj",
         "projectName": "TestEase",
-        "projectPath": "C:\\Users\\ethan\\Source\\Repos\\engr-csc-sdc\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj",
-        "packagesPath": "C:\\Users\\ethan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ethan\\Source\\Repos\\engr-csc-sdc\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\obj\\",
+        "projectPath": "C:\\Users\\lukeg\\source\\repos\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\TestEase.csproj",
+        "packagesPath": "C:\\Users\\lukeg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lukeg\\source\\repos\\2024SpringTeam31-Hitachi-2\\TestEase\\TestEase\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lukeg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
+          "net8.0",
           "net8.0-android",
           "net8.0-ios",
           "net8.0-maccatalyst",
@@ -34,6 +35,10 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          },
           "net8.0-android34.0": {
             "targetAlias": "net8.0-android",
             "projectReferences": {}
@@ -58,6 +63,64 @@
         }
       },
       "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "CommunityToolkit.Maui": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            },
+            "EasyModbusTCP": {
+              "target": "Package",
+              "version": "[5.6.0, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Maui.Controls": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "Microsoft.Maui.Controls.Compatibility": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "System.IO.Ports": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "UraniumUI": {
+              "target": "Package",
+              "version": "[2.7.4, )"
+            },
+            "UraniumUI.Material": {
+              "target": "Package",
+              "version": "[2.7.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        },
         "net8.0-android34.0": {
           "targetAlias": "net8.0-android",
           "dependencies": {

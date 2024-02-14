@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEase", "TestEase\TestEase.csproj", "{36D602BA-6AF4-4F69-8A6E-D65AC21C24A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEase", "TestEase\TestEase.csproj", "{36D602BA-6AF4-4F69-8A6E-D65AC21C24A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEaseTest", "TestEaseTest\TestEaseTest.csproj", "{5BC47D5D-52FC-4CE5-894E-1C5714DFB0D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{36D602BA-6AF4-4F69-8A6E-D65AC21C24A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36D602BA-6AF4-4F69-8A6E-D65AC21C24A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36D602BA-6AF4-4F69-8A6E-D65AC21C24A6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5BC47D5D-52FC-4CE5-894E-1C5714DFB0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BC47D5D-52FC-4CE5-894E-1C5714DFB0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BC47D5D-52FC-4CE5-894E-1C5714DFB0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BC47D5D-52FC-4CE5-894E-1C5714DFB0D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

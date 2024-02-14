@@ -21,7 +21,7 @@ namespace TestEase.Models
 
     public class Fixed<T>(int address, RegisterType type, string name, T value) : RegisterModel(address, type, name)
     {
-        private T value = value;
+        public T value = value;
     }
 
 

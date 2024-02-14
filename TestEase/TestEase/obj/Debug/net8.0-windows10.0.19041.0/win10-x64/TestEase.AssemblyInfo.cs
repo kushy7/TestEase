@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestEase")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+5f2480b24028c1b905d1e8d95278154c119ede28")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+bb69eb3eb3d59e68fd55e83b2c1a2d3d8cd47be2")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestEase")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestEase")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

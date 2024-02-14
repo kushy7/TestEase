@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace TestEase.Helpers
 {
-    class ValueGenerators
+    public class ValueGenerators
     {
+
+        private static readonly Random random = new Random();
+
+        public static int GenerateRandomValueInt(int lowerBound, int upperBound)
+        {
+            return random.Next(lowerBound, upperBound + 1);
+        }
+
+        public static double GenerateRandomValueDouble(double lowerBound, double upperBound)
+        {
+            return random.NextDouble() * (upperBound - lowerBound) + lowerBound;
+        }
+
     }
 }
