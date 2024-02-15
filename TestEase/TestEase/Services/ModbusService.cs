@@ -13,10 +13,10 @@ namespace TestEase.Services
     public class ModbusService
     {
         // Manages the servers through the EasyModbus model
-        private List<ModbusServer> modbusServers = new List<ModbusServer>();
+        public List<ModbusServer> modbusServers = new List<ModbusServer>();
 
         // Manages the servers through the ModbusModel
-        private List<ModbusServerModel> modbusModels = new List<ModbusServerModel>();
+        public List<ModbusServerModel> modbusModels = new List<ModbusServerModel>();
 
         public void CreateServer(int port)
         {

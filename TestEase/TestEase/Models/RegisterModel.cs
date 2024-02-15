@@ -15,8 +15,9 @@ namespace TestEase.Models
         public string Name { get; set; } = name;
     }
 
-    public class Coil(int address, RegisterType type, string name) : RegisterModel(address, type, name)
+    public class CoilOrDiscrete(int address, RegisterType type, string name, bool value) : RegisterModel(address, type, name)
     {
+        public bool value = value;
     }
 
     public class Fixed<T>(int address, RegisterType type, string name, T value) : RegisterModel(address, type, name)
