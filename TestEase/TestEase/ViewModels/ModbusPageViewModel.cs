@@ -24,15 +24,17 @@ namespace TestEase.ViewModels
         {
             service = new ModbusService();
             SelectedServer = new ModbusServerModel(502);
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 60001; i++)
             {
                 HoldingItems.Add(new Register
                 {
-                    Id = i,
+                    Address = i,
                     Value = 0,
                     Name = ""
                 });
+                
             }
+            
             /*
             service.CreateServer(502);
             service.StartServer(502);
@@ -59,10 +61,13 @@ namespace TestEase.ViewModels
 
         public class Register
         {
-            public int Id { get; set; }
+            public int Address { get; set; }
             public short Value { get; set; }
             public string Name { get; set; } = "";
 
         }
+
+
+
     }
 }

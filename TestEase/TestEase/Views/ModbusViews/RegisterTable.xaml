@@ -2,16 +2,25 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.RegisterTable"
-             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material">
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
+             >
     <Grid Margin="20"
-          RowDefinitions="Auto,Auto,*">
+          RowDefinitions="Auto,Auto,Auto,*">
         <Label 
             Grid.Row="0"
             Text="Register Table"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10">
+        <HorizontalStackLayout Grid.Row="1">
+            <Entry x:Name="AddressEntry"
+                   Placeholder="Enter Address"
+                   Keyboard="Numeric"/>
+            <Button Text="Jump" Clicked="OnJumpButtonClicked"/>
+        </HorizontalStackLayout>
+
+        <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="10">
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
                 <RadioButton x:Name="DiscreteInputsRadioButton"
                              GroupName="RegisterGroup"
@@ -41,11 +50,27 @@
             </StackLayout>
         </StackLayout>
 
-        <ScrollView Grid.Row="2">
-            <material:DataGrid ItemsSource="{Binding HoldingItems}" 
-                               UseAutoColumns="True" 
-                               VerticalOptions="Center"
-                               BackgroundColor="DarkBlue" />
-        </ScrollView>
+        <Grid>
+            
+        </Grid>
+        <ListView x:Name="AddressesListView"
+                      ItemsSource="{Binding HoldingItems}"
+                      BackgroundColor="DimGrey"
+                      VerticalScrollBarVisibility="Always"
+                  VerticalOptions="Center"
+                  Grid.Row="3"
+                      >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid ColumnDefinitions="*,*,*">
+                            <Label Text="{Binding Address}" Grid.Column="0"/>
+                            <Label Text="{Binding Value}" Grid.Column="1"/>
+                            <Label Text="{Binding Name}" Grid.Column="2"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </ContentView>
