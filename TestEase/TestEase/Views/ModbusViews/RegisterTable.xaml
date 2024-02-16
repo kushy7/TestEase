@@ -2,61 +2,50 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.RegisterTable"
-             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-             >
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material">
     <Grid Margin="20"
           RowDefinitions="Auto,Auto,*">
-            <Label 
-                Grid.Row="0"
-                Text="Register Table"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+        <Label 
+            Grid.Row="0"
+            Text="Register Table"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
 
-            <material:TabView x:Name="RegisterTypeTab"
-                              Grid.Row="1">
+        <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10">
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                <RadioButton x:Name="DiscreteInputsRadioButton"
+                             GroupName="RegisterGroup"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Discrete Inputs" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
 
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                <RadioButton x:Name="CoilsRadioButton"
+                             GroupName="RegisterGroup"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Coils" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
 
-                <material:TabItem Title="Discrete Inputs">
-                    <material:TabItem.ContentTemplate>
-                        <DataTemplate>
-                            <Label Text="Discrete Inputs" />
-                        </DataTemplate>
-                    </material:TabItem.ContentTemplate>
-                </material:TabItem>
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                <RadioButton x:Name="InputRegistersRadioButton"
+                             GroupName="RegisterGroup"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Input Registers" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
 
-
-                <material:TabItem Title="Coils">
-                    <material:TabItem.ContentTemplate>
-                        <DataTemplate>
-                            <Label Text="Coils" />
-                        </DataTemplate>
-                    </material:TabItem.ContentTemplate>
-                </material:TabItem>
-
-                <material:TabItem Title="Input Registers">
-                    <material:TabItem.ContentTemplate>
-                        <DataTemplate>
-                            <Label Text="Input Registers" />
-                        </DataTemplate>
-                    </material:TabItem.ContentTemplate>
-                </material:TabItem>
-
-                <material:TabItem Title="Holding Registers">
-                    <material:TabItem.ContentTemplate>
-                        <DataTemplate>
-
-                        </DataTemplate>
-                    </material:TabItem.ContentTemplate>
-                </material:TabItem>
-            </material:TabView>
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                <RadioButton x:Name="HoldingRegistersRadioButton"
+                             GroupName="RegisterGroup"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Holding Registers" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </StackLayout>
 
         <ScrollView Grid.Row="2">
-
             <material:DataGrid ItemsSource="{Binding HoldingItems}" 
                                UseAutoColumns="True" 
                                VerticalOptions="Center"
                                BackgroundColor="DarkBlue" />
         </ScrollView>
     </Grid>
-
 </ContentView>
