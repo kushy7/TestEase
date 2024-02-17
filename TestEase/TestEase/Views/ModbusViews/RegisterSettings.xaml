@@ -11,6 +11,7 @@
         <HorizontalStackLayout IsVisible="{Binding IsRegisterSelected}">
             <RadioButton x:Name="FixedRadioButton"
                          Content="Fixed"
+                         IsChecked="True"
                          CheckedChanged="OnRadioButtonCheckedChanged"/>
             <RadioButton x:Name="RandomRadioButton"
                          Content="Random"
@@ -19,14 +20,14 @@
 
         <!-- Conditionaly visible Configuration for FixedRadioButton -->
         <Grid x:Name="FloatConfiguration" ColumnDefinitions="50*, 50*"
-              IsVisible="False">
+              IsVisible="{Binding IsRegisterSelected}">
             <Label Text="Float" VerticalTextAlignment="Center"
                    Grid.Column="0"/>
             <CheckBox Grid.Column="1"/>
         </Grid>
 
         <Grid x:Name="ValueInput" ColumnDefinitions="50*, 50*"
-              IsVisible="False">
+              IsVisible="{Binding IsRegisterSelected}">
             <Label Text="Value" VerticalTextAlignment="Center"
                    Grid.Column="0"/>
             <SearchBar x:Name="AddressEntry"
