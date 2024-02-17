@@ -8,17 +8,19 @@
                HorizontalOptions="Center" />
 
         <!-- Conditional Visibility for Radio Buttons -->
-        <HorizontalStackLayout IsVisible="{Binding IsRegisterSelected}">
+
+        <VerticalStackLayout IsVisible="{Binding IsRegisterSelected}">
+            <HorizontalStackLayout IsVisible="{Binding IsRegisterSelected}">
             <RadioButton x:Name="FixedRadioButton"
                          Content="Fixed"
                          IsChecked="True"
                          CheckedChanged="OnRadioButtonCheckedChanged"/>
-            <RadioButton x:Name="RandomRadioButton"
-                         Content="Random"
+            <RadioButton x:Name="RangeRadioButton"
+                         Content="Range"
                          CheckedChanged="OnRadioButtonCheckedChanged"/>
-        </HorizontalStackLayout>
 
-        <!-- Conditionaly visible Configuration for FixedRadioButton -->
+            </HorizontalStackLayout>
+            <!-- Conditionaly visible Configuration for FixedRadioButton -->
         <Grid x:Name="FloatConfiguration" ColumnDefinitions="50*, 50*"
               IsVisible="{Binding IsRegisterSelected}">
             <Label Text="Float" VerticalTextAlignment="Center"
@@ -37,6 +39,35 @@
         </Grid>
         
         
+        <!-- Conditionaly visible Configuration for RangeRadioButton -->
+        <Grid x:Name="RangeFloatConfiguration" ColumnDefinitions="50*, 50*"
+            IsVisible="False">
+            <Label Text="Float" VerticalTextAlignment="Center"
+           Grid.Column="0"/>
+            <CheckBox Grid.Column="1"/>
+        </Grid>
+        
+        <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"
+      IsVisible="False">
+            <Label Text="Start Value" VerticalTextAlignment="Center"
+           Grid.Column="0"/>
+            <SearchBar x:Name="lowerrange"
+               Placeholder="Enter Value"
+               Keyboard="Numeric"
+               Grid.Column="1" />
+        </Grid>
+        
+        <Grid x:Name="UpperValueInput" ColumnDefinitions="50*, 50*"
+      IsVisible="False">
+            <Label Text="End Value" VerticalTextAlignment="Center"
+           Grid.Column="0"/>
+            <SearchBar x:Name="upperrange"
+               Placeholder="Enter Value"
+               Keyboard="Numeric"
+               Grid.Column="1" />
+        </Grid>
+        </VerticalStackLayout>
+
         <!-- test display data -->
 
         <Label Text="{Binding SelectedRegister.RegisterType}"/>

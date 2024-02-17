@@ -19,8 +19,15 @@ public partial class RegisterSettings : ContentView
                     // Show the Float and Value box components
                     FloatConfiguration.IsVisible = true;
                     ValueInput.IsVisible = true;
+                    RangeFloatConfiguration.IsVisible = false;
+                    LowerValueInput.IsVisible = false;
+                    UpperValueInput.IsVisible = false;
                     break;
-                case "Random":
+                case "Range":
+                    //show the register setting for range
+                    RangeFloatConfiguration.IsVisible = true;
+                    LowerValueInput.IsVisible = true;
+                    UpperValueInput.IsVisible = true;
                     // Hide the Float and Value components
                     FloatConfiguration.IsVisible = false;
                     ValueInput.IsVisible = false;
