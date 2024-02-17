@@ -4,9 +4,12 @@ using EasyModbus;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TestEase.Models;
 using TestEase.Services;
 using static EasyModbus.ModbusServer;
@@ -34,6 +37,21 @@ namespace TestEase.ViewModels
             }
         }
 
+        private IRegister _selectedRegister;
+
+        public IRegister SelectedRegister
+        {
+            get => _selectedRegister;
+            set
+            {
+                if (_selectedRegister != value)
+                {
+                    _selectedRegister = value;
+                    OnPropertyChanged(nameof(SelectedRegister));
+                }
+            }
+        }
+
         private ModbusService service;
         public ModbusPageViewModel()
         {
@@ -45,25 +63,29 @@ namespace TestEase.ViewModels
                 {
                     Address = i,
                     Value = false,
-                    Name = "discrete"
+                    Name = "discrete",
+                    RegisterType = RegisterType.DiscreteInput
                 });
                 Coils.Add(new Register<bool>
                 {
                     Address = i,
                     Value = false,
-                    Name = "coils"
+                    Name = "coils",
+                    RegisterType = RegisterType.Coil
                 });
                 InputRegisters.Add(new Register<short>
                 {
                     Address = i,
                     Value = 0,
-                    Name = "input"
+                    Name = "input",
+                    RegisterType = RegisterType.InputRegister
                 });
                 HoldingRegisters.Add(new Register<short>
                 {
                     Address = i,
                     Value = 0,
-                    Name = "holding"
+                    Name = "holding",
+                    RegisterType = RegisterType.HoldingRegister
                 });
 
                 // Holding Registers by default
@@ -114,20 +136,56 @@ namespace TestEase.ViewModels
             }
         }
 
-        public interface IRegister
+        public interface IRegister : INotifyPropertyChanged
         {
             int Address { get; }
-            string Name { get; }
-            object Value { get; }
+            object Value { get; set; }
+            string Name { get; set; }
+            RegisterType RegisterType { get; }
         }
 
         public class Register<T> : IRegister
         {
             public required int Address { get; set; }
             public required T Value { get; set; }
-            public required String Name { get; set; }
+            public required string Name { get; set; }
+            public required RegisterType RegisterType { get; set; }
 
-            object IRegister.Value => Value;
+            object IRegister.Value
+            {
+                get => Value;
+                set
+                {
+                    if (value is T)
+                    {
+                        this.Value = (T) value;
+                        OnPropertyChanged(nameof(Value));
+                    } else
+                    {
+                        throw new InvalidOperationException($"Cannot assign value of type {value.GetType()} to type {typeof(T)}.");
+                    }
+                }
+            }
+
+            string IRegister.Name
+            {
+                get => Name;
+                set
+                {
+                    if (Name != value)
+                    {
+                        Name = value;
+                        OnPropertyChanged();
+                    }
+                }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
     }

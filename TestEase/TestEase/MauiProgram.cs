@@ -2,7 +2,6 @@
 using TestEase.ViewModels;
 using TestEase.Views;
 using CommunityToolkit.Maui;
-using UraniumUI;
 
 namespace TestEase
 {
@@ -15,7 +14,7 @@ namespace TestEase
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            }).UseMauiCommunityToolkit().UseUraniumUI().UseUraniumUIMaterial();
+            }).UseMauiCommunityToolkit();
             
 #if DEBUG
             builder.Logging.AddDebug();
