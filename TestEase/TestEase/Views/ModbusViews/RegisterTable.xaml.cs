@@ -14,7 +14,44 @@ public partial class RegisterTable : ContentView
     }
     private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        // Your logic here
+        var rButton = sender as RadioButton;        
+
+        if (rButton == null)
+            Application.Current.MainPage.DisplayAlert("Error", "Button not found.", "OK");
+        else
+        {
+            if (!rButton.IsChecked)
+            {
+                return;
+            } else
+            {
+                string tabName = "";
+
+                if (rButton == DiscreteInputsRadioButton)
+                {
+                    tabName = "DiscreteInputs";
+                }
+                else if (rButton == CoilsRadioButton)
+                {
+                    tabName = "Coils";
+                }
+                else if (rButton == InputRegistersRadioButton)
+                {
+                    tabName = "InputRegisters";
+                }
+                else if (rButton == HoldingRegistersRadioButton)
+                {
+                    tabName = "HoldingRegisters";
+                }
+
+                // If there is a matching tab name, call SwitchTab
+                if (!string.IsNullOrEmpty(tabName))
+                {
+                    var viewModel = this.BindingContext as ModbusPageViewModel;
+                    viewModel?.SwitchTab(tabName);
+                }
+            }
+        }
     }
 
     private async void OnJumpButtonClicked(object sender, EventArgs e)
@@ -23,7 +60,7 @@ public partial class RegisterTable : ContentView
         {
             // Assuming the AddressViewModel.Addresses is a list of AddressItem
             // and AddressItem has an 'Address' property.
-            var itemToScrollTo = ((ModbusPageViewModel)this.BindingContext).HoldingItems
+            var itemToScrollTo = ((ModbusPageViewModel)this.BindingContext).CurrentItems
                                  .FirstOrDefault(item => item.Address == addressNumber);
             if (itemToScrollTo != null)
             {
@@ -42,5 +79,14 @@ public partial class RegisterTable : ContentView
             
             
         }
+    }
+
+    private void onItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem != null)
+        {
+            ModbusPageViewModel.IRegister item = e.SelectedItem as ModbusPageViewModel.IRegister;
+        }
+        
     }
 }

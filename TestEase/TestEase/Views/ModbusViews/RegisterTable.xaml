@@ -85,12 +85,10 @@
             <Label Text="Name" Grid.Column="2"/>
         </Grid>
         <ListView x:Name="AddressesListView"
-                  ItemsSource="{Binding HoldingItems}"
+                  ItemsSource="{Binding CurrentItems}"
                   BackgroundColor="DimGrey"
                   VerticalScrollBarVisibility="Always"
-                  VerticalOptions="Center"
-                  SeparatorVisibility="Default"
-                  SeparatorColor="Black"
+                  VerticalOptions="Start"
                   Grid.Row="5">
             <ListView.ItemTemplate>
                 <DataTemplate>
