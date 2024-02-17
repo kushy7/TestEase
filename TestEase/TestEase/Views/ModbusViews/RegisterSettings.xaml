@@ -3,11 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.RegisterSettings">
     <VerticalStackLayout>
-        <Label 
-            Text="Register Settings"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label Text="Register Settings"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
 
+        <!-- Conditional Visibility for Radio Buttons -->
+        <HorizontalStackLayout IsVisible="{Binding IsRegisterSelected}">
+            <RadioButton x:Name="FixedRadioButton"
+                         Content="Fixed"
+                         CheckedChanged="OnRadioButtonCheckedChanged"/>
+            <RadioButton x:Name="RandomRadioButton"
+                         Content="Random"
+                         CheckedChanged="OnRadioButtonCheckedChanged"/>
+        </HorizontalStackLayout>
 
         <Label Text="{Binding SelectedRegister.RegisterType}"/>
         <Label Text="{Binding SelectedRegister.Address}"/>

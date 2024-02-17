@@ -38,7 +38,6 @@ namespace TestEase.ViewModels
         }
 
         private IRegister _selectedRegister;
-
         public IRegister SelectedRegister
         {
             get => _selectedRegister;
@@ -48,8 +47,18 @@ namespace TestEase.ViewModels
                 {
                     _selectedRegister = value;
                     OnPropertyChanged(nameof(SelectedRegister));
+                    // Update IsRegisterSelected whenever SelectedRegister changes
+                    IsRegisterSelected = _selectedRegister != null;
                 }
             }
+        }
+
+        // Add IsRegisterSelected property to indicate if a register is selected
+        private bool _isRegisterSelected;
+        public bool IsRegisterSelected
+        {
+            get => _isRegisterSelected;
+            set => SetProperty(ref _isRegisterSelected, value);
         }
 
         private ModbusService service;
