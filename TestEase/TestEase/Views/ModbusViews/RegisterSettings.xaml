@@ -17,6 +17,27 @@
                          CheckedChanged="OnRadioButtonCheckedChanged"/>
         </HorizontalStackLayout>
 
+        <!-- Conditionaly visible Configuration for FixedRadioButton -->
+        <Grid x:Name="FloatConfiguration" ColumnDefinitions="50*, 50*"
+              IsVisible="False">
+            <Label Text="Float" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <CheckBox Grid.Column="1"/>
+        </Grid>
+
+        <Grid x:Name="ValueInput" ColumnDefinitions="50*, 50*"
+              IsVisible="False">
+            <Label Text="Value" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <SearchBar x:Name="AddressEntry"
+                       Placeholder="Enter Value"
+                       Keyboard="Numeric"
+                       Grid.Column="1" />
+        </Grid>
+        
+        
+        <!-- test display data -->
+
         <Label Text="{Binding SelectedRegister.RegisterType}"/>
         <Label Text="{Binding SelectedRegister.Address}"/>
         <Label Text="{Binding SelectedRegister.Value}"/>

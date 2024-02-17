@@ -1,7 +1,6 @@
 using TestEase.ViewModels;
 using EasyModbus;
 using CommunityToolkit.Maui.Core;
-using Microsoft.Maui.Controls.Compatibility.Platform.UWP;
 using Microsoft.Maui.Controls.Platform;
 
 namespace TestEase.Views.ModbusViews;
