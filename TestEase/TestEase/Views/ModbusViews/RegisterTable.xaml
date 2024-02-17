@@ -6,67 +6,102 @@
              xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
              >
     <Grid Margin="20"
-          RowDefinitions="Auto,Auto,Auto,*">
-        <Label 
-            Grid.Row="0"
-            Text="Register Table"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+          RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+          ColumnDefinitions="*">
+        <StackLayout BackgroundColor="Gray"
+                     Margin="-20,-20,-20,0"
+                     Grid.Row="0">
+            <Label Text="Register Table"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+        </StackLayout>
+        
 
-        <HorizontalStackLayout Grid.Row="1">
-            <Entry x:Name="AddressEntry"
-                   Placeholder="Enter Address"
-                   Keyboard="Numeric"/>
-            <Button Text="Jump" Clicked="OnJumpButtonClicked"/>
-        </HorizontalStackLayout>
+        <Grid ColumnDefinitions="50*, 50*"
+              Grid.Row="1">
+            <Label Text="Only Configured Registers" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <CheckBox Grid.Column="1"/>
+        </Grid>
 
-        <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="10">
-            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+        <Grid ColumnDefinitions="50*, 50*"
+              Grid.Row="2">
+            <Label Text="Move to Address" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <SearchBar x:Name="AddressEntry"
+                       Placeholder="Enter Address"
+                       Keyboard="Numeric"
+                       SearchButtonPressed="OnJumpButtonClicked"
+                       Grid.Column="1" />
+        </Grid>
+
+        
+
+        <Grid ColumnDefinitions="*,*,*,*"
+                     Grid.Row="3" >
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="0">
                 <RadioButton x:Name="DiscreteInputsRadioButton"
                              GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
                              CheckedChanged="RadioButton_CheckedChanged"/>
-                <Label Text="Discrete Inputs" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Discrete Inputs" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="1">
                 <RadioButton x:Name="CoilsRadioButton"
                              GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
                              CheckedChanged="RadioButton_CheckedChanged"/>
-                <Label Text="Coils" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Coils" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="2">
                 <RadioButton x:Name="InputRegistersRadioButton"
                              GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
                              CheckedChanged="RadioButton_CheckedChanged"/>
-                <Label Text="Input Registers" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Input Registers" HorizontalOptions="Center" />
             </StackLayout>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="3">
                 <RadioButton x:Name="HoldingRegistersRadioButton"
                              GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             IsChecked="True"
                              CheckedChanged="RadioButton_CheckedChanged"/>
-                <Label Text="Holding Registers" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Holding Registers" HorizontalOptions="Center" />
             </StackLayout>
-        </StackLayout>
+        </Grid>
 
-        <Grid>
-            
+        <Grid ColumnDefinitions="*, *, *"
+              BackgroundColor="Grey"
+              Grid.Row="4">
+            <Label Text="Address" Grid.Column="0"/>
+            <Label Text="Value" Grid.Column="1"/>
+            <Label Text="Name" Grid.Column="2"/>
         </Grid>
         <ListView x:Name="AddressesListView"
-                      ItemsSource="{Binding HoldingItems}"
-                      BackgroundColor="DimGrey"
-                      VerticalScrollBarVisibility="Always"
+                  ItemsSource="{Binding HoldingItems}"
+                  BackgroundColor="DimGrey"
+                  VerticalScrollBarVisibility="Always"
                   VerticalOptions="Center"
-                  Grid.Row="3"
-                      >
+                  SeparatorVisibility="Default"
+                  SeparatorColor="Black"
+                  Grid.Row="5">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid ColumnDefinitions="*,*,*">
-                            <Label Text="{Binding Address}" Grid.Column="0"/>
-                            <Label Text="{Binding Value}" Grid.Column="1"/>
-                            <Label Text="{Binding Name}" Grid.Column="2"/>
+                            <Label Text="{Binding Address}" 
+                                   Grid.Column="0"/>
+                            <Label Text="{Binding Value}" 
+                                   Grid.Column="1"/>
+                            <Label Text="{Binding Name}" 
+                                   Grid.Column="2"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
