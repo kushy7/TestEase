@@ -19,7 +19,8 @@
               Grid.Row="1">
             <Label Text="Only Configured Registers" VerticalTextAlignment="Center"
                    Grid.Column="0"/>
-            <CheckBox Grid.Column="1"/>
+            <CheckBox Grid.Column="1"
+                      CheckedChanged="OnCheckBoxCheckedChanged"/>
         </Grid>
 
         <Grid ColumnDefinitions="50*, 50*"

@@ -48,6 +48,10 @@
         <Tab Title="About">
             <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" />
         </Tab>
+        <Tab>
+            
+        </Tab>
     </TabBar>
+
 
 </Shell>

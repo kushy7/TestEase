@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO.Ports;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -61,13 +62,19 @@ namespace TestEase.ViewModels
             set => SetProperty(ref _isRegisterSelected, value);
         }
 
-        private ModbusService service;
+        public ModbusService Service { get; }
 
         public AppViewModel AppViewModel { get; }
         public ModbusPageViewModel(AppViewModel appViewModel)
         {
             AppViewModel = appViewModel;
-            service = new ModbusService(appViewModel);
+            Service = new ModbusService(appViewModel);
+
+            Service.CreateServer(502);
+            Service.StartServer(502);
+            SelectedServer = AppViewModel.ModbusServers[0];
+            SelectedServer.IsRunning = true;
+
 
             for (int i = 1; i < 65535; i++)
             {
@@ -75,28 +82,28 @@ namespace TestEase.ViewModels
                 {
                     Address = i,
                     Value = false,
-                    Name = "discrete",
+                    Name = "",
                     RegisterType = RegisterType.DiscreteInput
                 });
                 Coils.Add(new Register<bool>
                 {
                     Address = i,
                     Value = false,
-                    Name = "coils",
+                    Name = "",
                     RegisterType = RegisterType.Coil
                 });
                 InputRegisters.Add(new Register<short>
                 {
                     Address = i,
                     Value = 0,
-                    Name = "input",
+                    Name = "",
                     RegisterType = RegisterType.InputRegister
                 });
                 HoldingRegisters.Add(new Register<short>
                 {
                     Address = i,
                     Value = 0,
-                    Name = "holding",
+                    Name = "",
                     RegisterType = RegisterType.HoldingRegister
                 });
 

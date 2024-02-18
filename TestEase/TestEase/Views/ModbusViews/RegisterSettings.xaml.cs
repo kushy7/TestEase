@@ -1,7 +1,11 @@
+using TestEase.Models;
+using TestEase.ViewModels;
+
 namespace TestEase.Views.ModbusViews;
 
 public partial class RegisterSettings : ContentView
 {
+
     public RegisterSettings()
     {
         InitializeComponent();
@@ -39,5 +43,31 @@ public partial class RegisterSettings : ContentView
                     break;
             }
         }
+    }
+
+    private void OnSaveButtonClick(object sender, EventArgs args)
+    {
+        var vm = this.BindingContext as ModbusPageViewModel;
+        var register = vm.SelectedRegister;
+        // Fixed
+        if (FixedRadioButton.IsChecked)
+        {
+            short.TryParse(FixedValueEntry.Text, out short n);
+            switch (register.RegisterType)
+            {
+                case RegisterType.HoldingRegister:
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n));
+                    vm.HoldingRegisters[register.Address - 1].Value = n;
+                    vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.Service.WriteHoldingRegister(vm.SelectedServer.Port, register.Address, n);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{n}", "OK");
+                    break;
+            }
+        } else
+        {
+            Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
+        }
+
     }
 }

@@ -48,6 +48,7 @@ public partial class RegisterTable : ContentView
                 {
                     var viewModel = this.BindingContext as ModbusPageViewModel;
                     viewModel?.SwitchTab(tabName);
+                    viewModel.SelectedRegister = null;
                 }
             }
         }
@@ -110,13 +111,14 @@ public partial class RegisterTable : ContentView
         if (e.SelectedItem is ModbusPageViewModel.IRegister selectedRegister) 
         {
             viewModel.SelectedRegister = selectedRegister;
-            selectedRegister.Name = "changed";
             if (selectedRegister.RegisterType == Models.RegisterType.HoldingRegister)
             {
-                selectedRegister.Value = (short) ((short) selectedRegister.Value + 1);
+                // Holding Register actions
+
             } else if (selectedRegister.RegisterType == Models.RegisterType.InputRegister)
             {
-                selectedRegister.Value = (short)((short)selectedRegister.Value + 1);
+                // Input Register actions
+
             } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput)
             {
                 selectedRegister.Value = !( (bool)selectedRegister.Value);
@@ -134,5 +136,10 @@ public partial class RegisterTable : ContentView
             Application.Current.MainPage.DisplayAlert("Error", "Register Type not found. v3.", "OK");
         }
         
+    }
+
+    private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        // Operations
     }
 }
