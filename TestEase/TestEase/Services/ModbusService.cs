@@ -1,68 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 using EasyModbus;
 using TestEase.Models;
+using TestEase.ViewModels;
 //using Windows.Graphics.Printing3D;
 
 namespace TestEase.Services
 {
-    public class ModbusService
+    public class ModbusService(AppViewModel appViewModel)
     {
         // Manages the servers through the EasyModbus model
-        public List<ModbusServer> modbusServers = new List<ModbusServer>();
+        // public List<ModbusServer> modbusServers = new List<ModbusServer>();
 
         // Manages the servers through the ModbusModel
-        public List<ModbusServerModel> modbusModels = new List<ModbusServerModel>();
+        // public List<ModbusServerModel> modbusModels = new List<ModbusServerModel>();
 
         public void CreateServer(int port)
         {
-            ModbusServer modbusServer = new ModbusServer
-            {
-                Port = port
-            };
-            modbusServers.Add(modbusServer);
-
-            ModbusServerModel modbusModel = new ModbusServerModel(port);
-            modbusModels.Add(modbusModel);
+            appViewModel.ModbusServers.Add(new ModbusServerModel(port));
         }
         public void StartServer(int port)
         {
-            var server = modbusServers.FirstOrDefault(s => s.Port == port);
-            server?.Listen();
+            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
+            if (server != null)
+                server.Server.Listen();
         }
 
         public void StopServer(int port)
         {
-            var server = modbusServers.FirstOrDefault(s => s.Port == port);
-            server?.StopListening();
+            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
+            if (server != null)
+                server.Server.StopListening();
         }
 
-        public int ReadHoldingRegister(int serverPort, int address)
+        public short ReadHoldingRegister(int port, int address)
         {
-            var server = modbusServers.FirstOrDefault(s => s.Port == serverPort);
-            return server?.holdingRegisters[address] ?? 0;
-        }
-        public void WriteHoldingRegister(int serverPort, int address, int value)
-        {
-            var server = modbusServers.FirstOrDefault(s => s.Port == serverPort);
-            var model = modbusModels.FirstOrDefault(m => m.Port == serverPort);
+            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
             if (server != null)
-            {
-                // Int16/short limited to -32768 to 32767
-                server.holdingRegisters[address] = (short)value;
-            }
+                return server.Server.holdingRegisters[address];
+            else return 0;
+        }
+        public void WriteHoldingRegister(int port, int address, short value)
+        {
+            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
+            if (server != null)
+                server.Server.holdingRegisters[address] = value;
         }
 
-        public short[] GetHoldingRegisters(int serverPort)
+        public short[] GetHoldingRegisters(int port)
         {
-            var server = modbusServers.FirstOrDefault(s => s.Port == serverPort);
+            //var server = modbusServers.FirstOrDefault(s => s.Port == port);
+            //if (server != null)
+             //   return server.holdingRegisters.localArray;
+            //return null;
+            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
             if (server != null)
-                return server.holdingRegisters.localArray;
-            return null;
+                return server.Server.holdingRegisters.localArray;
+            return [0];
         }
 
     }

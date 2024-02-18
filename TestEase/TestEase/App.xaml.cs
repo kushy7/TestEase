@@ -1,4 +1,6 @@
-﻿namespace TestEase
+﻿using TestEase.ViewModels;
+
+namespace TestEase
 {
     public partial class App : Application
     {
@@ -7,8 +9,8 @@
             InitializeComponent();
 
             //Application.Current.UserAppTheme = AppTheme.Light;
-
-            MainPage = new AppShell();
+            var appViewModel = new AppViewModel();
+            MainPage = new AppShell() { BindingContext = appViewModel};
         }
     }
 }

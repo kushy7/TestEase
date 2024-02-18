@@ -20,6 +20,7 @@ namespace TestEase
             builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton<AppShell>();
+            builder.Services.AddSingleton<AppViewModel>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<ModbusPageViewModel>();

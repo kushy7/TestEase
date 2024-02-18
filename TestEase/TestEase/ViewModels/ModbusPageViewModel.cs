@@ -62,10 +62,13 @@ namespace TestEase.ViewModels
         }
 
         private ModbusService service;
-        public ModbusPageViewModel()
+
+        public AppViewModel AppViewModel { get; }
+        public ModbusPageViewModel(AppViewModel appViewModel)
         {
-            service = new ModbusService();
-            SelectedServer = new ModbusServerModel(502);
+            AppViewModel = appViewModel;
+            service = new ModbusService(appViewModel);
+
             for (int i = 1; i < 65535; i++)
             {
                 DiscreteInputs.Add(new Register<bool>
@@ -101,28 +104,6 @@ namespace TestEase.ViewModels
                 CurrentItems = HoldingRegisters;
                 
             }
-            
-            /*
-            service.CreateServer(502);
-            service.StartServer(502);
-            short[] holdingRegisters = service.GetHoldingRegisters(502);
-            if (holdingRegisters != null)
-            {
-                for (int i = 0; i < holdingRegisters.Length; i++)
-                {
-                    HoldingItems.Add(new Register
-                    {
-                        Id = i,
-                        Value = holdingRegisters[i],
-                        Name = ""
-                    });
-                }
-            } else
-            {
-                Console.WriteLine("Holding Registers is null");
-            }
-            service.StopServer(502);
-            */
 
         }
 
