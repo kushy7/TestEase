@@ -58,7 +58,7 @@
         </Grid>
         
         <Grid x:Name="UpperValueInput" ColumnDefinitions="50*, 50*"
-      IsVisible="False">
+            IsVisible="False">
             <Label Text="End Value" VerticalTextAlignment="Center"
            Grid.Column="0"/>
             <SearchBar x:Name="upperrange"
@@ -66,6 +66,18 @@
                Keyboard="Numeric"
                Grid.Column="1" />
         </Grid>
+
+            <HorizontalStackLayout>
+                <RadioButton x:Name="RandomRadioButton"
+                    IsVisible="false"
+                    Content="Random"
+                    IsChecked="True"
+                    CheckedChanged="OnRadioButtonCheckedChanged"/>
+                <RadioButton x:Name="CurveRadioButton"
+                    IsVisible="false"
+                    Content="Curve"
+                    CheckedChanged="OnRadioButtonCheckedChanged"/>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
 
         <!-- test display data -->
