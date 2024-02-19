@@ -14,54 +14,30 @@ namespace TestEase.Services
 {
     public class ModbusService(AppViewModel appViewModel)
     {
-        // Manages the servers through the EasyModbus model
-        // public List<ModbusServer> modbusServers = new List<ModbusServer>();
 
-        // Manages the servers through the ModbusModel
-        // public List<ModbusServerModel> modbusModels = new List<ModbusServerModel>();
+        private Timer _updateTimer;
 
-        public void CreateServer(int port)
+        public void StartPeriodicUpdate(TimeSpan interval)
         {
-            appViewModel.ModbusServers.Add(new ModbusServerModel(port));
-        }
-        public void StartServer(int port)
-        {
-            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
-            if (server != null)
-                server.Server.Listen();
+            _updateTimer = new Timer(UpdateRegistersCallback, null, TimeSpan.Zero, interval);
         }
 
-        public void StopServer(int port)
+        private void UpdateRegistersCallback(object state)
         {
-            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
-            if (server != null)
-                server.Server.StopListening();
-        }
+            foreach (var server in appViewModel.ModbusServers)
+            {
+                // Logic to update each server's registers
+                // This might involve generating new values and updating the Modbus registers
+                foreach (var register in server.WorkingConfiguration.RegisterModels)
+                {
+                    if (register.Type == RegisterType.HoldingRegister)
+                    {
+                        server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
+                    }
+                }
+            }
 
-        public short ReadHoldingRegister(int port, int address)
-        {
-            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
-            if (server != null)
-                return server.Server.holdingRegisters[address];
-            else return 0;
-        }
-        public void WriteHoldingRegister(int port, int address, short value)
-        {
-            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
-            if (server != null)
-                server.Server.holdingRegisters[address] = value;
-        }
-
-        public short[] GetHoldingRegisters(int port)
-        {
-            //var server = modbusServers.FirstOrDefault(s => s.Port == port);
-            //if (server != null)
-             //   return server.holdingRegisters.localArray;
-            //return null;
-            var server = appViewModel.ModbusServers.FirstOrDefault(s => s.Port == port);
-            if (server != null)
-                return server.Server.holdingRegisters.localArray;
-            return [0];
+            // If needed, raise an event or use a messaging system to notify the UI of updates
         }
 
     }
