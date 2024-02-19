@@ -121,11 +121,11 @@ public partial class RegisterTable : ContentView
 
             } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput)
             {
-                selectedRegister.Value = !( (bool)selectedRegister.Value);
+                // Discrete Input actions
             }
             else if (selectedRegister.RegisterType == Models.RegisterType.Coil)
             {
-                selectedRegister.Value = !( (bool) selectedRegister.Value);
+                // Coil actions
             } else
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Register Type not found. v2.", "OK");

@@ -14,6 +14,7 @@
                HorizontalTextAlignment="Center"/>
         <ListView x:Name="ServersListView"
                   ItemsSource="{Binding AppViewModel.ModbusServers}"
+                  SelectedItem="{Binding SelectedServer, Mode=TwoWay}"
                   VerticalScrollBarVisibility="Always"
                   VerticalOptions="Start"
                   Grid.Row="1" Grid.Column="0">

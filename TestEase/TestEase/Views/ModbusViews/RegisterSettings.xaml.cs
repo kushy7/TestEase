@@ -60,7 +60,7 @@ public partial class RegisterSettings : ContentView
                         .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n));
                     vm.HoldingRegisters[register.Address - 1].Value = n;
                     vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
-                    vm.Service.WriteHoldingRegister(vm.SelectedServer.Port, register.Address, n);
+                    vm.SelectedServer.WriteHoldingRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{n}", "OK");
                     break;
             }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using TestEase.Models;
 using TestEase.Services;
+using TestEase.Views.ModbusViews;
 using static EasyModbus.ModbusServer;
 
 namespace TestEase.ViewModels
@@ -20,7 +22,24 @@ namespace TestEase.ViewModels
     public partial class ModbusPageViewModel: ObservableObject
     {
 
-        public ModbusServerModel SelectedServer { get; set; }
+        private ModbusServerModel _selectedServer;
+        public ModbusServerModel SelectedServer
+        {
+            get => _selectedServer;
+            set
+            {
+                if (_selectedServer != value)
+                {
+                    _selectedServer = value;
+                    OnPropertyChanged(nameof(SelectedServer));
+                    if (CurrentItems != null)
+                    {
+                        UpdateRegisterCollections();
+                    }
+                    
+                }
+            }
+        }
 
         public ObservableCollection<IRegister> DiscreteInputs { get; set; } = new();
         public ObservableCollection<IRegister> Coils { get; set; } = new();
@@ -62,18 +81,16 @@ namespace TestEase.ViewModels
             set => SetProperty(ref _isRegisterSelected, value);
         }
 
-        public ModbusService Service { get; }
-
         public AppViewModel AppViewModel { get; }
         public ModbusPageViewModel(AppViewModel appViewModel)
         {
             AppViewModel = appViewModel;
-            Service = new ModbusService(appViewModel);
 
-            Service.CreateServer(502);
-            Service.StartServer(502);
-            SelectedServer = AppViewModel.ModbusServers[0];
+            Trace.WriteLine("Started server"); // DELETE
+            SelectedServer = new ModbusServerModel(502);
+            SelectedServer.StartServer();
             SelectedServer.IsRunning = true;
+            AppViewModel.ModbusServers.Add(SelectedServer);
 
 
             for (int i = 1; i < 65535; i++)
@@ -112,6 +129,109 @@ namespace TestEase.ViewModels
                 
             }
 
+        }
+
+        private void UpdateRegisterCollections()
+        {
+            // Assuming you want to clear the existing collections and repopulate them
+            //DiscreteInputs.Clear();
+            //Coils.Clear();
+            //InputRegisters.Clear();
+            //HoldingRegisters.Clear();
+            Trace.WriteLine("Updating Register collections"); // DELETE
+
+            CurrentItems = null;
+
+            for (int i = 1; i < 65535; i++)
+            {
+                DiscreteInputs[i - 1] = (new Register<bool>
+                {
+                    Address = i,
+                    Value = false,
+                    Name = "",
+                    RegisterType = RegisterType.DiscreteInput
+                });
+                Coils[i - 1] = (new Register<bool>
+                {
+                    Address = i,
+                    Value = false,
+                    Name = "",
+                    RegisterType = RegisterType.Coil
+                });
+                DiscreteInputs[i - 1] = (new Register<short>
+                {
+                    Address = i,
+                    Value = 0,
+                    Name = "",
+                    RegisterType = RegisterType.InputRegister
+                });
+                HoldingRegisters[i - 1] = (new Register<short>
+                {
+                    Address = i,
+                    Value = 0,
+                    Name = "",
+                    RegisterType = RegisterType.HoldingRegister
+                });
+            }
+
+            // Fill with saved configuration
+            if (SelectedServer.WorkingConfiguration.RegisterModels.Count > 0)
+            {
+
+                for (int j = 0; j < SelectedServer.WorkingConfiguration.RegisterModels.Count; j++)
+                {
+                    var reg = SelectedServer.WorkingConfiguration.RegisterModels[j];
+                    var i = reg.Address;
+                    var type = reg.Type;
+                    switch (type)
+                    {
+                        case RegisterType.DiscreteInput:
+                            DiscreteInputs[i - 1] = (new Register<bool>
+                            {
+                                Address = i,
+                                Value = SelectedServer.ReadDiscreteInput(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.DiscreteInput
+                            });
+                            break;
+                        case RegisterType.Coil:
+                            Coils[i - 1] = (new Register<bool>
+                            {
+                                Address = i,
+                                Value = SelectedServer.ReadCoil(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.Coil
+                            });
+                            break;
+                        case RegisterType.InputRegister:
+                            DiscreteInputs[i - 1] = (new Register<short>
+                            {
+                                Address = i,
+                                Value = SelectedServer.ReadInputRegister(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.InputRegister
+                            });
+                            break;
+                        case RegisterType.HoldingRegister:
+                            HoldingRegisters[i - 1] = (new Register<short>
+                            {
+                                Address = i,
+                                Value = SelectedServer.ReadHoldingRegister(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.HoldingRegister
+                            });
+                            break;
+                    }
+
+                }
+            } else
+            {
+
+                Trace.WriteLine("No registers"); // DELETE
+            }
+
+            // If you need to set CurrentItems to a default collection after update
+            CurrentItems = HoldingRegisters;
         }
 
         public void SwitchTab(string tabName)

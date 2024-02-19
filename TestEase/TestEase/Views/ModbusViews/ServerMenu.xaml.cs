@@ -9,7 +9,7 @@ public partial class ServerMenu : ContentView
 	public ServerMenu()
 	{
 		InitializeComponent();
-	}
+    }
 
 	private void AddServer(object sender, EventArgs args)
 	{
@@ -33,7 +33,16 @@ public partial class ServerMenu : ContentView
         if (item != null)
         {
             // Reverses the boolean
-            vm.AppViewModel.ModbusServers.FirstOrDefault(s => s.Port == item.Port).IsRunning ^= true;
+            var server = vm.AppViewModel.ModbusServers.FirstOrDefault(s => s.Port == item.Port);
+            if (server.IsRunning)
+            {
+                server.IsRunning = false;
+                server.StopServer();
+            } else if (!server.IsRunning)
+            {
+                server.IsRunning = true;
+                server.StartServer();
+            }
         }
     }
 
