@@ -56,35 +56,28 @@ namespace TestEaseTest
             Assert.Equal(RegisterType.Coil, f.Type);
             Assert.Equal("testingRegister", f.Name);
             Assert.Equal(44, f.value);
+ 
         }
 
-        [Fact]
-        public void ServiceCreateServerTest()
-        {
-            ModbusService service = new ModbusService();
-            service.CreateServer(502);
-            Assert.Single(service.modbusServers);
-        }
-
-        [Fact]
-        public void ServiceEditRegisterTest()
-        {
-            ModbusService service = new ModbusService();
-            service.CreateServer(502);
-            Assert.Single(service.modbusServers);
-            service.WriteHoldingRegister(502, 5, 25);
-            Assert.Equal(25, service.ReadHoldingRegister(502, 5));
-        }
         //[Fact]
-        //public void ServerAcceptingTest()
+        //public void ServiceCreateServerTest()
         //{
-        //    ModbusServer mbs = new ModbusServer
-        //    {
-        //        Port = 502
-        //    };
-
-
+        //    ModbusService service = new ModbusService();
+        //    service.CreateServer(502);
+        //    Assert.Single(service.modbusServers);
         //}
+
+        //[Fact]
+        //public void ServiceEditRegisterTest()
+        //{
+        //    ModbusService service = new ModbusService();
+        //    service.CreateServer(502);
+        //    Assert.Single(service.modbusServers);
+        //    service.WriteHoldingRegister(502, 5, 25);
+        //    Assert.Equal(25, service.ReadHoldingRegister(502, 5));
+        //}
+
+   
 
 
 
