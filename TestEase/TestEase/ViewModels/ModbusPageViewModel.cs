@@ -81,6 +81,32 @@ namespace TestEase.ViewModels
             set => SetProperty(ref _isRegisterSelected, value);
         }
 
+        private string _currentTabName = "HoldingRegisters"; // Default tab
+        public string CurrentTabName
+        {
+            get => _currentTabName;
+            set
+            {
+                if (_currentTabName != value)
+                {
+                    _currentTabName = value;
+                    OnPropertyChanged(nameof(CurrentTabName));
+                }
+            }
+        }
+
+        private IEnumerable<IRegister> GetCurrentTabCollection()
+        {
+            return CurrentTabName switch
+            {
+                "DiscreteInputs" => DiscreteInputs,
+                "Coils" => Coils,
+                "InputRegisters" => InputRegisters,
+                "HoldingRegisters" => HoldingRegisters,
+                _ => Enumerable.Empty<IRegister>(),
+            };
+        }
+
         public AppViewModel AppViewModel { get; }
         public ModbusPageViewModel(AppViewModel appViewModel)
         {
@@ -236,6 +262,7 @@ namespace TestEase.ViewModels
 
         public void SwitchTab(string tabName)
         {
+            CurrentTabName = tabName; // Keep track of the current tab
             switch (tabName)
             {
                 case "DiscreteInputs":
@@ -253,12 +280,32 @@ namespace TestEase.ViewModels
             }
         }
 
+
+        public void FilterModifiedRegisters(bool showOnlyModified)
+        {
+            if (showOnlyModified)
+            {
+                // Filter the current tab's collection to only show modified items
+                var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+            }
+            else
+            {
+                // Reset CurrentItems to show all items for the current tab
+                SwitchTab(CurrentTabName);
+            }
+        }
+
+
+
+
         public interface IRegister : INotifyPropertyChanged
         {
             int Address { get; }
             object Value { get; set; }
             string Name { get; set; }
             RegisterType RegisterType { get; }
+            bool IsModified { get; }
         }
 
         public class Register<T> : IRegister
@@ -268,6 +315,8 @@ namespace TestEase.ViewModels
             public required string Name { get; set; }
             public required RegisterType RegisterType { get; set; }
 
+            public bool isModified = false;
+
             object IRegister.Value
             {
                 get => Value;
@@ -276,6 +325,7 @@ namespace TestEase.ViewModels
                     if (value is T)
                     {
                         this.Value = (T) value;
+                        IsModified = true;
                         OnPropertyChanged(nameof(Value));
                     } else
                     {
@@ -292,7 +342,21 @@ namespace TestEase.ViewModels
                     if (Name != value)
                     {
                         Name = value;
+                        IsModified = true;
                         OnPropertyChanged();
+                    }
+                }
+            }
+
+            public bool IsModified
+            {
+                get => isModified;
+                private set
+                {
+                    if (isModified != value)
+                    {
+                        isModified = value;
+                        OnPropertyChanged(nameof(IsModified));
                     }
                 }
             }

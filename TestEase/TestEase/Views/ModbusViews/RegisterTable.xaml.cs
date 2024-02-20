@@ -140,6 +140,7 @@ public partial class RegisterTable : ContentView
 
     private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        // Operations
+        var viewModel = this.BindingContext as ModbusPageViewModel;
+        viewModel?.FilterModifiedRegisters(e.Value);
     }
 }
