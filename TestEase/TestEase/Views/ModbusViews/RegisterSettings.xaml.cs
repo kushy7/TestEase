@@ -1,5 +1,6 @@
 using TestEase.Models;
 using TestEase.ViewModels;
+using TestEase.Helpers;
 
 namespace TestEase.Views.ModbusViews;
 
@@ -64,10 +65,35 @@ public partial class RegisterSettings : ContentView
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{n}", "OK");
                     break;
             }
-        } else
-        {
-            Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
         }
-
+        else if (RangeRadioButton.IsChecked && RandomRadioButton.IsChecked)
+        {
+            if (short.TryParse(lowerrange.Text, out short lr) && short.TryParse(upperrange.Text, out short ur))
+            {
+                switch (register.RegisterType)
+                {
+                    case RegisterType.HoldingRegister:
+                        // Generate a random value within the specified range
+                        short randomValue = ValueGenerators.GenerateRandomValueShort(lr, ur);
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur));
+                        vm.HoldingRegisters[register.Address - 1].Value = randomValue;
+                        vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteHoldingRegister(register.Address, randomValue);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{randomValue}", "OK");
+                        break;
+                    default:
+                        Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Range value.", "OK");
+                        break;
+                }
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
+            }
+        }
     }
 }
+
+    
+

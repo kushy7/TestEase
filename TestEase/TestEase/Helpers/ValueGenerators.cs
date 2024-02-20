@@ -11,14 +11,14 @@ namespace TestEase.Helpers
 
         private static readonly Random random = new Random();
 
-        public static int GenerateRandomValueInt(int lowerBound, int upperBound)
+        public static short GenerateRandomValueShort(short lowerBound, short upperBound)
         {
-            return random.Next(lowerBound, upperBound + 1);
+            return (short) random.Next(lowerBound, upperBound + 1);
         }
 
-        public static double GenerateRandomValueDouble(double lowerBound, double upperBound)
+        public static float GenerateRandomValueDouble(float lowerBound, float upperBound)
         {
-            return random.NextDouble() * (upperBound - lowerBound) + lowerBound;
+            return (float) random.NextDouble() * (upperBound - lowerBound) + lowerBound;
         }
 
     }
