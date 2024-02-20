@@ -1,68 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 using EasyModbus;
 using TestEase.Models;
+using TestEase.ViewModels;
 //using Windows.Graphics.Printing3D;
 
 namespace TestEase.Services
 {
-    public class ModbusService
+    public class ModbusService(AppViewModel appViewModel)
     {
-        // Manages the servers through the EasyModbus model
-        private List<ModbusServer> modbusServers = new List<ModbusServer>();
 
-        // Manages the servers through the ModbusModel
-        private List<ModbusServerModel> modbusModels = new List<ModbusServerModel>();
+        private Timer _updateTimer;
 
-        public void CreateServer(int port)
+        public void StartPeriodicUpdate(TimeSpan interval)
         {
-            ModbusServer modbusServer = new ModbusServer
+            _updateTimer = new Timer(UpdateRegistersCallback, null, TimeSpan.Zero, interval);
+        }
+
+        private void UpdateRegistersCallback(object state)
+        {
+            foreach (var server in appViewModel.ModbusServers)
             {
-                Port = port
-            };
-            modbusServers.Add(modbusServer);
-
-            ModbusServerModel modbusModel = new ModbusServerModel(port);
-            modbusModels.Add(modbusModel);
-        }
-        public void StartServer(int port)
-        {
-            var server = modbusServers.FirstOrDefault(s => s.Port == port);
-            server?.Listen();
-        }
-
-        public void StopServer(int port)
-        {
-            var server = modbusServers.FirstOrDefault(s => s.Port == port);
-            server?.StopListening();
-        }
-
-        public int ReadHoldingRegister(int serverPort, int address)
-        {
-            var server = modbusServers.FirstOrDefault(s => s.Port == serverPort);
-            return server?.holdingRegisters[address] ?? 0;
-        }
-        public void WriteHoldingRegister(int serverPort, int address, int value)
-        {
-            var server = modbusServers.FirstOrDefault(s => s.Port == serverPort);
-            var model = modbusModels.FirstOrDefault(m => m.Port == serverPort);
-            if (server != null)
-            {
-                // Int16/short limited to -32768 to 32767
-                server.holdingRegisters[address] = (short)value;
+                // Logic to update each server's registers
+                // This might involve generating new values and updating the Modbus registers
+                foreach (var register in server.WorkingConfiguration.RegisterModels)
+                {
+                    if (register.Type == RegisterType.HoldingRegister)
+                    {
+                        server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
+                    }
+                }
             }
-        }
 
-        public short[] GetHoldingRegisters(int serverPort)
-        {
-            var server = modbusServers.FirstOrDefault(s => s.Port == serverPort);
-            if (server != null)
-                return server.holdingRegisters.localArray;
-            return null;
+            // If needed, raise an event or use a messaging system to notify the UI of updates
         }
 
     }

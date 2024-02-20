@@ -2,6 +2,7 @@
 using TestEase.ViewModels;
 using TestEase.Views;
 using CommunityToolkit.Maui;
+using TestEase.Services;
 
 namespace TestEase
 {
@@ -15,10 +16,13 @@ namespace TestEase
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             }).UseMauiCommunityToolkit();
+            
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton<AppShell>();
+            builder.Services.AddSingleton<AppViewModel>();
+            builder.Services.AddSingleton<ModbusService>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<ModbusPageViewModel>();
