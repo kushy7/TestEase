@@ -12,6 +12,7 @@
                Margin="-10,-10,-10,0"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
+        
         <ListView x:Name="ServersListView"
                   ItemsSource="{Binding AppViewModel.ModbusServers}"
                   SelectedItem="{Binding SelectedServer, Mode=TwoWay}"

@@ -9,11 +9,12 @@
     Title="Test Ease">
 
     <Shell.TitleView>
-        <Grid ColumnDefinitions="*,Auto" BackgroundColor="#EC001E">
+        <Grid ColumnDefinitions="*,Auto"
+              BackgroundColor="{AppThemeBinding  Light={StaticResource HitachiRed}, Dark={StaticResource Black}}">
             <HorizontalStackLayout Grid.Column="0">
                 <Label Text="TEST"
-                       FontFamily="Inter"
                        TextColor="White"
+                       FontFamily="Inter"
                        VerticalTextAlignment="Center"
                        VerticalOptions="Center"
                        HeightRequest="40"
@@ -21,8 +22,8 @@
                        FontAttributes="Bold,Italic"
                        Padding="10"/>
                 <Label Text="EASE"
-                       FontFamily="Inter"
                        TextColor="White"
+                       FontFamily="Inter"
                        VerticalTextAlignment="Center"
                        VerticalOptions="Center"
                        HeightRequest="40"
@@ -37,7 +38,6 @@
         </Grid>
     </Shell.TitleView>
 
-    <Shell.TabBarBackgroundColor>#EC001E</Shell.TabBarBackgroundColor>
     <TabBar>
         <Tab Title="Modbus">
             <ShellContent ContentTemplate="{DataTemplate views:ModbusPage}" />

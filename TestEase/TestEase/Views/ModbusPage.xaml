@@ -7,7 +7,6 @@
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              >
 
-
     <Grid 
         RowSpacing="10" 
         ColumnSpacing="10"
@@ -20,14 +19,15 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <local:ServerMenu 
+            BackgroundColor="Transparent"
             Grid.Row="0" Grid.Column="0"
             Margin="-20,0,0,0"/>
 
-        <local:RegisterConfigs
-            Grid.Row="0" Grid.Column="1"
-            Grid.ColumnSpan="3"
-            BackgroundColor="Red"
-            />
+        <Border Grid.Row="0" Grid.Column="1" 
+                Grid.ColumnSpan="3">
+            <local:RegisterConfigs />
+        </Border>
+        
     </Grid>
 
 

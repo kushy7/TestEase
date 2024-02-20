@@ -7,14 +7,16 @@
           ColumnDefinitions="*">
         
         <!-- Heading-->
-        
-        <StackLayout BackgroundColor="Gray"
-                     Margin="-20,-20,-20,0"
-                     Grid.Row="0">
-            <Label Text="Register Settings"
+
+        <Border Margin="-22,-22,-22,0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+                Grid.Row="0">
+            <StackLayout>
+                <Label Text="Register Settings"
                    VerticalOptions="Center" 
                    HorizontalOptions="Center" />
-        </StackLayout>
+            </StackLayout>
+        </Border>
 
         <!-- test display data -->
 
