@@ -1,17 +1,10 @@
-﻿using CommunityToolkit.Maui.Behaviors;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EasyModbus;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO.Ports;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using TestEase.Models;
 using TestEase.Services;
 using TestEase.Views.ModbusViews;
@@ -263,26 +256,54 @@ namespace TestEase.ViewModels
         public void SwitchTab(string tabName)
         {
             CurrentTabName = tabName; // Keep track of the current tab
+            if (onlyConfigured)
+            {
+                var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+            }
+            
             switch (tabName)
             {
                 case "DiscreteInputs":
                     CurrentItems = DiscreteInputs;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
                     break;
                 case "Coils":
                     CurrentItems = Coils;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
                     break;
                 case "InputRegisters":
                     CurrentItems = InputRegisters;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
                     break;
                 case "HoldingRegisters":
                     CurrentItems = HoldingRegisters;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
                     break;
             }
         }
 
-
+        //variable to track if only configured registers should be shown during tab switches
+        bool onlyConfigured = false;
         public void FilterModifiedRegisters(bool showOnlyModified)
         {
+            onlyConfigured = showOnlyModified;
             if (showOnlyModified)
             {
                 // Filter the current tab's collection to only show modified items
