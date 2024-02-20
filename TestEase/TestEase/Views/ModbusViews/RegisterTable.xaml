@@ -93,7 +93,20 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid ColumnDefinitions="*,*,*">
+                        <Grid ColumnDefinitions="*,*,*"
+                              BackgroundColor="Transparent">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="Grid"
+                                                     Binding="{Binding IsModified}"
+                                                     Value="True">
+                                            <Setter Property="BackgroundColor" Value="LightCoral"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
                             <Label Text="{Binding Address}" 
                                    Grid.Column="0"/>
                             <Label Text="{Binding Value}" 
