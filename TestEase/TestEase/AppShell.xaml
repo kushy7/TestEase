@@ -8,43 +8,36 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Test Ease">
 
-    <Shell.TabBarBackgroundColor>black</Shell.TabBarBackgroundColor>
-    <Shell.TitleColor>Blue</Shell.TitleColor>
-    <Shell.ToolbarItems>
-        <ToolbarItem>
-            <ToolbarItem.IconImageSource>
-                <FontImageSource
-                FontFamily="MaterialIconsOutlined-Regular"
-                Glyph="&#xe51c;"
-                Color="white"
-                Size="20"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-    </Shell.ToolbarItems>
     <Shell.TitleView>
-        <FlexLayout BackgroundColor="#EC001E">
-            <Label Text="TEST"
-                   FontFamily="Inter"
-                   TextColor="White"
-                   VerticalTextAlignment="Center"
-                   VerticalOptions="Center"
-                   HeightRequest="40"
-                   FontSize="Title"
-                   FontAttributes="Bold,Italic"
-                   Padding="10"/>
-            <Label Text="EASE"
-                   FontFamily="Inter"
-                   TextColor="White"
-                   VerticalTextAlignment="Center"
-                   VerticalOptions="Center"
-                   HeightRequest="40"
-                   FontSize="Title"
-                   FontAttributes="Italic"/>
-            <Switch 
-                HorizontalOptions="End"/>
-        </FlexLayout>
+        <Grid ColumnDefinitions="*,Auto" BackgroundColor="#EC001E">
+            <HorizontalStackLayout Grid.Column="0">
+                <Label Text="TEST"
+                       FontFamily="Inter"
+                       TextColor="White"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       HeightRequest="40"
+                       FontSize="Title"
+                       FontAttributes="Bold,Italic"
+                       Padding="10"/>
+                <Label Text="EASE"
+                       FontFamily="Inter"
+                       TextColor="White"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       HeightRequest="40"
+                       FontSize="Title"
+                       FontAttributes="Italic"/>
+            </HorizontalStackLayout>
+            
+            <Switch Grid.Column="1" 
+                    Toggled="OnTogged"
+                    IsToggled="True"
+                    Margin="0,0,-70,0"/>
+        </Grid>
     </Shell.TitleView>
 
+    <Shell.TabBarBackgroundColor>#EC001E</Shell.TabBarBackgroundColor>
     <TabBar>
         <Tab Title="Modbus">
             <ShellContent ContentTemplate="{DataTemplate views:ModbusPage}" />
@@ -55,6 +48,10 @@
         <Tab Title="About">
             <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" />
         </Tab>
+        <Tab>
+            
+        </Tab>
     </TabBar>
+
 
 </Shell>

@@ -2,55 +2,108 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.RegisterTable"
-             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              >
-    <VerticalStackLayout>
-        <Label 
-            Text="Register Table"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <Grid Margin="20"
+          RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+          ColumnDefinitions="*">
+        <StackLayout BackgroundColor="Gray"
+                     Margin="-20,-20,-20,0"
+                     Grid.Row="0">
+            <Label Text="Register Table"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+        </StackLayout>
+        
 
-        <material:TabView x:Name="RegisterTypeTab">
+        <Grid ColumnDefinitions="50*, 50*"
+              Grid.Row="1">
+            <Label Text="Only Configured Registers" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <CheckBox Grid.Column="1"
+                      CheckedChanged="OnCheckBoxCheckedChanged"/>
+        </Grid>
 
+        <Grid ColumnDefinitions="50*, 50*"
+              Grid.Row="2">
+            <Label Text="Move to Address" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <SearchBar x:Name="AddressEntry"
+                       Placeholder="Enter Address"
+                       Keyboard="Numeric"
+                       SearchButtonPressed="OnJumpButtonClicked"
+                       Grid.Column="1" />
+        </Grid>
 
-            <material:TabItem Title="Discrete Inputs">
-                <material:TabItem.ContentTemplate>
-                    <DataTemplate>
-                        <Label Text="Discrete Inputs" />
-                    </DataTemplate>
-                </material:TabItem.ContentTemplate>
-            </material:TabItem>
+        
 
+        <Grid ColumnDefinitions="*,*,*,*"
+                     Grid.Row="3" >
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="0">
+                <RadioButton x:Name="DiscreteInputsRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Discrete Inputs" HorizontalOptions="Center" />
+            </StackLayout>
 
-            <material:TabItem Title="Coils">
-                <material:TabItem.ContentTemplate>
-                    <DataTemplate>
-                        <Label Text="Coils" />
-                    </DataTemplate>
-                </material:TabItem.ContentTemplate>
-            </material:TabItem>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="1">
+                <RadioButton x:Name="CoilsRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Coils" HorizontalOptions="Center" />
+            </StackLayout>
 
-            <material:TabItem Title="Input Registers">
-                <material:TabItem.ContentTemplate>
-                    <DataTemplate>
-                        <Label Text="Input Registers" />
-                    </DataTemplate>
-                </material:TabItem.ContentTemplate>
-            </material:TabItem>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="2">
+                <RadioButton x:Name="InputRegistersRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Input Registers" HorizontalOptions="Center" />
+            </StackLayout>
 
-            <material:TabItem Title="Holding Registers">
-                <material:TabItem.ContentTemplate>
-                    <DataTemplate>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="3">
+                <RadioButton x:Name="HoldingRegistersRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             IsChecked="True"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Holding Registers" HorizontalOptions="Center" />
+            </StackLayout>
+        </Grid>
 
-                    </DataTemplate>
-                </material:TabItem.ContentTemplate>
-            </material:TabItem>
-        </material:TabView>
-
-
-        <material:DataGrid ItemsSource="{Binding HoldingItems}" UseAutoColumns="True" Margin="30" BackgroundColor="Yellow" />
-
-
-    </VerticalStackLayout>
-
+        <Grid ColumnDefinitions="*, *, *"
+              BackgroundColor="Grey"
+              Grid.Row="4">
+            <Label Text="Address" Grid.Column="0"/>
+            <Label Text="Value" Grid.Column="1"/>
+            <Label Text="Name" Grid.Column="2"/>
+        </Grid>
+        <ListView x:Name="AddressesListView"
+                  ItemsSource="{Binding CurrentItems}"
+                  ItemTapped="OnItemTapped"
+                  BackgroundColor="DimGrey"
+                  VerticalScrollBarVisibility="Always"
+                  VerticalOptions="Start"
+                  Grid.Row="5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid ColumnDefinitions="*,*,*">
+                            <Label Text="{Binding Address}" 
+                                   Grid.Column="0"/>
+                            <Label Text="{Binding Value}" 
+                                   Grid.Column="1"/>
+                            <Label Text="{Binding Name}" 
+                                   Grid.Column="2"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentView>

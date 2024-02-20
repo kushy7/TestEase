@@ -21,7 +21,6 @@
         </Grid.ColumnDefinitions>
         <local:ServerMenu 
             Grid.Row="0" Grid.Column="0"
-            BackgroundColor="Blue"
             Margin="-20,0,0,0"/>
 
         <local:RegisterConfigs

@@ -1,14 +1,21 @@
-﻿namespace TestEase
+﻿using TestEase.Services;
+using TestEase.ViewModels;
+
+namespace TestEase
 {
     public partial class App : Application
     {
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
             //Application.Current.UserAppTheme = AppTheme.Light;
+            var appViewModel = new AppViewModel();
 
-            MainPage = new AppShell();
+            var modbusService = serviceProvider.GetService<ModbusService>();
+            modbusService.StartPeriodicUpdate(TimeSpan.FromSeconds(3));
+
+            MainPage = new AppShell() { BindingContext = appViewModel};
         }
     }
 }

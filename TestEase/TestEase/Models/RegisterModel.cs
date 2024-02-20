@@ -13,6 +13,7 @@ namespace TestEase.Models
         public int Address { get; set; } = address;
         public RegisterType Type { get; set; } = type;
         public string Name { get; set; } = name;
+        public short LastValue { get; set; } = 0;
     }
 
     public class CoilOrDiscrete(int address, RegisterType type, string name, bool value) : RegisterModel(address, type, name)
