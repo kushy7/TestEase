@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.RegisterTable"
              >
+
     <Grid Margin="20"
           RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
           ColumnDefinitions="*">
@@ -92,7 +93,8 @@
                   ItemTapped="OnItemTapped"
                   VerticalScrollBarVisibility="Always"
                   VerticalOptions="Start"
-                  BackgroundColor="{AppThemeBinding Light={StaticResource ContainerLight}, Dark={StaticResource ContainerDark}}"
+                  SelectionMode="Single"
+                  BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource ContainerDark}}"
                   Grid.Row="5" >
             <ListView.Resources>
                 <Style TargetType="Grid">
@@ -100,7 +102,7 @@
                         <VisualStateGroupList>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Selected">
+                                <VisualState x:Name="Focused">
                                     <VisualState.Setters>
                                         <Setter Property="BackgroundColor"
                                                 Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" />
@@ -115,7 +117,7 @@
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Property="BackgroundColor"
-                                                Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray100}}" />
+                                                Value="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -126,7 +128,6 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        
                         <Grid ColumnDefinitions="*,*,*">
                             <Label Text="{Binding Address}" 
                                     Grid.Column="0"/>

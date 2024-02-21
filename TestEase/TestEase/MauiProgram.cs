@@ -3,6 +3,7 @@ using TestEase.ViewModels;
 using TestEase.Views;
 using CommunityToolkit.Maui;
 using TestEase.Services;
+using Microsoft.Maui.Platform;
 
 namespace TestEase
 {
@@ -16,7 +17,7 @@ namespace TestEase
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             }).UseMauiCommunityToolkit();
-            
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
