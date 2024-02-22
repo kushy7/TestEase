@@ -2,10 +2,22 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.SavedConfigurations">
-    <VerticalStackLayout>
-        <Label 
-            Text="Saved Configurations"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid Margin="20"
+          RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+          ColumnDefinitions="*">
+        
+        <Border Margin="-22,-22,-22,0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+                Grid.Row="0">
+            <StackLayout>
+                <Label Text="Saved Configurations"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </Border>
+
+    </Grid>
+
+    
 </ContentView>

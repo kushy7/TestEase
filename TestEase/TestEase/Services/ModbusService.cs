@@ -33,6 +33,10 @@ namespace TestEase.Services
                     if (register.Type == RegisterType.HoldingRegister)
                     {
                         server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
+                        if (register is Random<short>)
+                        {
+
+                        }
                     }
                 }
             }

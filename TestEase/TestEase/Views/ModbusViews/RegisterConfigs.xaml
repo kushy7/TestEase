@@ -27,39 +27,43 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label Text="Register Configurations"
-               BackgroundColor="Grey"
-               Grid.Row="0" Grid.Column="0"
-               Grid.ColumnSpan="3"
-               Margin="-10,-10,-10,0"
+
+        <Border Grid.Row="0" Grid.Column="0"
+                Grid.ColumnSpan="3"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+                Margin="-12,-12,-12,0">
+            <Label Text="Register Configurations"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
+        </Border>
 
+
+        <Border Grid.Row="1" Grid.Column="0"
+                Grid.ColumnSpan="2">
             <HorizontalStackLayout
-            BackgroundColor="ForestGreen"
-            Padding="5" Spacing="5"
-            Grid.Row="1" Grid.Column="0"
-            Grid.ColumnSpan="2">
-            <Button Text="New"></Button>
-            <Button Text="Save"></Button>
-            <Button Text="Save As"></Button>
-        </HorizontalStackLayout>
-        <local:RegisterSettings
-            BackgroundColor="BlueViolet"
+                Padding="5" Spacing="5">
+                <Button Text="New"></Button>
+                <Button Text="Save"></Button>
+                <Button Text="Save As"></Button>
+            </HorizontalStackLayout>
+        </Border>
+        
+        <Border
             Grid.Row="2" Grid.Column="0"
             Grid.RowSpan="7" Grid.ColumnSpan="2">
+            <local:RegisterSettings />
             <!-- Register Settings -->
-        </local:RegisterSettings>
-        <local:SavedConfigurations
-            BackgroundColor="DarkCyan"
+        </Border>
+        <Border
             Grid.Row="9" Grid.Column="0"
             Grid.RowSpan="3" Grid.ColumnSpan="2">
+            <local:SavedConfigurations />
             <!-- Saved Configurations -->
-        </local:SavedConfigurations>
-        <local:RegisterTable
-            BackgroundColor="LightSkyBlue"
+        </Border>
+        <Border
             Grid.Row="1" Grid.Column="2"
             Grid.RowSpan="11">
-        </local:RegisterTable>
+            <local:RegisterTable />
+        </Border>
     </Grid>
 </ContentView>
