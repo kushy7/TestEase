@@ -14,7 +14,7 @@ namespace TestEase
             var appViewModel = new AppViewModel();
 
             var modbusService = serviceProvider.GetService<ModbusService>();
-            modbusService.StartPeriodicUpdate(TimeSpan.FromSeconds(3));
+            modbusService.StartPeriodicUpdate(TimeSpan.FromSeconds(1));
 
             MainPage = new AppShell() { BindingContext = appViewModel };
         }

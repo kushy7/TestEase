@@ -140,6 +140,8 @@ namespace TestEase.ViewModels
             AppViewModel.ModbusServers.Add(SelectedServer);
 
 
+            // To update these in the frontend, consider making these objects and storing all this these observables
+            // inside the ModbusServerModel. This would give the ModbusService access through the appViewModel.
             for (int i = 1; i < 65535; i++)
             {
                 DiscreteInputs.Add(new Register<bool>

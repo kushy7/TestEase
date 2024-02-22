@@ -29,18 +29,16 @@ namespace TestEase.Models
 
     public class Range<T>(int address, RegisterType type, string name, T startValue, T endValue) : RegisterModel(address, type, name)
     {
-        private T startValue = startValue;
-        private T endValue = endValue;
+        public T startValue = startValue;
+        public T endValue = endValue;
     }
 
     public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue) : Range<T>(address, type, name, startValue, endValue)
     {
-        private T startValue = startValue;
-        private T endValue = endValue;
     }
 
     public class Curve<T>(int address, RegisterType type, string name, T startValue, T endValue, int period) : Range<T>(address, type, name, startValue, endValue)
     {
-        private int period = period;
+        public int period = period;
     }
 }

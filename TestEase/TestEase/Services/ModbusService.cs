@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using EasyModbus;
+using TestEase.Helpers;
 using TestEase.Models;
 using TestEase.ViewModels;
 //using Windows.Graphics.Printing3D;
@@ -32,10 +33,10 @@ namespace TestEase.Services
                 {
                     if (register.Type == RegisterType.HoldingRegister)
                     {
-                        server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
-                        if (register is Random<short>)
+                        // server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
+                        if (register is Random<short> r)
                         {
-
+                            server.WriteHoldingRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
                         }
                     }
                 }
