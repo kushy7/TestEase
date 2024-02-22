@@ -94,6 +94,21 @@ namespace TestEase.ViewModels
             set => SetProperty(ref _isBooleanRegisterSelected, value);
         }
 
+
+        private bool _selectedBooleanValue;
+        public bool SelectedBooleanValue
+        {
+            get => _selectedBooleanValue;
+            set
+            {
+                if (_selectedBooleanValue != value)
+                {
+                    _selectedBooleanValue = value;
+                    OnPropertyChanged(); 
+                }
+            }
+        }
+
         private string _currentTabName = "HoldingRegisters"; // Default tab
         public string CurrentTabName
         {

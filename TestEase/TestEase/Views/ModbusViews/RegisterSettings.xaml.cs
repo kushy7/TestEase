@@ -12,6 +12,8 @@ public partial class RegisterSettings : ContentView
         InitializeComponent();
     }
 
+
+
     private void OnRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         // Ensure the sender is a RadioButton and that one of the buttons is pressed
@@ -63,6 +65,24 @@ public partial class RegisterSettings : ContentView
                     vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{n}", "OK");
+                    break;
+                case RegisterType.DiscreteInput:
+                    // short boolShort = vm.SelectedBooleanValue ? (short)1 : (short)0;
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
+                    vm.DiscreteInputs[register.Address - 1].Value = vm.SelectedBooleanValue;
+                    vm.DiscreteInputs[register.Address - 1].Name = BooleanNameEntry.Text;
+                    vm.SelectedServer.WriteDiscreteInput(register.Address, vm.SelectedBooleanValue);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedBooleanValue}", "OK");
+                    break;
+                case RegisterType.Coil:
+                    // short boolShort = vm.SelectedBooleanValue ? (short)1 : (short)0;
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
+                    vm.Coils[register.Address - 1].Value = vm.SelectedBooleanValue;
+                    vm.Coils[register.Address - 1].Name = BooleanNameEntry.Text;
+                    vm.SelectedServer.WriteCoil(register.Address, vm.SelectedBooleanValue);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedBooleanValue}", "OK");
                     break;
             }
         }
