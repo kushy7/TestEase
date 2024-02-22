@@ -61,7 +61,12 @@ namespace TestEase.ViewModels
                     _selectedRegister = value;
                     OnPropertyChanged(nameof(SelectedRegister));
                     // Update IsRegisterSelected whenever SelectedRegister changes
-                    IsRegisterSelected = _selectedRegister != null;
+                    IsRegisterSelected = _selectedRegister?.RegisterType == RegisterType.HoldingRegister ||
+                                                _selectedRegister?.RegisterType == RegisterType.InputRegister;
+
+                    // Update IsBooleanRegisterSelected based on the RegisterType
+                    IsBooleanRegisterSelected = _selectedRegister?.RegisterType == RegisterType.DiscreteInput ||
+                                                _selectedRegister?.RegisterType == RegisterType.Coil;
                 }
             }
         }
@@ -72,6 +77,29 @@ namespace TestEase.ViewModels
         {
             get => _isRegisterSelected;
             set => SetProperty(ref _isRegisterSelected, value);
+        }
+
+        // Add IsBooleanRegisterSelected to indicate if a register is of discrete input or coil type
+        private bool _isBooleanRegisterSelected;
+        public bool IsBooleanRegisterSelected
+        {
+            get => _isBooleanRegisterSelected;
+            set => SetProperty(ref _isBooleanRegisterSelected, value);
+        }
+
+
+        private bool _selectedBooleanValue;
+        public bool SelectedBooleanValue
+        {
+            get => _selectedBooleanValue;
+            set
+            {
+                if (_selectedBooleanValue != value)
+                {
+                    _selectedBooleanValue = value;
+                    OnPropertyChanged(); 
+                }
+            }
         }
 
         private string _currentTabName = "HoldingRegisters"; // Default tab
