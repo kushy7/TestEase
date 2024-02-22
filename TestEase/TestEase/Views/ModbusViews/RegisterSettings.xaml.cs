@@ -12,8 +12,6 @@ public partial class RegisterSettings : ContentView
         InitializeComponent();
     }
 
-
-
     private void OnRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         // Ensure the sender is a RadioButton and that one of the buttons is pressed
@@ -53,9 +51,12 @@ public partial class RegisterSettings : ContentView
         var vm = this.BindingContext as ModbusPageViewModel;
         var register = vm.SelectedRegister;
         // Fixed
-        if (FixedRadioButton.IsChecked)
+        if (FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x))
         {
-            short.TryParse(FixedValueEntry.Text, out short n);
+            Console.WriteLine("HELLO");
+        }
+        if (FixedRadioButton.IsChecked && short.TryParse(FixedValueEntry.Text, out short n))
+        {
             switch (register.RegisterType)
             {
                 case RegisterType.HoldingRegister:
@@ -111,6 +112,10 @@ public partial class RegisterSettings : ContentView
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
             }
+        }
+        else
+        {
+            Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
         }
     }
 }

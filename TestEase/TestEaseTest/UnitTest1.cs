@@ -30,11 +30,11 @@ namespace TestEaseTest
         }
 
         [Fact]
-        public void randomIntTest()
+        public void randomShortTest()
         {
-            int lowerBound = 1;
-            int upperBound = 100;
-            int result = ValueGenerators.GenerateRandomValueInt(lowerBound, upperBound);
+            short lowerBound = 1;
+            short upperBound = 100;
+            short result = ValueGenerators.GenerateRandomValueShort(lowerBound, upperBound);
             Assert.InRange(result, lowerBound, upperBound);
         }
 
@@ -44,7 +44,7 @@ namespace TestEaseTest
         {
             double lowerBound = 0.0;
             double upperBound = 1.0;
-            double result = ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
+            float result = ValueGenerators.GenerateRandomValueFloat((float)lowerBound, (float)upperBound);
             Assert.InRange(result, lowerBound, upperBound);
         }
 

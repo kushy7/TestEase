@@ -87,7 +87,7 @@
                     IsVisible="{Binding IsRegisterSelected}">
                         <Label Text="Float" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
-                        <CheckBox Grid.Column="1"/>
+                        <CheckBox x:Name="FixedFloatConfiguration"  Grid.Column="1" IsChecked="{Binding IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="ValueInput" ColumnDefinitions="50*, 50*"
@@ -107,7 +107,7 @@
                     IsVisible="False">
                         <Label Text="Float" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
-                        <CheckBox Grid.Column="1"/>
+                        <CheckBox x:Name="RangeFloatConfigurationCheck" Grid.Column="1" IsChecked="{Binding IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"

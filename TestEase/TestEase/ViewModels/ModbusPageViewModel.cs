@@ -102,6 +102,22 @@ namespace TestEase.ViewModels
             }
         }
 
+
+        private bool _isFloatConfigurationChecked;
+        public bool IsFloatConfigurationChecked
+        {
+            get => _isFloatConfigurationChecked;
+            set
+            {
+                if (_isFloatConfigurationChecked != value)
+                {
+                    _isFloatConfigurationChecked = value;
+                    OnPropertyChanged(nameof(IsFloatConfigurationChecked));
+
+                }
+            }
+        }
+
         private string _currentTabName = "HoldingRegisters"; // Default tab
         public string CurrentTabName
         {
