@@ -89,7 +89,7 @@
         </Grid>
 
         <ListView x:Name="AddressesListView"
-                  ItemsSource="{Binding CurrentItems}"
+                  ItemsSource="{Binding SelectedServer.CurrentItems}"
                   ItemTapped="OnItemTapped"
                   VerticalScrollBarVisibility="Always"
                   VerticalOptions="Start"

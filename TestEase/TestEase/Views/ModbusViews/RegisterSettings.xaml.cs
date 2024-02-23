@@ -49,7 +49,7 @@ public partial class RegisterSettings : ContentView
     private void OnSaveButtonClick(object sender, EventArgs args)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
-        var register = vm.SelectedRegister;
+        var register = vm.SelectedServer.SelectedRegister;
         // Fixed
         if (FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x))
         {
@@ -62,28 +62,28 @@ public partial class RegisterSettings : ContentView
                 case RegisterType.HoldingRegister:
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
                         .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n));
-                    vm.HoldingRegisters[register.Address - 1].Value = n;
-                    vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = n;
+                    vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{n}", "OK");
                     break;
                 case RegisterType.DiscreteInput:
                     // short boolShort = vm.SelectedBooleanValue ? (short)1 : (short)0;
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
-                    vm.DiscreteInputs[register.Address - 1].Value = vm.SelectedBooleanValue;
-                    vm.DiscreteInputs[register.Address - 1].Name = BooleanNameEntry.Text;
-                    vm.SelectedServer.WriteDiscreteInput(register.Address, vm.SelectedBooleanValue);
-                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedBooleanValue}", "OK");
+                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedServer.SelectedBooleanValue));
+                    vm.SelectedServer.DiscreteInputs[register.Address - 1].Value = vm.SelectedServer.SelectedBooleanValue;
+                    vm.SelectedServer.DiscreteInputs[register.Address - 1].Name = BooleanNameEntry.Text;
+                    vm.SelectedServer.WriteDiscreteInput(register.Address, vm.SelectedServer.SelectedBooleanValue);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedServer.SelectedBooleanValue}", "OK");
                     break;
                 case RegisterType.Coil:
                     // short boolShort = vm.SelectedBooleanValue ? (short)1 : (short)0;
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
-                    vm.Coils[register.Address - 1].Value = vm.SelectedBooleanValue;
-                    vm.Coils[register.Address - 1].Name = BooleanNameEntry.Text;
-                    vm.SelectedServer.WriteCoil(register.Address, vm.SelectedBooleanValue);
-                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedBooleanValue}", "OK");
+                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedServer.SelectedBooleanValue));
+                    vm.SelectedServer.Coils[register.Address - 1].Value = vm.SelectedServer.SelectedBooleanValue;
+                    vm.SelectedServer.Coils[register.Address - 1].Name = BooleanNameEntry.Text;
+                    vm.SelectedServer.WriteCoil(register.Address, vm.SelectedServer.SelectedBooleanValue);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedServer.SelectedBooleanValue}", "OK");
                     break;
             }
         }
@@ -98,8 +98,8 @@ public partial class RegisterSettings : ContentView
                         short randomValue = ValueGenerators.GenerateRandomValueShort(lr, ur);
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
                             .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur));
-                        vm.HoldingRegisters[register.Address - 1].Value = randomValue;
-                        vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = randomValue;
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteHoldingRegister(register.Address, randomValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{randomValue}", "OK");
                         break;

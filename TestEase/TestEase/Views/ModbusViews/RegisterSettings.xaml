@@ -22,22 +22,22 @@
 
         <HorizontalStackLayout Spacing="10"
                                Grid.Row="1">
-            <Label Text="{Binding SelectedRegister.RegisterType}"/>
-            <Label Text="{Binding SelectedRegister.Address}"/>
-            <Label Text="{Binding SelectedRegister.Value}"/>
-            <Label Text="{Binding SelectedRegister.Name}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.RegisterType}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.Address}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.Value}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.Name}"/>
         </HorizontalStackLayout>
 
         <!-- Conditional Visibility for Radio Buttons -->
 
         <ScrollView Grid.Row="2" Orientation="Vertical">
             <StackLayout>
-                <VerticalStackLayout IsVisible="{Binding IsBooleanRegisterSelected}">
+                <VerticalStackLayout IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}">
                     <!-- Display for boolean registers -->
                     <StackLayout>
                         <Label Text="Boolean Register Options" />
                         <Grid x:Name="BooleanNameInput" ColumnDefinitions="50*, 50*"
-                        IsVisible="{Binding IsBooleanRegisterSelected}">
+                        IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}">
                             <Label Text="Name" VerticalTextAlignment="Center"
                             Grid.Column="0"/>
                             <Entry x:Name="BooleanNameEntry"
@@ -48,7 +48,7 @@
                         </Grid>
                         <StackLayout>
                             <Label Text="Value" VerticalTextAlignment="Center" />
-                            <Picker SelectedItem="{Binding SelectedBooleanValue}">
+                            <Picker SelectedItem="{Binding SelectedServer.SelectedBooleanValue}">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>True</x:String>
@@ -59,11 +59,11 @@
                         </StackLayout>
                     </StackLayout>
                 </VerticalStackLayout>
-                <VerticalStackLayout IsVisible="{Binding IsRegisterSelected}"
+                <VerticalStackLayout IsVisible="{Binding SelectedServer.IsRegisterSelected}"
                  >
 
                     <Grid x:Name="NameInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding IsRegisterSelected}">
+                    IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Name" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="NameEntry"
@@ -72,7 +72,7 @@
                         Keyboard="Text"
                         Grid.Column="1" />
                     </Grid>
-                    <HorizontalStackLayout IsVisible="{Binding IsRegisterSelected}">
+                    <HorizontalStackLayout IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <RadioButton x:Name="FixedRadioButton"
                         Content="Fixed"
                         IsChecked="True"
@@ -84,14 +84,14 @@
                     </HorizontalStackLayout>
                     <!-- Conditionaly visible Configuration for FixedRadioButton -->
                     <Grid x:Name="FloatConfiguration" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding IsRegisterSelected}">
+                    IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Float" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
-                        <CheckBox x:Name="FixedFloatConfiguration"  Grid.Column="1" IsChecked="{Binding IsFloatConfigurationChecked}" />
+                        <CheckBox x:Name="FixedFloatConfiguration"  Grid.Column="1" IsChecked="{Binding SelectedServer.IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="ValueInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding IsRegisterSelected}">
+                    IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Value" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="FixedValueEntry"
@@ -107,7 +107,7 @@
                     IsVisible="False">
                         <Label Text="Float" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
-                        <CheckBox x:Name="RangeFloatConfigurationCheck" Grid.Column="1" IsChecked="{Binding IsFloatConfigurationChecked}" />
+                        <CheckBox x:Name="RangeFloatConfigurationCheck" Grid.Column="1" IsChecked="{Binding SelectedServer.IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"
@@ -147,16 +147,16 @@
             </StackLayout>
             
         </ScrollView>
-        
 
-        <Grid IsVisible="{Binding IsRegisterSelected}"
+
+        <Grid IsVisible="{Binding SelectedServer.IsRegisterSelected}"
               Grid.Row="3">
             <Button Text="Save"
                     Pressed="OnSaveButtonClick"
                     HorizontalOptions="Center"/>
         </Grid>
 
-        <Grid IsVisible="{Binding IsBooleanRegisterSelected}"
+        <Grid IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}"
             Grid.Row="3">
             <Button Text="Save"
             Pressed="OnSaveButtonClick"
