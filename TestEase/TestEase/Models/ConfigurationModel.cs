@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestEase.Models
 {
@@ -11,16 +8,16 @@ namespace TestEase.Models
         public List<RegisterModel> RegisterModels { get; set; }
 
         public string Name { get; set; }
-        
+
         public ConfigurationModel()
         {
-            RegisterModels = [];
+            RegisterModels = new List<RegisterModel>();
             Name = "new config";
         }
 
-        public ConfigurationModel(String name)
+        public ConfigurationModel(string name)
         {
-            RegisterModels = [];
+            RegisterModels = new List<RegisterModel>();
             Name = name;
         }
     }

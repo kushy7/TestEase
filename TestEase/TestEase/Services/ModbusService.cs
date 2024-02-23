@@ -36,7 +36,7 @@ namespace TestEase.Services
                         // server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
                         if (register is Random<short> r)
                         {
-                            var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
+                            var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
                             server.WriteHoldingRegister(register.Address, val);
                             server.HoldingRegisters[register.Address - 1].Value = val;
                         }

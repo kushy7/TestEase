@@ -42,9 +42,10 @@
                 Grid.ColumnSpan="2">
             <HorizontalStackLayout
                 Padding="5" Spacing="5">
-                <Button Text="New"></Button>
-                <Button Text="Save"></Button>
-                <Button Text="Save As"></Button>
+                <Button Text="New" Clicked="New_Clicked"/>
+                <Button Text="Save" Clicked="Save_Clicked"/>
+                <Button Text="Save As" Clicked="SaveAs_Clicked"/>
+
             </HorizontalStackLayout>
         </Border>
         

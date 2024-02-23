@@ -34,6 +34,58 @@ namespace TestEase.ViewModels
             }
         }
 
+
+        public void CreateNewConfiguration()
+        {
+            // Option 1: Reset the current server's configuration
+            SelectedServer.WorkingConfiguration = new ConfigurationModel("new config");
+
+            // Option 2: Create a new server instance (if applicable)
+            // SelectedServer = new ModbusServerModel(502); // Use the appropriate port
+            // Note: If you create a new server instance, make sure to handle the initialization and starting of the server.
+        }
+
+        public async Task SaveConfigurationAsync(string fileName)
+        {
+            SelectedServer.WorkingConfiguration.Name = fileName;
+            var json = System.Text.Json.JsonSerializer.Serialize(SelectedServer.WorkingConfiguration);
+
+            // Get the path to the user's Documents directory
+            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            // Combine the documents path with the filename to get the full path
+            var filePath = System.IO.Path.Combine(documentsPath, fileName);
+
+          
+            // Write the JSON to the file
+            await System.IO.File.WriteAllTextAsync(filePath, json);
+        }
+
+        public async Task SaveConfigurationAsAsync(string fileName)
+        {
+            var json = System.Text.Json.JsonSerializer.Serialize(SelectedServer.WorkingConfiguration);
+            var filePath = System.IO.Path.Combine(Microsoft.Maui.Storage.FileSystem.AppDataDirectory, fileName);
+            Console.Write(filePath);
+            await System.IO.File.WriteAllTextAsync(filePath, json);
+        }
+
+        public async Task LoadConfigurationAsync(string fileName)
+        {
+            var filePath = System.IO.Path.Combine(Microsoft.Maui.Storage.FileSystem.AppDataDirectory, fileName);
+            if (System.IO.File.Exists(filePath))
+            {
+                var json = await System.IO.File.ReadAllTextAsync(filePath);
+                var configuration = System.Text.Json.JsonSerializer.Deserialize<ConfigurationModel>(json);
+                if (configuration != null)
+                {
+                    SelectedServer.WorkingConfiguration = configuration;
+                }
+            }
+        }
+
+
+
+
         //public ObservableCollection<IRegister> DiscreteInputs { get; set; } = new();
         //public ObservableCollection<IRegister> Coils { get; set; } = new();
         //public ObservableCollection<IRegister> InputRegisters { get; set; } = new();
