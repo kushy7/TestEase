@@ -44,28 +44,28 @@ namespace TestEase.Models
                 {
                     Address = i,
                     Value = false,
-                    Name = "d",
+                    Name = "",
                     RegisterType = RegisterType.DiscreteInput
                 });
                 this.Coils.Add(new Register<bool>
                 {
                     Address = i,
                     Value = false,
-                    Name = "c",
+                    Name = "",
                     RegisterType = RegisterType.Coil
                 });
                 this.InputRegisters.Add(new Register<short>
                 {
                     Address = i,
                     Value = 0,
-                    Name = "ir",
+                    Name = "",
                     RegisterType = RegisterType.InputRegister
                 });
                 this.HoldingRegisters.Add(new Register<short>
                 {
                     Address = i,
                     Value = 0,
-                    Name = "hr",
+                    Name = "",
                     RegisterType = RegisterType.HoldingRegister
                 });
 
