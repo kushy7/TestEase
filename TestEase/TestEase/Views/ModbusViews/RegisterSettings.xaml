@@ -37,14 +37,15 @@
                     <StackLayout>
                         <Label Text="Boolean Register Options" />
                         <Grid x:Name="BooleanNameInput" ColumnDefinitions="50*, 50*"
-                        IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}">
+                              IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}">
                             <Label Text="Name" VerticalTextAlignment="Center"
-                            Grid.Column="0"/>
+                                   Grid.Column="0"/>
                             <Entry x:Name="BooleanNameEntry"
-                            Placeholder="Enter Name"
-                            ClearButtonVisibility="WhileEditing"
-                            Keyboard="Text"
-                            Grid.Column="1" />
+                                   Placeholder="Enter Name"
+                                   Text="{Binding SelectedServer.SelectedRegister.Name}"
+                                   ClearButtonVisibility="WhileEditing"
+                                   Keyboard="Text"
+                                   Grid.Column="1" />
                         </Grid>
                         <StackLayout>
                             <Label Text="Value" VerticalTextAlignment="Center" />
@@ -63,85 +64,86 @@
                  >
 
                     <Grid x:Name="NameInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding SelectedServer.IsRegisterSelected}">
+                          IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Name" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <Entry x:Name="NameEntry"
-                        Placeholder="Enter Name"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Text"
-                        Grid.Column="1" />
+                               Placeholder="Enter Name"
+                               ClearButtonVisibility="WhileEditing"
+                               Text="{Binding SelectedServer.SelectedRegister.Name}"
+                               Keyboard="Text"
+                               Grid.Column="1" />
                     </Grid>
                     <HorizontalStackLayout IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <RadioButton x:Name="FixedRadioButton"
-                        Content="Fixed"
-                        IsChecked="True"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                                     Content="Fixed"
+                                     IsChecked="True"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>
                         <RadioButton x:Name="RangeRadioButton"
-                        Content="Range"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                                     Content="Range"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>
 
                     </HorizontalStackLayout>
                     <!-- Conditionaly visible Configuration for FixedRadioButton -->
                     <Grid x:Name="FloatConfiguration" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding SelectedServer.IsRegisterSelected}">
+                          IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Float" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <CheckBox x:Name="FixedFloatConfiguration"  Grid.Column="1" IsChecked="{Binding SelectedServer.IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="ValueInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding SelectedServer.IsRegisterSelected}">
+                          IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Value" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <Entry x:Name="FixedValueEntry"
-                        Placeholder="Enter Value"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Numeric"
-                        Grid.Column="1" />
+                               Placeholder="Enter Value"
+                               ClearButtonVisibility="WhileEditing"
+                               Keyboard="Numeric"
+                               Grid.Column="1" />
                     </Grid>
 
 
                     <!-- Conditionaly visible Configuration for RangeRadioButton -->
                     <Grid x:Name="RangeFloatConfiguration" ColumnDefinitions="50*, 50*"
-                    IsVisible="False">
+                          IsVisible="False">
                         <Label Text="Float" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <CheckBox x:Name="RangeFloatConfigurationCheck" Grid.Column="1" IsChecked="{Binding SelectedServer.IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="False">
+                          IsVisible="False">
                         <Label Text="Start Value" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <Entry x:Name="lowerrange"
-                        Placeholder="Enter Value"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Numeric"
-                        Grid.Column="1" />
+                               Placeholder="Enter Value"
+                               ClearButtonVisibility="WhileEditing"
+                               Keyboard="Numeric"
+                               Grid.Column="1" />
                     </Grid>
 
                     <Grid x:Name="UpperValueInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="False">
+                          IsVisible="False">
                         <Label Text="End Value" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <Entry x:Name="upperrange"
-                        Placeholder="Enter Value"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Numeric"
-                        Grid.Column="1" />
+                               Placeholder="Enter Value"
+                               ClearButtonVisibility="WhileEditing"
+                               Keyboard="Numeric"
+                               Grid.Column="1" />
                     </Grid>
 
                     <HorizontalStackLayout>
                         <RadioButton x:Name="RandomRadioButton"
-                     IsVisible="false"
-                     Content="Random"
-                     IsChecked="True"
-                     CheckedChanged="OnRadioButtonCheckedChanged"/>
+                                     IsVisible="false"
+                                     Content="Random"
+                                     IsChecked="True"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>
                         <RadioButton x:Name="CurveRadioButton"
-                     IsVisible="false"
-                     Content="Curve"
-                     CheckedChanged="OnRadioButtonCheckedChanged"/>
+                                     IsVisible="false"
+                                     Content="Curve"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </StackLayout>
