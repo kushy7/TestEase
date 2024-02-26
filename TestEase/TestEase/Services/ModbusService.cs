@@ -38,6 +38,12 @@ namespace TestEase.Services
                         {
                             server.WriteHoldingRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
                         }
+                    } else if (register.Type == RegisterType.InputRegister)
+                    {
+                        if(register is Random<short> r)
+                        {
+                            server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
+                        }
                     }
                 }
             }
