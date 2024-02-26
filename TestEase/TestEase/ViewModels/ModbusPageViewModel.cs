@@ -34,12 +34,15 @@ namespace TestEase.ViewModels
             }
         }
 
+       
+
         public ObservableCollection<IRegister> DiscreteInputs { get; set; } = new();
         public ObservableCollection<IRegister> Coils { get; set; } = new();
         public ObservableCollection<IRegister> InputRegisters { get; set; } = new();
         public ObservableCollection<IRegister> HoldingRegisters { get; set; } = new();
 
         private ObservableCollection<IRegister> _currentItems;
+
         public ObservableCollection<IRegister> CurrentItems
         {
             get => _currentItems;
@@ -145,8 +148,11 @@ namespace TestEase.ViewModels
         }
 
         public AppViewModel AppViewModel { get; }
+
+        private readonly ModbusService _service;
         public ModbusPageViewModel(AppViewModel appViewModel)
         {
+            _service = new ModbusService(appViewModel);
             AppViewModel = appViewModel;
 
             Trace.WriteLine("Started server"); // DELETE

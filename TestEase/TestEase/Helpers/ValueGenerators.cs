@@ -18,8 +18,9 @@ namespace TestEase.Helpers
 
         public static float GenerateRandomValueFloat(float lowerBound, float upperBound)
         {
-            return (float) random.NextDouble() * (upperBound - lowerBound) + lowerBound;
+            return (float)(random.NextDouble() * (upperBound - lowerBound) + lowerBound);
         }
+
 
         public static short[] GenerateShortArrayFromFloat(float floatInput)
         {
