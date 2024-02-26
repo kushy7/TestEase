@@ -22,9 +22,20 @@ public partial class RegisterConfigs : ContentView
         if (viewModel != null)
         {
             string fileName = "defaultConfig.json"; // Define how you determine the file name
-            await viewModel.SaveConfigurationAsync(fileName);
+            try
+            {
+                await viewModel.SaveConfigurationAsync(fileName);
+                // Assuming saving was successful, notify the user
+                await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved as " + fileName, "OK");
+            }
+            catch (Exception ex)
+            {
+                // If there's an error during save, notify the user
+                await Application.Current.MainPage.DisplayAlert("Error", $"Failed to save the configuration: {ex.Message}", "OK");
+            }
         }
     }
+
 
     private async void SaveAs_Clicked(object sender, EventArgs e)
     {
