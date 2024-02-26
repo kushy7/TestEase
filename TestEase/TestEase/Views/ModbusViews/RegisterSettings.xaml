@@ -42,7 +42,7 @@
                                    Grid.Column="0"/>
                             <Entry x:Name="BooleanNameEntry"
                                    Placeholder="Enter Name"
-                                   Text="{Binding SelectedServer.SelectedRegister.Name}"
+                                   Text="{Binding SelectedServer.SelectedRegister.Name, Mode=OneWay}"
                                    ClearButtonVisibility="WhileEditing"
                                    Keyboard="Text"
                                    Grid.Column="1" />
@@ -70,7 +70,7 @@
                         <Entry x:Name="NameEntry"
                                Placeholder="Enter Name"
                                ClearButtonVisibility="WhileEditing"
-                               Text="{Binding SelectedServer.SelectedRegister.Name}"
+                               Text="{Binding SelectedServer.SelectedRegister.Name, Mode=OneWay}"
                                Keyboard="Text"
                                Grid.Column="1" />
                     </Grid>
@@ -98,6 +98,7 @@
                                Grid.Column="0"/>
                         <Entry x:Name="FixedValueEntry"
                                Placeholder="Enter Value"
+                               Text="{Binding FixedNonFloatEntryText}"
                                ClearButtonVisibility="WhileEditing"
                                Keyboard="Numeric"
                                Grid.Column="1" />

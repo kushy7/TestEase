@@ -144,6 +144,21 @@ namespace TestEase.ViewModels
         //    };
         //}
 
+        private string _fixedNonFloatEntryText;
+
+        public string FixedNonFloatEntryText
+        {
+            get => _fixedNonFloatEntryText;
+            set
+            {
+                if (_fixedNonFloatEntryText != value)
+                {
+                    _fixedNonFloatEntryText = value;
+                    OnPropertyChanged(nameof(FixedNonFloatEntryText));
+                }
+            }
+        }
+
         public AppViewModel AppViewModel { get; }
         public ModbusPageViewModel(AppViewModel appViewModel)
         {
