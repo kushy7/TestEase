@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EasyModbus;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -37,18 +39,22 @@ namespace TestEase.ViewModels
 
         public void CreateNewConfiguration()
         {
-            // Option 1: Reset the current server's configuration
+            //Reset the current server's configuration
             SelectedServer.WorkingConfiguration = new ConfigurationModel("new config");
 
-            // Option 2: Create a new server instance (if applicable)
-            // SelectedServer = new ModbusServerModel(502); // Use the appropriate port
-            // Note: If you create a new server instance, make sure to handle the initialization and starting of the server.
+      
         }
 
         public async Task SaveConfigurationAsync(string fileName)
         {
             SelectedServer.WorkingConfiguration.Name = fileName;
-            var json = System.Text.Json.JsonSerializer.Serialize(SelectedServer.WorkingConfiguration);
+            var settings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                Converters = { new StringEnumConverter() }
+            };
+
+            string json = JsonConvert.SerializeObject(this.SelectedServer.WorkingConfiguration, settings);
 
             // Get the path to the user's Documents directory
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -56,30 +62,69 @@ namespace TestEase.ViewModels
             // Combine the documents path with the filename to get the full path
             var filePath = System.IO.Path.Combine(documentsPath, fileName);
 
-          
             // Write the JSON to the file
             await System.IO.File.WriteAllTextAsync(filePath, json);
+       
         }
 
         public async Task SaveConfigurationAsAsync(string fileName)
         {
-            var json = System.Text.Json.JsonSerializer.Serialize(SelectedServer.WorkingConfiguration);
-            var filePath = System.IO.Path.Combine(Microsoft.Maui.Storage.FileSystem.AppDataDirectory, fileName);
-            Console.Write(filePath);
-            await System.IO.File.WriteAllTextAsync(filePath, json);
+            // Adjusting to use the Documents directory
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName);
+            var json = JsonConvert.SerializeObject(SelectedServer.WorkingConfiguration);
+            await File.WriteAllTextAsync(filePath, json);
         }
 
         public async Task LoadConfigurationAsync(string fileName)
         {
-            var filePath = System.IO.Path.Combine(Microsoft.Maui.Storage.FileSystem.AppDataDirectory, fileName);
-            if (System.IO.File.Exists(filePath))
+            // Adjusting to use the Documents directory
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName);
+            if (File.Exists(filePath))
             {
-                var json = await System.IO.File.ReadAllTextAsync(filePath);
-                var configuration = System.Text.Json.JsonSerializer.Deserialize<ConfigurationModel>(json);
-                if (configuration != null)
+                var json = await File.ReadAllTextAsync(filePath);
+                SelectedServer.WorkingConfiguration = JsonConvert.DeserializeObject<ConfigurationModel>(json);
+            }
+        }
+
+
+
+        public class SavedConfigurationsViewModel : INotifyPropertyChanged
+        {
+            private ObservableCollection<string> _configurationFiles;
+            public ObservableCollection<string> ConfigurationFiles
+            {
+                get => _configurationFiles;
+                set
                 {
-                    SelectedServer.WorkingConfiguration = configuration;
+                    _configurationFiles = value;
+                    OnPropertyChanged(nameof(ConfigurationFiles));
                 }
+            }
+
+            private async Task LoadConfigurationsAsync()
+            {
+                // Specify the folder where the configuration files are saved
+                string configFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                var files = Directory.EnumerateFiles(configFolderPath, "*.json");
+                foreach (var file in files)
+                {
+                    ConfigurationFiles.Add(Path.GetFileName(file));
+                }
+            }
+
+            public SavedConfigurationsViewModel()
+            {
+                ConfigurationFiles = new ObservableCollection<string>();
+                LoadConfigurationsAsync();
+            }
+
+            
+
+            public event PropertyChangedEventHandler PropertyChanged;
+            protected virtual void OnPropertyChanged(string propertyName = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 

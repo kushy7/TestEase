@@ -31,20 +31,19 @@ public partial class RegisterConfigs : ContentView
         var viewModel = this.BindingContext as ModbusPageViewModel;
         if (viewModel != null)
         {
-            // Using Application.Current.MainPage to access DisplayPromptAsync
-            string defaultFileName = $"Configuration_{DateTime.Now:yyyyMMddHHmmss}.json";
-            string fileName = await Application.Current.MainPage.DisplayPromptAsync("Save As", "Enter a file name:", initialValue: defaultFileName, accept: "Save", cancel: "Cancel");
-
+            string fileName = await Application.Current.MainPage.DisplayPromptAsync("Save As", "Enter a file name:", initialValue: "Configuration_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".json", accept: "Save", cancel: "Cancel");
             if (!string.IsNullOrWhiteSpace(fileName))
             {
                 if (!fileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
                 {
                     fileName += ".json";
                 }
-
                 try
                 {
                     await viewModel.SaveConfigurationAsync(fileName);
+                    // Directly instantiate an instance of SavedConfigurationsViewModel
+                    var savedConfigurationsViewModel = new SavedConfigurationsViewModel();
+                    await savedConfigurationsViewModel.LoadConfigurationsAsync();
                     await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved successfully.", "OK");
                 }
                 catch (Exception ex)
@@ -54,5 +53,7 @@ public partial class RegisterConfigs : ContentView
             }
         }
     }
+
+
 
 }

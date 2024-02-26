@@ -4,9 +4,9 @@
              x:Class="TestEase.Views.ModbusViews.SavedConfigurations">
 
     <Grid Margin="20"
-          RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+          RowDefinitions="Auto,*,Auto"
           ColumnDefinitions="*">
-        
+
         <Border Margin="-22,-22,-22,0"
                 BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
                 Grid.Row="0">
@@ -17,7 +17,21 @@
             </StackLayout>
         </Border>
 
-    </Grid>
+        <!-- CollectionView for displaying the list of configuration files -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding ConfigurationFiles}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-    
+     
+    </Grid>
 </ContentView>
