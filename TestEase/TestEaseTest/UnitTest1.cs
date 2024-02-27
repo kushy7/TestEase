@@ -32,9 +32,9 @@ namespace TestEaseTest
         [Fact]
         public void randomIntTest()
         {
-            int lowerBound = 1;
-            int upperBound = 100;
-            int result = ValueGenerators.GenerateRandomValueInt(lowerBound, upperBound);
+            double lowerBound = 1.0;
+            double upperBound = 100.0;
+            double result = ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
             Assert.InRange(result, lowerBound, upperBound);
         }
 
@@ -44,7 +44,7 @@ namespace TestEaseTest
         {
             double lowerBound = 0.0;
             double upperBound = 1.0;
-            double result = ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
+            float result = (float)ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
             Assert.InRange(result, lowerBound, upperBound);
         }
 
