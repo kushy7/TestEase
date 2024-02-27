@@ -50,6 +50,30 @@ public partial class RegisterSettings : ContentView
     {
         var vm = this.BindingContext as ModbusPageViewModel;
         var register = vm.SelectedRegister;
+        if (register.RegisterType == RegisterType.Coil || register.RegisterType == RegisterType.DiscreteInput)
+        {
+            switch (register.RegisterType)
+            {
+                case RegisterType.DiscreteInput:
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
+                    vm.DiscreteInputs[register.Address - 1].Value = vm.SelectedBooleanValue;
+                    vm.DiscreteInputs[register.Address - 1].Name = BooleanNameEntry.Text;
+                    vm.SelectedServer.WriteDiscreteInput(register.Address, vm.SelectedBooleanValue);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {BooleanNameEntry.Text}\nValue: {vm.SelectedBooleanValue}", "OK");
+                    break;
+                case RegisterType.Coil:
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
+                    vm.Coils[register.Address - 1].Value = vm.SelectedBooleanValue;
+                    vm.Coils[register.Address - 1].Name = BooleanNameEntry.Text;
+                    vm.SelectedServer.WriteCoil(register.Address, vm.SelectedBooleanValue);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {BooleanNameEntry.Text}\nValue: {vm.SelectedBooleanValue}", "OK");
+                    break;
+            }
+            return; // this is dumb
+        }
+
         // Fixed
         if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
         {
@@ -148,22 +172,6 @@ public partial class RegisterSettings : ContentView
                     vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteInputRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {n}", "OK");
-                    break;
-                case RegisterType.DiscreteInput:
-                    vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
-                    vm.DiscreteInputs[register.Address - 1].Value = vm.SelectedBooleanValue;
-                    vm.DiscreteInputs[register.Address - 1].Name = BooleanNameEntry.Text;
-                    vm.SelectedServer.WriteDiscreteInput(register.Address, vm.SelectedBooleanValue);
-                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {BooleanNameEntry.Text}\nValue: {vm.SelectedBooleanValue}", "OK");
-                    break;
-                case RegisterType.Coil:
-                    vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
-                    vm.Coils[register.Address - 1].Value = vm.SelectedBooleanValue;
-                    vm.Coils[register.Address - 1].Name = BooleanNameEntry.Text;
-                    vm.SelectedServer.WriteCoil(register.Address, vm.SelectedBooleanValue);
-                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {BooleanNameEntry.Text}\nValue: {vm.SelectedBooleanValue}", "OK");
                     break;
             }
         }
