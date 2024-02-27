@@ -107,11 +107,24 @@
 
                     <!-- Conditionaly visible Configuration for RangeRadioButton -->
                     <Grid x:Name="RangeFloatConfiguration" ColumnDefinitions="50*, 50*"
-                          IsVisible="False">
+                          IsVisible="false">
                         <Label Text="Float" VerticalTextAlignment="Center"
                                Grid.Column="0"/>
                         <CheckBox x:Name="RangeFloatConfigurationCheck" Grid.Column="1" IsChecked="{Binding SelectedServer.IsFloatConfigurationChecked}" />
                     </Grid>
+
+                    <HorizontalStackLayout>
+                        <RadioButton x:Name="RandomRadioButton"
+                        IsVisible="false"
+                        Content="Random"
+                        IsChecked="{Binding SelectedServer.IsRandomSelected, Mode=TwoWay}"
+                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                        <RadioButton x:Name="CurveRadioButton"
+                        IsVisible="false"
+                        Content="Curve"
+                        IsChecked="{Binding SelectedServer.IsCurveSelected, Mode=TwoWay}"
+                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                    </HorizontalStackLayout>
 
                     <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"
                     IsVisible="{Binding SelectedServer.IsRandomSelected}">
@@ -159,27 +172,15 @@
 
                     <Grid x:Name="CurveConfiguration" ColumnDefinitions="50*, 50*"
                         IsVisible="{Binding SelectedServer.IsCurveSelected}">
-                        <Label Text="Period" VerticalTextAlignment="Center"
+                        <Label Text="Intervals/Period" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="PeriodEntry"
-                        Placeholder="Enter Period"
+                        Placeholder="Enter Intervals/Period"
                         ClearButtonVisibility="WhileEditing"
                         Keyboard="Numeric"
                         Grid.Column="1" />
                     </Grid>
 
-                    <HorizontalStackLayout>
-                        <RadioButton x:Name="RandomRadioButton"
-                        IsVisible="false"
-                        Content="Random"
-                        IsChecked="{Binding SelectedServer.IsRandomSelected, Mode=TwoWay}"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
-                        <RadioButton x:Name="CurveRadioButton"
-                        IsVisible="false"
-                        Content="Curve"
-                        IsChecked="{Binding SelectedServer.IsCurveSelected, Mode=TwoWay}"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
-                    </HorizontalStackLayout>
                 </VerticalStackLayout>
             </StackLayout>
             

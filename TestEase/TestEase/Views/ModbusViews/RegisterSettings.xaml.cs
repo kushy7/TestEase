@@ -50,7 +50,6 @@ public partial class RegisterSettings : ContentView
                     // Hide other configurations
                     FloatConfiguration.IsVisible = false;
                     ValueInput.IsVisible = false;
-                    RangeFloatConfiguration.IsVisible = false;
                     LowerValueInput.IsVisible = true;
                     UpperValueInput.IsVisible = true;
                     StartingValueInput.IsVisible = false;
@@ -65,7 +64,6 @@ public partial class RegisterSettings : ContentView
                     // Hide other configurations
                     FloatConfiguration.IsVisible = false;
                     ValueInput.IsVisible = false;
-                    RangeFloatConfiguration.IsVisible = false;
                     LowerValueInput.IsVisible = false;
                     UpperValueInput.IsVisible = false;
                     StartingValueInput.IsVisible = true;

@@ -57,7 +57,9 @@ namespace TestEase.Services
                         {
 
                             ra.IncrementIterationStep(); // Increment iterationStep
-                            server.WriteHoldingRegister(register.Address, ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period));
+                            var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                            server.WriteHoldingRegister(register.Address, val);
+                            server.HoldingRegisters[register.Address - 1].Value = val;
                         }
                     } else if (register.Type == RegisterType.InputRegister)
                     {
@@ -78,7 +80,9 @@ namespace TestEase.Services
                         {
 
                             ra.IncrementIterationStep(); // Increment iterationStep
-                            server.WriteInputRegister(register.Address, ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period));
+                            var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                            server.WriteInputRegister(register.Address, val);
+                            server.InputRegisters[register.Address - 1].Value = val;
                         }
                     }
                 }
