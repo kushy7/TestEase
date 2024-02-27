@@ -21,31 +21,48 @@ namespace TestEase.Helpers
             return (float) random.NextDouble() * (upperBound - lowerBound) + lowerBound;
         }
 
-        public static short GetNextSineValue(short currentValue, short startValue, short endValue, int interval)
+        //public static short GetNextSineValue(short currentValue, short startValue, short endValue, int interval)
+        //{
+        //    // Calculate the amplitude of the sine wave
+        //    double amplitude = (endValue - startValue) / 2.0;
+
+        //    // Calculate the midpoint of the sine wave
+        //    double midPoint = (startValue + endValue) / 2.0;
+
+        //    // Calculate the angular frequency (omega)
+        //    double omega = 2 * Math.PI / interval;
+
+        //    // Calculate the current phase theta based on the current value
+        //    // This involves reverse calculation from the sine wave formula: currentValue = midPoint + amplitude * sin(theta)
+        //    double theta = Math.Asin((currentValue - midPoint) / amplitude);
+
+        //    // Increment the phase by omega to get the next point
+        //    theta += omega;
+
+        //    // Calculate the next value using the sine wave formula
+        //    short nextValue = (short)(midPoint + amplitude * Math.Sin(theta));
+
+        //    // Ensure the next value is within the limits
+        //    nextValue = (short)Math.Max(startValue, Math.Min(endValue, nextValue));
+
+        //    return nextValue;
+        //}
+
+        public static short GenerateNextSinValue(double startValue, double endValue, int iterationStep, int iterationTotal)
         {
-            // Calculate the amplitude of the sine wave
-            double amplitude = (endValue - startValue) / 2.0;
+            if (iterationStep < 0 || iterationStep >= iterationTotal)
+            {
+                throw new ArgumentOutOfRangeException(nameof(iterationStep), "Iteration step must be between 0 (inclusive) and iterationTotal (exclusive).");
+            }
 
-            // Calculate the midpoint of the sine wave
-            double midPoint = (startValue + endValue) / 2.0;
+            double range = endValue - startValue;
+            double stepSize = 2 * Math.PI / iterationTotal;
+            double angle = (iterationStep + 1) * stepSize;
 
-            // Calculate the angular frequency (omega)
-            double omega = 2 * Math.PI / interval;
+            double sinValue = Math.Sin(angle);
+            short result = (short)(startValue + ((sinValue + 1) / 2) * range);
 
-            // Calculate the current phase theta based on the current value
-            // This involves reverse calculation from the sine wave formula: currentValue = midPoint + amplitude * sin(theta)
-            double theta = Math.Asin((currentValue - midPoint) / amplitude);
-
-            // Increment the phase by omega to get the next point
-            theta += omega;
-
-            // Calculate the next value using the sine wave formula
-            short nextValue = (short)(midPoint + amplitude * Math.Sin(theta));
-
-            // Ensure the next value is within the limits
-            nextValue = (short)Math.Max(startValue, Math.Min(endValue, nextValue));
-
-            return nextValue;
+            return result;
         }
 
     }

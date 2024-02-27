@@ -40,7 +40,7 @@ namespace TestEase.Services
                         }
                         else if (register is Curve<short> ra)
                         {
-                            server.WriteHoldingRegister(register.Address, ValueGenerators.GetNextSineValue(0, ra.startValue, ra.endValue, ra.period));
+                            server.WriteHoldingRegister(register.Address, ValueGenerators.GenerateNextSinValue(0, ra.startValue, ra.endValue, ra.period));
                         }
                     } else if (register.Type == RegisterType.InputRegister)
                     {

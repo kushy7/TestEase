@@ -155,10 +155,10 @@ public partial class RegisterSettings : ContentView
         }
         else if (RangeRadioButton.IsChecked && CurveRadioButton.IsChecked)
         {
-            if (short.TryParse(lowerrange.Text, out short lowerR) && short.TryParse(upperrange.Text, out short upperR)
+            if (short.TryParse(startval.Text, out short lowerR) && short.TryParse(endval.Text, out short upperR)
                 && int.TryParse(PeriodEntry.Text, out int periodR))
             {
-                short nextValue = ValueGenerators.GetNextSineValue(0, lowerR, upperR, periodR);
+                short nextValue = ValueGenerators.GenerateNextSinValue(lowerR, upperR, 0, periodR);
                 switch (register.RegisterType)
                 {
                     case RegisterType.HoldingRegister:
