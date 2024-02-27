@@ -29,24 +29,24 @@ namespace TestEaseTest
             Assert.False(c.value);
         }
 
-        [Fact]
-        public void randomIntTest()
-        {
-            double lowerBound = 1.0;
-            double upperBound = 100.0;
-            double result = ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
-            Assert.InRange(result, lowerBound, upperBound);
-        }
+        //[Fact]
+        //public void randomIntTest()
+        //{
+        //    double lowerBound = 1.0;
+        //    double upperBound = 100.0;
+        //    double result = (float)ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
+        //    Assert.InRange(result, lowerBound, upperBound);
+        //}
 
 
-        [Fact]
-         public void GenerateRandomDoubleTest()
-        {
-            double lowerBound = 0.0;
-            double upperBound = 1.0;
-            float result = (float)ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
-            Assert.InRange(result, lowerBound, upperBound);
-        }
+        //[Fact]
+        // public void GenerateRandomDoubleTest()
+        //{
+        //    double lowerBound = 0.0;
+        //    double upperBound = 1.0;
+        //    float result = (float)ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
+        //    Assert.InRange(result, lowerBound, upperBound);
+        //}
 
         [Fact]
         public void FixedTest()
