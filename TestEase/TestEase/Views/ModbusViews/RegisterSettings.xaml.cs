@@ -72,6 +72,7 @@ public partial class RegisterSettings : ContentView
                     vm.HoldingRegisters[register.Address].Value = highBits;
                     vm.HoldingRegisters[register.Address].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
+
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {x} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
                     break;
                 case RegisterType.InputRegister:
@@ -103,13 +104,11 @@ public partial class RegisterSettings : ContentView
                 case RegisterType.HoldingRegister:
                     //low bits
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Random<float>(register.Address, register.RegisterType, NameEntry.Text, lrf, urf));
+                        .Add(new Random<float>(register.Address, register.RegisterType, NameEntry.Text, lrf, urf, true));
                     vm.HoldingRegisters[register.Address - 1].Value = lowBits;
                     vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
                     //high bits
-                    vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Random<float>(register.Address + 1, register.RegisterType, NameEntry.Text, lrf, urf));
                     vm.HoldingRegisters[register.Address].Value = highBits;
                     vm.HoldingRegisters[register.Address].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
@@ -118,13 +117,11 @@ public partial class RegisterSettings : ContentView
                 case RegisterType.InputRegister:
                     //low bits
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Random<float>(register.Address, register.RegisterType, NameEntry.Text, lrf, urf));
+                        .Add(new Random<float>(register.Address, register.RegisterType, NameEntry.Text, lrf, urf, true));
                     vm.InputRegisters[register.Address - 1].Value = lowBits;
                     vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
                     //high bits
-                    vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Random<float>(register.Address + 1, register.RegisterType, NameEntry.Text, lrf, urf));
                     vm.InputRegisters[register.Address].Value = highBits;
                     vm.InputRegisters[register.Address].Name = NameEntry.Text;
                     vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
@@ -179,7 +176,7 @@ public partial class RegisterSettings : ContentView
                 {
                     case RegisterType.HoldingRegister:
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur));
+                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur, false));
                         vm.HoldingRegisters[register.Address - 1].Value = randomValue;
                         vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteHoldingRegister(register.Address, randomValue);
@@ -187,7 +184,7 @@ public partial class RegisterSettings : ContentView
                         break;
                     case RegisterType.InputRegister:
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur));
+                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur, false));
                         vm.InputRegisters[register.Address - 1].Value = randomValue;
                         vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteInputRegister(register.Address, randomValue);

@@ -25,20 +25,22 @@ namespace TestEase.Models
     public class Fixed<T>(int address, RegisterType type, string name, T value) : RegisterModel(address, type, name)
     {
         public T value = value;
+        public bool isFloat = false;
     }
 
 
-    public class Range<T>(int address, RegisterType type, string name, T startValue, T endValue) : RegisterModel(address, type, name)
+    public class Range<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : RegisterModel(address, type, name)
     {
         public T startValue = startValue;
         public T endValue = endValue;
+        public bool isFloat = isFloat;
     }
 
-    public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue) : Range<T>(address, type, name, startValue, endValue)
+    public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : Range<T>(address, type, name, startValue, endValue, isFloat)
     {
     }
 
-    public class Curve<T>(int address, RegisterType type, string name, T startValue, T endValue, int period) : Range<T>(address, type, name, startValue, endValue)
+    public class Curve<T>(int address, RegisterType type, string name, T startValue, T endValue, int period, bool isFloat) : Range<T>(address, type, name, startValue, endValue, isFloat)
     {
         public int period = period;
     }
