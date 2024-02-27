@@ -50,10 +50,6 @@ namespace TestEase.Helpers
 
         public static short GenerateNextSinValue(double startValue, double endValue, int iterationStep, int iterationTotal)
         {
-            if (iterationStep < 0 || iterationStep >= iterationTotal)
-            {
-                throw new ArgumentOutOfRangeException(nameof(iterationStep), "Iteration step must be between 0 (inclusive) and iterationTotal (exclusive).");
-            }
 
             double range = endValue - startValue;
             double stepSize = 2 * Math.PI / iterationTotal;

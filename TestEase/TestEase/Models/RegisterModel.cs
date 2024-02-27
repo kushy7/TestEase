@@ -37,8 +37,31 @@ namespace TestEase.Models
     {
     }
 
-    public class Curve<T>(int address, RegisterType type, string name, T startValue, T endValue, int period) : Range<T>(address, type, name, startValue, endValue)
+    public class Curve<T> : Range<T>
     {
-        public int period = period;
+        private int _iterationStep;
+
+        public int Period { get; }
+
+        public Curve(int address, RegisterType type, string name, T startValue, T endValue, int intervalStep, int period)
+            : base(address, type, name, startValue, endValue)
+        {
+            _iterationStep = 0; // Initialize iterationStep
+            Period = period;
+        }
+
+        public void IncrementIterationStep()
+        {
+            _iterationStep++;
+            if (_iterationStep >= Period)
+            {
+                _iterationStep = 0; // Reset iterationStep to 0
+            }
+        }
+
+        public int GetIterationStep()
+        {
+            return _iterationStep;
+        }
     }
 }
