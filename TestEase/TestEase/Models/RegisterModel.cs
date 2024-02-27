@@ -1,49 +1,33 @@
-﻿using System;
+﻿//using ABI.System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace TestEase.Models
 {
-    
-
-    public abstract class RegisterModel
+    public abstract class RegisterModel(int address, RegisterType type, string name)
     {
-        public int Address { get; set; }
-        public RegisterType Type { get; set; }
-        public string Name { get; set; }
-        public short LastValue { get; set; }
+        public int Address { get; set; } = address;
+        public RegisterType Type { get; set; } = type;
+        public string Name { get; set; } = name;
+        public short LastValue { get; set; } = 0;
 
-        protected RegisterModel(int address, RegisterType type, string name)
-        {
-            Address = address;
-            Type = type;
-            Name = name;
-        }
     }
 
-    public class CoilOrDiscrete : RegisterModel
+    public class CoilOrDiscrete(int address, RegisterType type, string name, bool value) : RegisterModel(address, type, name)
     {
-        public bool Value { get; set; }
-
-        public CoilOrDiscrete(int address, RegisterType type, string name, bool value)
-            : base(address, type, name)
-        {
-            Value = value;
-        }
+        public bool value = value;
     }
 
-    public class Fixed<T> : RegisterModel
+    public class Fixed<T>(int address, RegisterType type, string name, T value) : RegisterModel(address, type, name)
     {
-
         public T value = value;
         public bool isFloat = false;
     }
 
-
-        public Fixed(int address, RegisterType type, string name, T value)
-            : base(address, type, name)
-        {
-            Value = value;
-        }
-    }
 
     public class Range<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : RegisterModel(address, type, name)
     {
@@ -53,17 +37,11 @@ namespace TestEase.Models
     }
 
     public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : Range<T>(address, type, name, startValue, endValue, isFloat)
-
     {
-        public Random(int address, RegisterType type, string name, T startValue, T endValue)
-            : base(address, type, name, startValue, endValue)
-        {
-        }
     }
 
     public class Curve<T> : Range<T>
     {
-
         private int _iterationStep;
 
         public int Period { get; }
@@ -88,6 +66,5 @@ namespace TestEase.Models
         {
             return _iterationStep;
         }
-
     }
 }

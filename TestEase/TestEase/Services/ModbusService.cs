@@ -39,7 +39,7 @@ namespace TestEase.Services
                     {
                         if (register is Random<short> r)
                         {
-                            var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
+                            var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
                             server.WriteHoldingRegister(register.Address, val);
                             server.HoldingRegisters[register.Address - 1].Value = val;
                         }
@@ -89,7 +89,7 @@ namespace TestEase.Services
                     {
                         if (register is Random<short> r)
                         {
-                            var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
+                            var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
                             server.WriteInputRegister(register.Address, val);
                             server.InputRegisters[register.Address - 1].Value = val;
                         }

@@ -229,16 +229,6 @@ public partial class RegisterSettings : ContentView
                         vm.SelectedServer.WriteInputRegister(register.Address, randomValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue}", "OK");
                         break;
-                    case RegisterType.InputRegister:
-                        // Generate a random value within the specified range
-                        randomValue = ValueGenerators.GenerateRandomValueShort(lr, ur);
-                        vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur));
-                        vm.SelectedServer.InputRegisters[register.Address - 1].Value = randomValue;
-                        vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
-                        vm.SelectedServer.WriteHoldingRegister(register.Address, randomValue);
-                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{randomValue}", "OK");
-                        break;
                     default:
                         Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Range value.", "OK");
                         break;
@@ -283,8 +273,4 @@ public partial class RegisterSettings : ContentView
         }
 
     }
- }
-
-
-    
-
+}

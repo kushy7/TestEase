@@ -22,26 +22,26 @@ public class RegisterModelConverter : JsonConverter
 
         // Serialize common properties
         jo.Add("Type", JToken.FromObject(((RegisterModel)value).Type, serializer));
-        jo.Add("Address", ((RegisterModel)value).Address);
-        jo.Add("Name", ((RegisterModel)value).Name);
-        jo.Add("LastValue", ((RegisterModel)value).LastValue);
+        jo.Add("Address", JToken.FromObject(((RegisterModel)value).Address, serializer)); // Ensure Address is converted to JToken
+        jo.Add("Name", JToken.FromObject(((RegisterModel)value).Name, serializer)); // Ensure Name is converted to JToken
+        jo.Add("LastValue", JToken.FromObject(((RegisterModel)value).LastValue, serializer)); // Ensure LastValue is converted to JToken
 
         // Serialize properties based on specific derived type
         if (type == typeof(CoilOrDiscrete))
         {
-            jo.Add("Value", ((CoilOrDiscrete)value).Value);
+            jo.Add("Value", JToken.FromObject(((CoilOrDiscrete)value).value, serializer)); // Ensure Value is converted to JToken
         }
         else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Fixed<>))
         {
-            jo.Add("Value", JToken.FromObject(((dynamic)value).Value, serializer));
+            jo.Add("Value", JToken.FromObject(((dynamic)value).Value, serializer)); // Correctly converting to JToken
         }
         else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Range<>) || type.GetGenericTypeDefinition() == typeof(Random<>) || type.GetGenericTypeDefinition() == typeof(Curve<>))
         {
-            jo.Add("StartValue", JToken.FromObject(((dynamic)value).StartValue, serializer));
-            jo.Add("EndValue", JToken.FromObject(((dynamic)value).EndValue, serializer));
+            jo.Add("StartValue", JToken.FromObject(((dynamic)value).StartValue, serializer)); // Correctly converting to JToken
+            jo.Add("EndValue", JToken.FromObject(((dynamic)value).EndValue, serializer)); // Correctly converting to JToken
             if (type.GetGenericTypeDefinition() == typeof(Curve<>))
             {
-                jo.Add("Period", ((Curve<dynamic>)value).Period);
+                jo.Add("Period", JToken.FromObject(((Curve<dynamic>)value).Period, serializer)); // Ensure Period is converted to JToken
             }
         }
 
@@ -50,4 +50,5 @@ public class RegisterModelConverter : JsonConverter
 
         jo.WriteTo(writer);
     }
+
 }
