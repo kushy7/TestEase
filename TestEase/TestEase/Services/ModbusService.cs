@@ -18,6 +18,10 @@ namespace TestEase.Services
 
         private Timer _updateTimer;
 
+        private int _iterationStep = 0;
+
+
+
         public void StartPeriodicUpdate(TimeSpan interval)
         {
             _updateTimer = new Timer(UpdateRegistersCallback, null, TimeSpan.Zero, interval);
@@ -33,12 +37,52 @@ namespace TestEase.Services
                 {
                     if (register.Type == RegisterType.HoldingRegister)
                     {
-                        // server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
                         if (register is Random<short> r)
                         {
                             var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
                             server.WriteHoldingRegister(register.Address, val);
                             server.HoldingRegisters[register.Address - 1].Value = val;
+                        }
+                        else if (register is Random<float> rf)
+                        {
+                            float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
+                            short lowBits = lowHighBits[0];
+                            short highBits = lowHighBits[1];
+                            
+                            server.WriteHoldingRegister(register.Address, lowBits);
+                            server.WriteHoldingRegister(register.Address + 1, highBits);
+                        }
+                        else if (register is Curve<short> ra)
+                        {
+
+                            ra.IncrementIterationStep(); // Increment iterationStep
+                            var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                            server.WriteHoldingRegister(register.Address, val);
+                            server.HoldingRegisters[register.Address - 1].Value = val;
+                        }
+                    } else if (register.Type == RegisterType.InputRegister)
+                    {
+                        if(register is Random<short> r)
+                        {
+                            server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
+                        } else if (register is Random<float> rf)
+                        {
+                            float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
+                            short lowBits = lowHighBits[0];
+                            short highBits = lowHighBits[1];
+
+                            server.WriteInputRegister(register.Address, lowBits);
+                            server.WriteInputRegister(register.Address + 1, highBits);
+                        }
+                        else if (register is Curve<short> ra)
+                        {
+
+                            ra.IncrementIterationStep(); // Increment iterationStep
+                            var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                            server.WriteInputRegister(register.Address, val);
+                            server.InputRegisters[register.Address - 1].Value = val;
                         }
                     }
                     else if (register.Type == RegisterType.InputRegister)
@@ -55,6 +99,8 @@ namespace TestEase.Services
 
             // If needed, raise an event or use a messaging system to notify the UI of updates
         }
+
+       
 
 
     }

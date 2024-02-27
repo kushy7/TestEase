@@ -113,22 +113,26 @@ public partial class RegisterTable : ContentView
         if (e.SelectedItem is ModbusServerModel.IRegister selectedRegister) 
         {
             viewModel.SelectedServer.SelectedRegister = selectedRegister;
-            if (selectedRegister.RegisterType == Models.RegisterType.HoldingRegister)
+            if (selectedRegister.RegisterType == Models.RegisterType.HoldingRegister || selectedRegister.RegisterType == Models.RegisterType.InputRegister)
             {
-                // Holding Register actions
+                // Holding Register or Input Register actions actions
+                if (selectedRegister.IsModified)
+                {
+                    var modifiedRegister = viewModel.SelectedServer.WorkingConfiguration.RegisterModels.Find(x => x.Address == selectedRegister.Address);
+                    if (modifiedRegister is Fixed<short> fixedRegister)
+                    {
+                        viewModel.FixedNonFloatEntryText = fixedRegister.value.ToString();
+                    } // TODO: floats
+                } else
+                {
+                    viewModel.FixedNonFloatEntryText = "";
+                }
 
-            } else if (selectedRegister.RegisterType == Models.RegisterType.InputRegister)
+            } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput || selectedRegister.RegisterType == Models.RegisterType.Coil)
             {
-                // Input Register actions
-
-            } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput)
-            {
-                // Discrete Input actions
+                // Discrete Input or Coil actions
             }
-            else if (selectedRegister.RegisterType == Models.RegisterType.Coil)
-            {
-                // Coil actions
-            } else
+            else
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Register Type not found. v2.", "OK");
             }

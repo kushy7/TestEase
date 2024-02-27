@@ -32,7 +32,11 @@ namespace TestEase.Models
 
     public class Fixed<T> : RegisterModel
     {
-        public T Value { get; set; }
+
+        public T value = value;
+        public bool isFloat = false;
+    }
+
 
         public Fixed(int address, RegisterType type, string name, T value)
             : base(address, type, name)
@@ -41,20 +45,15 @@ namespace TestEase.Models
         }
     }
 
-    public class Range<T> : RegisterModel
+    public class Range<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : RegisterModel(address, type, name)
     {
-        public T StartValue { get; set; }
-        public T EndValue { get; set; }
-
-        public Range(int address, RegisterType type, string name, T startValue, T endValue)
-            : base(address, type, name)
-        {
-            StartValue = startValue;
-            EndValue = endValue;
-        }
+        public T startValue = startValue;
+        public T endValue = endValue;
+        public bool isFloat = isFloat;
     }
 
-    public class Random<T> : Range<T>
+    public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : Range<T>(address, type, name, startValue, endValue, isFloat)
+
     {
         public Random(int address, RegisterType type, string name, T startValue, T endValue)
             : base(address, type, name, startValue, endValue)
@@ -64,12 +63,31 @@ namespace TestEase.Models
 
     public class Curve<T> : Range<T>
     {
-        public int Period { get; set; }
 
-        public Curve(int address, RegisterType type, string name, T startValue, T endValue, int period)
-            : base(address, type, name, startValue, endValue)
+        private int _iterationStep;
+
+        public int Period { get; }
+
+        public Curve(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat, int intervalStep, int period)
+            : base(address, type, name, startValue, endValue, isFloat)
         {
+            _iterationStep = 0; // Initialize iterationStep
             Period = period;
         }
+
+        public void IncrementIterationStep()
+        {
+            _iterationStep++;
+            if (_iterationStep >= Period)
+            {
+                _iterationStep = 0; // Reset iterationStep to 0
+            }
+        }
+
+        public int GetIterationStep()
+        {
+            return _iterationStep;
+        }
+
     }
 }
