@@ -396,13 +396,49 @@ namespace TestEase.Models
             }
         }
 
+        public void ResetRegistersToDefault()
+        {
+            // Reset DiscreteInputs and Coils to false
+            foreach (var discreteInput in DiscreteInputs)
+            {
+                discreteInput.Value = false;
+                discreteInput.IsModified = false; // Assuming you want to reset modification status as well
+            }
+
+            foreach (var coil in Coils)
+            {
+                coil.Value = false;
+                coil.IsModified = false;
+            }
+
+            // Reset InputRegisters and HoldingRegisters to 0
+            foreach (var inputRegister in InputRegisters)
+            {
+                inputRegister.Value = (short) 0;
+                inputRegister.IsModified = false;
+            }
+
+            foreach (var holdingRegister in HoldingRegisters)
+            {
+                holdingRegister.Value = (short) 0;
+                holdingRegister.IsModified = false;
+            }
+
+            // Notify the UI if necessary
+            OnPropertyChanged(nameof(DiscreteInputs));
+            OnPropertyChanged(nameof(Coils));
+            OnPropertyChanged(nameof(InputRegisters));
+            OnPropertyChanged(nameof(HoldingRegisters));
+        }
+
+
         public interface IRegister : INotifyPropertyChanged
         {
             int Address { get; }
             object Value { get; set; }
             string Name { get; set; }
             RegisterType RegisterType { get; }
-            bool IsModified { get; }
+            bool IsModified { get; set; }
         }
 
         public class Register<T> : IRegister
@@ -446,14 +482,15 @@ namespace TestEase.Models
                 }
             }
 
+            private bool _isModified = false;
             public bool IsModified
             {
-                get => isModified;
-                private set
+                get => _isModified;
+                set
                 {
-                    if (isModified != value)
+                    if (_isModified != value)
                     {
-                        isModified = value;
+                        _isModified = value;
                         OnPropertyChanged(nameof(IsModified));
                     }
                 }

@@ -85,6 +85,15 @@ namespace TestEase.Services
                             server.InputRegisters[register.Address - 1].Value = val;
                         }
                     }
+                    else if (register.Type == RegisterType.InputRegister)
+                    {
+                        if (register is Random<short> r)
+                        {
+                            var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
+                            server.WriteInputRegister(register.Address, val);
+                            server.InputRegisters[register.Address - 1].Value = val;
+                        }
+                    }
                 }
             }
 

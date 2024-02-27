@@ -273,8 +273,4 @@ public partial class RegisterSettings : ContentView
         }
 
     }
- }
-
-
-    
-
+}
