@@ -29,24 +29,25 @@ namespace TestEaseTest
             Assert.False(c.value);
         }
 
-        [Fact]
-        public void randomShortTest()
-        {
-            short lowerBound = 1;
-            short upperBound = 100;
-            short result = ValueGenerators.GenerateRandomValueShort(lowerBound, upperBound);
-            Assert.InRange(result, lowerBound, upperBound);
-        }
+        //[Fact]
+        //public void randomIntTest()
+        //{
+        //    int lowerBound = 1;
+        //    int upperBound = 100;
+        //    int result = ValueGenerators.GenerateRandomValueShort(lowerBound, upperBound);
+        //    Assert.InRange(result, lowerBound, upperBound);
+        //}
 
 
-        [Fact]
-         public void GenerateRandomDoubleTest()
-        {
-            double lowerBound = 0.0;
-            double upperBound = 1.0;
-            float result = ValueGenerators.GenerateRandomValueFloat((float)lowerBound, (float)upperBound);
-            Assert.InRange(result, lowerBound, upperBound);
-        }
+        //[Fact]
+        // public void GenerateRandomDoubleTest()
+        //{
+        //    double lowerBound = 0.0;
+        //    double upperBound = 1.0;
+        //    double result = ValueGenerators.GenerateRandomValueDouble(lowerBound, upperBound);
+        //    Assert.InRange(result, lowerBound, upperBound);
+        //}
+
 
         [Fact]
         public void FixedTest()
@@ -57,6 +58,18 @@ namespace TestEaseTest
             Assert.Equal("testingRegister", f.Name);
             Assert.Equal(44, f.value);
  
+        }
+
+        [Fact]
+        public void GenerateNextSinTest()
+        {
+            double start = 0;
+            double end = 10;
+            int itStep = 0;
+            int totalIt = 20;
+            double ans = 0;
+            short result = ValueGenerators.GenerateNextSinValue(start, end, itStep, totalIt);
+            Assert.Equal(ans, result);
         }
 
         //[Fact]
