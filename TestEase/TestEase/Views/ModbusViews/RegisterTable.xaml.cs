@@ -3,6 +3,7 @@ using EasyModbus;
 using CommunityToolkit.Maui.Core;
 using Microsoft.Maui.Controls.Platform;
 using Microsoft.Maui.Platform;
+using TestEase.Models;
 
 namespace TestEase.Views.ModbusViews;
 
@@ -48,8 +49,8 @@ public partial class RegisterTable : ContentView
                 if (!string.IsNullOrEmpty(tabName))
                 {
                     var viewModel = this.BindingContext as ModbusPageViewModel;
-                    viewModel?.SwitchTab(tabName);
-                    viewModel.SelectedRegister = null;
+                    viewModel?.SelectedServer.SwitchTab(tabName);
+                    viewModel.SelectedServer.SelectedRegister = null;
                 }
             }
         }
@@ -61,7 +62,7 @@ public partial class RegisterTable : ContentView
         {
             // Assuming the AddressViewModel.Addresses is a list of AddressItem
             // and AddressItem has an 'Address' property.
-            var itemToScrollTo = ((ModbusPageViewModel)this.BindingContext).CurrentItems
+            var itemToScrollTo = ((ModbusPageViewModel)this.BindingContext).SelectedServer.CurrentItems
                                  .FirstOrDefault(item => item.Address == addressNumber);
             if (itemToScrollTo != null)
             {
@@ -97,7 +98,7 @@ public partial class RegisterTable : ContentView
             // Item is already selected, so unselect it
             listView.SelectedItem = null;
             lastSelectedItem = null;
-            viewModel.SelectedRegister = null;
+            viewModel.SelectedServer.SelectedRegister = null;
         } else
         {
             // listView.SelectedItem = e.Item;
@@ -109,25 +110,29 @@ public partial class RegisterTable : ContentView
     private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         var viewModel = this.BindingContext as ModbusPageViewModel;
-        if (e.SelectedItem is ModbusPageViewModel.IRegister selectedRegister) 
+        if (e.SelectedItem is ModbusServerModel.IRegister selectedRegister) 
         {
-            viewModel.SelectedRegister = selectedRegister;
-            if (selectedRegister.RegisterType == Models.RegisterType.HoldingRegister)
+            viewModel.SelectedServer.SelectedRegister = selectedRegister;
+            if (selectedRegister.RegisterType == Models.RegisterType.HoldingRegister || selectedRegister.RegisterType == Models.RegisterType.InputRegister)
             {
-                // Holding Register actions
+                // Holding Register or Input Register actions actions
+                if (selectedRegister.IsModified)
+                {
+                    var modifiedRegister = viewModel.SelectedServer.WorkingConfiguration.RegisterModels.Find(x => x.Address == selectedRegister.Address);
+                    if (modifiedRegister is Fixed<short> fixedRegister)
+                    {
+                        viewModel.FixedNonFloatEntryText = fixedRegister.value.ToString();
+                    } // TODO: floats
+                } else
+                {
+                    viewModel.FixedNonFloatEntryText = "";
+                }
 
-            } else if (selectedRegister.RegisterType == Models.RegisterType.InputRegister)
+            } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput || selectedRegister.RegisterType == Models.RegisterType.Coil)
             {
-                // Input Register actions
-
-            } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput)
-            {
-                // Discrete Input actions
+                // Discrete Input or Coil actions
             }
-            else if (selectedRegister.RegisterType == Models.RegisterType.Coil)
-            {
-                // Coil actions
-            } else
+            else
             {
                 Application.Current.MainPage.DisplayAlert("Error", "Register Type not found. v2.", "OK");
             }
@@ -142,6 +147,6 @@ public partial class RegisterTable : ContentView
     private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var viewModel = this.BindingContext as ModbusPageViewModel;
-        viewModel?.FilterModifiedRegisters(e.Value);
+        viewModel?.SelectedServer.FilterModifiedRegisters(e.Value);
     }
 }

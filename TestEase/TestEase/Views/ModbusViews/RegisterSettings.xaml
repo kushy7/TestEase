@@ -22,33 +22,34 @@
 
         <HorizontalStackLayout Spacing="10"
                                Grid.Row="1">
-            <Label Text="{Binding SelectedRegister.RegisterType}"/>
-            <Label Text="{Binding SelectedRegister.Address}"/>
-            <Label Text="{Binding SelectedRegister.Value}"/>
-            <Label Text="{Binding SelectedRegister.Name}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.RegisterType}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.Address}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.Value}"/>
+            <Label Text="{Binding SelectedServer.SelectedRegister.Name}"/>
         </HorizontalStackLayout>
 
         <!-- Conditional Visibility for Radio Buttons -->
 
         <ScrollView Grid.Row="2" Orientation="Vertical">
             <StackLayout>
-                <VerticalStackLayout IsVisible="{Binding IsBooleanRegisterSelected}">
+                <VerticalStackLayout IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}">
                     <!-- Display for boolean registers -->
                     <StackLayout>
                         <Label Text="Boolean Register Options" />
                         <Grid x:Name="BooleanNameInput" ColumnDefinitions="50*, 50*"
-                        IsVisible="{Binding IsBooleanRegisterSelected}">
+                              IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}">
                             <Label Text="Name" VerticalTextAlignment="Center"
-                            Grid.Column="0"/>
+                                   Grid.Column="0"/>
                             <Entry x:Name="BooleanNameEntry"
-                            Placeholder="Enter Name"
-                            ClearButtonVisibility="WhileEditing"
-                            Keyboard="Text"
-                            Grid.Column="1" />
+                                   Placeholder="Enter Name"
+                                   Text="{Binding SelectedServer.SelectedRegister.Name, Mode=OneWay}"
+                                   ClearButtonVisibility="WhileEditing"
+                                   Keyboard="Text"
+                                   Grid.Column="1" />
                         </Grid>
                         <StackLayout>
                             <Label Text="Value" VerticalTextAlignment="Center" />
-                            <Picker SelectedItem="{Binding SelectedBooleanValue}">
+                            <Picker SelectedItem="{Binding SelectedServer.SelectedBooleanValue}">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>True</x:String>
@@ -59,55 +60,57 @@
                         </StackLayout>
                     </StackLayout>
                 </VerticalStackLayout>
-                <VerticalStackLayout IsVisible="{Binding IsRegisterSelected}"
+                <VerticalStackLayout IsVisible="{Binding SelectedServer.IsRegisterSelected}"
                  >
 
                     <Grid x:Name="NameInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding IsRegisterSelected}">
+                          IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Name" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <Entry x:Name="NameEntry"
-                        Placeholder="Enter Name"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Text"
-                        Grid.Column="1" />
+                               Placeholder="Enter Name"
+                               ClearButtonVisibility="WhileEditing"
+                               Text="{Binding SelectedServer.SelectedRegister.Name, Mode=OneWay}"
+                               Keyboard="Text"
+                               Grid.Column="1" />
                     </Grid>
-                    <HorizontalStackLayout IsVisible="{Binding IsRegisterSelected}">
+                    <HorizontalStackLayout IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <RadioButton x:Name="FixedRadioButton"
-                        Content="Fixed"
-                        IsChecked="True"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                                     Content="Fixed"
+                                     IsChecked="True"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>
                         <RadioButton x:Name="RangeRadioButton"
-                        Content="Range"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                                     Content="Range"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>
 
                     </HorizontalStackLayout>
                     <!-- Conditionaly visible Configuration for FixedRadioButton -->
                     <Grid x:Name="FloatConfiguration" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding IsRegisterSelected}">
+                          IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Float" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
-                        <CheckBox Grid.Column="1"/>
+                               Grid.Column="0"/>
+                        <CheckBox x:Name="FixedFloatConfiguration"  Grid.Column="1" IsChecked="{Binding SelectedServer.IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="ValueInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="{Binding IsRegisterSelected}">
+                          IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <Label Text="Value" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
+                               Grid.Column="0"/>
                         <Entry x:Name="FixedValueEntry"
-                        Placeholder="Enter Value"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Numeric"
-                        Grid.Column="1" />
+                               Placeholder="Enter Value"
+                               Text="{Binding FixedNonFloatEntryText}"
+                               ClearButtonVisibility="WhileEditing"
+                               Keyboard="Numeric"
+                               Grid.Column="1" />
                     </Grid>
 
 
                     <!-- Conditionaly visible Configuration for RangeRadioButton -->
                     <Grid x:Name="RangeFloatConfiguration" ColumnDefinitions="50*, 50*"
-                    IsVisible="False">
+                          IsVisible="False">
                         <Label Text="Float" VerticalTextAlignment="Center"
-                        Grid.Column="0"/>
-                        <CheckBox Grid.Column="1"/>
+                               Grid.Column="0"/>
+                        <CheckBox x:Name="RangeFloatConfigurationCheck" Grid.Column="1" IsChecked="{Binding SelectedServer.IsFloatConfigurationChecked}" />
                     </Grid>
 
                     <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"
@@ -115,10 +118,10 @@
                         <Label Text="Lower Value" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="lowerrange"
-                        Placeholder="Enter Value"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Numeric"
-                        Grid.Column="1" />
+                               Placeholder="Enter Value"
+                               ClearButtonVisibility="WhileEditing"
+                               Keyboard="Numeric"
+                               Grid.Column="1" />
                     </Grid>
 
                     <Grid x:Name="UpperValueInput" ColumnDefinitions="50*, 50*"
@@ -126,10 +129,10 @@
                         <Label Text="Upper Value" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="upperrange"
-                        Placeholder="Enter Value"
-                        ClearButtonVisibility="WhileEditing"
-                        Keyboard="Numeric"
-                        Grid.Column="1" />
+                               Placeholder="Enter Value"
+                               ClearButtonVisibility="WhileEditing"
+                               Keyboard="Numeric"
+                               Grid.Column="1" />
                     </Grid>
 
                     <Grid x:Name="StartingValueInput" ColumnDefinitions="50*, 50*"
@@ -181,16 +184,16 @@
             </StackLayout>
             
         </ScrollView>
-        
 
-        <Grid IsVisible="{Binding IsRegisterSelected}"
+
+        <Grid IsVisible="{Binding SelectedServer.IsRegisterSelected}"
               Grid.Row="3">
             <Button Text="Save"
                     Pressed="OnSaveButtonClick"
                     HorizontalOptions="Center"/>
         </Grid>
 
-        <Grid IsVisible="{Binding IsBooleanRegisterSelected}"
+        <Grid IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}"
             Grid.Row="3">
             <Button Text="Save"
             Pressed="OnSaveButtonClick"

@@ -1,7 +1,9 @@
 ﻿using EasyModbus;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -9,16 +11,13 @@ using System.Threading.Tasks;
 
 namespace TestEase.Models
 {
-    public class ModbusServerModel(int port) : INotifyPropertyChanged
+    public class ModbusServerModel : INotifyPropertyChanged
     {
-        public int Port { get; set; } = port;
+        public int Port { get; set; }
 
         private bool _isRunning = false;
 
-        public ModbusServer Server { get; set; } = new ModbusServer()
-        {
-            Port = port
-        };
+        public ModbusServer Server { get; set; }
 
         public ConfigurationModel WorkingConfiguration { get; set; } = new ConfigurationModel();
 
@@ -34,6 +33,413 @@ namespace TestEase.Models
                 }
             }
         }
+        public ModbusServerModel(int port)
+        {
+            this.Port = port;
+            this.Server = new ModbusServer() { Port = port };
+
+            for (int i = 1; i < 65535; i++)
+            {
+                this.DiscreteInputs.Add(new Register<bool>
+                {
+                    Address = i,
+                    Value = false,
+                    Name = "",
+                    RegisterType = RegisterType.DiscreteInput
+                });
+                this.Coils.Add(new Register<bool>
+                {
+                    Address = i,
+                    Value = false,
+                    Name = "",
+                    RegisterType = RegisterType.Coil
+                });
+                this.InputRegisters.Add(new Register<short>
+                {
+                    Address = i,
+                    Value = 0,
+                    Name = "",
+                    RegisterType = RegisterType.InputRegister
+                });
+                this.HoldingRegisters.Add(new Register<short>
+                {
+                    Address = i,
+                    Value = 0,
+                    Name = "",
+                    RegisterType = RegisterType.HoldingRegister
+                });
+
+                // Holding Registers by default
+            }
+            this._currentItems = HoldingRegisters;
+        }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public ObservableCollection<IRegister> DiscreteInputs { get; set; } = [];
+        public ObservableCollection<IRegister> Coils { get; set; } = [];
+        public ObservableCollection<IRegister> InputRegisters { get; set; } = [];
+        public ObservableCollection<IRegister> HoldingRegisters { get; set; } = [];
+
+        private ObservableCollection<IRegister>? _currentItems;
+        public ObservableCollection<IRegister> CurrentItems
+        {
+            get => _currentItems;
+            set
+            {
+                _currentItems = value;
+                OnPropertyChanged(nameof(CurrentItems));
+            }
+        }
+
+        private IRegister? _selectedRegister;
+        public IRegister SelectedRegister
+        {
+            get => _selectedRegister;
+            set
+            {
+                if (_selectedRegister != value)
+                {
+                    _selectedRegister = value;
+                    OnPropertyChanged(nameof(SelectedRegister));
+                    // Update IsRegisterSelected whenever SelectedRegister changes
+                    IsRegisterSelected = _selectedRegister?.RegisterType == RegisterType.HoldingRegister ||
+                                                _selectedRegister?.RegisterType == RegisterType.InputRegister;
+
+                    // Update IsBooleanRegisterSelected based on the RegisterType
+                    IsBooleanRegisterSelected = _selectedRegister?.RegisterType == RegisterType.DiscreteInput ||
+                                                _selectedRegister?.RegisterType == RegisterType.Coil;
+                }
+            }
+        }
+
+        // Add IsRegisterSelected property to indicate if a register is selected
+        private bool _isRegisterSelected;
+        public bool IsRegisterSelected
+        {
+            get => _isRegisterSelected;
+            set
+            {
+                _isRegisterSelected = value;
+                OnPropertyChanged(nameof(IsRegisterSelected));
+            }
+            // set => _isRegisterSelected = value;
+        }
+
+        // Add IsBooleanRegisterSelected to indicate if a register is of discrete input or coil type
+        private bool _isBooleanRegisterSelected;
+        public bool IsBooleanRegisterSelected
+        {
+            get => _isBooleanRegisterSelected;
+            set
+            {
+                _isBooleanRegisterSelected = value;
+                OnPropertyChanged(nameof(IsBooleanRegisterSelected));
+            }
+            // set => _isBooleanRegisterSelected = value;
+        }
+
+        private bool _selectedBooleanValue;
+        public bool SelectedBooleanValue
+        {
+            get => _selectedBooleanValue;
+            set
+            {
+                if (_selectedBooleanValue != value)
+                {
+                    _selectedBooleanValue = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        private bool _isFloatConfigurationChecked;
+        public bool IsFloatConfigurationChecked
+        {
+            get => _isFloatConfigurationChecked;
+            set
+            {
+                if (_isFloatConfigurationChecked != value)
+                {
+                    _isFloatConfigurationChecked = value;
+                    OnPropertyChanged(nameof(IsFloatConfigurationChecked));
+
+                }
+            }
+        }
+
+        private string _currentTabName = "HoldingRegisters"; // Default tab
+        public string CurrentTabName
+        {
+            get => _currentTabName;
+            set
+            {
+                if (_currentTabName != value)
+                {
+                    _currentTabName = value;
+                    OnPropertyChanged(nameof(CurrentTabName));
+                }
+            }
+        }
+
+        private IEnumerable<IRegister> GetCurrentTabCollection()
+        {
+            return CurrentTabName switch
+            {
+                "DiscreteInputs" => DiscreteInputs,
+                "Coils" => Coils,
+                "InputRegisters" => InputRegisters,
+                "HoldingRegisters" => HoldingRegisters,
+                _ => Enumerable.Empty<IRegister>(),
+            };
+        }
+
+        private void UpdateRegisterCollections()
+        {
+            // Assuming you want to clear the existing collections and repopulate them
+            //DiscreteInputs.Clear();
+            //Coils.Clear();
+            //InputRegisters.Clear();
+            //HoldingRegisters.Clear();
+            Trace.WriteLine("Updating Register collections"); // DELETE
+
+            CurrentItems = null;
+
+            for (int i = 1; i < 65535; i++)
+            {
+                DiscreteInputs[i - 1] = (new Register<bool>
+                {
+                    Address = i,
+                    Value = false,
+                    Name = "",
+                    RegisterType = RegisterType.DiscreteInput
+                });
+                Coils[i - 1] = (new Register<bool>
+                {
+                    Address = i,
+                    Value = false,
+                    Name = "",
+                    RegisterType = RegisterType.Coil
+                });
+                DiscreteInputs[i - 1] = (new Register<short>
+                {
+                    Address = i,
+                    Value = 0,
+                    Name = "",
+                    RegisterType = RegisterType.InputRegister
+                });
+                HoldingRegisters[i - 1] = (new Register<short>
+                {
+                    Address = i,
+                    Value = 0,
+                    Name = "",
+                    RegisterType = RegisterType.HoldingRegister
+                });
+            }
+
+            // Fill with saved configuration
+            if (WorkingConfiguration.RegisterModels.Count > 0)
+            {
+
+                for (int j = 0; j < WorkingConfiguration.RegisterModels.Count; j++)
+                {
+                    var reg = WorkingConfiguration.RegisterModels[j];
+                    var i = reg.Address;
+                    var type = reg.Type;
+                    switch (type)
+                    {
+                        case RegisterType.DiscreteInput:
+                            DiscreteInputs[i - 1] = (new Register<bool>
+                            {
+                                Address = i,
+                                Value = ReadDiscreteInput(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.DiscreteInput
+                            });
+                            break;
+                        case RegisterType.Coil:
+                            Coils[i - 1] = (new Register<bool>
+                            {
+                                Address = i,
+                                Value = ReadCoil(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.Coil
+                            });
+                            break;
+                        case RegisterType.InputRegister:
+                            DiscreteInputs[i - 1] = (new Register<short>
+                            {
+                                Address = i,
+                                Value = ReadInputRegister(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.InputRegister
+                            });
+                            break;
+                        case RegisterType.HoldingRegister:
+                            HoldingRegisters[i - 1] = (new Register<short>
+                            {
+                                Address = i,
+                                Value = ReadHoldingRegister(i),
+                                Name = reg.Name,
+                                RegisterType = RegisterType.HoldingRegister
+                            });
+                            break;
+                    }
+
+                }
+            }
+            else
+            {
+
+                Trace.WriteLine("No registers"); // DELETE
+            }
+
+            // If you need to set CurrentItems to a default collection after update
+            CurrentItems = HoldingRegisters;
+        }
+
+        public void SwitchTab(string tabName)
+        {
+            CurrentTabName = tabName; // Keep track of the current tab
+            if (onlyConfigured)
+            {
+                var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+            }
+
+            switch (tabName)
+            {
+                case "DiscreteInputs":
+                    CurrentItems = DiscreteInputs;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
+                    break;
+                case "Coils":
+                    CurrentItems = Coils;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
+                    break;
+                case "InputRegisters":
+                    CurrentItems = InputRegisters;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
+                    break;
+                case "HoldingRegisters":
+                    CurrentItems = HoldingRegisters;
+                    if (onlyConfigured)
+                    {
+                        var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                        CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+                    }
+                    break;
+            }
+        }
+
+        //variable to track if only configured registers should be shown during tab switches
+        bool onlyConfigured = false;
+        public void FilterModifiedRegisters(bool showOnlyModified)
+        {
+            onlyConfigured = showOnlyModified;
+            if (showOnlyModified)
+            {
+                // Filter the current tab's collection to only show modified items
+                var modifiedItems = GetCurrentTabCollection().Where(item => item.IsModified).ToList();
+                CurrentItems = new ObservableCollection<IRegister>(modifiedItems);
+            }
+            else
+            {
+                // Reset CurrentItems to show all items for the current tab
+                SwitchTab(CurrentTabName);
+            }
+        }
+
+        public interface IRegister : INotifyPropertyChanged
+        {
+            int Address { get; }
+            object Value { get; set; }
+            string Name { get; set; }
+            RegisterType RegisterType { get; }
+            bool IsModified { get; }
+        }
+
+        public class Register<T> : IRegister
+        {
+            public required int Address { get; set; }
+            public required T Value { get; set; }
+            public required string Name { get; set; }
+            public required RegisterType RegisterType { get; set; }
+
+            public bool isModified = false;
+
+            object IRegister.Value
+            {
+                get => Value;
+                set
+                {
+                    if (value is T)
+                    {
+                        this.Value = (T)value;
+                        IsModified = true;
+                        OnPropertyChanged(nameof(Value));
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"Cannot assign value of type {value.GetType()} to type {typeof(T)}.");
+                    }
+                }
+            }
+
+            string IRegister.Name
+            {
+                get => Name;
+                set
+                {
+                    if (Name != value)
+                    {
+                        Name = value;
+                        IsModified = true;
+                        OnPropertyChanged();
+                    }
+                }
+            }
+
+            public bool IsModified
+            {
+                get => isModified;
+                private set
+                {
+                    if (isModified != value)
+                    {
+                        isModified = value;
+                        OnPropertyChanged(nameof(IsModified));
+                    }
+                }
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
         public void StartServer()
         {
             Server.Listen();
@@ -104,12 +510,6 @@ namespace TestEase.Models
             return Server.coils.localArray;
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
     }
 }
