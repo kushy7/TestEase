@@ -33,16 +33,34 @@ namespace TestEase.Services
                 {
                     if (register.Type == RegisterType.HoldingRegister)
                     {
-                        // server.WriteHoldingRegister(register.Address, (short) (server.ReadHoldingRegister(register.Address) + 1));
                         if (register is Random<short> r)
                         {
                             server.WriteHoldingRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
+                        }
+                        else if (register is Random<float> rf)
+                        {
+                            float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
+                            short lowBits = lowHighBits[0];
+                            short highBits = lowHighBits[1];
+                            
+                            server.WriteHoldingRegister(register.Address, lowBits);
+                            server.WriteHoldingRegister(register.Address + 1, highBits);
                         }
                     } else if (register.Type == RegisterType.InputRegister)
                     {
                         if(register is Random<short> r)
                         {
                             server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
+                        } else if (register is Random<float> rf)
+                        {
+                            float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
+                            short lowBits = lowHighBits[0];
+                            short highBits = lowHighBits[1];
+
+                            server.WriteInputRegister(register.Address, lowBits);
+                            server.WriteInputRegister(register.Address + 1, highBits);
                         }
                     }
                 }
@@ -50,6 +68,9 @@ namespace TestEase.Services
 
             // If needed, raise an event or use a messaging system to notify the UI of updates
         }
+
+       
+
 
     }
 }
