@@ -46,8 +46,8 @@ namespace TestEase.Models
 
         public int Period { get; }
 
-        public Curve(int address, RegisterType type, string name, T startValue, T endValue, int intervalStep, int period)
-            : base(address, type, name, startValue, endValue)
+        public Curve(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat, int intervalStep, int period)
+            : base(address, type, name, startValue, endValue, isFloat)
         {
             _iterationStep = 0; // Initialize iterationStep
             Period = period;

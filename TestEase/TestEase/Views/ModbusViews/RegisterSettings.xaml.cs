@@ -247,17 +247,17 @@ public partial class RegisterSettings : ContentView
                 {
                     case RegisterType.HoldingRegister:
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new Curve<short>(register.Address, register.RegisterType, NameEntry.Text, lowerR, upperR, 0, periodR));
-                        vm.HoldingRegisters[register.Address - 1].Value = nextValue;
-                        vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                            .Add(new Curve<short>(register.Address, register.RegisterType, NameEntry.Text, lowerR, upperR, false, 0, periodR));
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = nextValue;
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteHoldingRegister(register.Address, nextValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
                         break;
                     case RegisterType.InputRegister:
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new Curve<short>(register.Address, register.RegisterType, NameEntry.Text, lowerR, upperR, 0, periodR));
-                        vm.InputRegisters[register.Address - 1].Value = nextValue;
-                        vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                            .Add(new Curve<short>(register.Address, register.RegisterType, NameEntry.Text, lowerR, upperR, false, 0, periodR));
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Value = nextValue;
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteInputRegister(register.Address, nextValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
                         break;
