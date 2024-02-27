@@ -38,6 +38,10 @@ namespace TestEase.Services
                         {
                             server.WriteHoldingRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
                         }
+                        else if (register is Curve<short> ra)
+                        {
+                            server.WriteHoldingRegister(register.Address, ValueGenerators.GetNextSineValue(0, ra.startValue, ra.endValue, ra.period));
+                        }
                     } else if (register.Type == RegisterType.InputRegister)
                     {
                         if(register is Random<short> r)

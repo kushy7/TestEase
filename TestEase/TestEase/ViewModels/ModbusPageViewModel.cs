@@ -87,6 +87,34 @@ namespace TestEase.ViewModels
             set => SetProperty(ref _isBooleanRegisterSelected, value);
         }
 
+        private bool _isCurveSelected;
+        public bool IsCurveSelected
+        {
+            get { return _isCurveSelected; }
+            set
+            {
+                if (_isCurveSelected != value)
+                {
+                    _isCurveSelected = value;
+                    OnPropertyChanged(nameof(IsCurveSelected));
+                }
+            }
+        }
+
+        private bool _isRandomSelected;
+        public bool IsRandomSelected
+        {
+            get { return _isRandomSelected; }
+            set
+            {
+                if (_isRandomSelected != value)
+                {
+                    _isRandomSelected = value;
+                    OnPropertyChanged(nameof(IsRandomSelected));
+                }
+            }
+        }
+
 
         private bool _selectedBooleanValue;
         public bool SelectedBooleanValue

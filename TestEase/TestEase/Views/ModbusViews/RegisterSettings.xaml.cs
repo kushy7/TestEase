@@ -32,17 +32,49 @@ public partial class RegisterSettings : ContentView
                     UpperValueInput.IsVisible = false;
                     RandomRadioButton.IsVisible = false;
                     CurveRadioButton.IsVisible = false;
+                    PeriodEntry.IsVisible = false;
                     break;
                 case "Range":
                     //show the register setting for range
+                    CurveConfiguration.IsVisible = false;
                     RangeFloatConfiguration.IsVisible = true;
-                    LowerValueInput.IsVisible = true;
-                    UpperValueInput.IsVisible = true;
+                    LowerValueInput.IsVisible = false;
+                    UpperValueInput.IsVisible = false;
                     RandomRadioButton.IsVisible = true;
                     CurveRadioButton.IsVisible = true;
+                    PeriodEntry.IsVisible = false;
                     // Hide the fixed value components
                     FloatConfiguration.IsVisible = false;
                     ValueInput.IsVisible = false;
+                    break;
+                case "Random":
+                    CurveConfiguration.IsVisible = false;
+                    // Hide other configurations
+                    FloatConfiguration.IsVisible = false;
+                    ValueInput.IsVisible = false;
+                    RangeFloatConfiguration.IsVisible = false;
+                    LowerValueInput.IsVisible = true;
+                    UpperValueInput.IsVisible = true;
+                    StartingValueInput.IsVisible = false;
+                    EndingValueInput.IsVisible = false;
+                    PeriodEntry.IsVisible = false;
+                    RandomRadioButton.IsVisible = true;
+                    CurveRadioButton.IsVisible = true;
+                    break;
+                case "Curve":
+                    // Show the Curve configuration
+                    CurveConfiguration.IsVisible = true;
+                    // Hide other configurations
+                    FloatConfiguration.IsVisible = false;
+                    ValueInput.IsVisible = false;
+                    RangeFloatConfiguration.IsVisible = false;
+                    LowerValueInput.IsVisible = false;
+                    UpperValueInput.IsVisible = false;
+                    StartingValueInput.IsVisible = true;
+                    EndingValueInput.IsVisible = true;
+                    PeriodEntry.IsVisible = true;
+                    RandomRadioButton.IsVisible = true;
+                    CurveRadioButton.IsVisible = true;
                     break;
             }
         }
@@ -120,13 +152,38 @@ public partial class RegisterSettings : ContentView
                         break;
                 }
             }
-            else
-            {
-                Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
-            }
         }
+        else if (RangeRadioButton.IsChecked && CurveRadioButton.IsChecked)
+        {
+            if (short.TryParse(lowerrange.Text, out short lowerR) && short.TryParse(upperrange.Text, out short upperR)
+                && int.TryParse(PeriodEntry.Text, out int periodR))
+            {
+                short nextValue = ValueGenerators.GetNextSineValue(0, lowerR, upperR, periodR);
+                switch (register.RegisterType)
+                {
+                    case RegisterType.HoldingRegister:
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Curve<short>(register.Address, register.RegisterType, NameEntry.Text, lowerR, upperR, periodR));
+                        vm.HoldingRegisters[register.Address - 1].Value = nextValue;
+                        vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteHoldingRegister(register.Address, nextValue);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
+                        break;
+                    default:
+                        Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Curve value.", "OK");
+                        break;
+                }
+            }
+
+        }
+        else
+        {
+            Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
+        }
+
     }
-}
+ }
+
 
     
 

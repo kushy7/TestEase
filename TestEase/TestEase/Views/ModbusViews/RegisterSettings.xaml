@@ -111,8 +111,8 @@
                     </Grid>
 
                     <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="False">
-                        <Label Text="Start Value" VerticalTextAlignment="Center"
+                    IsVisible="{Binding IsRandomSelected}">
+                        <Label Text="Lower Value" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="lowerrange"
                         Placeholder="Enter Value"
@@ -122,8 +122,8 @@
                     </Grid>
 
                     <Grid x:Name="UpperValueInput" ColumnDefinitions="50*, 50*"
-                    IsVisible="False">
-                        <Label Text="End Value" VerticalTextAlignment="Center"
+                    IsVisible="{Binding IsRandomSelected}">
+                        <Label Text="Upper Value" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="upperrange"
                         Placeholder="Enter Value"
@@ -132,16 +132,50 @@
                         Grid.Column="1" />
                     </Grid>
 
+                    <Grid x:Name="StartingValueInput" ColumnDefinitions="50*, 50*"
+                    IsVisible="{Binding IsCurveSelected}">
+                        <Label Text="Start Value" VerticalTextAlignment="Center"
+                        Grid.Column="0"/>
+                        <Entry x:Name="startval"
+                        Placeholder="Enter Value"
+                        ClearButtonVisibility="WhileEditing"
+                        Keyboard="Numeric"
+                        Grid.Column="1" />
+                    </Grid>
+
+                    <Grid x:Name="EndingValueInput" ColumnDefinitions="50*, 50*"
+                    IsVisible="{Binding IsCurveSelected}">
+                        <Label Text="End Value" VerticalTextAlignment="Center"
+                        Grid.Column="0"/>
+                        <Entry x:Name="endval"
+                        Placeholder="Enter Value"
+                        ClearButtonVisibility="WhileEditing"
+                        Keyboard="Numeric"
+                        Grid.Column="1" />
+                    </Grid>
+
+                    <Grid x:Name="CurveConfiguration" ColumnDefinitions="50*, 50*"
+                        IsVisible="{Binding IsCurveSelected}">
+                        <Label Text="Period" VerticalTextAlignment="Center"
+                        Grid.Column="0"/>
+                        <Entry x:Name="PeriodEntry"
+                        Placeholder="Enter Period"
+                        ClearButtonVisibility="WhileEditing"
+                        Keyboard="Numeric"
+                        Grid.Column="1" />
+                    </Grid>
+
                     <HorizontalStackLayout>
                         <RadioButton x:Name="RandomRadioButton"
-                     IsVisible="false"
-                     Content="Random"
-                     IsChecked="True"
-                     CheckedChanged="OnRadioButtonCheckedChanged"/>
+                        IsVisible="false"
+                        Content="Random"
+                        IsChecked="{Binding IsRandomSelected, Mode=TwoWay}"
+                        CheckedChanged="OnRadioButtonCheckedChanged"/>
                         <RadioButton x:Name="CurveRadioButton"
-                     IsVisible="false"
-                     Content="Curve"
-                     CheckedChanged="OnRadioButtonCheckedChanged"/>
+                        IsVisible="false"
+                        Content="Curve"
+                        IsChecked="{Binding IsCurveSelected, Mode=TwoWay}"
+                        CheckedChanged="OnRadioButtonCheckedChanged"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </StackLayout>
