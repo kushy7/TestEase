@@ -65,7 +65,7 @@ namespace TestEase.Helpers
 
             double range = endValue - startValue;
             double stepSize = 2 * Math.PI / iterationTotal;
-            double angle = (iterationStep + 1) * stepSize;
+            double angle = iterationStep * stepSize;
 
             double sinValue = Math.Sin(angle);
             short result = (short)(startValue + ((sinValue + 1) / 2) * range);
