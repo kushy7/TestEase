@@ -117,13 +117,13 @@ public partial class RegisterSettings : ContentView
                 case RegisterType.HoldingRegister:
                     //low bits
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits));
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits, true));
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = lowBits;
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
                     //high bits
-                    vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
+                    // vm.SelectedServer.WorkingConfiguration.RegisterModels
+                    //    .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
                     vm.SelectedServer.HoldingRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.HoldingRegisters[register.Address].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
@@ -133,13 +133,13 @@ public partial class RegisterSettings : ContentView
                 case RegisterType.InputRegister:
                     //low bits
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits));
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits, true));
                     vm.SelectedServer.InputRegisters[register.Address - 1].Value = lowBits;
                     vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
                     //high bits
-                    vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
+                    // vm.SelectedServer.WorkingConfiguration.RegisterModels
+                    //     .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
                     vm.SelectedServer.InputRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.InputRegisters[register.Address].Name = NameEntry.Text;
                     vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
@@ -190,7 +190,7 @@ public partial class RegisterSettings : ContentView
             {
                 case RegisterType.HoldingRegister:
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n));
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n, false));
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = n;
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address, n);
@@ -198,7 +198,7 @@ public partial class RegisterSettings : ContentView
                     break;
                 case RegisterType.InputRegister:
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n));
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n, false));
                     vm.SelectedServer.InputRegisters[register.Address - 1].Value = n;
                     vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteInputRegister(register.Address, n);

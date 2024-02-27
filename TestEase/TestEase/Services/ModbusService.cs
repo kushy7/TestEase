@@ -52,6 +52,8 @@ namespace TestEase.Services
                             
                             server.WriteHoldingRegister(register.Address, lowBits);
                             server.WriteHoldingRegister(register.Address + 1, highBits);
+                            server.HoldingRegisters[register.Address - 1].Value = lowBits;
+                            server.HoldingRegisters[register.Address].Value = highBits;
                         }
                         else if (register is Curve<short> ra)
                         {
@@ -75,6 +77,8 @@ namespace TestEase.Services
 
                             server.WriteInputRegister(register.Address, lowBits);
                             server.WriteInputRegister(register.Address + 1, highBits);
+                            server.InputRegisters[register.Address - 1].Value = lowBits;
+                            server.InputRegisters[register.Address].Value = highBits;
                         }
                         else if (register is Curve<short> ra)
                         {

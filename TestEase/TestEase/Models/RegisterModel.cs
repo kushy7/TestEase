@@ -22,10 +22,10 @@ namespace TestEase.Models
         public bool value = value;
     }
 
-    public class Fixed<T>(int address, RegisterType type, string name, T value) : RegisterModel(address, type, name)
+    public class Fixed<T>(int address, RegisterType type, string name, T value, bool isFloat) : RegisterModel(address, type, name)
     {
         public T value = value;
-        public bool isFloat = false;
+        public bool isFloat = isFloat;
     }
 
 
