@@ -49,6 +49,7 @@ public partial class RegisterSettings : ContentView
     private void OnSaveButtonClick(object sender, EventArgs args)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
+        
         var register = vm.SelectedServer.SelectedRegister;
         // Fixed
         if (FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x))
@@ -67,8 +68,8 @@ public partial class RegisterSettings : ContentView
                     vm.SelectedServer.WriteHoldingRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{n}", "OK");
                     break;
+
                 case RegisterType.DiscreteInput:
-                    // short boolShort = vm.SelectedBooleanValue ? (short)1 : (short)0;
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
                             .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedServer.SelectedBooleanValue));
                     vm.SelectedServer.DiscreteInputs[register.Address - 1].Value = vm.SelectedServer.SelectedBooleanValue;
@@ -77,31 +78,140 @@ public partial class RegisterSettings : ContentView
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedServer.SelectedBooleanValue}", "OK");
                     break;
                 case RegisterType.Coil:
-                    // short boolShort = vm.SelectedBooleanValue ? (short)1 : (short)0;
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedServer.SelectedBooleanValue));
-                    vm.SelectedServer.Coils[register.Address - 1].Value = vm.SelectedServer.SelectedBooleanValue;
-                    vm.SelectedServer.Coils[register.Address - 1].Name = BooleanNameEntry.Text;
-                    vm.SelectedServer.WriteCoil(register.Address, vm.SelectedServer.SelectedBooleanValue);
-                    Application.Current.MainPage.DisplayAlert("Saved", $"Name:{BooleanNameEntry.Text}\nValue:{vm.SelectedServer.SelectedBooleanValue}", "OK");
+                            .Add(new CoilOrDiscrete(register.Address, register.RegisterType, NameEntry.Text, vm.SelectedBooleanValue));
+                    vm.Coils[register.Address - 1].Value = vm.SelectedBooleanValue;
+                    vm.Coils[register.Address - 1].Name = BooleanNameEntry.Text;
+                    vm.SelectedServer.WriteCoil(register.Address, vm.SelectedBooleanValue);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {BooleanNameEntry.Text}\nValue: {vm.SelectedBooleanValue}", "OK");
+                    break;
+            }
+            return; // this is dumb
+        }
+
+        // Fixed
+        if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
+        {
+            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(x);
+            short lowBits = lowHighBits[0];
+            short highBits = lowHighBits[1];
+
+            switch (register.RegisterType)
+            {
+                case RegisterType.HoldingRegister:
+                    //low bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits));
+                    vm.HoldingRegisters[register.Address - 1].Value = lowBits;
+                    vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
+                    //high bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
+                    vm.HoldingRegisters[register.Address].Value = highBits;
+                    vm.HoldingRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
+
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {x} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                    break;
+                case RegisterType.InputRegister:
+                    //low bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits));
+                    vm.InputRegisters[register.Address - 1].Value = lowBits;
+                    vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
+                    //high bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
+                    vm.InputRegisters[register.Address].Value = highBits;
+                    vm.InputRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {x} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                    break;
+            }
+
+        }
+        else if (RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && float.TryParse(lowerrange.Text, out float lrf) && float.TryParse(upperrange.Text, out float urf) && lowerrange.Text.Contains('.') && upperrange.Text.Contains('.'))
+        {
+            float randomValue = ValueGenerators.GenerateRandomValueFloat(lrf, urf);
+            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
+            short lowBits = lowHighBits[0];
+            short highBits = lowHighBits[1];
+            switch (register.RegisterType)
+            {
+                case RegisterType.HoldingRegister:
+                    //low bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Random<float>(register.Address, register.RegisterType, NameEntry.Text, lrf, urf, true));
+                    vm.HoldingRegisters[register.Address - 1].Value = lowBits;
+                    vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
+                    //high bits
+                    vm.HoldingRegisters[register.Address].Value = highBits;
+                    vm.HoldingRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                    break;
+                case RegisterType.InputRegister:
+                    //low bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Random<float>(register.Address, register.RegisterType, NameEntry.Text, lrf, urf, true));
+                    vm.InputRegisters[register.Address - 1].Value = lowBits;
+                    vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
+                    //high bits
+                    vm.InputRegisters[register.Address].Value = highBits;
+                    vm.InputRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
                     break;
             }
         }
-        else if (RangeRadioButton.IsChecked && RandomRadioButton.IsChecked)
+        else if (FixedRadioButton.IsChecked && short.TryParse(FixedValueEntry.Text, out short n) && !FixedFloatConfiguration.IsChecked)
+        {
+            switch (register.RegisterType)
+            {
+                case RegisterType.HoldingRegister:
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n));
+                    vm.HoldingRegisters[register.Address - 1].Value = n;
+                    vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteHoldingRegister(register.Address, n);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {n}", "OK");
+                    break;
+                case RegisterType.InputRegister:
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n));
+                    vm.InputRegisters[register.Address - 1].Value = n;
+                    vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteInputRegister(register.Address, n);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {n}", "OK");
+                    break;
+            }
+        }
+        else if (RangeRadioButton.IsChecked && RandomRadioButton.IsChecked && !RangeFloatConfigurationCheck.IsChecked )
         {
             if (short.TryParse(lowerrange.Text, out short lr) && short.TryParse(upperrange.Text, out short ur))
             {
+                short randomValue = ValueGenerators.GenerateRandomValueShort(lr, ur);
                 switch (register.RegisterType)
                 {
                     case RegisterType.HoldingRegister:
-                        // Generate a random value within the specified range
-                        short randomValue = ValueGenerators.GenerateRandomValueShort(lr, ur);
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
-                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur));
-                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = randomValue;
-                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur, false));
+                        vm.HoldingRegisters[register.Address - 1].Value = randomValue;
+                        vm.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteHoldingRegister(register.Address, randomValue);
-                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{randomValue}", "OK");
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue}", "OK");
+                        break;
+                    case RegisterType.InputRegister:
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Random<short>(register.Address, register.RegisterType, NameEntry.Text, lr, ur, false));
+                        vm.InputRegisters[register.Address - 1].Value = randomValue;
+                        vm.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteInputRegister(register.Address, randomValue);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue}", "OK");
                         break;
                     default:
                         Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Range value.", "OK");

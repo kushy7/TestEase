@@ -147,6 +147,7 @@ namespace TestEase.ViewModels
         private string _fixedNonFloatEntryText;
 
         public string FixedNonFloatEntryText
+        
         {
             get => _fixedNonFloatEntryText;
             set
@@ -160,8 +161,11 @@ namespace TestEase.ViewModels
         }
 
         public AppViewModel AppViewModel { get; }
+
+        private readonly ModbusService _service;
         public ModbusPageViewModel(AppViewModel appViewModel)
         {
+            _service = new ModbusService(appViewModel);
             AppViewModel = appViewModel;
 
             Trace.WriteLine("Started server"); // DELETE
