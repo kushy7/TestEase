@@ -24,7 +24,6 @@ public class RegisterModelConverter : JsonConverter
         jo.Add("Type", JToken.FromObject(((RegisterModel)value).Type, serializer));
         jo.Add("Address", JToken.FromObject(((RegisterModel)value).Address, serializer)); // Ensure Address is converted to JToken
         jo.Add("Name", JToken.FromObject(((RegisterModel)value).Name, serializer)); // Ensure Name is converted to JToken
-        jo.Add("LastValue", JToken.FromObject(((RegisterModel)value).LastValue, serializer)); // Ensure LastValue is converted to JToken
 
         // Serialize properties based on specific derived type
         if (type == typeof(CoilOrDiscrete))

@@ -241,18 +241,100 @@ namespace TestEase.ViewModels
         //    };
         //}
 
-        private string _fixedNonFloatEntryText;
-
-        public string FixedNonFloatEntryText
-        
+        private string _fixedEntryText;
+        public string FixedEntryText
         {
-            get => _fixedNonFloatEntryText;
+            get => _fixedEntryText;
             set
             {
-                if (_fixedNonFloatEntryText != value)
+                if (_fixedEntryText != value)
                 {
-                    _fixedNonFloatEntryText = value;
-                    OnPropertyChanged(nameof(FixedNonFloatEntryText));
+                    _fixedEntryText = value;
+                    OnPropertyChanged(nameof(FixedEntryText));
+                }
+            }
+        }
+
+        private string _lowerRangeText;
+        public string LowerRangeText
+        {
+            get => _lowerRangeText;
+            set
+            {
+                if (_lowerRangeText != value)
+                {
+                    _lowerRangeText = value;
+                    OnPropertyChanged(nameof(LowerRangeText));
+                }
+            }
+        }
+
+        private string _upperRangeText;
+        public string UpperRangeText
+        {
+            get => _upperRangeText;
+            set
+            {
+                if (_upperRangeText != value)
+                {
+                    _upperRangeText = value;
+                    OnPropertyChanged(nameof(UpperRangeText));
+                }
+            }
+        }
+
+        private string _startValText;
+        public string StartValText
+        {
+            get => _startValText;
+            set
+            {
+                if (_startValText != value)
+                {
+                    _startValText = value;
+                    OnPropertyChanged(nameof(StartValText));
+                }
+            }
+        }
+
+        private string _endValText;
+        public string EndValText
+        {
+            get => _endValText;
+            set
+            {
+                if (_endValText != value)
+                {
+                    _endValText = value;
+                    OnPropertyChanged(nameof(EndValText));
+                }
+            }
+        }
+
+        private string _periodText;
+        public string PeriodText
+        {
+            get => _periodText;
+            set
+            {
+                if (_periodText != value)
+                {
+                    _periodText = value;
+                    OnPropertyChanged(nameof(PeriodText));
+                }
+            }
+        }
+
+        private bool _isFloatChecked;
+        public bool IsFloatChecked
+        {
+            get => _isFloatChecked;
+            set
+            {
+                if (_isFloatChecked != value)
+                {
+                    _isFloatChecked = value;
+                    OnPropertyChanged(nameof(IsFloatChecked));
                 }
             }
         }
