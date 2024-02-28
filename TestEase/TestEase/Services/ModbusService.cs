@@ -63,6 +63,20 @@ namespace TestEase.Services
                             server.WriteHoldingRegister(register.Address, val);
                             server.HoldingRegisters[register.Address - 1].Value = val;
                         }
+                        else if (register is Curve<float> raf)
+                        {
+
+                            raf.IncrementIterationStep(); // Increment iterationStep
+                            float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
+                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                            short lowBits = lowHighBits[0];
+                            short highBits = lowHighBits[1];
+
+                            server.WriteHoldingRegister(register.Address, lowBits);
+                            server.WriteHoldingRegister(register.Address + 1, highBits);
+                            server.HoldingRegisters[register.Address - 1].Value = lowBits;
+                            server.HoldingRegisters[register.Address].Value = highBits;
+                        }
                     } else if (register.Type == RegisterType.InputRegister)
                     {
                         if(register is Random<short> r)
@@ -87,6 +101,20 @@ namespace TestEase.Services
                             var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
                             server.WriteInputRegister(register.Address, val);
                             server.InputRegisters[register.Address - 1].Value = val;
+                        }
+                        else if (register is Curve<float> raf)
+                        {
+
+                            raf.IncrementIterationStep(); // Increment iterationStep
+                            float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
+                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                            short lowBits = lowHighBits[0];
+                            short highBits = lowHighBits[1];
+
+                            server.WriteInputRegister(register.Address, lowBits);
+                            server.WriteInputRegister(register.Address + 1, highBits);
+                            server.InputRegisters[register.Address - 1].Value = lowBits;
+                            server.InputRegisters[register.Address].Value = highBits;
                         }
                     }
                     else if (register.Type == RegisterType.InputRegister)

@@ -148,7 +148,7 @@ public partial class RegisterSettings : ContentView
             }
 
         }
-        else if (RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && float.TryParse(lowerrange.Text, out float lrf) && float.TryParse(upperrange.Text, out float urf) && lowerrange.Text.Contains('.') && upperrange.Text.Contains('.'))
+        else if (RandomRadioButton.IsChecked && RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && float.TryParse(lowerrange.Text, out float lrf) && float.TryParse(upperrange.Text, out float urf) && lowerrange.Text.Contains('.') && upperrange.Text.Contains('.'))
         {
             float randomValue = ValueGenerators.GenerateRandomValueFloat(lrf, urf);
             short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
@@ -235,7 +235,7 @@ public partial class RegisterSettings : ContentView
                 }
             }
         }
-        else if (RangeRadioButton.IsChecked && CurveRadioButton.IsChecked)
+        else if (RangeRadioButton.IsChecked && CurveRadioButton.IsChecked && !RangeFloatConfigurationCheck.IsChecked)
         {
             if (short.TryParse(startval.Text, out short lowerR) && short.TryParse(endval.Text, out short upperR)
                 && int.TryParse(PeriodEntry.Text, out int periodR))
@@ -264,6 +264,45 @@ public partial class RegisterSettings : ContentView
                         Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Curve value.", "OK");
                         break;
                 }
+            }
+
+        }
+        else if (CurveRadioButton.IsChecked && RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && 
+            float.TryParse(startval.Text, out float lowerRF) && float.TryParse(endval.Text, out float upperRF) 
+            && int.TryParse(PeriodEntry.Text, out int periodRF) && startval.Text.Contains('.') && endval.Text.Contains('.'))
+        {
+            float nextValue = ValueGenerators.GetNextSineValueFloat(lowerRF, upperRF, 0, periodRF);
+            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+            short lowBits = lowHighBits[0];
+            short highBits = lowHighBits[1];
+            switch (register.RegisterType)
+            {
+                case RegisterType.HoldingRegister:
+                    //low bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Curve<float>(register.Address, register.RegisterType, NameEntry.Text, lowerRF, upperRF, true, 0, periodRF));
+                    vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = lowBits;
+                    vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
+                    //high bits
+                    vm.SelectedServer.HoldingRegisters[register.Address].Value = highBits;
+                    vm.SelectedServer.HoldingRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                    break;
+                case RegisterType.InputRegister:
+                    //low bits
+                    vm.SelectedServer.WorkingConfiguration.RegisterModels
+                        .Add(new Curve<float>(register.Address, register.RegisterType, NameEntry.Text, lowerRF, upperRF, true, 0, periodRF));
+                    vm.SelectedServer.InputRegisters[register.Address - 1].Value = lowBits;
+                    vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
+                    //high bits
+                    vm.SelectedServer.InputRegisters[register.Address].Value = highBits;
+                    vm.SelectedServer.InputRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
+                    Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                    break;
             }
 
         }

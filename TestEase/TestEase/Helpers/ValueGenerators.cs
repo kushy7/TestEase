@@ -73,5 +73,18 @@ namespace TestEase.Helpers
             return result;
         }
 
+        public static float GetNextSineValueFloat(float startValue, float endValue, int iterationStep, int iterationTotal)
+        {
+
+            float range = endValue - startValue;
+            float stepSize = 2f * (float)Math.PI / iterationTotal;
+            float angle = (iterationStep + 1) * stepSize;
+
+            float sinValue = (float)Math.Sin(angle);
+            float result = (float) startValue + ((sinValue + 1f) / 2f) * range;
+
+            return result;
+        }
+
     }
 }
