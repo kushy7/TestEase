@@ -92,6 +92,12 @@ public partial class RegisterTable : ContentView
 
         var listView = (ListView)sender;
 
+        var item = e.Item as ModbusServerModel.IRegister;
+        if (item == null || item.IsFloatHelper)
+        {
+            return;
+        }
+
         // Check if the tapped item is the same as the currently selected item
         if (e.Item == lastSelectedItem)
         {
@@ -116,16 +122,67 @@ public partial class RegisterTable : ContentView
             if (selectedRegister.RegisterType == Models.RegisterType.HoldingRegister || selectedRegister.RegisterType == Models.RegisterType.InputRegister)
             {
                 // Holding Register or Input Register actions actions
+                // FOR FILLING IN INPUT ENTRIES FOR CONFIGURED REGISTERS
                 if (selectedRegister.IsModified)
                 {
                     var modifiedRegister = viewModel.SelectedServer.WorkingConfiguration.RegisterModels.Find(x => x.Address == selectedRegister.Address);
-                    if (modifiedRegister is Fixed<short> fixedRegister)
+                    if (modifiedRegister is Fixed<short> fixedShortRegister)
                     {
-                        viewModel.FixedNonFloatEntryText = fixedRegister.value.ToString();
-                    } // TODO: floats
+                        viewModel.FixedEntryText = fixedShortRegister.value.ToString();
+                        viewModel.LowerRangeText = "";
+                        viewModel.UpperRangeText = "";
+                        viewModel.StartValText = "";
+                        viewModel.EndValText = "";
+                        viewModel.PeriodText = "";
+                    } else if (modifiedRegister is Fixed<float> fixedFloatRegister)
+                    {
+                        viewModel.FixedEntryText = fixedFloatRegister.value.ToString();
+                        viewModel.LowerRangeText = "";
+                        viewModel.UpperRangeText = "";
+                        viewModel.StartValText = "";
+                        viewModel.EndValText = "";
+                        viewModel.PeriodText = "";
+                    } else if (modifiedRegister is Random<short> randomShortRegister)
+                    {
+                        viewModel.FixedEntryText = "";
+                        viewModel.LowerRangeText = randomShortRegister.startValue.ToString();
+                        viewModel.UpperRangeText = randomShortRegister.endValue.ToString();
+                        viewModel.StartValText = "";
+                        viewModel.EndValText = "";
+                        viewModel.PeriodText = "";
+                    } else if (modifiedRegister is Random<float> randomFloatRegister)
+                    {
+                        viewModel.FixedEntryText = "";
+                        viewModel.LowerRangeText = randomFloatRegister.startValue.ToString();
+                        viewModel.UpperRangeText = randomFloatRegister.endValue.ToString();
+                        viewModel.StartValText = "";
+                        viewModel.EndValText = "";
+                        viewModel.PeriodText = "";
+                    } else if (modifiedRegister is Curve<short> curveShortRegister)
+                    {
+                        viewModel.FixedEntryText = "";
+                        viewModel.LowerRangeText = "";
+                        viewModel.UpperRangeText = "";
+                        viewModel.StartValText = curveShortRegister.startValue.ToString();
+                        viewModel.EndValText = curveShortRegister.endValue.ToString();
+                        viewModel.PeriodText = curveShortRegister.Period.ToString();
+                    } else if (modifiedRegister is Curve<float> curveFloatRegister)
+                    {
+                        viewModel.FixedEntryText = "";
+                        viewModel.LowerRangeText = "";
+                        viewModel.UpperRangeText = "";
+                        viewModel.StartValText = curveFloatRegister.startValue.ToString();
+                        viewModel.EndValText = curveFloatRegister.endValue.ToString();
+                        viewModel.PeriodText = curveFloatRegister.Period.ToString();
+                    }
                 } else
                 {
-                    viewModel.FixedNonFloatEntryText = "";
+                    viewModel.FixedEntryText = "";
+                    viewModel.LowerRangeText = "";
+                    viewModel.UpperRangeText = "";
+                    viewModel.StartValText = "";
+                    viewModel.EndValText = "";
+                    viewModel.PeriodText = "";
                 }
 
             } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput || selectedRegister.RegisterType == Models.RegisterType.Coil)

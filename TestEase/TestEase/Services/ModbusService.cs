@@ -33,100 +33,104 @@ namespace TestEase.Services
             {
                 // Logic to update each server's registers
                 // This might involve generating new values and updating the Modbus registers
-                foreach (var register in server.WorkingConfiguration.RegisterModels)
+                if (server.IsRunning)
                 {
-                    if (register.Type == RegisterType.HoldingRegister)
+                    foreach (var register in server.WorkingConfiguration.RegisterModels)
                     {
-                        if (register is Random<short> r)
+                        if (register.Type == RegisterType.HoldingRegister)
                         {
-                            var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
-                            server.WriteHoldingRegister(register.Address, val);
-                            server.HoldingRegisters[register.Address - 1].Value = val;
-                        }
-                        else if (register is Random<float> rf)
-                        {
-                            float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
-                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
-                            short lowBits = lowHighBits[0];
-                            short highBits = lowHighBits[1];
+                            if (register is Random<short> r)
+                            {
+                                var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
+                                server.WriteHoldingRegister(register.Address, val);
+                                server.HoldingRegisters[register.Address - 1].Value = val;
+                            }
+                            else if (register is Random<float> rf)
+                            {
+                                float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
                             
-                            server.WriteHoldingRegister(register.Address, lowBits);
-                            server.WriteHoldingRegister(register.Address + 1, highBits);
-                            server.HoldingRegisters[register.Address - 1].Value = lowBits;
-                            server.HoldingRegisters[register.Address].Value = highBits;
+                                server.WriteHoldingRegister(register.Address, lowBits);
+                                server.WriteHoldingRegister(register.Address + 1, highBits);
+                                server.HoldingRegisters[register.Address - 1].Value = lowBits;
+                                server.HoldingRegisters[register.Address].Value = highBits;
+                            }
+                            else if (register is Curve<short> ra)
+                            {
+
+                                ra.IncrementIterationStep(); // Increment iterationStep
+                                var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                                server.WriteHoldingRegister(register.Address, val);
+                                server.HoldingRegisters[register.Address - 1].Value = val;
+                            }
+                            else if (register is Curve<float> raf)
+                            {
+
+                                raf.IncrementIterationStep(); // Increment iterationStep
+                                float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
+
+                                server.WriteHoldingRegister(register.Address, lowBits);
+                                server.WriteHoldingRegister(register.Address + 1, highBits);
+                                server.HoldingRegisters[register.Address - 1].Value = lowBits;
+                                server.HoldingRegisters[register.Address].Value = highBits;
+                            }
+                        } else if (register.Type == RegisterType.InputRegister)
+                        {
+                            if(register is Random<short> r)
+                            {
+                                server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
+                            } else if (register is Random<float> rf)
+                            {
+                                float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
+
+                                server.WriteInputRegister(register.Address, lowBits);
+                                server.WriteInputRegister(register.Address + 1, highBits);
+                                server.InputRegisters[register.Address - 1].Value = lowBits;
+                                server.InputRegisters[register.Address].Value = highBits;
+                            }
+                            else if (register is Curve<short> ra)
+                            {
+
+                                ra.IncrementIterationStep(); // Increment iterationStep
+                                var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                                server.WriteInputRegister(register.Address, val);
+                                server.InputRegisters[register.Address - 1].Value = val;
+                            }
+                            else if (register is Curve<float> raf)
+                            {
+
+                                raf.IncrementIterationStep(); // Increment iterationStep
+                                float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
+
+                                server.WriteInputRegister(register.Address, lowBits);
+                                server.WriteInputRegister(register.Address + 1, highBits);
+                                server.InputRegisters[register.Address - 1].Value = lowBits;
+                                server.InputRegisters[register.Address].Value = highBits;
+                            }
                         }
-                        else if (register is Curve<short> ra)
+                        else if (register.Type == RegisterType.InputRegister)
                         {
-
-                            ra.IncrementIterationStep(); // Increment iterationStep
-                            var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
-                            server.WriteHoldingRegister(register.Address, val);
-                            server.HoldingRegisters[register.Address - 1].Value = val;
-                        }
-                        else if (register is Curve<float> raf)
-                        {
-
-                            raf.IncrementIterationStep(); // Increment iterationStep
-                            float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
-                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
-                            short lowBits = lowHighBits[0];
-                            short highBits = lowHighBits[1];
-
-                            server.WriteHoldingRegister(register.Address, lowBits);
-                            server.WriteHoldingRegister(register.Address + 1, highBits);
-                            server.HoldingRegisters[register.Address - 1].Value = lowBits;
-                            server.HoldingRegisters[register.Address].Value = highBits;
-                        }
-                    } else if (register.Type == RegisterType.InputRegister)
-                    {
-                        if(register is Random<short> r)
-                        {
-                            server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
-                        } else if (register is Random<float> rf)
-                        {
-                            float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
-                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
-                            short lowBits = lowHighBits[0];
-                            short highBits = lowHighBits[1];
-
-                            server.WriteInputRegister(register.Address, lowBits);
-                            server.WriteInputRegister(register.Address + 1, highBits);
-                            server.InputRegisters[register.Address - 1].Value = lowBits;
-                            server.InputRegisters[register.Address].Value = highBits;
-                        }
-                        else if (register is Curve<short> ra)
-                        {
-
-                            ra.IncrementIterationStep(); // Increment iterationStep
-                            var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
-                            server.WriteInputRegister(register.Address, val);
-                            server.InputRegisters[register.Address - 1].Value = val;
-                        }
-                        else if (register is Curve<float> raf)
-                        {
-
-                            raf.IncrementIterationStep(); // Increment iterationStep
-                            float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
-                            short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
-                            short lowBits = lowHighBits[0];
-                            short highBits = lowHighBits[1];
-
-                            server.WriteInputRegister(register.Address, lowBits);
-                            server.WriteInputRegister(register.Address + 1, highBits);
-                            server.InputRegisters[register.Address - 1].Value = lowBits;
-                            server.InputRegisters[register.Address].Value = highBits;
-                        }
-                    }
-                    else if (register.Type == RegisterType.InputRegister)
-                    {
-                        if (register is Random<short> r)
-                        {
-                            var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
-                            server.WriteInputRegister(register.Address, val);
-                            server.InputRegisters[register.Address - 1].Value = val;
+                            if (register is Random<short> r)
+                            {
+                                var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
+                                server.WriteInputRegister(register.Address, val);
+                                server.InputRegisters[register.Address - 1].Value = val;
+                            }
                         }
                     }
                 }
+                
             }
 
             // If needed, raise an event or use a messaging system to notify the UI of updates

@@ -98,7 +98,7 @@
                                Grid.Column="0"/>
                         <Entry x:Name="FixedValueEntry"
                                Placeholder="Enter Value"
-                               Text="{Binding FixedNonFloatEntryText}"
+                               Text="{Binding FixedEntryText}"
                                ClearButtonVisibility="WhileEditing"
                                Keyboard="Numeric"
                                Grid.Column="1" />
@@ -132,6 +132,7 @@
                         Grid.Column="0"/>
                         <Entry x:Name="lowerrange"
                                Placeholder="Enter Value"
+                               Text="{Binding LowerRangeText}"
                                ClearButtonVisibility="WhileEditing"
                                Keyboard="Numeric"
                                Grid.Column="1" />
@@ -143,6 +144,7 @@
                         Grid.Column="0"/>
                         <Entry x:Name="upperrange"
                                Placeholder="Enter Value"
+                               Text="{Binding UpperRangeText}"
                                ClearButtonVisibility="WhileEditing"
                                Keyboard="Numeric"
                                Grid.Column="1" />
@@ -154,6 +156,7 @@
                         Grid.Column="0"/>
                         <Entry x:Name="startval"
                         Placeholder="Enter Value"
+                        Text="{Binding StartValText}"
                         ClearButtonVisibility="WhileEditing"
                         Keyboard="Numeric"
                         Grid.Column="1" />
@@ -165,6 +168,7 @@
                         Grid.Column="0"/>
                         <Entry x:Name="endval"
                         Placeholder="Enter Value"
+                        Text="{Binding EndValText}"
                         ClearButtonVisibility="WhileEditing"
                         Keyboard="Numeric"
                         Grid.Column="1" />
@@ -176,6 +180,7 @@
                         Grid.Column="0"/>
                         <Entry x:Name="PeriodEntry"
                         Placeholder="Enter Intervals/Period"
+                        Text="{Binding PeriodText}"
                         ClearButtonVisibility="WhileEditing"
                         Keyboard="Numeric"
                         Grid.Column="1" />

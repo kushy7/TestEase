@@ -81,6 +81,14 @@ public partial class RegisterSettings : ContentView
         var vm = this.BindingContext as ModbusPageViewModel;
         var register = vm.SelectedServer.SelectedRegister;
 
+        // Find the index of the existing register, if it exists, remove it.
+        int index = vm.SelectedServer.WorkingConfiguration.RegisterModels
+            .FindIndex(r => r.Address == register.Address && r.Type == register.RegisterType);
+        if (index != -1)
+        {
+            vm.SelectedServer.WorkingConfiguration.RegisterModels.RemoveAt(index);
+        }
+
         if (register.RegisterType == RegisterType.Coil || register.RegisterType == RegisterType.DiscreteInput)
         {
             switch (register.RegisterType)
@@ -105,9 +113,9 @@ public partial class RegisterSettings : ContentView
             return; // this is dumb
         }
 
-        // Fixed
         if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
         {
+            // FIXED FLOAT
             short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(x);
             short lowBits = lowHighBits[0];
             short highBits = lowHighBits[1];
@@ -117,15 +125,14 @@ public partial class RegisterSettings : ContentView
                 case RegisterType.HoldingRegister:
                     //low bits
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits, true));
+                        .Add(new Fixed<float>(register.Address, register.RegisterType, NameEntry.Text, x, true));
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = lowBits;
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
                     //high bits
-                    // vm.SelectedServer.WorkingConfiguration.RegisterModels
-                    //    .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
                     vm.SelectedServer.HoldingRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.HoldingRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
                     vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
 
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {x} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
@@ -133,16 +140,16 @@ public partial class RegisterSettings : ContentView
                 case RegisterType.InputRegister:
                     //low bits
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
-                        .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, lowBits, true));
+                        .Add(new Fixed<float>(register.Address, register.RegisterType, NameEntry.Text, x, true));
                     vm.SelectedServer.InputRegisters[register.Address - 1].Value = lowBits;
                     vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                     vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
                     //high bits
-                    // vm.SelectedServer.WorkingConfiguration.RegisterModels
-                    //     .Add(new Fixed<short>(register.Address + 1, register.RegisterType, NameEntry.Text, highBits));
                     vm.SelectedServer.InputRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.InputRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
                     vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
+
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {x} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
                     break;
             }
@@ -150,6 +157,7 @@ public partial class RegisterSettings : ContentView
         }
         else if (RandomRadioButton.IsChecked && RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && float.TryParse(lowerrange.Text, out float lrf) && float.TryParse(upperrange.Text, out float urf) && lowerrange.Text.Contains('.') && upperrange.Text.Contains('.'))
         {
+            // RANDOM FLOAT
             float randomValue = ValueGenerators.GenerateRandomValueFloat(lrf, urf);
             short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
             short lowBits = lowHighBits[0];
@@ -166,6 +174,7 @@ public partial class RegisterSettings : ContentView
                     //high bits
                     vm.SelectedServer.HoldingRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.HoldingRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
                     vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
                     break;
@@ -179,6 +188,7 @@ public partial class RegisterSettings : ContentView
                     //high bits
                     vm.SelectedServer.InputRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.InputRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
                     vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
                     break;
@@ -186,6 +196,7 @@ public partial class RegisterSettings : ContentView
         }
         else if (FixedRadioButton.IsChecked && short.TryParse(FixedValueEntry.Text, out short n) && !FixedFloatConfiguration.IsChecked)
         {
+            // FIXED SHORT
             switch (register.RegisterType)
             {
                 case RegisterType.HoldingRegister:
@@ -193,6 +204,8 @@ public partial class RegisterSettings : ContentView
                         .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n, false));
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = n;
                     vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+
+                    // Write to Modbus
                     vm.SelectedServer.WriteHoldingRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {n}", "OK");
                     break;
@@ -201,6 +214,8 @@ public partial class RegisterSettings : ContentView
                         .Add(new Fixed<short>(register.Address, register.RegisterType, NameEntry.Text, n, false));
                     vm.SelectedServer.InputRegisters[register.Address - 1].Value = n;
                     vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+
+                    // Write to Modbus
                     vm.SelectedServer.WriteInputRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {n}", "OK");
                     break;
@@ -208,6 +223,7 @@ public partial class RegisterSettings : ContentView
         }
         else if (RangeRadioButton.IsChecked && RandomRadioButton.IsChecked && !RangeFloatConfigurationCheck.IsChecked)
         {
+            // RANDOM SHORT
             if (short.TryParse(lowerrange.Text, out short lr) && short.TryParse(upperrange.Text, out short ur))
             {
                 short randomValue = ValueGenerators.GenerateRandomValueShort(lr, ur);
@@ -237,6 +253,7 @@ public partial class RegisterSettings : ContentView
         }
         else if (RangeRadioButton.IsChecked && CurveRadioButton.IsChecked && !RangeFloatConfigurationCheck.IsChecked)
         {
+            // CURVE SHORT
             if (short.TryParse(startval.Text, out short lowerR) && short.TryParse(endval.Text, out short upperR)
                 && int.TryParse(PeriodEntry.Text, out int periodR))
             {
@@ -271,6 +288,7 @@ public partial class RegisterSettings : ContentView
             float.TryParse(startval.Text, out float lowerRF) && float.TryParse(endval.Text, out float upperRF) 
             && int.TryParse(PeriodEntry.Text, out int periodRF) && startval.Text.Contains('.') && endval.Text.Contains('.'))
         {
+            // CURVE FLOAT
             float nextValue = ValueGenerators.GetNextSineValueFloat(lowerRF, upperRF, 0, periodRF);
             short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
             short lowBits = lowHighBits[0];
@@ -287,6 +305,7 @@ public partial class RegisterSettings : ContentView
                     //high bits
                     vm.SelectedServer.HoldingRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.HoldingRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
                     vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
                     break;
@@ -300,6 +319,7 @@ public partial class RegisterSettings : ContentView
                     //high bits
                     vm.SelectedServer.InputRegisters[register.Address].Value = highBits;
                     vm.SelectedServer.InputRegisters[register.Address].Name = NameEntry.Text;
+                    vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
                     vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
                     break;

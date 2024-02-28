@@ -439,6 +439,7 @@ namespace TestEase.Models
             string Name { get; set; }
             RegisterType RegisterType { get; }
             bool IsModified { get; set; }
+            bool IsFloatHelper { get; set; }
         }
 
         public class Register<T> : IRegister
@@ -449,6 +450,7 @@ namespace TestEase.Models
             public required RegisterType RegisterType { get; set; }
 
             public bool isModified = false;
+
 
             object IRegister.Value
             {
@@ -492,6 +494,20 @@ namespace TestEase.Models
                     {
                         _isModified = value;
                         OnPropertyChanged(nameof(IsModified));
+                    }
+                }
+            }
+
+            private bool _isFloatHelper = false;
+            public bool IsFloatHelper
+            {
+                get => _isFloatHelper;
+                set
+                {
+                    if (_isFloatHelper != value)
+                    {
+                        _isFloatHelper = value;
+                        OnPropertyChanged(nameof(IsFloatHelper));
                     }
                 }
             }
