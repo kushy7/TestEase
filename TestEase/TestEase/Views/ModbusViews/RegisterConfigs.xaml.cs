@@ -1,5 +1,7 @@
 namespace TestEase.Views.ModbusViews;
 using TestEase.ViewModels;
+using TestEase.Services;
+using TestEase.Models;
 
 public partial class RegisterConfigs : ContentView
 {
@@ -39,22 +41,46 @@ public partial class RegisterConfigs : ContentView
 
     private async void SaveAs_Clicked(object sender, EventArgs e)
     {
+        //var viewModel = this.BindingContext as ModbusPageViewModel;
+        //if (viewModel != null)
+        //{
+        //    string fileName = await Application.Current.MainPage.DisplayPromptAsync("Save As", "Enter a file name:", initialValue: "Configuration_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".json", accept: "Save", cancel: "Cancel");
+        //    if (!string.IsNullOrWhiteSpace(fileName))
+        //    {
+        //        if (!fileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            fileName += ".json";
+        //        }
+        //        try
+        //        {
+        //            await viewModel.SaveConfigurationAsync(fileName);
+        //            // Directly instantiate an instance of SavedConfigurationsViewModel
+        //            var savedConfigurationsViewModel = new SavedConfigurationsViewModel();
+        //            await savedConfigurationsViewModel.LoadConfigurationsAsync();
+        //            await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved successfully.", "OK");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            await Application.Current.MainPage.DisplayAlert("Error", $"Failed to save the configuration: {ex.Message}", "OK");
+        //        }
+        //    }
+        //}
         var viewModel = this.BindingContext as ModbusPageViewModel;
         if (viewModel != null)
         {
-            string fileName = await Application.Current.MainPage.DisplayPromptAsync("Save As", "Enter a file name:", initialValue: "Configuration_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".json", accept: "Save", cancel: "Cancel");
+            string fileName = await Application.Current.MainPage.DisplayPromptAsync("Save As", "Enter a file name:", initialValue: viewModel.SelectedServer.WorkingConfiguration.Name, accept: "Save", cancel: "Cancel");
             if (!string.IsNullOrWhiteSpace(fileName))
             {
+                viewModel.SelectedServer.WorkingConfiguration.Name = fileName; // update name of config object
                 if (!fileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
                 {
                     fileName += ".json";
                 }
                 try
                 {
-                    await viewModel.SaveConfigurationAsync(fileName);
-                    // Directly instantiate an instance of SavedConfigurationsViewModel
-                    var savedConfigurationsViewModel = new SavedConfigurationsViewModel();
-                    await savedConfigurationsViewModel.LoadConfigurationsAsync();
+                    ConfigurationService s = new ConfigurationService();
+                    await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, fileName); // save json to directory
+                    viewModel.AppViewModel.Configurations.Add(viewModel.SelectedServer.WorkingConfiguration); // add to global list
                     await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved successfully.", "OK");
                 }
                 catch (Exception ex)

@@ -41,13 +41,13 @@ namespace TestEase.Services
                         {
                             if (register is Random<short> r)
                             {
-                                var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
+                                var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
                                 server.WriteHoldingRegister(register.Address, val);
                                 server.HoldingRegisters[register.Address - 1].Value = val;
                             }
                             else if (register is Random<float> rf)
                             {
-                                float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                                float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.StartValue, rf.EndValue);
                                 short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
                                 short lowBits = lowHighBits[0];
                                 short highBits = lowHighBits[1];
@@ -61,7 +61,7 @@ namespace TestEase.Services
                             {
 
                                 ra.IncrementIterationStep(); // Increment iterationStep
-                                var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                                var val = ValueGenerators.GenerateNextSinValue(ra.StartValue, ra.EndValue, ra.GetIterationStep(), ra.Period);
                                 server.WriteHoldingRegister(register.Address, val);
                                 server.HoldingRegisters[register.Address - 1].Value = val;
                             }
@@ -69,7 +69,7 @@ namespace TestEase.Services
                             {
 
                                 raf.IncrementIterationStep(); // Increment iterationStep
-                                float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
+                                float nextValue = ValueGenerators.GetNextSineValueFloat(raf.StartValue, raf.EndValue, raf.GetIterationStep(), raf.Period);
                                 short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
                                 short lowBits = lowHighBits[0];
                                 short highBits = lowHighBits[1];
@@ -83,10 +83,10 @@ namespace TestEase.Services
                         {
                             if(register is Random<short> r)
                             {
-                                server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue));
+                                server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue));
                             } else if (register is Random<float> rf)
                             {
-                                float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.startValue, rf.endValue);
+                                float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.StartValue, rf.EndValue);
                                 short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
                                 short lowBits = lowHighBits[0];
                                 short highBits = lowHighBits[1];
@@ -100,7 +100,7 @@ namespace TestEase.Services
                             {
 
                                 ra.IncrementIterationStep(); // Increment iterationStep
-                                var val = ValueGenerators.GenerateNextSinValue(ra.startValue, ra.endValue, ra.GetIterationStep(), ra.Period);
+                                var val = ValueGenerators.GenerateNextSinValue(ra.StartValue, ra.EndValue, ra.GetIterationStep(), ra.Period);
                                 server.WriteInputRegister(register.Address, val);
                                 server.InputRegisters[register.Address - 1].Value = val;
                             }
@@ -108,7 +108,7 @@ namespace TestEase.Services
                             {
 
                                 raf.IncrementIterationStep(); // Increment iterationStep
-                                float nextValue = ValueGenerators.GetNextSineValueFloat(raf.startValue, raf.endValue, raf.GetIterationStep(), raf.Period);
+                                float nextValue = ValueGenerators.GetNextSineValueFloat(raf.StartValue, raf.EndValue, raf.GetIterationStep(), raf.Period);
                                 short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
                                 short lowBits = lowHighBits[0];
                                 short highBits = lowHighBits[1];
@@ -123,7 +123,7 @@ namespace TestEase.Services
                         {
                             if (register is Random<short> r)
                             {
-                                var val = ValueGenerators.GenerateRandomValueShort(r.startValue, r.endValue);
+                                var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
                                 server.WriteInputRegister(register.Address, val);
                                 server.InputRegisters[register.Address - 1].Value = val;
                             }

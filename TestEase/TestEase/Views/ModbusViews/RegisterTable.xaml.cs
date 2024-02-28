@@ -128,7 +128,7 @@ public partial class RegisterTable : ContentView
                     var modifiedRegister = viewModel.SelectedServer.WorkingConfiguration.RegisterModels.Find(x => x.Address == selectedRegister.Address);
                     if (modifiedRegister is Fixed<short> fixedShortRegister)
                     {
-                        viewModel.FixedEntryText = fixedShortRegister.value.ToString();
+                        viewModel.FixedEntryText = fixedShortRegister.Value.ToString();
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
                         viewModel.StartValText = "";
@@ -136,7 +136,7 @@ public partial class RegisterTable : ContentView
                         viewModel.PeriodText = "";
                     } else if (modifiedRegister is Fixed<float> fixedFloatRegister)
                     {
-                        viewModel.FixedEntryText = fixedFloatRegister.value.ToString();
+                        viewModel.FixedEntryText = fixedFloatRegister.Value.ToString();
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
                         viewModel.StartValText = "";
@@ -145,16 +145,16 @@ public partial class RegisterTable : ContentView
                     } else if (modifiedRegister is Random<short> randomShortRegister)
                     {
                         viewModel.FixedEntryText = "";
-                        viewModel.LowerRangeText = randomShortRegister.startValue.ToString();
-                        viewModel.UpperRangeText = randomShortRegister.endValue.ToString();
+                        viewModel.LowerRangeText = randomShortRegister.StartValue.ToString();
+                        viewModel.UpperRangeText = randomShortRegister.EndValue.ToString();
                         viewModel.StartValText = "";
                         viewModel.EndValText = "";
                         viewModel.PeriodText = "";
                     } else if (modifiedRegister is Random<float> randomFloatRegister)
                     {
                         viewModel.FixedEntryText = "";
-                        viewModel.LowerRangeText = randomFloatRegister.startValue.ToString();
-                        viewModel.UpperRangeText = randomFloatRegister.endValue.ToString();
+                        viewModel.LowerRangeText = randomFloatRegister.StartValue.ToString();
+                        viewModel.UpperRangeText = randomFloatRegister.EndValue.ToString();
                         viewModel.StartValText = "";
                         viewModel.EndValText = "";
                         viewModel.PeriodText = "";
@@ -163,16 +163,16 @@ public partial class RegisterTable : ContentView
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
-                        viewModel.StartValText = curveShortRegister.startValue.ToString();
-                        viewModel.EndValText = curveShortRegister.endValue.ToString();
+                        viewModel.StartValText = curveShortRegister.StartValue.ToString();
+                        viewModel.EndValText = curveShortRegister.EndValue.ToString();
                         viewModel.PeriodText = curveShortRegister.Period.ToString();
                     } else if (modifiedRegister is Curve<float> curveFloatRegister)
                     {
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
-                        viewModel.StartValText = curveFloatRegister.startValue.ToString();
-                        viewModel.EndValText = curveFloatRegister.endValue.ToString();
+                        viewModel.StartValText = curveFloatRegister.StartValue.ToString();
+                        viewModel.EndValText = curveFloatRegister.EndValue.ToString();
                         viewModel.PeriodText = curveFloatRegister.Period.ToString();
                     }
                 } else

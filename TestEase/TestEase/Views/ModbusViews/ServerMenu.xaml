@@ -42,6 +42,7 @@
                                 </Style>
                             </StackLayout.Style>
                             <Label Text="{Binding Port}"/>
+                            <Label Text="{Binding WorkingConfiguration.Name}" FontSize="12"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
