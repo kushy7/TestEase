@@ -1,64 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TestEase.Models;
+using TestEase.ViewModels;
+using Windows.Media.Streaming.Adaptive;
 
 namespace TestEase.Services
 {
     public class ConfigurationService
     {
-        private const string ConfigurationsDirectory = "Configurations";
 
-        public ConfigurationService()
-        {
-            Directory.CreateDirectory(ConfigurationsDirectory);
-        }
+        private static JsonSerializerOptions _options;
 
-        public async Task SaveConfigurationAsync(string configName, ModbusModel configuration)
+        static ConfigurationService()
         {
-            string filePath = Path.Combine(ConfigurationsDirectory, configName + ".json");
-            string json = JsonSerializer.Serialize(configuration);
-            await File.WriteAllTextAsync(filePath, json);
-        }
-
-        public async Task<ModbusModel> LoadConfigurationAsync(string configName)
-        {
-            string filePath = Path.Combine(ConfigurationsDirectory, configName + ".json");
-            if (!File.Exists(filePath))
+            _options = new JsonSerializerOptions
             {
-                throw new FileNotFoundException("Configuration file not found.");
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            };
+        }
+
+        public string GetFolderPath()
+        {
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Test Ease");
+
+            // Ensure directory exists
+            Directory.CreateDirectory(folderPath);
+
+            return folderPath;
+        }
+
+        public async Task SaveConfigurationAsync<T>(T configuration, string filename)
+        {
+            string fullPath = Path.Combine(GetFolderPath(), filename);
+            string json = JsonSerializer.Serialize(configuration, _options);
+            await File.WriteAllTextAsync(fullPath, json);
+        }
+
+        public async Task<T> LoadConfigurationAsync<T>(string filename)
+        {
+            string fullPath = Path.Combine(GetFolderPath(), filename);
+            if (File.Exists(fullPath))
+            {
+                string json = await File.ReadAllTextAsync(fullPath);
+                return JsonSerializer.Deserialize<T>(json);
             }
 
-            string json = await File.ReadAllTextAsync(filePath);
-            if (json != null)
-            {
-                return JsonSerializer.Deserialize<ModbusModel>(json); // danger!
-            } else
-            {
-                throw new FileNotFoundException("Configuration file is empty.");
-            }
+            return default;
+
+            //var service = new ConfigurationService();
+
+            //string folderPath = service.GetFolderPath();
+            //string[] files = Directory.GetFiles(folderPath, "*.json");
+
+            //foreach (string file in files)
+            //{
+            //    try
+            //    {
+            //        string jsonContent = await File.ReadAllTextAsync(file);
+            //        ConfigurationModel config = JsonSerializer.Deserialize<ConfigurationModel>(jsonContent);
+            //        if (config != null)
+            //        {
+            //            appViewModel.Configurations.Add(config);
+            //        }
+            //    }
+            //    catch (JsonException jsonEx)
+            //    {
+            //        // Handle JSON-specific exceptions, e.g., malformed JSON
+            //        await Current.MainPage.DisplayAlert("Error", $"JSON Error from file {file}: {jsonEx.Message}", "OK");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        // Handle other exceptions, e.g., file read errors
+            //        await Current.MainPage.DisplayAlert("Error", $"Error loading configuration from file {file}: {ex.Message}", "OK");
+            //    }
+            //}
         }
 
-        public void DeleteConfiguration(string configName)
+        public void OpenConfigurationFolderInExplorer()
         {
-            string filePath = Path.Combine(ConfigurationsDirectory, configName + ".json");
-            File.Delete(filePath);
+            string folderPath = GetFolderPath();
+            Process.Start("explorer.exe", folderPath);
         }
-
-        public IEnumerable<string> GetSavedConfigurations()
-        {
-            var files = Directory.GetFiles(ConfigurationsDirectory, "*.json");
-            foreach (var file in files)
-            {
-                yield return Path.GetFileNameWithoutExtension(file);
-            }
-        }
-
-        // Additional methods for export/import, synchronization, etc.
 
     }
 }

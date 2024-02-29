@@ -40,13 +40,15 @@
 
         <Border Grid.Row="1" Grid.Column="0"
                 Grid.ColumnSpan="2">
-            <HorizontalStackLayout
-                Padding="5" Spacing="5">
-                <Button Text="New" Clicked="New_Clicked"/>
-                <Button Text="Save" Clicked="Save_Clicked"/>
-                <Button Text="Save As" Clicked="SaveAs_Clicked"/>
-
-            </HorizontalStackLayout>
+            <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="*"
+                Padding="5" ColumnSpacing="5">
+                <Button Text="New" Clicked="New_Clicked" Grid.Column="0" CornerRadius="0" VerticalOptions="Center"/>
+                <Button Text="Save" Clicked="Save_Clicked" Grid.Column="1" CornerRadius="0" VerticalOptions="Center"/>
+                <Button Text="Save As" Clicked="SaveAs_Clicked" Grid.Column="2" CornerRadius="0" VerticalOptions="Center"/>
+                <Label Text="{Binding SelectedServer.WorkingConfiguration.Name}"
+                       VerticalOptions="Center" HorizontalOptions="Center"
+                       Grid.Column="3"/>
+            </Grid>
         </Border>
         
         <Border

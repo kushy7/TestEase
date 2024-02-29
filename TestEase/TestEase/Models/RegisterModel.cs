@@ -3,11 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace TestEase.Models
 {
+
+    // [JsonDerivedType(typeof(RegisterModel), typeDiscriminator: "base")]
+    [JsonDerivedType(typeof(CoilOrDiscrete), typeDiscriminator: "coilOrDiscrete")]
+    [JsonDerivedType(typeof(Fixed<short>), typeDiscriminator: "fixedShort")]
+    [JsonDerivedType(typeof(Fixed<float>), typeDiscriminator: "fixedFloat")]
+    [JsonDerivedType(typeof(Random<short>), typeDiscriminator: "randomShort")]
+    [JsonDerivedType(typeof(Random<float>), typeDiscriminator: "randomFloat")]
+    [JsonDerivedType(typeof(Curve<short>), typeDiscriminator: "curveShort")]
+    [JsonDerivedType(typeof(Curve<float>), typeDiscriminator: "curveFloat")]
     public abstract class RegisterModel(int address, RegisterType type, string name)
     {
         public int Address { get; set; } = address;
@@ -17,21 +27,23 @@ namespace TestEase.Models
 
     public class CoilOrDiscrete(int address, RegisterType type, string name, bool value) : RegisterModel(address, type, name)
     {
-        public bool value = value;
+        public bool Value { get; set; } = value;
     }
 
     public class Fixed<T>(int address, RegisterType type, string name, T value, bool isFloat) : RegisterModel(address, type, name)
     {
-        public T value = value;
-        public bool isFloat = isFloat;
+        public T Value { get; set; } = value;
+        // public bool isFloat = isFloat;
+        public bool IsFloat { get; set; } = isFloat;
     }
 
 
     public class Range<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : RegisterModel(address, type, name)
     {
-        public T startValue = startValue;
-        public T endValue = endValue;
-        public bool isFloat = isFloat;
+        public T StartValue { get; set; } = startValue;
+        public T EndValue { get; set; } = endValue;
+        // public bool isFloat = isFloat;
+        public bool IsFloat { get; set; } = isFloat;
     }
 
     public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : Range<T>(address, type, name, startValue, endValue, isFloat)
@@ -42,9 +54,9 @@ namespace TestEase.Models
     {
         private int _iterationStep;
 
-        public int Period { get; }
+        public int Period { get; set; }
 
-        public Curve(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat, int intervalStep, int period)
+        public Curve(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat, int period)
             : base(address, type, name, startValue, endValue, isFloat)
         {
             _iterationStep = 0; // Initialize iterationStep
