@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EasyModbus;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.ObjectModel;
@@ -12,6 +13,9 @@ using TestEase.Models;
 using TestEase.Services;
 using TestEase.Views.ModbusViews;
 using static EasyModbus.ModbusServer;
+using Newtonsoft.Json;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 
 namespace TestEase.ViewModels
 {
@@ -239,14 +243,47 @@ namespace TestEase.ViewModels
         {
             AppViewModel = appViewModel;
 
-            AppViewModel.Configurations.Add(new ConfigurationModel("TEST"));
-
             Trace.WriteLine("Started server"); // DELETE
             SelectedServer = new ModbusServerModel(502);
             SelectedServer.StartServer();
             SelectedServer.IsRunning = true;
             AppViewModel.ModbusServers.Add(SelectedServer);
 
+            LoadConfigurations();
+
+        }
+
+        public async Task LoadConfigurations()
+        {
+            var service = new ConfigurationService();
+
+            string folderPath = service.GetFolderPath();
+            string[] files = Directory.GetFiles(folderPath, "*.json");
+
+            foreach (string file in files)
+            {
+                try
+                {
+                    string jsonContent = await File.ReadAllTextAsync(file);
+                    var config = System.Text.Json.JsonSerializer.Deserialize<ConfigurationModel>(jsonContent);
+
+                    if (config != null)
+                    {
+                        // await Application.Current.MainPage.DisplayAlert("Error", $"Name: {config.Name}\nRegisters: {config.RegisterModels.Count}", "OK");
+                        AppViewModel.Configurations.Add(config);
+                    }
+                }
+                catch (System.Text.Json.JsonException jsonEx)
+                {
+                    // Handle JSON-specific exceptions, e.g., malformed JSON
+                    Debug.WriteLine($"JSON Error: {jsonEx.Message}");
+                }
+                catch (Exception ex)
+                {
+                    // Handle other exceptions, e.g., file read errors
+                    Debug.WriteLine($"Error loading configuration from file {file}: {ex.Message}");
+                }
+            }
         }
     }
 }

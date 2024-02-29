@@ -37,9 +37,27 @@ namespace TestEase.Services
                 {
                     foreach (var register in server.WorkingConfiguration.RegisterModels)
                     {
+                        // HOLDING REGISTERS
                         if (register.Type == RegisterType.HoldingRegister)
                         {
-                            if (register is Random<short> r)
+                            if (register is Fixed<short> fs)
+                            {
+                                server.WriteHoldingRegister(register.Address, fs.Value);
+                                server.HoldingRegisters[register.Address - 1].Value = fs.Value;
+                            } 
+                            else if (register is Fixed<float> ff)
+                            {
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(ff.Value);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
+
+                                server.WriteHoldingRegister(register.Address, lowBits);
+                                server.WriteHoldingRegister(register.Address + 1, highBits);
+                                server.HoldingRegisters[register.Address - 1].Value = lowBits;
+                                server.HoldingRegisters[register.Address].Value = highBits;
+                                server.HoldingRegisters[register.Address].IsFloatHelper = true;
+                            }
+                            else if (register is Random<short> r)
                             {
                                 var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
                                 server.WriteHoldingRegister(register.Address, val);
@@ -56,6 +74,7 @@ namespace TestEase.Services
                                 server.WriteHoldingRegister(register.Address + 1, highBits);
                                 server.HoldingRegisters[register.Address - 1].Value = lowBits;
                                 server.HoldingRegisters[register.Address].Value = highBits;
+                                server.HoldingRegisters[register.Address].IsFloatHelper = true;
                             }
                             else if (register is Curve<short> ra)
                             {
@@ -78,13 +97,36 @@ namespace TestEase.Services
                                 server.WriteHoldingRegister(register.Address + 1, highBits);
                                 server.HoldingRegisters[register.Address - 1].Value = lowBits;
                                 server.HoldingRegisters[register.Address].Value = highBits;
+                                server.HoldingRegisters[register.Address].IsFloatHelper = true;
                             }
-                        } else if (register.Type == RegisterType.InputRegister)
+                        } 
+                        // INPUT REGISTERS
+                        else if (register.Type == RegisterType.InputRegister)
                         {
-                            if(register is Random<short> r)
+                            if (register is Fixed<short> fs)
                             {
-                                server.WriteInputRegister(register.Address, ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue));
-                            } else if (register is Random<float> rf)
+                                server.WriteInputRegister(register.Address, fs.Value);
+                                server.InputRegisters[register.Address - 1].Value = fs.Value;
+                            }
+                            else if (register is Fixed<float> ff)
+                            {
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(ff.Value);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
+
+                                server.WriteInputRegister(register.Address, lowBits);
+                                server.WriteInputRegister(register.Address + 1, highBits);
+                                server.InputRegisters[register.Address - 1].Value = lowBits;
+                                server.InputRegisters[register.Address].Value = highBits;
+                                server.InputRegisters[register.Address].IsFloatHelper = true;
+                            }
+                            else if (register is Random<short> r)
+                            {
+                                var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
+                                server.WriteInputRegister(register.Address, val);
+                                server.InputRegisters[register.Address - 1].Value = val;
+                            } 
+                            else if (register is Random<float> rf)
                             {
                                 float randomValue = ValueGenerators.GenerateRandomValueFloat(rf.StartValue, rf.EndValue);
                                 short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(randomValue);
@@ -95,6 +137,7 @@ namespace TestEase.Services
                                 server.WriteInputRegister(register.Address + 1, highBits);
                                 server.InputRegisters[register.Address - 1].Value = lowBits;
                                 server.InputRegisters[register.Address].Value = highBits;
+                                server.InputRegisters[register.Address].IsFloatHelper = true;
                             }
                             else if (register is Curve<short> ra)
                             {
@@ -117,15 +160,25 @@ namespace TestEase.Services
                                 server.WriteInputRegister(register.Address + 1, highBits);
                                 server.InputRegisters[register.Address - 1].Value = lowBits;
                                 server.InputRegisters[register.Address].Value = highBits;
+                                server.InputRegisters[register.Address].IsFloatHelper = true;
                             }
                         }
-                        else if (register.Type == RegisterType.InputRegister)
+                        // DISCRETE INPUTS
+                        else if (register.Type == RegisterType.DiscreteInput)
                         {
-                            if (register is Random<short> r)
+                            if (register is CoilOrDiscrete r)
                             {
-                                var val = ValueGenerators.GenerateRandomValueShort(r.StartValue, r.EndValue);
-                                server.WriteInputRegister(register.Address, val);
-                                server.InputRegisters[register.Address - 1].Value = val;
+                                server.WriteDiscreteInput(register.Address, r.Value);
+                                server.DiscreteInputs[register.Address - 1].Value = r.Value;
+                            }
+                        }
+                        // COILS
+                        else if (register.Type == RegisterType.Coil)
+                        {
+                            if (register is CoilOrDiscrete r)
+                            {
+                                server.WriteCoil(register.Address, r.Value);
+                                server.Coils[register.Address - 1].Value = r.Value;
                             }
                         }
                     }

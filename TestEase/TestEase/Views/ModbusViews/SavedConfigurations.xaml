@@ -21,21 +21,28 @@
             <Button Text="Folder" Clicked="OpenFileExplorer" Grid.Column="1" HorizontalOptions="End" />
         </Grid>
 
-        <!-- CollectionView for displaying the list of configuration files -->
-        <CollectionView Grid.Row="2"
-                        ItemsSource="{Binding AppViewModel.Configurations}"
-                        SelectionMode="Single">
-            <CollectionView.ItemTemplate>
+        <!-- ListView for displaying the list of configuration files -->
+        <ListView x:Name="ConfigurationsListView"
+          ItemsSource="{Binding AppViewModel.Configurations}"
+          VerticalScrollBarVisibility="Always"
+          VerticalOptions="Start"
+          Grid.Row="2">
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10">
-                        <Label Text="{Binding Name}"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Start" />
-                    </StackLayout>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Open" Clicked="OnOpenClicked"/>
+                        </ViewCell.ContextActions>
+                        <StackLayout Padding="5,10,0,10" Margin="10">
+                            <Label Text="{Binding Name}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </ListView.ItemTemplate>
+        </ListView>
 
-     
+
     </Grid>
 </ContentView>

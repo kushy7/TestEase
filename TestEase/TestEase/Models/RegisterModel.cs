@@ -34,6 +34,7 @@ namespace TestEase.Models
     {
         public T Value { get; set; } = value;
         // public bool isFloat = isFloat;
+        public bool IsFloat { get; set; } = isFloat;
     }
 
 
@@ -42,6 +43,7 @@ namespace TestEase.Models
         public T StartValue { get; set; } = startValue;
         public T EndValue { get; set; } = endValue;
         // public bool isFloat = isFloat;
+        public bool IsFloat { get; set; } = isFloat;
     }
 
     public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : Range<T>(address, type, name, startValue, endValue, isFloat)
@@ -54,7 +56,7 @@ namespace TestEase.Models
 
         public int Period { get; set; }
 
-        public Curve(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat, int intervalStep, int period)
+        public Curve(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat, int period)
             : base(address, type, name, startValue, endValue, isFloat)
         {
             _iterationStep = 0; // Initialize iterationStep

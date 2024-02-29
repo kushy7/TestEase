@@ -23,7 +23,6 @@ namespace TestEase.Services
             {
                 WriteIndented = true,
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
         }
 
@@ -53,7 +52,35 @@ namespace TestEase.Services
                 return JsonSerializer.Deserialize<T>(json);
             }
 
-            return default(T);
+            return default;
+
+            //var service = new ConfigurationService();
+
+            //string folderPath = service.GetFolderPath();
+            //string[] files = Directory.GetFiles(folderPath, "*.json");
+
+            //foreach (string file in files)
+            //{
+            //    try
+            //    {
+            //        string jsonContent = await File.ReadAllTextAsync(file);
+            //        ConfigurationModel config = JsonSerializer.Deserialize<ConfigurationModel>(jsonContent);
+            //        if (config != null)
+            //        {
+            //            appViewModel.Configurations.Add(config);
+            //        }
+            //    }
+            //    catch (JsonException jsonEx)
+            //    {
+            //        // Handle JSON-specific exceptions, e.g., malformed JSON
+            //        await Current.MainPage.DisplayAlert("Error", $"JSON Error from file {file}: {jsonEx.Message}", "OK");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        // Handle other exceptions, e.g., file read errors
+            //        await Current.MainPage.DisplayAlert("Error", $"Error loading configuration from file {file}: {ex.Message}", "OK");
+            //    }
+            //}
         }
 
         public void OpenConfigurationFolderInExplorer()

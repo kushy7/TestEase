@@ -16,11 +16,6 @@ namespace TestEase.Models
         public int Port { get; set; }
 
         private bool _isRunning = false;
-
-        public ModbusServer Server { get; set; }
-
-        public ConfigurationModel WorkingConfiguration { get; set; } = new ConfigurationModel();
-
         public bool IsRunning
         {
             get => _isRunning;
@@ -33,6 +28,25 @@ namespace TestEase.Models
                 }
             }
         }
+
+        public ModbusServer Server { get; set; }
+
+        public ConfigurationModel _workingConfiguration = new ConfigurationModel();
+        public ConfigurationModel WorkingConfiguration
+        {
+            get => _workingConfiguration;
+            set
+            {
+                if (_workingConfiguration != value)
+                {
+                    _workingConfiguration = value;
+                    OnPropertyChanged(nameof(WorkingConfiguration));
+                }
+            }
+        }
+
+        // public ConfigurationModel WorkingConfiguration { get; set; } = new ConfigurationModel();
+
         public ModbusServerModel(int port)
         {
             this.Port = port;
@@ -228,7 +242,7 @@ namespace TestEase.Models
             };
         }
 
-        private void UpdateRegisterCollections()
+        public void UpdateRegisterCollections()
         {
             // Assuming you want to clear the existing collections and repopulate them
             //DiscreteInputs.Clear();
@@ -255,7 +269,7 @@ namespace TestEase.Models
                     Name = "",
                     RegisterType = RegisterType.Coil
                 });
-                DiscreteInputs[i - 1] = (new Register<short>
+                InputRegisters[i - 1] = (new Register<short>
                 {
                     Address = i,
                     Value = 0,
@@ -288,6 +302,7 @@ namespace TestEase.Models
                                 Address = i,
                                 Value = ReadDiscreteInput(i),
                                 Name = reg.Name,
+                                IsModified = true,
                                 RegisterType = RegisterType.DiscreteInput
                             });
                             break;
@@ -297,15 +312,17 @@ namespace TestEase.Models
                                 Address = i,
                                 Value = ReadCoil(i),
                                 Name = reg.Name,
+                                IsModified = true,
                                 RegisterType = RegisterType.Coil
                             });
                             break;
                         case RegisterType.InputRegister:
-                            DiscreteInputs[i - 1] = (new Register<short>
+                            InputRegisters[i - 1] = (new Register<short>
                             {
                                 Address = i,
                                 Value = ReadInputRegister(i),
                                 Name = reg.Name,
+                                IsModified = true,
                                 RegisterType = RegisterType.InputRegister
                             });
                             break;
@@ -315,6 +332,7 @@ namespace TestEase.Models
                                 Address = i,
                                 Value = ReadHoldingRegister(i),
                                 Name = reg.Name,
+                                IsModified = true,
                                 RegisterType = RegisterType.HoldingRegister
                             });
                             break;
@@ -329,7 +347,44 @@ namespace TestEase.Models
             }
 
             // If you need to set CurrentItems to a default collection after update
-            CurrentItems = HoldingRegisters;
+            // CurrentItems = HoldingRegisters;
+            // SwitchTab("HoldingRegisters");
+            SwitchTab(CurrentTabName);
+
+        }
+
+        public void clearServerRegisters()
+        {
+            for (int j = 0; j < WorkingConfiguration.RegisterModels.Count; j++)
+            {
+                var reg = WorkingConfiguration.RegisterModels[j];
+                var i = reg.Address;
+                var type = reg.Type;
+                switch (type)
+                {
+                    case RegisterType.DiscreteInput:
+                        Server.discreteInputs[i] = false;
+                        break;
+                    case RegisterType.Coil:
+                        Server.coils[i] = false;
+                        break;
+                    case RegisterType.InputRegister:
+                        Server.inputRegisters[i] = 0;
+                        if (reg is Fixed<float> || reg is Random<float> || reg is Curve<float>)
+                        {
+                            Server.inputRegisters[i + 1] = 0;
+                        }
+                        break;
+                    case RegisterType.HoldingRegister:
+                        Server.holdingRegisters[i] = 0;
+                        if (reg is Fixed<float> || reg is Random<float> || reg is Curve<float>)
+                        {
+                            Server.holdingRegisters[i + 1] = 0;
+                        }
+                        break;
+                }
+
+            }
         }
 
         public void SwitchTab(string tabName)
@@ -448,9 +503,6 @@ namespace TestEase.Models
             public required T Value { get; set; }
             public required string Name { get; set; }
             public required RegisterType RegisterType { get; set; }
-
-            public bool isModified = false;
-
 
             object IRegister.Value
             {
