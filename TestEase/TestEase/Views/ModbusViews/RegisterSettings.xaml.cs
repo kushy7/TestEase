@@ -31,6 +31,12 @@ public partial class RegisterSettings : ContentView
                     RandomRadioButton.IsVisible = false;
                     CurveRadioButton.IsVisible = false;
                     PeriodEntry.IsVisible = false;
+                    StartingValueInput.IsVisible = false;
+                    EndingValueInput.IsVisible = false;
+                    PeriodEntry.IsVisible = false;
+                    RandomRadioButton.IsChecked = false;
+                    CurveRadioButton.IsChecked = false;
+                    CurveConfiguration.IsVisible = false;
                     break;
                 case "Range":
                     //show the register setting for range
@@ -40,10 +46,11 @@ public partial class RegisterSettings : ContentView
                     UpperValueInput.IsVisible = false;
                     RandomRadioButton.IsVisible = true;
                     CurveRadioButton.IsVisible = true;
-                    PeriodEntry.IsVisible = false;
                     // Hide the fixed value components
                     FloatConfiguration.IsVisible = false;
                     ValueInput.IsVisible = false;
+                    RandomRadioButton.IsChecked = false;
+                    CurveRadioButton.IsChecked = false;
                     break;
                 case "Random":
                     CurveConfiguration.IsVisible = false;

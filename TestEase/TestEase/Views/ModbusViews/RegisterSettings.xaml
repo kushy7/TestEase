@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:TestEase.Helpers;assembly=TestEase"
              x:Class="TestEase.Views.ModbusViews.RegisterSettings">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Grid Margin="20"
           RowDefinitions="Auto,Auto,*,Auto"
           ColumnDefinitions="*">
@@ -118,11 +124,13 @@
                         IsVisible="false"
                         Content="Random"
                         IsChecked="{Binding SelectedServer.IsRandomSelected, Mode=TwoWay}"
+                        IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
                         CheckedChanged="OnRadioButtonCheckedChanged"/>
                         <RadioButton x:Name="CurveRadioButton"
                         IsVisible="false"
                         Content="Curve"
                         IsChecked="{Binding SelectedServer.IsCurveSelected, Mode=TwoWay}"
+                        IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
                         CheckedChanged="OnRadioButtonCheckedChanged"/>
                     </HorizontalStackLayout>
 
