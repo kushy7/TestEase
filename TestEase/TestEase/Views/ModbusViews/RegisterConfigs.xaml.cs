@@ -2,6 +2,7 @@ namespace TestEase.Views.ModbusViews;
 using TestEase.ViewModels;
 using TestEase.Services;
 using TestEase.Models;
+using System.Xml.Linq;
 
 public partial class RegisterConfigs : ContentView
 {
@@ -23,12 +24,25 @@ public partial class RegisterConfigs : ContentView
         var viewModel = this.BindingContext as ModbusPageViewModel;
         if (viewModel != null)
         {
-            string fileName = "defaultConfig.json"; // Define how you determine the file name
+            string name = viewModel.SelectedServer.WorkingConfiguration.Name; // Define how you determine the file name
             try
             {
-                await viewModel.SaveConfigurationAsync(fileName);
+                var duplicate = viewModel.AppViewModel.Configurations.FirstOrDefault(s => s.Name.ToLower() == name.ToLower());
+                if (duplicate != null)
+                {
+                    viewModel.AppViewModel.Configurations.Remove(duplicate);
+                }
+
+                ConfigurationService s = new ConfigurationService();
+
+                viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
+                await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, name + ".json"); // save json to directory
+                ConfigurationModel newConfig = viewModel.SelectedServer.WorkingConfiguration.DeepCopy();
+
+                viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
+
                 // Assuming saving was successful, notify the user
-                await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved as " + fileName, "OK");
+                await Application.Current.MainPage.DisplayAlert("Success", "Configuration " + name + " saved", "OK");
             }
             catch (Exception ex)
             {
@@ -75,7 +89,7 @@ public partial class RegisterConfigs : ContentView
                     ConfigurationModel newConfig = viewModel.SelectedServer.WorkingConfiguration.DeepCopy();
 
                     viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
-                    await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved successfully.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved as " + name, "OK");
                 }
                 catch (Exception ex)
                 {
