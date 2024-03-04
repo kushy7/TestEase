@@ -41,5 +41,15 @@ namespace TestEase.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public ConfigurationModel DeepCopy()
+        {
+            ConfigurationModel copy = new ConfigurationModel(Name);
+            foreach( var model in RegisterModels)
+            {
+                copy.RegisterModels.Add(model);
+            }
+            return copy;
+        }
     }
 }

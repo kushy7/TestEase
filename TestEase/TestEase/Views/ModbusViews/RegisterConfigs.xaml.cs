@@ -67,10 +67,14 @@ public partial class RegisterConfigs : ContentView
                             return;
                         }
                     }
-                    viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
+                    // viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
                     ConfigurationService s = new ConfigurationService();
                     await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, fileName); // save json to directory
-                    viewModel.AppViewModel.Configurations.Add(viewModel.SelectedServer.WorkingConfiguration); // add to global list
+
+                    viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
+                    ConfigurationModel newConfig = viewModel.SelectedServer.WorkingConfiguration.DeepCopy();
+
+                    viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
                     await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved successfully.", "OK");
                 }
                 catch (Exception ex)

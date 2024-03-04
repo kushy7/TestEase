@@ -39,6 +39,7 @@ namespace TestEase.ViewModels
             }
         }
 
+        // public ObservableCollection<ConfigurationModel> Configurations { get; set; } = new ObservableCollection<ConfigurationModel>();
         public ObservableCollection<ConfigurationModel> Configurations
         {
             get => _configurations;

@@ -29,7 +29,10 @@ public partial class SavedConfigurations : ContentView
         if (item != null)
         {
             vm.SelectedServer.clearServerRegisters();
-            vm.SelectedServer.WorkingConfiguration = item;
+
+            ConfigurationModel copyOfItem = item.DeepCopy();
+            vm.SelectedServer.WorkingConfiguration = copyOfItem;
+
             vm.SelectedServer.UpdateRegisterCollections();
             vm.SelectedServer.SelectedRegister = null;
         }
