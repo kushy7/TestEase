@@ -69,9 +69,9 @@ public partial class RegisterConfigs : ContentView
                     }
                     // viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
                     ConfigurationService s = new ConfigurationService();
-                    await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, fileName); // save json to directory
 
                     viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
+                    await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, fileName); // save json to directory
                     ConfigurationModel newConfig = viewModel.SelectedServer.WorkingConfiguration.DeepCopy();
 
                     viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
