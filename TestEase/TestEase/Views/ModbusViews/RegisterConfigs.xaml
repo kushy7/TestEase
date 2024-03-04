@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.ModbusViews.RegisterConfigs"
              xmlns:local="clr-namespace:TestEase.Views.ModbusViews">
+
     <Grid 
         RowSpacing="10" 
         ColumnSpacing="10"
@@ -43,11 +44,14 @@
             <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="*"
                 Padding="5" ColumnSpacing="5">
                 <Button Text="New" Clicked="New_Clicked" Grid.Column="0" CornerRadius="0" VerticalOptions="Center"/>
-                <Button Text="Save" Clicked="Save_Clicked" Grid.Column="1" CornerRadius="0" VerticalOptions="Center"/>
+                <Button Text="Save" Clicked="Save_Clicked" Grid.Column="1" CornerRadius="0" VerticalOptions="Center" IsEnabled="{Binding SelectedServer.IsNotSaved}"/>
                 <Button Text="Save As" Clicked="SaveAs_Clicked" Grid.Column="2" CornerRadius="0" VerticalOptions="Center"/>
-                <Label Text="{Binding SelectedServer.WorkingConfiguration.Name}"
-                       VerticalOptions="Center" HorizontalOptions="Center"
-                       Grid.Column="3"/>
+                <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="3">
+                    <Label Text="{Binding SelectedServer.WorkingConfiguration.Name}"
+                           VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label Text="*" IsVisible="{Binding SelectedServer.IsNotSaved}" />
+                </HorizontalStackLayout>
+                
             </Grid>
         </Border>
         

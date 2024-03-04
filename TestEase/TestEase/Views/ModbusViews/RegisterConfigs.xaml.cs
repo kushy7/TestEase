@@ -11,12 +11,21 @@ public partial class RegisterConfigs : ContentView
         InitializeComponent();
     }
 
-    private void New_Clicked(object sender, EventArgs e)
+    private async void New_Clicked(object sender, EventArgs e)
     {
         // Assuming your ViewModel is bound as the DataContext or BindingContext
         var viewModel = this.BindingContext as ModbusPageViewModel;
+
+        if (viewModel.SelectedServer.IsNotSaved)
+        {
+            bool isUserSure = await Application.Current.MainPage.DisplayAlert("Confirmation", "Your working configuration has not yet been saved, continue?", "Yes", "No");
+            if (!isUserSure)
+                return;
+        }
+
         viewModel?.CreateNewConfiguration();
-        viewModel?.SelectedServer.ResetRegistersToDefault();
+        viewModel.SelectedServer.SelectedRegister = null;
+        viewModel.SelectedServer.ResetRegistersToDefault();
     }
 
     private async void Save_Clicked(object sender, EventArgs e)
@@ -27,13 +36,13 @@ public partial class RegisterConfigs : ContentView
             string name = viewModel.SelectedServer.WorkingConfiguration.Name; // Define how you determine the file name
             try
             {
+
+                ConfigurationService s = new ConfigurationService();
                 var duplicate = viewModel.AppViewModel.Configurations.FirstOrDefault(s => s.Name.ToLower() == name.ToLower());
                 if (duplicate != null)
                 {
                     viewModel.AppViewModel.Configurations.Remove(duplicate);
                 }
-
-                ConfigurationService s = new ConfigurationService();
 
                 viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
                 await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, name + ".json"); // save json to directory
@@ -42,6 +51,7 @@ public partial class RegisterConfigs : ContentView
                 viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
 
                 // Assuming saving was successful, notify the user
+                viewModel.SelectedServer.IsNotSaved = false;
                 await Application.Current.MainPage.DisplayAlert("Success", "Configuration " + name + " saved", "OK");
             }
             catch (Exception ex)
@@ -89,6 +99,8 @@ public partial class RegisterConfigs : ContentView
                     ConfigurationModel newConfig = viewModel.SelectedServer.WorkingConfiguration.DeepCopy();
 
                     viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
+
+                    viewModel.SelectedServer.IsNotSaved = false;
                     await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved as " + name, "OK");
                 }
                 catch (Exception ex)
