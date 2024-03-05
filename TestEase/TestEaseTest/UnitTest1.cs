@@ -26,7 +26,7 @@ namespace TestEaseTest
             Assert.Equal(2, c.Address);
             Assert.Equal(RegisterType.Coil, c.Type);
             Assert.Equal("testingRegister", c.Name);
-            Assert.False(c.value);
+            Assert.False(c.Value);
         }
 
         //[Fact]
@@ -52,11 +52,11 @@ namespace TestEaseTest
         [Fact]
         public void FixedTest()
         {
-            Fixed<short> f = new Fixed<short>(2, RegisterType.Coil, "testingRegister", 44);
+            Fixed<short> f = new Fixed<short>(2, RegisterType.Coil, "testingRegister", 44, false);
             Assert.Equal(2, f.Address);
             Assert.Equal(RegisterType.Coil, f.Type);
             Assert.Equal("testingRegister", f.Name);
-            Assert.Equal(44, f.value);
+            Assert.Equal(44, f.Value);
  
         }
 
