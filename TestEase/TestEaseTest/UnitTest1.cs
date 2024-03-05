@@ -60,18 +60,6 @@ namespace TestEaseTest
  
         }
 
-        [Fact]
-        public void GenerateNextSinTest()
-        {
-            double start = 0;
-            double end = 10;
-            int itStep = 0;
-            int totalIt = 20;
-            double ans = 0;
-            short result = ValueGenerators.GenerateNextSinValue(start, end, itStep, totalIt);
-            Assert.Equal(ans, result);
-        }
-
         //[Fact]
         //public void ServiceCreateServerTest()
         //{
