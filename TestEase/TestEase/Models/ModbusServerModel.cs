@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static EasyModbus.ModbusServer;
 
 namespace TestEase.Models
 {
@@ -41,6 +42,21 @@ namespace TestEase.Models
                 {
                     _workingConfiguration = value;
                     OnPropertyChanged(nameof(WorkingConfiguration));
+                }
+            }
+        }
+
+        public bool _isNotSaved = true;
+
+        public bool IsNotSaved
+        {
+            get => _isNotSaved;
+            set
+            {
+                if (_isNotSaved != value)
+                {
+                    _isNotSaved = value;
+                    OnPropertyChanged(nameof(IsNotSaved));
                 }
             }
         }
@@ -457,12 +473,14 @@ namespace TestEase.Models
             foreach (var discreteInput in DiscreteInputs)
             {
                 discreteInput.Value = false;
+                discreteInput.Name = "";
                 discreteInput.IsModified = false; // Assuming you want to reset modification status as well
             }
 
             foreach (var coil in Coils)
             {
                 coil.Value = false;
+                coil.Name = "";
                 coil.IsModified = false;
             }
 
@@ -470,12 +488,14 @@ namespace TestEase.Models
             foreach (var inputRegister in InputRegisters)
             {
                 inputRegister.Value = (short) 0;
+                inputRegister.Name = "";
                 inputRegister.IsModified = false;
             }
 
             foreach (var holdingRegister in HoldingRegisters)
             {
                 holdingRegister.Value = (short) 0;
+                holdingRegister.Name = "";
                 holdingRegister.IsModified = false;
             }
 

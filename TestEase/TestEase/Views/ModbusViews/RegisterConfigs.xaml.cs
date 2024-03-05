@@ -2,6 +2,7 @@ namespace TestEase.Views.ModbusViews;
 using TestEase.ViewModels;
 using TestEase.Services;
 using TestEase.Models;
+using System.Xml.Linq;
 
 public partial class RegisterConfigs : ContentView
 {
@@ -10,12 +11,21 @@ public partial class RegisterConfigs : ContentView
         InitializeComponent();
     }
 
-    private void New_Clicked(object sender, EventArgs e)
+    private async void New_Clicked(object sender, EventArgs e)
     {
         // Assuming your ViewModel is bound as the DataContext or BindingContext
         var viewModel = this.BindingContext as ModbusPageViewModel;
+
+        if (viewModel.SelectedServer.IsNotSaved)
+        {
+            bool isUserSure = await Application.Current.MainPage.DisplayAlert("Confirmation", "Your working configuration has not yet been saved, continue?", "Yes", "No");
+            if (!isUserSure)
+                return;
+        }
+
         viewModel?.CreateNewConfiguration();
-        viewModel?.SelectedServer.ResetRegistersToDefault();
+        viewModel.SelectedServer.SelectedRegister = null;
+        viewModel.SelectedServer.ResetRegistersToDefault();
     }
 
     private async void Save_Clicked(object sender, EventArgs e)
@@ -23,12 +33,26 @@ public partial class RegisterConfigs : ContentView
         var viewModel = this.BindingContext as ModbusPageViewModel;
         if (viewModel != null)
         {
-            string fileName = "defaultConfig.json"; // Define how you determine the file name
+            string name = viewModel.SelectedServer.WorkingConfiguration.Name; // Define how you determine the file name
             try
             {
-                await viewModel.SaveConfigurationAsync(fileName);
+
+                ConfigurationService s = new ConfigurationService();
+                var duplicate = viewModel.AppViewModel.Configurations.FirstOrDefault(s => s.Name.ToLower() == name.ToLower());
+                if (duplicate != null)
+                {
+                    viewModel.AppViewModel.Configurations.Remove(duplicate);
+                }
+
+                viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
+                await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, name + ".json"); // save json to directory
+                ConfigurationModel newConfig = viewModel.SelectedServer.WorkingConfiguration.DeepCopy();
+
+                viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
+
                 // Assuming saving was successful, notify the user
-                await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved as " + fileName, "OK");
+                viewModel.SelectedServer.IsNotSaved = false;
+                await Application.Current.MainPage.DisplayAlert("Success", "Configuration " + name + " saved", "OK");
             }
             catch (Exception ex)
             {
@@ -67,11 +91,17 @@ public partial class RegisterConfigs : ContentView
                             return;
                         }
                     }
-                    viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
+                    // viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
                     ConfigurationService s = new ConfigurationService();
+
+                    viewModel.SelectedServer.WorkingConfiguration.Name = name; // update name of config object
                     await s.SaveConfigurationAsync(viewModel.SelectedServer.WorkingConfiguration, fileName); // save json to directory
-                    viewModel.AppViewModel.Configurations.Add(viewModel.SelectedServer.WorkingConfiguration); // add to global list
-                    await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved successfully.", "OK");
+                    ConfigurationModel newConfig = viewModel.SelectedServer.WorkingConfiguration.DeepCopy();
+
+                    viewModel.AppViewModel.Configurations.Add(newConfig); // add to global list
+
+                    viewModel.SelectedServer.IsNotSaved = false;
+                    await Application.Current.MainPage.DisplayAlert("Success", "Configuration saved as " + name, "OK");
                 }
                 catch (Exception ex)
                 {

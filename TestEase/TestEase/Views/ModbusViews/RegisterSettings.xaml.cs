@@ -117,6 +117,8 @@ public partial class RegisterSettings : ContentView
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {BooleanNameEntry.Text}\nValue: {vm.SelectedServer.SelectedBooleanValue}", "OK");
                     break;
             }
+            // Display to user that changes have been made and the config will need saved
+            vm.SelectedServer.IsNotSaved = true;
             return; // this is dumb
         }
 
@@ -330,7 +332,9 @@ public partial class RegisterSettings : ContentView
         else
         {
             Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
+            return;
         }
-
+        // Display to user that changes have been made and the config will need saved
+        vm.SelectedServer.IsNotSaved = true;
     }
 }

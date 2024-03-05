@@ -47,8 +47,6 @@ namespace TestEase.ViewModels
         {
             //Reset the current server's configuration
             SelectedServer.WorkingConfiguration = new ConfigurationModel("new config");
-
-      
         }
 
         public async Task SaveConfigurationAsync(string fileName)

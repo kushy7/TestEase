@@ -19,7 +19,7 @@ namespace TestEase.Models
                 if (_name != value)
                 {
                     _name = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Name));
                 }
             }
         }
@@ -40,6 +40,16 @@ namespace TestEase.Models
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public ConfigurationModel DeepCopy()
+        {
+            ConfigurationModel copy = new ConfigurationModel(Name);
+            foreach( var model in RegisterModels)
+            {
+                copy.RegisterModels.Add(model);
+            }
+            return copy;
         }
     }
 }
