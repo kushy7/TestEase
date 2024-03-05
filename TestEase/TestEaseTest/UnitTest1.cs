@@ -57,7 +57,6 @@ namespace TestEaseTest
             Assert.Equal(RegisterType.Coil, f.Type);
             Assert.Equal("testingRegister", f.Name);
             Assert.Equal(44, f.Value);
- 
         }
 
         //[Fact]
