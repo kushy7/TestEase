@@ -15,6 +15,7 @@ namespace TestEaseTest
         {
             string expectedName = "Test Config";
             ConfigurationModel configuration = new ConfigurationModel(expectedName);
+            configuration.DeepCopy();
             Assert.Equal(expectedName, configuration.Name);
         }
 
