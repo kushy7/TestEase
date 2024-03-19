@@ -260,12 +260,6 @@ namespace TestEase.Models
 
         public void UpdateRegisterCollections()
         {
-            // Assuming you want to clear the existing collections and repopulate them
-            //DiscreteInputs.Clear();
-            //Coils.Clear();
-            //InputRegisters.Clear();
-            //HoldingRegisters.Clear();
-            Trace.WriteLine("Updating Register collections"); // DELETE
 
             CurrentItems = null;
 

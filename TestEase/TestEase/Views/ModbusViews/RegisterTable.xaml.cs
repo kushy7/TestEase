@@ -7,7 +7,7 @@ using TestEase.Models;
 
 namespace TestEase.Views.ModbusViews;
 
-public partial class RegisterTable : ContentView
+public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
 {
 	public RegisterTable()
 	{
