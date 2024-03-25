@@ -104,9 +104,18 @@
 	  <MauiXaml Update="Views\ModbusViews\SavedConfigurations.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ModbusViews\ClientMenu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ModbusViews\ServerMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\ModbusViews\ClientMenu.xaml.cs">
+	    <DependentUpon>ClientMenu.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

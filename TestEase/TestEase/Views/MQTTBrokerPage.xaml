@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestEase.Views.MQTTBrokerPage">
-             
-    <VerticalStackLayout>
-        <Label 
-            Text="Start the MQTTBroker?"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             x:Class="TestEase.Views.MQTTBrokerPage"
+             xmlns:local="clr-namespace:TestEase.Views.ModbusViews">
 
-        <Button Text="Start MQTT Server"
-                Clicked="StartCommand"
-                Grid.Row="3"
+    <Grid RowSpacing="10" ColumnSpacing="10" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Status Indicator -->
+        <Frame x:Name="statusIndicator"
+               Grid.Row="0" Grid.Column="0"
+               Padding="10"
+               CornerRadius="10"
+               HasShadow="True"
+               BackgroundColor="Transparent">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Ellipse WidthRequest="50" HeightRequest="50" BackgroundColor="Red" VerticalOptions="Start" />
+                <Label Text="Offline" Grid.Row="1" VerticalOptions="Center" Margin="10,0,0,0" />
+            </Grid>
+        </Frame>
+
+        <!-- MQTT Control Button -->
+        <Button Text="Toggle MQTT Server"
+                Clicked="ToggleCommand"
+                Grid.Row="1"
                 Margin="10"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
-    </VerticalStackLayout>
+
+    </Grid>
 </ContentPage>
