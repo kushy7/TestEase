@@ -14,74 +14,48 @@ public partial class RegisterSettings : ContentView
 
     private void OnRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        // Ensure the sender is a RadioButton and that one of the buttons is pressed
         if (sender is RadioButton rb && rb.IsChecked)
         {
-            // Determine which RadioButton was checked
+            // Reset visibility for all specific settings
+            FloatConfiguration.IsVisible = ValueInput.IsVisible = RangeFloatConfiguration.IsVisible = false;
+            LowerValueInput.IsVisible = UpperValueInput.IsVisible = false;
+            StartingValueInput.IsVisible = EndingValueInput.IsVisible = PeriodEntry.IsVisible = false;
+            LinearConfiguration.IsVisible = false;
+
+            // Hide range-specific radio buttons initially
+            LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = false;
+
+            // Handle visibility based on selected mode
             switch (rb.Content.ToString())
             {
                 case "Fixed":
-                    // Show the Float and Value box components
-                    FloatConfiguration.IsVisible = true;
-                    ValueInput.IsVisible = true;
-                    // hide the range value components
-                    RangeFloatConfiguration.IsVisible = false;
-                    LowerValueInput.IsVisible = false;
-                    UpperValueInput.IsVisible = false;
-                    RandomRadioButton.IsVisible = false;
-                    CurveRadioButton.IsVisible = false;
-                    PeriodEntry.IsVisible = false;
-                    StartingValueInput.IsVisible = false;
-                    EndingValueInput.IsVisible = false;
-                    PeriodEntry.IsVisible = false;
-                    RandomRadioButton.IsChecked = false;
-                    CurveRadioButton.IsChecked = false;
-                    CurveConfiguration.IsVisible = false;
+                    FloatConfiguration.IsVisible = ValueInput.IsVisible = true;
+
+                    //TODO: bug where the interval/period text still shown when switching from range back to fixed
+
+                    //PeriodEntry.IsVisible = false;
                     break;
                 case "Range":
-                    //show the register setting for range
-                    CurveConfiguration.IsVisible = false;
                     RangeFloatConfiguration.IsVisible = true;
-                    LowerValueInput.IsVisible = false;
-                    UpperValueInput.IsVisible = false;
-                    RandomRadioButton.IsVisible = true;
-                    CurveRadioButton.IsVisible = true;
-                    // Hide the fixed value components
-                    FloatConfiguration.IsVisible = false;
-                    ValueInput.IsVisible = false;
-                    RandomRadioButton.IsChecked = false;
-                    CurveRadioButton.IsChecked = false;
+                    // Only show these radio buttons under "Range" selection
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
                 case "Random":
-                    CurveConfiguration.IsVisible = false;
-                    // Hide other configurations
-                    FloatConfiguration.IsVisible = false;
-                    ValueInput.IsVisible = false;
-                    LowerValueInput.IsVisible = true;
-                    UpperValueInput.IsVisible = true;
-                    StartingValueInput.IsVisible = false;
-                    EndingValueInput.IsVisible = false;
-                    PeriodEntry.IsVisible = false;
-                    RandomRadioButton.IsVisible = true;
-                    CurveRadioButton.IsVisible = true;
+                    LowerValueInput.IsVisible = UpperValueInput.IsVisible = true;
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
                 case "Curve":
-                    // Show the Curve configuration
-                    CurveConfiguration.IsVisible = true;
-                    // Hide other configurations
-                    FloatConfiguration.IsVisible = false;
-                    ValueInput.IsVisible = false;
-                    LowerValueInput.IsVisible = false;
-                    UpperValueInput.IsVisible = false;
-                    StartingValueInput.IsVisible = true;
-                    EndingValueInput.IsVisible = true;
-                    PeriodEntry.IsVisible = true;
-                    RandomRadioButton.IsVisible = true;
-                    CurveRadioButton.IsVisible = true;
+                    StartingValueInput.IsVisible = EndingValueInput.IsVisible = PeriodEntry.IsVisible = true;
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
+                    break;
+                case "Linear":
+                    LinearConfiguration.IsVisible = true;
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
             }
         }
     }
+
 
     private void OnSaveButtonClick(object sender, EventArgs args)
     {
