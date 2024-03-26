@@ -15,3 +15,4 @@ echo "Uploading the artifacts into github"
 set FILE=publish.zip
 
 curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @%FILE% %UPLOAD_URL%?name=%FILE%
+
