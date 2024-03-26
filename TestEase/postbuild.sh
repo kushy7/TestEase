@@ -9,10 +9,9 @@ set ORG=engr-csc-sdc
 set TAG=v0
 set NAME="Release Name"
 
-for /f "delims=" %%i in ('curl -s -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{ \"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" %GITHUB_API%/repos/%ORG%/%REPO%/releases ^| jq -r .upload_url') do set UPLOAD_URL=%%i
+for /f "delims=" %%i in ('curl -s -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{ \"tag_name\": \"v0\", \"target_commitish\": \"jenkins-publish\", \"name\": \"^"Release Name^"\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" %GITHUB_API%/repos/%ORG%/%REPO%/releases ^| jq -r .upload_url') do set UPLOAD_URL=%%i
 
 echo "Uploading the artifacts into github" 
 set FILE=publish.zip
 
 curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @%FILE% %UPLOAD_URL%?name=%FILE%
-
