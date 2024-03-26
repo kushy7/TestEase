@@ -9,7 +9,7 @@ set USER=ejsamuel
 set TAG=v0
 set NAME="Release Name"
 
-curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{ \"tag_name\": \"%TAG%\", \"target_commitish\": \"master\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" %GITHUB_API%/repos/%USER%/%REPO%/releases
+curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{ \"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" %GITHUB_API%/repos/%USER%/%REPO%/releases
 
 echo "Uploading the artifacts into github" 
 set FILE=publish.zip
