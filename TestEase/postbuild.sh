@@ -5,11 +5,12 @@ echo "Exporting token and enterprise api to enable github-release tool"
 set GITHUB_TOKEN=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 
 set GITHUB_API=https://github.ncsu.edu/api/v3/
 
-echo "Deleting release from github before creating new one" 
-github-release delete --user "ejsamuel" --repo "2024SpringTeam31-Hitachi-2" --tag "v0" --security-token %GITHUB_TOKEN%
+#echo "Deleting release from github before creating new one" 
+#github-release delete --user "ejsamuel" --repo "2024SpringTeam31-Hitachi-2" --tag "v0" --security-token %GITHUB_TOKEN%
 
 echo "Creating a new release in github" 
-github-release release --user "ejsamuel" --repo "2024SpringTeam31-Hitachi-2" --tag "v0" --name "Release Name"
+github-release release --user "ejsamuel" --repo "2024SpringTeam31-Hitachi-2" --tag "v0" --name "Release Name" --security-token %GITHUB_TOKEN%
 
 echo "Uploading the artifacts into github" 
-github-release upload --user "ejsamuel" --repo "2024SpringTeam31-Hitachi-" --tag "v0" --name "publish.zip" --file publish.zip
+github-release upload --user "ejsamuel" --repo "2024SpringTeam31-Hitachi-2" --tag "v0" --name "publish.zip" --file publish.zip --security-token %GITHUB_TOKEN%
+
