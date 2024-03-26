@@ -311,8 +311,8 @@ public partial class RegisterSettings : ContentView
 
             if (short.TryParse(LinearStartValueEntry.Text, out short lsv) && short.TryParse(LinearEndValueEntry.Text, out short lev) && short.TryParse(LinearIncrementEntry.Text, out short inc))
             {
-                // Assuming the logic for determining the current value and whether it's increasing is implemented
-                bool increasing = true; // Example flag, you need to manage this based on actual logic
+                //initially increasing
+                bool increasing = true;
                 short nextValue = (short) ValueGenerators.GenerateLinearValue(lsv, lsv, lev, inc, ref increasing);
 
                 switch (register.RegisterType)

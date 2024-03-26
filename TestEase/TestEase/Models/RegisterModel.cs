@@ -18,6 +18,8 @@ namespace TestEase.Models
     [JsonDerivedType(typeof(Random<float>), typeDiscriminator: "randomFloat")]
     [JsonDerivedType(typeof(Curve<short>), typeDiscriminator: "curveShort")]
     [JsonDerivedType(typeof(Curve<float>), typeDiscriminator: "curveFloat")]
+    [JsonDerivedType(typeof(Linear<short>), typeDiscriminator: "LinearShort")]
+    [JsonDerivedType(typeof(Linear<float>), typeDiscriminator: "LinearFloat")]
     public abstract class RegisterModel(int address, RegisterType type, string name)
     {
         public int Address { get; set; } = address;
