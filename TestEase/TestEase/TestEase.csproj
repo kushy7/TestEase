@@ -13,6 +13,7 @@
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<Platform>x64</Platform>
 
 		<OutputType Condition="'$(TargetFramework)' != 'net8.0'">Exe</OutputType>
 		<RootNamespace>TestEase</RootNamespace>
@@ -38,7 +39,7 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
 	</PropertyGroup>
-
+	
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.png" />
