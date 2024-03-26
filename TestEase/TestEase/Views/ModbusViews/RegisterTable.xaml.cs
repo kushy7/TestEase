@@ -207,24 +207,6 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
         viewModel?.SelectedServer.FilterModifiedRegisters(e.Value);
     }
 
-    private void PauseClicked(object sender, EventArgs e)
-    {
-        var vm = this.BindingContext as ModbusPageViewModel;
-        var menuItem = (MenuItem)sender;
-        var item = (ModbusServerModel.IRegister)menuItem.BindingContext;
-
-        if (item != null)
-        {
-            var modifiedRegister = vm.SelectedServer.WorkingConfiguration.RegisterModels.Find(x => x.Address == item.Address);
-
-            if (modifiedRegister != null)
-            {
-                modifiedRegister.IsPlaying = false;
-            }
-
-        }
-    }
-
     private void PlayClicked(object sender, EventArgs e)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
@@ -237,7 +219,8 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
 
             if (modifiedRegister != null)
             {
-                modifiedRegister.IsPlaying = true;
+                item.IsPlaying = !item.IsPlaying;
+                modifiedRegister.IsPlaying = !modifiedRegister.IsPlaying;
             }
 
         }
