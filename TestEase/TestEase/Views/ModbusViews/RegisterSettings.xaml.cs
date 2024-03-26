@@ -344,11 +344,11 @@ public partial class RegisterSettings : ContentView
         {
             //LINEAR FLOAT
 
-            if (short.TryParse(LinearStartValueEntry.Text, out short lsv) && short.TryParse(LinearEndValueEntry.Text, out short lev) && short.TryParse(LinearIncrementEntry.Text, out short inc))
+            if (float.TryParse(LinearStartValueEntry.Text, out float lsv) && float.TryParse(LinearEndValueEntry.Text, out float lev) && float.TryParse(LinearIncrementEntry.Text, out float inc))
             {
                 
                 bool increasing = true; 
-                float nextValue = ValueGenerators.GenerateLinearValue(lsv, lsv, lev, inc, ref increasing);
+                float nextValue = ValueGenerators.GenerateLinearValueFloat(lsv, lsv, lev, inc, ref increasing);
                 short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
                 short lowBits = lowHighBits[0];
                 short highBits = lowHighBits[1];
