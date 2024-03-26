@@ -1,5 +1,5 @@
 echo "Compressing artifacts into one file" 
-powershell Compress-Archive -Path ./publish/* -DestinationPath publish.zip
+powershell Compress-Archive -Path "C:\ProgramData\Jenkins\.jenkins\workspace\TestEaseBuild\TestEase\TestEase\bin\x64\Release\net8.0-windows10.0.19041.0\win10-x64\publish\*" -DestinationPath publish.zip
 
 echo "Exporting token and enterprise api to enable github-release tool" 
 set GITHUB_TOKEN=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 
