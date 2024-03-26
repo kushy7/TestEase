@@ -37,6 +37,10 @@ namespace TestEase.Services
                 {
                     foreach (var register in server.WorkingConfiguration.RegisterModels)
                     {
+                        if (register.IsPlaying == false)
+                        {
+                            continue;
+                        }
                         // HOLDING REGISTERS
                         if (register.Type == RegisterType.HoldingRegister)
                         {

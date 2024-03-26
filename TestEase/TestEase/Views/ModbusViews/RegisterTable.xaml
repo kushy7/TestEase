@@ -123,6 +123,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Pause"
+                                      Clicked="PauseClicked" />
+                            <MenuItem Text="Play"
+                                      Clicked="PlayClicked" />
+                        </ViewCell.ContextActions>
                         <Grid ColumnDefinitions="*,*,*"
                               BackgroundColor="Transparent">
                             <Grid.Style>
