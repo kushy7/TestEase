@@ -5,15 +5,14 @@ echo "Creating a new release in github"
 set GITHUB_TOKEN=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 
 set GITHUB_API=https://github.ncsu.edu/api/v3/
 set REPO=2024SpringTeam31-Hitachi-2
-set USER=ejsamuel
+set ORG=engr-csc-sdc
 set TAG=v0
 set NAME="Release Name"
 
-curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{ \"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" %GITHUB_API%/repos/%USER%/%REPO%/releases
+curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d '{ "tag_name": "%TAG%", "target_commitish": "jenkins-publish", "name": "%NAME%", "body": "Description of the release", "draft": false, "prerelease": false }' %GITHUB_API%/repos/%ORG%/%REPO%/releases
 
 echo "Uploading the artifacts into github" 
 set FILE=publish.zip
 
-curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: $(file -b --mime-type %FILE%)" --data-binary @%FILE% %GITHUB_API%/repos/%USER%/%REPO%/releases/%TAG%/assets?name=$(basename %FILE%)
-
+curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @%FILE% %GITHUB_API%/repos/%ORG%/%REPO%/releases/%TAG%/assets?name=%FILE%
 
