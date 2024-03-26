@@ -99,6 +99,31 @@ namespace TestEase.Services
                                 server.HoldingRegisters[register.Address].Value = highBits;
                                 server.HoldingRegisters[register.Address].IsFloatHelper = true;
                             }
+                            else if (register is Linear<short> la)
+                            {
+
+                                short current = la.GetCurrentValue();
+                                bool increasing = true;
+                                var val = ValueGenerators.GenerateLinearValue(current, la.StartValue, la.EndValue, la.Increment, ref increasing);
+                                server.WriteHoldingRegister(register.Address, val);
+                                server.HoldingRegisters[register.Address - 1].Value = val;
+                            }
+                            else if (register is Linear<float> laf)
+                            {
+
+                                float current = laf.GetCurrentValue();
+                                bool increasing = true;
+                                float nextValue = ValueGenerators.GenerateLinearValueFloat(current, laf.StartValue, laf.EndValue, laf.Increment, ref increasing);
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
+
+                                server.WriteHoldingRegister(register.Address, lowBits);
+                                server.WriteHoldingRegister(register.Address + 1, highBits);
+                                server.HoldingRegisters[register.Address - 1].Value = lowBits;
+                                server.HoldingRegisters[register.Address].Value = highBits;
+                                server.HoldingRegisters[register.Address].IsFloatHelper = true;
+                            }
                         } 
                         // INPUT REGISTERS
                         else if (register.Type == RegisterType.InputRegister)
@@ -161,6 +186,31 @@ namespace TestEase.Services
                                 server.InputRegisters[register.Address - 1].Value = lowBits;
                                 server.InputRegisters[register.Address].Value = highBits;
                                 server.InputRegisters[register.Address].IsFloatHelper = true;
+                            }
+                            else if (register is Linear<short> la)
+                            {
+
+                                short current = la.GetCurrentValue();
+                                bool increasing = true;
+                                var val = ValueGenerators.GenerateLinearValue(current, la.StartValue, la.EndValue, la.Increment, ref increasing);
+                                server.WriteHoldingRegister(register.Address, val);
+                                server.HoldingRegisters[register.Address - 1].Value = val;
+                            }
+                            else if (register is Linear<float> laf)
+                            {
+
+                                float current = laf.GetCurrentValue();
+                                bool increasing = true;
+                                float nextValue = ValueGenerators.GenerateLinearValueFloat(current, laf.StartValue, laf.EndValue, laf.Increment, ref increasing);
+                                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                                short lowBits = lowHighBits[0];
+                                short highBits = lowHighBits[1];
+
+                                server.WriteHoldingRegister(register.Address, lowBits);
+                                server.WriteHoldingRegister(register.Address + 1, highBits);
+                                server.HoldingRegisters[register.Address - 1].Value = lowBits;
+                                server.HoldingRegisters[register.Address].Value = highBits;
+                                server.HoldingRegisters[register.Address].IsFloatHelper = true;
                             }
                         }
                         // DISCRETE INPUTS

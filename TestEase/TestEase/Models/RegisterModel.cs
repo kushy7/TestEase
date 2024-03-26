@@ -50,6 +50,56 @@ namespace TestEase.Models
     {
     }
 
+    public class Linear<T> : Range<T> where T : IComparable, IConvertible
+    {
+        public T Increment { get; set; }
+        private T currentValue;
+        private bool increasing = true;
+
+        public Linear(int address, RegisterType type, string name, T startValue, T endValue, T increment, bool isFloat)
+            : base(address, type, name, startValue, endValue, isFloat)
+        {
+            Increment = increment;
+            currentValue = startValue;
+        }
+
+        public T GetCurrentValue()
+        {
+            UpdateValue();
+            return currentValue;
+        }
+
+        private void UpdateValue()
+        {
+            dynamic current = currentValue;
+            dynamic start = StartValue;
+            dynamic end = EndValue;
+            dynamic step = Increment;
+
+            if (increasing)
+            {
+                current += step;
+                if (current.CompareTo(end) >= 0)
+                {
+                    current = end;
+                    increasing = false;
+                }
+            }
+            else
+            {
+                current -= step;
+                if (current.CompareTo(start) <= 0)
+                {
+                    current = start;
+                    increasing = true;
+                }
+            }
+
+            currentValue = (T) current;
+        }
+    }
+
+
     public class Curve<T> : Range<T>
     {
         private int _iterationStep;

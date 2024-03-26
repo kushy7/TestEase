@@ -42,14 +42,17 @@ public partial class RegisterSettings : ContentView
                     break;
                 case "Random":
                     LowerValueInput.IsVisible = UpperValueInput.IsVisible = true;
+                    RangeFloatConfiguration.IsVisible = true;
                     LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
                 case "Curve":
                     StartingValueInput.IsVisible = EndingValueInput.IsVisible = PeriodEntry.IsVisible = true;
+                    RangeFloatConfiguration.IsVisible = true;
                     LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
                 case "Linear":
                     LinearConfiguration.IsVisible = true;
+                    RangeFloatConfiguration.IsVisible = true;
                     LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
             }
@@ -95,8 +98,7 @@ public partial class RegisterSettings : ContentView
             vm.SelectedServer.IsNotSaved = true;
             return; // this is dumb
         }
-
-        if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
+        else if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
         {
             // FIXED FLOAT
             short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(x);
@@ -303,6 +305,86 @@ public partial class RegisterSettings : ContentView
             }
 
         }
+        else if (LinearRadioButton.IsChecked && !RangeFloatConfigurationCheck.IsChecked)
+        {
+            //LINEAR SHORT
+
+            if (short.TryParse(LinearStartValueEntry.Text, out short lsv) && short.TryParse(LinearEndValueEntry.Text, out short lev) && short.TryParse(LinearIncrementEntry.Text, out short inc))
+            {
+                // Assuming the logic for determining the current value and whether it's increasing is implemented
+                bool increasing = true; // Example flag, you need to manage this based on actual logic
+                short nextValue = (short) ValueGenerators.GenerateLinearValue(lsv, lsv, lev, inc, ref increasing);
+
+                switch (register.RegisterType)
+                {
+                    case RegisterType.HoldingRegister:
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<short>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, false));
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = nextValue;
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteHoldingRegister(register.Address, nextValue);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
+                        break;
+                    case RegisterType.InputRegister:
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<short>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, false));
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Value = nextValue;
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteInputRegister(register.Address, nextValue);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
+                        break;
+
+                    default:
+                        Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Curve value.", "OK");
+                        break;
+                }
+            }
+        }
+        else if (LinearRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked)
+        {
+            //LINEAR FLOAT
+
+            if (short.TryParse(LinearStartValueEntry.Text, out short lsv) && short.TryParse(LinearEndValueEntry.Text, out short lev) && short.TryParse(LinearIncrementEntry.Text, out short inc))
+            {
+                
+                bool increasing = true; 
+                float nextValue = ValueGenerators.GenerateLinearValue(lsv, lsv, lev, inc, ref increasing);
+                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                short lowBits = lowHighBits[0];
+                short highBits = lowHighBits[1];
+
+                switch (register.RegisterType)
+                {
+                    case RegisterType.HoldingRegister:
+                        //low bits
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<float>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, true));
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = lowBits;
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
+                        //high bits
+                        vm.SelectedServer.HoldingRegisters[register.Address].Value = highBits;
+                        vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
+                        vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                        break;
+                    case RegisterType.InputRegister:
+                        //low bits
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<float>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, true));
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Value = lowBits;
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
+                        //high bits
+                        vm.SelectedServer.InputRegisters[register.Address].Value = highBits;
+                        vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
+                        vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                        break;
+                }
+            }
+        }
+
         else
         {
             Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");
