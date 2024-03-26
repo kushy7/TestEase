@@ -9,7 +9,7 @@ set ORG=engr-csc-sdc
 set TAG=v0
 set NAME="Release Name"
 
-curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d '{ "tag_name": "%TAG%", "target_commitish": "jenkins-publish", "name": "%NAME%", "body": "Description of the release", "draft": false, "prerelease": false }' %GITHUB_API%/repos/%ORG%/%REPO%/releases
+curl -X POST -H "Authorization: token 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 " -d "{ \"tag_name\": \"v0\", \"target_commitish\": \"jenkins-publish\", \"name\": \"Release Name\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" https://github.ncsu.edu/api/v3/repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/releases
 
 echo "Uploading the artifacts into github" 
 set FILE=publish.zip
