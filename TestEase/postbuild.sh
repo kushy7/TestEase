@@ -13,6 +13,10 @@ echo Create the release and capture the release ID
 for /F "tokens=*" %%a in ('curl -s -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases" ^| jq -r ".id"') do (set RELEASE_ID=%%a goto :break)
 :break
 
+echo Remove unwanted appended string
+set RELEASE_ID=!RELEASE_ID:goto :break=!
+
+
 echo Release created with ID: %RELEASE_ID%
 
 echo "Uploading the artifacts into GitHub"
