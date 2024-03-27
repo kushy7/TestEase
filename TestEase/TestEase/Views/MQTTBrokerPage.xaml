@@ -42,5 +42,25 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
 
+
+        <!-- Clients Section -->
+        
+        <Frame Grid.Row="2"
+       Margin="10"
+       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+       CornerRadius="5"
+       Padding="10">
+            <StackLayout>
+                <Frame BorderColor="Black"  Padding="5" Margin="0,0,0,10">
+                    <Label Text="Clients" FontSize="Title" HorizontalOptions="Center" />
+                </Frame>
+                <Label Text="Number of connects: " />
+                <Label Text="Number of disconnects: " />
+                <Label Text="Client 1" />
+                <Label Text="Client 2" />
+                <Label Text="Client 3" />
+            </StackLayout>
+        </Frame>
+
     </Grid>
 </ContentPage>

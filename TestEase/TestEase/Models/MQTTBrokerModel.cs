@@ -1,40 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Timers;
 using System.Threading.Tasks;
-using System.Configuration;
-
 using MQTTnet;
-using MQTTnet.Formatter;
-using MQTTnet.Protocol;
 using MQTTnet.Server;
 
-    public class MqttBrokerModel
+public class MqttBrokerModel
+{
+    private IMqttServer mqttServer;
+    private List<string> connectedClients;
+
+    public MqttBrokerModel()
     {
-        private MqttServer? mqttServer;
-
-        public async Task StartAsync()
+        connectedClients = new List<string>();
+        mqttServer = new MqttFactory().CreateMqttServer();
+        mqttServer.ClientConnectedHandler = new MqttServerClientConnectedHandlerDelegate(e =>
         {
-            var optionsBuilder = new MqttServerOptionsBuilder()
-                .WithDefaultEndpoint()
-                .WithDefaultEndpointPort(1883);
-
-            var mqttServerOptions = optionsBuilder.Build();
-
-            mqttServer = new MqttFactory().CreateMqttServer(mqttServerOptions);
-
-            await mqttServer.StartAsync();
-        }
-
-
-        public async Task StopAsync()
-        {
-            if (mqttServer != null)
+            lock (connectedClients)
             {
-                await mqttServer.StopAsync();
-                mqttServer.Dispose();
-                mqttServer = null;
+                connectedClients.Add(e.ClientId);
             }
+        });
+
+        mqttServer.ClientDisconnectedHandler = new MqttServerClientDisconnectedHandlerDelegate(e =>
+        {
+            lock (connectedClients)
+            {
+                connectedClients.Remove(e.ClientId);
+            }
+        });
+    }
+
+    public async Task StartAsync()
+    {
+        var optionsBuilder = new MqttServerOptionsBuilder()
+            .WithDefaultEndpoint()
+            .WithDefaultEndpointPort(1883);
+
+        var mqttServerOptions = optionsBuilder.Build();
+
+        await mqttServer.StartAsync(mqttServerOptions);
+    }
+
+    public async Task StopAsync()
+    {
+        await mqttServer.StopAsync();
+    }
+
+    public List<string> GetConnectedClients()
+    {
+        lock (connectedClients)
+        {
+            return new List<string>(connectedClients);
         }
     }
+
+    public int GetConnectedClientsCount()
+    {
+        lock (connectedClients)
+        {
+            return connectedClients.Count;
+        }
+    }
+}

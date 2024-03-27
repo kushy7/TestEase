@@ -17,6 +17,8 @@ namespace TestEase.ViewModels
             set => SetProperty(ref _isBrokerRunning, value);
         }
 
+
+
         public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
         public event StatusChangedEventHandler StatusChanged;
 
