@@ -3,7 +3,8 @@ powershell Compress-Archive -Path "C:\ProgramData\Jenkins\.jenkins\workspace\Tes
 
 echo "Creating a new release in GitHub"
 set GITHUB_TOKEN=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
-set GITHUB_API=https://github.ncsu.edu/api/
+set GITHUB_API=https://github.ncsu.edu/api/v3/
+set GITHUB_UPLOAD_API=https://github.ncsu.edu/api/
 set REPO=2024SpringTeam31-Hitachi-2
 set ORG=engr-csc-sdc
 set TAG=v0
@@ -22,4 +23,4 @@ echo "Uploading the artifact to GitHub"
 set FILE=publish.zip
 
 echo Use the obtained release ID: %RELEASE_I% to upload the artifact
-curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @publish.zip "%GITHUB_API%uploads/repos/%ORG%/%REPO%/releases/%RELEASE_ID%/assets?name=publish.zip"
+curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @publish.zip "%GITHUB_UPLOAD_API%uploads/repos/%ORG%/%REPO%/releases/%RELEASE_ID%/assets?name=publish.zip"
