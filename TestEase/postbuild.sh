@@ -13,14 +13,10 @@ echo Create the release and capture the release ID
 for /F "tokens=*" %%a in ('curl -s -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases" ^| jq -r ".id"') do (set RELEASE_ID=%%a goto :break)
 :break
 
-echo Remove unwanted appended string
-set RELEASE_ID=!RELEASE_ID:goto :break=!
+echo Release created with ID: !RELEASE_ID!
+echo "Uploading the artifact to GitHub"
 
-
-echo Release created with ID: %RELEASE_ID%
-
-echo "Uploading the artifacts into GitHub"
 set FILE=publish.zip
 
-echo Use the obtained release ID to upload the artifact
-curl -X POST -H "Authorization: token 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" -H "Content-Type: application/zip" --data-binary @publish.zip "https://github.ncsu.edu/api/uploads/repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/releases/%RELEASE_ID%/assets?name=publish.zip" 
+echo Use the obtained release ID: !RELEASE_ID! to upload the artifact
+curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @publish.zip "%GITHUB_API%uploads/repos/%ORG%/%REPO%/releases/!RELEASE_ID!/assets?name=publish.zip"
