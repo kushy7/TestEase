@@ -7,10 +7,10 @@ set GITHUB_API=https://github.ncsu.edu/api/v3/
 set REPO=2024SpringTeam31-Hitachi-2
 set ORG=engr-csc-sdc
 set TAG=v0
-set NAME=TestEaseRelease
+set NAME=ReleasingTestEase
 
 echo Create the release and capture the release ID
-setlocal enabledelayedexpansion & for /f "tokens=1,2 delims=:" %%a in ('curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases"') do (if "%%a"=="\"id\"" (set RELEASE_ID=%%b & goto :break))
+for /F "tokens=*" %%a in ('curl -s -X POST -H "Authorization: token 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" -d "{\"tag_name\": \"v0\", \"target_commitish\": \"jenkins-publish\", \"name\": \"TestEaseRelease\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "https://github.ncsu.edu/api/v3/repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/releases" ^| jq -r ".id"') do (set RELEASE_ID=%%a & goto :break)
 
 echo Release created with ID: %RELEASE_ID%
 
