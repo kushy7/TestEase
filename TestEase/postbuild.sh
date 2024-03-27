@@ -3,7 +3,7 @@ powershell Compress-Archive -Path "C:\ProgramData\Jenkins\.jenkins\workspace\Tes
 
 echo "Creating a new release in GitHub"
 set GITHUB_TOKEN=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
-set GITHUB_API=https://github.ncsu.edu/api/v3/
+set GITHUB_API=https://github.ncsu.edu/api/
 set REPO=2024SpringTeam31-Hitachi-2
 set ORG=engr-csc-sdc
 set TAG=v0
