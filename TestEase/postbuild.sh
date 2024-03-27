@@ -10,13 +10,16 @@ set TAG=v0
 set NAME=ReleasingTestEase
 
 echo Create the release and capture the release ID
-for /F "tokens=*" %%a in ('curl -s -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases" ^| jq -r ".id"') do (set RELEASE_ID=%%a goto :break)
+for /F "tokens=*" %%a in ('curl -s -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases" ^| jq -r ".id"') do (
+	set RELEASE_ID=%%a
+	goto :break
+)
 :break
 
-echo Release created with ID: !RELEASE_ID!
+echo Release created with ID: RELEASE_ID
 echo "Uploading the artifact to GitHub"
 
 set FILE=publish.zip
 
-echo Use the obtained release ID: !RELEASE_ID! to upload the artifact
-curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @publish.zip "%GITHUB_API%uploads/repos/%ORG%/%REPO%/releases/!RELEASE_ID!/assets?name=publish.zip"
+echo Use the obtained release ID: RELEASE_ID to upload the artifact
+curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -H "Content-Type: application/zip" --data-binary @publish.zip "%GITHUB_API%uploads/repos/%ORG%/%REPO%/releases/RELEASE_ID/assets?name=publish.zip"
