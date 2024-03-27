@@ -10,9 +10,8 @@ set TAG=v0
 set NAME=TestEaseRelease
 
 echo Create the release and capture the release ID
-for /f "tokens=*" %%a in ('curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases"') do (set RELEASE_RESPONSE=%%a)
-
-for /f "delims=" %%i in ('echo %RELEASE_RESPONSE% ^| powershell -Command "Add-Type -AssemblyName System.Web; [System.Web.Script.Serialization.JavaScriptSerializer]::new().DeserializeObject($input).id"') do set RELEASE_ID=%%i
+for /f "tokens=*" %%a in ('curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases"') do (set RELEASE_RESPONSE=%%a & echo !RELEASE_RESPONSE! | findstr /C:"\"id\":" 1>nul && goto :break) :break
+for /f "tokens=2 delims=:" %%a in ("%RELEASE_RESPONSE%") do (set RELEASE_ID=%%a)
 
 echo Release created with ID: %RELEASE_ID%
 
