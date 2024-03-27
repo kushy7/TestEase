@@ -10,8 +10,7 @@ set TAG=v0
 set NAME=TestEaseRelease
 
 echo Create the release and capture the release ID
-for /f "tokens=1,2 delims=:" %%a in ('curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases"') do (if "%%a"=="\"id\"" (set RELEASE_ID=%%b & goto :break))
-
+setlocal enabledelayedexpansion & for /f "tokens=1,2 delims=:" %%a in ('curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases"') do (if "%%a"=="\"id\"" (set RELEASE_ID=%%b & goto :break))
 
 echo Release created with ID: %RELEASE_ID%
 
