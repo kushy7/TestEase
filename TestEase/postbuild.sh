@@ -10,7 +10,7 @@ set TAG=v0
 set NAME="Release Name"
 
 echo Create the release and capture the release ID
-for /f "tokens=*" %%a in ('curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{ \"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": %NAME%, \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases"') do (set RELEASE_RESPONSE=%%a)
+for /f "tokens=*" %%a in ('curl -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases"') do (set RELEASE_RESPONSE=%%a)
 
 echo Parse the release ID from the response
 for /f "tokens=2 delims=:" %%a in ("%RELEASE_RESPONSE%") do (set RELEASE_ID=%%a)
