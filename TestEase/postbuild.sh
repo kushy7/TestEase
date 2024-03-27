@@ -13,4 +13,4 @@ curl -X POST -H "Authorization: token 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 "
 echo "Uploading the artifacts into github" 
 set FILE=publish.zip
 
-curl -X POST -H "Authorization: token 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 " -H "Content-Type: application/zip" --data-binary @publish.zip https://github.ncsu.edu/api/v3/repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/releases/v0/assets?name=publish.zip 
+curl -X POST -H "Authorization: token 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 " -H "Content-Type: application/zip" --data-binary @publish.zip https://uploads.github.ncsu.edu/api/v3/repos/engr-csc-sdc/2024SpringTeam31-Hitachi-2/releases/v0/assets?name=publish.zip 
