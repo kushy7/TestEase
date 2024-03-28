@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Server;
@@ -6,26 +7,35 @@ using MQTTnet.Server;
 public class MqttBrokerModel
 {
     private IMqttServer mqttServer;
-    private List<string> connectedClients;
+    public ObservableCollection<string> ConnectedClients { get; private set; }
 
+    private int _connectCount = 0;
+    private int _disconnectCount = 0;
+
+    public int ConnectCount => _connectCount;
+    public int DisconnectCount => _disconnectCount;
+
+    [Obsolete]
     public MqttBrokerModel()
     {
-        connectedClients = new List<string>();
+        ConnectedClients = new ObservableCollection<string>();
         mqttServer = new MqttFactory().CreateMqttServer();
         mqttServer.ClientConnectedHandler = new MqttServerClientConnectedHandlerDelegate(e =>
         {
-            lock (connectedClients)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                connectedClients.Add(e.ClientId);
-            }
+                ConnectedClients.Add("Client: " + e.ClientId);
+                _connectCount++;
+            });
         });
 
         mqttServer.ClientDisconnectedHandler = new MqttServerClientDisconnectedHandlerDelegate(e =>
         {
-            lock (connectedClients)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                connectedClients.Remove(e.ClientId);
-            }
+                ConnectedClients.Remove("Client: " + e.ClientId);
+                _disconnectCount++;
+            });
         });
     }
 
@@ -45,19 +55,19 @@ public class MqttBrokerModel
         await mqttServer.StopAsync();
     }
 
-    public List<string> GetConnectedClients()
+    public ObservableCollection<string> GetConnectedClients()
     {
-        lock (connectedClients)
+        lock (ConnectedClients)
         {
-            return new List<string>(connectedClients);
+            return new ObservableCollection<string>(ConnectedClients);
         }
     }
 
     public int GetConnectedClientsCount()
     {
-        lock (connectedClients)
+        lock (ConnectedClients)
         {
-            return connectedClients.Count;
+            return ConnectedClients.Count;
         }
     }
 }

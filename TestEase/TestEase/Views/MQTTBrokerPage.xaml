@@ -54,11 +54,15 @@
                 <Frame BorderColor="Black"  Padding="5" Margin="0,0,0,10">
                     <Label Text="Clients" FontSize="Title" HorizontalOptions="Center" />
                 </Frame>
-                <Label Text="Number of connects: " />
-                <Label Text="Number of disconnects: " />
-                <Label Text="Client 1" />
-                <Label Text="Client 2" />
-                <Label Text="Client 3" />
+                <Label Text="{Binding ConnectCount, StringFormat='Number of connects: {0}'}" />
+                <Label Text="{Binding DisconnectCount, StringFormat='Number of disconnects: {0}'}" />
+                <ListView ItemsSource="{Binding ConnectedClients}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </Frame>
 

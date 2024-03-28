@@ -3,10 +3,12 @@ using System;
 using System.Threading.Tasks;
 using TestEase.Models;
 using TestEase.Helpers;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace TestEase.ViewModels
 {
-    public partial class MQTTBrokerPageViewModel : ObservableObject
+    public partial class MQTTBrokerPageViewModel : ObservableObject, INotifyPropertyChanged
     {
         private MqttBrokerModel _mqttBroker;
         private bool _isBrokerRunning;
@@ -22,10 +24,30 @@ namespace TestEase.ViewModels
         public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
         public event StatusChangedEventHandler StatusChanged;
 
+        public ObservableCollection<string> ConnectedClients { get; private set; }
+
+        private int _connectCount;
+        public int ConnectCount
+        {
+            get => _connectCount;
+            set => SetProperty(ref _connectCount, value);
+        }
+
+        private int _disconnectCount;
+        public int DisconnectCount
+        {
+            get => _disconnectCount;
+            set => SetProperty(ref _disconnectCount, value);
+        }
+
         public MQTTBrokerPageViewModel()
         {
             _mqttBroker = new MqttBrokerModel();
             IsBrokerRunning = false; // MQTT broker is initially not running
+            ConnectedClients = _mqttBroker.ConnectedClients;
+            ConnectCount = _mqttBroker.ConnectCount;
+            DisconnectCount = _mqttBroker.DisconnectCount;
+
         }
 
         public void ToggleCommand(CustomColor greenColor, CustomColor redColor)
