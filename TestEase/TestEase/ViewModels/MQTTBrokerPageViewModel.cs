@@ -12,11 +12,39 @@ namespace TestEase.ViewModels
     {
         private MqttBrokerModel _mqttBroker;
         private bool _isBrokerRunning;
+        public int ConnectCount => _mqttBroker.ConnectCount;
+        public int DisconnectCount => _mqttBroker.DisconnectCount;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsBrokerRunning
         {
             get => _isBrokerRunning;
             set => SetProperty(ref _isBrokerRunning, value);
+        }
+
+
+        private string _selectedClient;
+        public string SelectedClient
+        {
+            get => _selectedClient;
+            set
+            {
+                SetProperty(ref _selectedClient, value);
+                OnPropertyChanged(nameof(IsClientSelected));
+                OnPropertyChanged(nameof(SelectedClientInfo));
+            }
+        }
+
+        public bool IsClientSelected => !string.IsNullOrEmpty(SelectedClient);
+
+        public string SelectedClientInfo
+        {
+            get
+            {
+                // Return client details based on the selected client
+                return $"Client Info for {SelectedClient}";
+            }
         }
 
 
@@ -26,27 +54,16 @@ namespace TestEase.ViewModels
 
         public ObservableCollection<string> ConnectedClients { get; private set; }
 
-        private int _connectCount;
-        public int ConnectCount
-        {
-            get => _connectCount;
-            set => SetProperty(ref _connectCount, value);
-        }
 
-        private int _disconnectCount;
-        public int DisconnectCount
-        {
-            get => _disconnectCount;
-            set => SetProperty(ref _disconnectCount, value);
-        }
+
+
 
         public MQTTBrokerPageViewModel()
         {
             _mqttBroker = new MqttBrokerModel();
             IsBrokerRunning = false; // MQTT broker is initially not running
             ConnectedClients = _mqttBroker.ConnectedClients;
-            ConnectCount = _mqttBroker.ConnectCount;
-            DisconnectCount = _mqttBroker.DisconnectCount;
+
 
         }
 
@@ -65,6 +82,11 @@ namespace TestEase.ViewModels
 
             // Raise event to notify view of status change
             StatusChanged?.Invoke(this, new StatusChangedEventArgs(IsBrokerRunning, greenColor, redColor));
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

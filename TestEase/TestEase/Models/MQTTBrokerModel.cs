@@ -1,19 +1,46 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Server;
 
-public class MqttBrokerModel
+public class MqttBrokerModel : INotifyPropertyChanged
 {
     private IMqttServer mqttServer;
+    private int _connectCount;
+    private int _disconnectCount;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     public ObservableCollection<string> ConnectedClients { get; private set; }
 
-    private int _connectCount = 0;
-    private int _disconnectCount = 0;
+    public int ConnectCount
+    {
+        get => _connectCount;
+        set
+        {
+            if (_connectCount != value)
+            {
+                _connectCount = value;
+                OnPropertyChanged(nameof(ConnectCount));
+            }
+        }
+    }
 
-    public int ConnectCount => _connectCount;
-    public int DisconnectCount => _disconnectCount;
+    public int DisconnectCount
+    {
+        get => _disconnectCount;
+        set
+        {
+            if (_disconnectCount != value)
+            {
+                _disconnectCount = value;
+                OnPropertyChanged(nameof(DisconnectCount));
+            }
+        }
+    }
+
 
     [Obsolete]
     public MqttBrokerModel()
@@ -24,8 +51,10 @@ public class MqttBrokerModel
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                ConnectCount++;
+                OnPropertyChanged(nameof(ConnectCount));
                 ConnectedClients.Add("Client: " + e.ClientId);
-                _connectCount++;
+                
             });
         });
 
@@ -33,8 +62,10 @@ public class MqttBrokerModel
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                DisconnectCount++;
+                OnPropertyChanged(nameof(DisconnectCount));
                 ConnectedClients.Remove("Client: " + e.ClientId);
-                _disconnectCount++;
+                
             });
         });
     }
@@ -69,5 +100,10 @@ public class MqttBrokerModel
         {
             return ConnectedClients.Count;
         }
+    }
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

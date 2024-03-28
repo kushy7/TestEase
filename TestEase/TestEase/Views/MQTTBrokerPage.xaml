@@ -9,6 +9,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -44,19 +45,19 @@
 
 
         <!-- Clients Section -->
-        
         <Frame Grid.Row="2"
-       Margin="10"
-       BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
-       CornerRadius="5"
-       Padding="10">
+               Margin="10"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+               CornerRadius="5"
+               Padding="10">
             <StackLayout>
-                <Frame BorderColor="Black"  Padding="5" Margin="0,0,0,10">
+                <Frame BorderColor="Black" Padding="5" Margin="0,0,0,10">
                     <Label Text="Clients" FontSize="Title" HorizontalOptions="Center" />
                 </Frame>
                 <Label Text="{Binding ConnectCount, StringFormat='Number of connects: {0}'}" />
                 <Label Text="{Binding DisconnectCount, StringFormat='Number of disconnects: {0}'}" />
-                <ListView ItemsSource="{Binding ConnectedClients}">
+                <ListView ItemsSource="{Binding ConnectedClients}"
+                          SelectedItem="{Binding SelectedClient}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding}" />
@@ -66,5 +67,18 @@
             </StackLayout>
         </Frame>
 
+        <!-- Client Information Section -->
+        <Frame Grid.Row="3"
+               Margin="10"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+               CornerRadius="5"
+               Padding="10"
+               IsVisible="{Binding IsClientSelected}">
+            <StackLayout>
+                <Label Text="Client Info" FontSize="Title" HorizontalOptions="Center" />
+                <Label Text="{Binding SelectedClient}" FontSize="Subtitle" HorizontalOptions="Center" />
+                <!-- Add other client info labels here -->
+            </StackLayout>
+        </Frame>
     </Grid>
 </ContentPage>
