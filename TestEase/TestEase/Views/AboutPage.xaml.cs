@@ -17,10 +17,13 @@ public partial class AboutPage : ContentPage
         if (e.Value)
         {
             Application.Current.UserAppTheme = AppTheme.Dark;
+            Preferences.Set("AppTheme", "Dark");
         }
         else
         {
             Application.Current.UserAppTheme = AppTheme.Light;
+            Preferences.Set("AppTheme", "Light");
         }
     }
+
 }
