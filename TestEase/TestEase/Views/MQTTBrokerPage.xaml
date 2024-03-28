@@ -8,11 +8,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <!-- Status Indicator -->
@@ -78,6 +82,19 @@
                 <Label Text="Client Info" FontSize="Title" HorizontalOptions="Center" />
                 <Label Text="{Binding SelectedClient}" FontSize="Subtitle" HorizontalOptions="Center" />
                 <!-- Add other client info labels here -->
+            </StackLayout>
+        </Frame>
+
+        <!-- Messages Section -->
+        <Frame Grid.Column="1" Grid.ColumnSpan="4"
+               Grid.Row="0" Grid.RowSpan="4"
+               BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+               CornerRadius="5"
+               Padding="10">
+            <StackLayout>
+                <Frame BorderColor="Black" Padding="5" Margin="0,0,0,10">
+                    <Label Text="Messages" FontSize="Title" HorizontalOptions="Center" />
+                </Frame>
             </StackLayout>
         </Frame>
     </Grid>
