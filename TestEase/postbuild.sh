@@ -8,7 +8,7 @@ set GITHUB_UPLOAD_API=https://github.ncsu.edu/api/
 set REPO=2024SpringTeam31-Hitachi-2
 set ORG=engr-csc-sdc
 set TAG=v0
-set NAME=ReleasingTestEase
+set NAME=TestEase
 
 echo Create the release and capture the release ID
 for /F "tokens=*" %%a in ('curl -s -X POST -H "Authorization: token %GITHUB_TOKEN%" -d "{\"tag_name\": \"%TAG%\", \"target_commitish\": \"jenkins-publish\", \"name\": \"%NAME%\", \"body\": \"Description of the release\", \"draft\": false, \"prerelease\": false }" "%GITHUB_API%repos/%ORG%/%REPO%/releases" ^| jq -r ".id"') do (
