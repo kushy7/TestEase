@@ -86,5 +86,52 @@ namespace TestEase.Helpers
             return result;
         }
 
+        public static short GenerateLinearValue(int current, int start, int end, int increment, ref bool increasing)
+        {
+            if (increasing)
+            {
+                current += increment;
+                if (current >= end)
+                {
+                    current = end;
+                    increasing = false;
+                }
+            }
+            else
+            {
+                current -= increment;
+                if (current <= start)
+                {
+                    current = start;
+                    increasing = true;
+                }
+            }
+            return (short) current;
+        }
+
+        public static float GenerateLinearValueFloat(float current, float start, float end, float increment, ref bool increasing)
+        {
+            if (increasing)
+            {
+                current += increment;
+                if (current >= end)
+                {
+                    current = end;
+                    increasing = false;
+                }
+            }
+            else
+            {
+                current -= increment;
+                if (current <= start)
+                {
+                    current = start;
+                    increasing = true;
+                }
+            }
+            return current;
+        }
+
+
     }
 }

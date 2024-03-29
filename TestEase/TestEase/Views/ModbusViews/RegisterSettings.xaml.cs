@@ -14,74 +14,51 @@ public partial class RegisterSettings : ContentView
 
     private void OnRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        // Ensure the sender is a RadioButton and that one of the buttons is pressed
         if (sender is RadioButton rb && rb.IsChecked)
         {
-            // Determine which RadioButton was checked
+            // Reset visibility for all specific settings
+            FloatConfiguration.IsVisible = ValueInput.IsVisible = RangeFloatConfiguration.IsVisible = false;
+            LowerValueInput.IsVisible = UpperValueInput.IsVisible = false;
+            StartingValueInput.IsVisible = EndingValueInput.IsVisible = PeriodEntry.IsVisible = false;
+            LinearConfiguration.IsVisible = false;
+
+            // Hide range-specific radio buttons initially
+            LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = false;
+
+            // Handle visibility based on selected mode
             switch (rb.Content.ToString())
             {
                 case "Fixed":
-                    // Show the Float and Value box components
-                    FloatConfiguration.IsVisible = true;
-                    ValueInput.IsVisible = true;
-                    // hide the range value components
-                    RangeFloatConfiguration.IsVisible = false;
-                    LowerValueInput.IsVisible = false;
-                    UpperValueInput.IsVisible = false;
-                    RandomRadioButton.IsVisible = false;
-                    CurveRadioButton.IsVisible = false;
-                    PeriodEntry.IsVisible = false;
-                    StartingValueInput.IsVisible = false;
-                    EndingValueInput.IsVisible = false;
-                    PeriodEntry.IsVisible = false;
-                    RandomRadioButton.IsChecked = false;
-                    CurveRadioButton.IsChecked = false;
-                    CurveConfiguration.IsVisible = false;
+                    FloatConfiguration.IsVisible = ValueInput.IsVisible = true;
+
+                    //TODO: bug where the interval/period text still shown when switching from range back to fixed
+
+                    //PeriodEntry.IsVisible = false;
                     break;
                 case "Range":
-                    //show the register setting for range
-                    CurveConfiguration.IsVisible = false;
                     RangeFloatConfiguration.IsVisible = true;
-                    LowerValueInput.IsVisible = false;
-                    UpperValueInput.IsVisible = false;
-                    RandomRadioButton.IsVisible = true;
-                    CurveRadioButton.IsVisible = true;
-                    // Hide the fixed value components
-                    FloatConfiguration.IsVisible = false;
-                    ValueInput.IsVisible = false;
-                    RandomRadioButton.IsChecked = false;
-                    CurveRadioButton.IsChecked = false;
+                    // Only show these radio buttons under "Range" selection
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
                 case "Random":
-                    CurveConfiguration.IsVisible = false;
-                    // Hide other configurations
-                    FloatConfiguration.IsVisible = false;
-                    ValueInput.IsVisible = false;
-                    LowerValueInput.IsVisible = true;
-                    UpperValueInput.IsVisible = true;
-                    StartingValueInput.IsVisible = false;
-                    EndingValueInput.IsVisible = false;
-                    PeriodEntry.IsVisible = false;
-                    RandomRadioButton.IsVisible = true;
-                    CurveRadioButton.IsVisible = true;
+                    LowerValueInput.IsVisible = UpperValueInput.IsVisible = true;
+                    RangeFloatConfiguration.IsVisible = true;
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
                 case "Curve":
-                    // Show the Curve configuration
-                    CurveConfiguration.IsVisible = true;
-                    // Hide other configurations
-                    FloatConfiguration.IsVisible = false;
-                    ValueInput.IsVisible = false;
-                    LowerValueInput.IsVisible = false;
-                    UpperValueInput.IsVisible = false;
-                    StartingValueInput.IsVisible = true;
-                    EndingValueInput.IsVisible = true;
-                    PeriodEntry.IsVisible = true;
-                    RandomRadioButton.IsVisible = true;
-                    CurveRadioButton.IsVisible = true;
+                    StartingValueInput.IsVisible = EndingValueInput.IsVisible = PeriodEntry.IsVisible = true;
+                    RangeFloatConfiguration.IsVisible = true;
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
+                    break;
+                case "Linear":
+                    LinearConfiguration.IsVisible = true;
+                    RangeFloatConfiguration.IsVisible = true;
+                    LinearRadioButton.IsVisible = RandomRadioButton.IsVisible = CurveRadioButton.IsVisible = true;
                     break;
             }
         }
     }
+
 
     private void OnSaveButtonClick(object sender, EventArgs args)
     {
@@ -121,8 +98,7 @@ public partial class RegisterSettings : ContentView
             vm.SelectedServer.IsNotSaved = true;
             return; // this is dumb
         }
-
-        if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
+        else if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
         {
             // FIXED FLOAT
             short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(x);
@@ -329,6 +305,86 @@ public partial class RegisterSettings : ContentView
             }
 
         }
+        else if (LinearRadioButton.IsChecked && !RangeFloatConfigurationCheck.IsChecked)
+        {
+            //LINEAR SHORT
+
+            if (short.TryParse(LinearStartValueEntry.Text, out short lsv) && short.TryParse(LinearEndValueEntry.Text, out short lev) && short.TryParse(LinearIncrementEntry.Text, out short inc))
+            {
+                //initially increasing
+                bool increasing = true;
+                short nextValue = (short) ValueGenerators.GenerateLinearValue(lsv, lsv, lev, inc, ref increasing);
+
+                switch (register.RegisterType)
+                {
+                    case RegisterType.HoldingRegister:
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<short>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, false));
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = nextValue;
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteHoldingRegister(register.Address, nextValue);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
+                        break;
+                    case RegisterType.InputRegister:
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<short>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, false));
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Value = nextValue;
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteInputRegister(register.Address, nextValue);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
+                        break;
+
+                    default:
+                        Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Curve value.", "OK");
+                        break;
+                }
+            }
+        }
+        else if (LinearRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked)
+        {
+            //LINEAR FLOAT
+
+            if (float.TryParse(LinearStartValueEntry.Text, out float lsv) && float.TryParse(LinearEndValueEntry.Text, out float lev) && float.TryParse(LinearIncrementEntry.Text, out float inc))
+            {
+                
+                bool increasing = true; 
+                float nextValue = ValueGenerators.GenerateLinearValueFloat(lsv, lsv, lev, inc, ref increasing);
+                short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(nextValue);
+                short lowBits = lowHighBits[0];
+                short highBits = lowHighBits[1];
+
+                switch (register.RegisterType)
+                {
+                    case RegisterType.HoldingRegister:
+                        //low bits
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<float>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, true));
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Value = lowBits;
+                        vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteHoldingRegister(register.Address, lowBits);
+                        //high bits
+                        vm.SelectedServer.HoldingRegisters[register.Address].Value = highBits;
+                        vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
+                        vm.SelectedServer.WriteHoldingRegister(register.Address + 1, highBits);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                        break;
+                    case RegisterType.InputRegister:
+                        //low bits
+                        vm.SelectedServer.WorkingConfiguration.RegisterModels
+                            .Add(new Linear<float>(register.Address, register.RegisterType, NameEntry.Text, lsv, lev, inc, true));
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Value = lowBits;
+                        vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
+                        vm.SelectedServer.WriteInputRegister(register.Address, lowBits);
+                        //high bits
+                        vm.SelectedServer.InputRegisters[register.Address].Value = highBits;
+                        vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = true; // HELPER REGISTER
+                        vm.SelectedServer.WriteInputRegister(register.Address + 1, highBits);
+                        Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {nextValue} Converted to {lowHighBits[0]} and {lowHighBits[1]}", "OK");
+                        break;
+                }
+            }
+        }
+
         else
         {
             Application.Current.MainPage.DisplayAlert("Error", "Incomplete settings.", "OK");

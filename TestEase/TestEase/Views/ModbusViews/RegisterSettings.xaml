@@ -11,7 +11,7 @@
     <Grid Margin="20"
           RowDefinitions="Auto,Auto,*,Auto"
           ColumnDefinitions="*">
-        
+
         <!-- Heading-->
 
         <Border Margin="-22,-22,-22,0"
@@ -120,16 +120,20 @@
                     </Grid>
 
                     <HorizontalStackLayout>
-                        <RadioButton x:Name="RandomRadioButton"
-                        IsVisible="false"
-                        Content="Random"
-                        IsChecked="{Binding SelectedServer.IsRandomSelected, Mode=TwoWay}"
-                        IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                        <RadioButton x:Name="LinearRadioButton"
+                         Content="Linear"
+                        CheckedChanged="OnRadioButtonCheckedChanged"
+                        IsVisible="{Binding Source={x:Reference RangeRadioButton}, Path=IsChecked}" />
                         <RadioButton x:Name="CurveRadioButton"
                         IsVisible="false"
                         Content="Curve"
                         IsChecked="{Binding SelectedServer.IsCurveSelected, Mode=TwoWay}"
+                        IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
+                        CheckedChanged="OnRadioButtonCheckedChanged"/>  
+                        <RadioButton x:Name="RandomRadioButton"
+                        IsVisible="false"
+                        Content="Random"
+                        IsChecked="{Binding SelectedServer.IsRandomSelected, Mode=TwoWay}"
                         IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
                         CheckedChanged="OnRadioButtonCheckedChanged"/>
                     </HorizontalStackLayout>
@@ -194,9 +198,39 @@
                         Grid.Column="1" />
                     </Grid>
 
+
+
+
+                    <Grid x:Name="LinearConfiguration" ColumnDefinitions="50*, 50*"
+          IsVisible="{Binding Source={x:Reference LinearRadioButton}, Path=IsChecked}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="Start Value" Grid.Row="0" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="LinearStartValueEntry"
+               Placeholder="Enter Start Value"
+               Grid.Row="0" Grid.Column="1"
+               Keyboard="Numeric"/>
+
+                        <Label Text="End Value" Grid.Row="1" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="LinearEndValueEntry"
+               Placeholder="Enter End Value"
+               Grid.Row="1" Grid.Column="1"
+               Keyboard="Numeric"/>
+
+                        <Label Text="Increment" Grid.Row="2" VerticalTextAlignment="Center"/>
+                        <Entry x:Name="LinearIncrementEntry"
+               Placeholder="Enter Increment"
+               Grid.Row="2" Grid.Column="1"
+               Keyboard="Numeric"/>
+                    </Grid>
+
                 </VerticalStackLayout>
             </StackLayout>
-            
+
         </ScrollView>
 
 

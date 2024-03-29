@@ -18,6 +18,8 @@ namespace TestEase.Models
     [JsonDerivedType(typeof(Random<float>), typeDiscriminator: "randomFloat")]
     [JsonDerivedType(typeof(Curve<short>), typeDiscriminator: "curveShort")]
     [JsonDerivedType(typeof(Curve<float>), typeDiscriminator: "curveFloat")]
+    [JsonDerivedType(typeof(Linear<short>), typeDiscriminator: "LinearShort")]
+    [JsonDerivedType(typeof(Linear<float>), typeDiscriminator: "LinearFloat")]
     public abstract class RegisterModel(int address, RegisterType type, string name)
     {
         public int Address { get; set; } = address;
@@ -49,6 +51,56 @@ namespace TestEase.Models
     public class Random<T>(int address, RegisterType type, string name, T startValue, T endValue, bool isFloat) : Range<T>(address, type, name, startValue, endValue, isFloat)
     {
     }
+
+    public class Linear<T> : Range<T> where T : IComparable, IConvertible
+    {
+        public T Increment { get; set; }
+        private T currentValue;
+        private bool increasing = true;
+
+        public Linear(int address, RegisterType type, string name, T startValue, T endValue, T increment, bool isFloat)
+            : base(address, type, name, startValue, endValue, isFloat)
+        {
+            Increment = increment;
+            currentValue = startValue;
+        }
+
+        public T GetCurrentValue()
+        {
+            UpdateValue();
+            return currentValue;
+        }
+
+        private void UpdateValue()
+        {
+            dynamic current = currentValue;
+            dynamic start = StartValue;
+            dynamic end = EndValue;
+            dynamic step = Increment;
+
+            if (increasing)
+            {
+                current += step;
+                if (current.CompareTo(end) >= 0)
+                {
+                    current = end;
+                    increasing = false;
+                }
+            }
+            else
+            {
+                current -= step;
+                if (current.CompareTo(start) <= 0)
+                {
+                    current = start;
+                    increasing = true;
+                }
+            }
+
+            currentValue = (T) current;
+        }
+    }
+
 
     public class Curve<T> : Range<T>
     {

@@ -19,6 +19,10 @@ namespace TestEase
             var modbusService = serviceProvider.GetService<ModbusService>();
             modbusService.StartPeriodicUpdate(TimeSpan.FromSeconds(1));
 
+            // Load the theme preference
+            var themePreference = Preferences.Get("AppTheme", "Light");
+            Application.Current.UserAppTheme = themePreference == "Dark" ? AppTheme.Dark : AppTheme.Light;
+
             MainPage = new AppShell() { BindingContext = appViewModel };
 
         }
