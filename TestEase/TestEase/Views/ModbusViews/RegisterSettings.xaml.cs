@@ -70,6 +70,7 @@ public partial class RegisterSettings : ContentView
             vm.SelectedServer.WorkingConfiguration.RegisterModels.RemoveAt(index);
         }
 
+        // BOOL REGISTERS
         if (register.RegisterType == RegisterType.Coil || register.RegisterType == RegisterType.DiscreteInput)
         {
             switch (register.RegisterType)
@@ -187,6 +188,16 @@ public partial class RegisterSettings : ContentView
                     // Write to Modbus
                     vm.SelectedServer.WriteHoldingRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {n}", "OK");
+
+                    // Check if address+1 was a float helper, if it was, reset it
+                    if (vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper)
+                    {
+                        vm.SelectedServer.HoldingRegisters[register.Address].Value = (short) 0;
+                        vm.SelectedServer.HoldingRegisters[register.Address].Name = "";
+                        vm.SelectedServer.HoldingRegisters[register.Address].IsPlaying = false;
+                        vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = false;
+                        vm.SelectedServer.HoldingRegisters[register.Address].IsModified = false;
+                    }
                     break;
                 case RegisterType.InputRegister:
                     vm.SelectedServer.WorkingConfiguration.RegisterModels
@@ -197,6 +208,16 @@ public partial class RegisterSettings : ContentView
                     // Write to Modbus
                     vm.SelectedServer.WriteInputRegister(register.Address, n);
                     Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {n}", "OK");
+
+                    // Check if address+1 was a float helper, if it was, reset it
+                    if (vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper)
+                    {
+                        vm.SelectedServer.InputRegisters[register.Address].Value = (short)0;
+                        vm.SelectedServer.InputRegisters[register.Address].Name = "";
+                        vm.SelectedServer.InputRegisters[register.Address].IsPlaying = false;
+                        vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = false;
+                        vm.SelectedServer.InputRegisters[register.Address].IsModified = false;
+                    }
                     break;
             }
         }
@@ -215,6 +236,16 @@ public partial class RegisterSettings : ContentView
                         vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteHoldingRegister(register.Address, randomValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue}", "OK");
+
+                        // Check if address+1 was a float helper, if it was, reset it
+                        if (vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper)
+                        {
+                            vm.SelectedServer.HoldingRegisters[register.Address].Value = (short)0;
+                            vm.SelectedServer.HoldingRegisters[register.Address].Name = "";
+                            vm.SelectedServer.HoldingRegisters[register.Address].IsPlaying = false;
+                            vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = false;
+                            vm.SelectedServer.HoldingRegisters[register.Address].IsModified = false;
+                        }
                         break;
                     case RegisterType.InputRegister:
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
@@ -223,6 +254,16 @@ public partial class RegisterSettings : ContentView
                         vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteInputRegister(register.Address, randomValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name: {NameEntry.Text}\nValue: {randomValue}", "OK");
+
+                        // Check if address+1 was a float helper, if it was, reset it
+                        if (vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper)
+                        {
+                            vm.SelectedServer.InputRegisters[register.Address].Value = (short)0;
+                            vm.SelectedServer.InputRegisters[register.Address].Name = "";
+                            vm.SelectedServer.InputRegisters[register.Address].IsPlaying = false;
+                            vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = false;
+                            vm.SelectedServer.InputRegisters[register.Address].IsModified = false;
+                        }
                         break;
                     default:
                         Application.Current.MainPage.DisplayAlert("Error", "Invalid register type for Range value.", "OK");
@@ -246,6 +287,16 @@ public partial class RegisterSettings : ContentView
                         vm.SelectedServer.HoldingRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteHoldingRegister(register.Address, nextValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
+
+                        // Check if address+1 was a float helper, if it was, reset it
+                        if (vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper)
+                        {
+                            vm.SelectedServer.HoldingRegisters[register.Address].Value = (short)0;
+                            vm.SelectedServer.HoldingRegisters[register.Address].Name = "";
+                            vm.SelectedServer.HoldingRegisters[register.Address].IsPlaying = false;
+                            vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = false;
+                            vm.SelectedServer.HoldingRegisters[register.Address].IsModified = false;
+                        }
                         break;
                     case RegisterType.InputRegister:
                         vm.SelectedServer.WorkingConfiguration.RegisterModels
@@ -254,6 +305,16 @@ public partial class RegisterSettings : ContentView
                         vm.SelectedServer.InputRegisters[register.Address - 1].Name = NameEntry.Text;
                         vm.SelectedServer.WriteInputRegister(register.Address, nextValue);
                         Application.Current.MainPage.DisplayAlert("Saved", $"Name:{NameEntry.Text}\nValue:{nextValue}", "OK");
+
+                        // Check if address+1 was a float helper, if it was, reset it
+                        if (vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper)
+                        {
+                            vm.SelectedServer.InputRegisters[register.Address].Value = (short)0;
+                            vm.SelectedServer.InputRegisters[register.Address].Name = "";
+                            vm.SelectedServer.InputRegisters[register.Address].IsPlaying = false;
+                            vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = false;
+                            vm.SelectedServer.InputRegisters[register.Address].IsModified = false;
+                        }
                         break;
 
                     default:
