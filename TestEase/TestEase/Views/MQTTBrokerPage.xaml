@@ -81,6 +81,7 @@
             <StackLayout>
                 <Label Text="Client Info" FontSize="Title" HorizontalOptions="Center" />
                 <Label Text="{Binding SelectedClient}" FontSize="Subtitle" HorizontalOptions="Center" />
+                <Label Text="{Binding ClientConnectionUptime, StringFormat='Connection Uptime: {0:hh\\:mm\\:ss}'}" FontSize="Subtitle" HorizontalOptions="Center" />
                 <!-- Add other client info labels here -->
             </StackLayout>
         </Frame>
@@ -95,6 +96,16 @@
                 <Frame BorderColor="Black" Padding="5" Margin="0,0,0,10">
                     <Label Text="Messages" FontSize="Title" HorizontalOptions="Center" />
                 </Frame>
+                <ListView Grid.Column="1" Grid.ColumnSpan="4"
+                    Grid.Row="0" Grid.RowSpan="4"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+                    ItemsSource="{Binding ReceivedMessages}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </Frame>
     </Grid>

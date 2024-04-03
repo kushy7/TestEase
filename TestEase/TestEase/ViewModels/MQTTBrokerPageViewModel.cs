@@ -17,6 +17,8 @@ namespace TestEase.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private TimeSpan _clientConnectionUptime;
+
         public bool IsBrokerRunning
         {
             get => _isBrokerRunning;
@@ -33,6 +35,7 @@ namespace TestEase.ViewModels
                 SetProperty(ref _selectedClient, value);
                 OnPropertyChanged(nameof(IsClientSelected));
                 OnPropertyChanged(nameof(SelectedClientInfo));
+                ClientConnectionUptime = _mqttBroker.GetClientConnectionUptime(value);
             }
         }
 
@@ -47,12 +50,27 @@ namespace TestEase.ViewModels
             }
         }
 
+        public TimeSpan ClientConnectionUptime
+        {
+            get => _clientConnectionUptime;
+            set
+            {
+                if (_clientConnectionUptime != value)
+                {
+                    _clientConnectionUptime = value;
+                    OnPropertyChanged(nameof(ClientConnectionUptime));
+                }
+            }
+        }
+
 
 
         public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
         public event StatusChangedEventHandler StatusChanged;
 
         public ObservableCollection<string> ConnectedClients { get; private set; }
+
+        public ObservableCollection<string> ReceivedMessages { get; private set; }
 
 
 
@@ -63,6 +81,7 @@ namespace TestEase.ViewModels
             _mqttBroker = new MqttBrokerModel();
             IsBrokerRunning = false; // MQTT broker is initially not running
             ConnectedClients = _mqttBroker.ConnectedClients;
+            ReceivedMessages = _mqttBroker.ReceivedMessages;
 
 
         }

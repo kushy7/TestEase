@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using MQTTnet;
+using MQTTnet.Client.Receiving;
 using MQTTnet.Server;
 
 public class MqttBrokerModel : INotifyPropertyChanged
@@ -14,6 +15,8 @@ public class MqttBrokerModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public ObservableCollection<string> ConnectedClients { get; private set; }
+    public ObservableCollection<string> ReceivedMessages { get; private set; }
+    private Dictionary<string, DateTime> ClientConnectionStartTimes { get; set; }
 
     public int ConnectCount
     {
@@ -46,6 +49,9 @@ public class MqttBrokerModel : INotifyPropertyChanged
     public MqttBrokerModel()
     {
         ConnectedClients = new ObservableCollection<string>();
+        ReceivedMessages = new ObservableCollection<string>();
+        ClientConnectionStartTimes = new Dictionary<string, DateTime>();
+
         mqttServer = new MqttFactory().CreateMqttServer();
         mqttServer.ClientConnectedHandler = new MqttServerClientConnectedHandlerDelegate(e =>
         {
@@ -54,7 +60,8 @@ public class MqttBrokerModel : INotifyPropertyChanged
                 ConnectCount++;
                 OnPropertyChanged(nameof(ConnectCount));
                 ConnectedClients.Add("Client: " + e.ClientId);
-                
+                ClientConnectionStartTimes[e.ClientId] = DateTime.UtcNow;
+
             });
         });
 
@@ -65,7 +72,15 @@ public class MqttBrokerModel : INotifyPropertyChanged
                 DisconnectCount++;
                 OnPropertyChanged(nameof(DisconnectCount));
                 ConnectedClients.Remove("Client: " + e.ClientId);
-                
+                ClientConnectionStartTimes.Remove(e.ClientId);
+
+            });
+        });
+        mqttServer.ApplicationMessageReceivedHandler = new MqttApplicationMessageReceivedHandlerDelegate(e =>
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                ReceivedMessages.Add($"[{DateTime.Now}] {e.ClientId}: {System.Text.Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
             });
         });
     }
@@ -100,6 +115,20 @@ public class MqttBrokerModel : INotifyPropertyChanged
         {
             return ConnectedClients.Count;
         }
+    }
+
+    public TimeSpan GetClientConnectionUptime(string clientId)
+    {
+        if (clientId != null && ClientConnectionStartTimes.TryGetValue(clientId, out DateTime connectionStartTime))
+        {
+            return DateTime.UtcNow - connectionStartTime;
+        }
+        else
+        {
+            return TimeSpan.Zero; // Return zero if client not found or not currently connected
+        }
+
+        
     }
 
     protected virtual void OnPropertyChanged(string propertyName)
