@@ -80,7 +80,7 @@ public class MqttBrokerModel : INotifyPropertyChanged
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                ReceivedMessages.Add($"[{DateTime.Now}] {e.ClientId}: {System.Text.Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
+                ReceivedMessages.Add($"[{DateTime.Now}] {e.ClientId}:\n{e.ApplicationMessage.Topic}\n{System.Text.Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
             });
         });
     }

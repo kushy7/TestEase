@@ -83,7 +83,11 @@ namespace TestEase.ViewModels
             ConnectedClients = _mqttBroker.ConnectedClients;
             ReceivedMessages = _mqttBroker.ReceivedMessages;
 
-
+            _mqttBroker.PropertyChanged += (sender, args) =>
+            {
+                OnPropertyChanged(nameof(ConnectCount));
+                OnPropertyChanged(nameof(DisconnectCount));
+            };
         }
 
         public void ToggleCommand(CustomColor greenColor, CustomColor redColor)
