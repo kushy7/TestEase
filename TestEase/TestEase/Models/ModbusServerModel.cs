@@ -313,8 +313,9 @@ namespace TestEase.Models
                                 Value = ReadDiscreteInput(i),
                                 Name = reg.Name,
                                 IsModified = true,
+                                IsPlaying = reg.IsPlaying,
                                 RegisterType = RegisterType.DiscreteInput
-                            });
+                            }); ;
                             break;
                         case RegisterType.Coil:
                             Coils[i - 1] = (new Register<bool>
@@ -323,6 +324,7 @@ namespace TestEase.Models
                                 Value = ReadCoil(i),
                                 Name = reg.Name,
                                 IsModified = true,
+                                IsPlaying = reg.IsPlaying,
                                 RegisterType = RegisterType.Coil
                             });
                             break;
@@ -333,6 +335,7 @@ namespace TestEase.Models
                                 Value = ReadInputRegister(i),
                                 Name = reg.Name,
                                 IsModified = true,
+                                IsPlaying = reg.IsPlaying,
                                 RegisterType = RegisterType.InputRegister
                             });
                             break;
@@ -343,6 +346,7 @@ namespace TestEase.Models
                                 Value = ReadHoldingRegister(i),
                                 Name = reg.Name,
                                 IsModified = true,
+                                IsPlaying = reg.IsPlaying,
                                 RegisterType = RegisterType.HoldingRegister
                             });
                             break;
@@ -469,6 +473,7 @@ namespace TestEase.Models
                 discreteInput.Value = false;
                 discreteInput.Name = "";
                 discreteInput.IsModified = false; // Assuming you want to reset modification status as well
+                discreteInput.IsPlaying = false;
             }
 
             foreach (var coil in Coils)
@@ -476,6 +481,7 @@ namespace TestEase.Models
                 coil.Value = false;
                 coil.Name = "";
                 coil.IsModified = false;
+                coil.IsPlaying = false;
             }
 
             // Reset InputRegisters and HoldingRegisters to 0
@@ -484,6 +490,7 @@ namespace TestEase.Models
                 inputRegister.Value = (short) 0;
                 inputRegister.Name = "";
                 inputRegister.IsModified = false;
+                inputRegister.IsPlaying = false;
             }
 
             foreach (var holdingRegister in HoldingRegisters)
@@ -491,6 +498,7 @@ namespace TestEase.Models
                 holdingRegister.Value = (short) 0;
                 holdingRegister.Name = "";
                 holdingRegister.IsModified = false;
+                holdingRegister.IsPlaying = false;
             }
 
             // Notify the UI if necessary
@@ -509,6 +517,7 @@ namespace TestEase.Models
             RegisterType RegisterType { get; }
             bool IsModified { get; set; }
             bool IsFloatHelper { get; set; }
+            bool IsPlaying { get; set; }
         }
 
         public class Register<T> : IRegister
@@ -527,6 +536,7 @@ namespace TestEase.Models
                     {
                         this.Value = (T)value;
                         IsModified = true;
+                        IsPlaying = true;
                         OnPropertyChanged(nameof(Value));
                     }
                     else
@@ -574,6 +584,20 @@ namespace TestEase.Models
                     {
                         _isFloatHelper = value;
                         OnPropertyChanged(nameof(IsFloatHelper));
+                    }
+                }
+            }
+
+            private bool _IsPlaying = false;
+            public bool IsPlaying
+            {
+                get => _IsPlaying;
+                set
+                {
+                    if (_IsPlaying != value)
+                    {
+                        _IsPlaying = value;
+                        OnPropertyChanged(nameof(IsPlaying));
                     }
                 }
             }

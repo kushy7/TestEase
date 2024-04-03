@@ -123,6 +123,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Play/Pause"
+                                      Clicked="PlayClicked" />
+                        </ViewCell.ContextActions>
                         <Grid ColumnDefinitions="*,*,*"
                               BackgroundColor="Transparent">
                             <Grid.Style>
@@ -132,8 +136,18 @@
                                         <DataTrigger TargetType="Grid"
                                                      Binding="{Binding IsModified}"
                                                      Value="True">
-                                            <Setter Property="BackgroundColor" Value="LightCoral"/>
+                                            <Setter Property="BackgroundColor" Value="OliveDrab"/>
                                         </DataTrigger>
+                                        <MultiTrigger TargetType="Grid">
+                                            <MultiTrigger.Conditions>
+                                                <BindingCondition Binding="{Binding IsModified}" Value="true" />
+                                                <BindingCondition Binding="{Binding IsPlaying}" Value="false" />
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="BackgroundColor" Value="Coral" />
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        
                                     </Style.Triggers>
                                 </Style>
                             </Grid.Style>
