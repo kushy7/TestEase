@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Client.Receiving;
@@ -17,6 +18,7 @@ public class MqttBrokerModel : INotifyPropertyChanged
     public ObservableCollection<string> ConnectedClients { get; private set; }
     public ObservableCollection<string> ReceivedMessages { get; private set; }
     private Dictionary<string, DateTime> ClientConnectionStartTimes { get; set; }
+    public Dictionary<string, int> ClientMessagesSent { get; set; }
 
     public int ConnectCount
     {
@@ -51,6 +53,7 @@ public class MqttBrokerModel : INotifyPropertyChanged
         ConnectedClients = new ObservableCollection<string>();
         ReceivedMessages = new ObservableCollection<string>();
         ClientConnectionStartTimes = new Dictionary<string, DateTime>();
+        ClientMessagesSent = new Dictionary<string, int>();
 
         mqttServer = new MqttFactory().CreateMqttServer();
         mqttServer.ClientConnectedHandler = new MqttServerClientConnectedHandlerDelegate(e =>
@@ -59,7 +62,8 @@ public class MqttBrokerModel : INotifyPropertyChanged
             {
                 ConnectCount++;
                 OnPropertyChanged(nameof(ConnectCount));
-                ConnectedClients.Add("Client: " + e.ClientId);
+                ConnectedClients.Add(e.ClientId);
+                ClientMessagesSent.Add(e.ClientId, 0);
                 ClientConnectionStartTimes[e.ClientId] = DateTime.UtcNow;
 
             });
@@ -71,7 +75,8 @@ public class MqttBrokerModel : INotifyPropertyChanged
             {
                 DisconnectCount++;
                 OnPropertyChanged(nameof(DisconnectCount));
-                ConnectedClients.Remove("Client: " + e.ClientId);
+                ConnectedClients.Remove(e.ClientId);
+                ClientMessagesSent.Remove(e.ClientId);
                 ClientConnectionStartTimes.Remove(e.ClientId);
 
             });
@@ -81,6 +86,11 @@ public class MqttBrokerModel : INotifyPropertyChanged
             Device.BeginInvokeOnMainThread(() =>
             {
                 ReceivedMessages.Add($"[{DateTime.Now}] {e.ClientId}:\n{e.ApplicationMessage.Topic}\n{System.Text.Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
+
+                // Increment client message count
+                int currentCount;
+                ClientMessagesSent.TryGetValue(e.ClientId, out currentCount);
+                ClientMessagesSent[e.ClientId] = currentCount + 1;
             });
         });
     }

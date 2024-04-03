@@ -61,7 +61,7 @@
                 <Label Text="{Binding ConnectCount, StringFormat='Number of connects: {0}'}" />
                 <Label Text="{Binding DisconnectCount, StringFormat='Number of disconnects: {0}'}" />
                 <ListView ItemsSource="{Binding ConnectedClients}"
-                          SelectedItem="{Binding SelectedClient}">
+                          SelectedItem="{Binding SelectedClient, Mode=OneWayToSource}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding}" />
@@ -80,8 +80,9 @@
                IsVisible="{Binding IsClientSelected}">
             <StackLayout>
                 <Label Text="Client Info" FontSize="Title" HorizontalOptions="Center" />
-                <Label Text="{Binding SelectedClient}" FontSize="Subtitle" HorizontalOptions="Center" />
-                <Label Text="{Binding ClientConnectionUptime, StringFormat='Connection Uptime: {0:hh\\:mm\\:ss}'}" FontSize="Subtitle" HorizontalOptions="Center" />
+                <Label Text="{Binding SelectedClient}" HorizontalOptions="Center" />
+                <Label Text="{Binding ClientConnectionUptime, StringFormat='Uptime: {0:hh\\:mm\\:ss}'}" HorizontalOptions="Start" />
+                <Label Text="{Binding ClientMessagesSent, StringFormat='Messages Sent: {0}'}" HorizontalOptions="Start" />
                 <!-- Add other client info labels here -->
             </StackLayout>
         </Frame>
@@ -96,10 +97,11 @@
                 <Frame BorderColor="Black" Padding="5" Margin="0,0,0,10">
                     <Label Text="Messages" FontSize="Title" HorizontalOptions="Center" />
                 </Frame>
+                <SearchBar Placeholder="Filter messages" Text="{Binding SearchText, Mode=TwoWay}" />
                 <ListView Grid.Column="1" Grid.ColumnSpan="4"
                     Grid.Row="0" Grid.RowSpan="4"
                     BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
-                    ItemsSource="{Binding ReceivedMessages}">
+                    ItemsSource="{Binding FilteredMessages}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding}" />
