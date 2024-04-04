@@ -146,7 +146,7 @@ namespace TestEase.ViewModels
 
         private void UpdateTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(SelectedClient))
+            if (!string.IsNullOrEmpty(SelectedClient) && ConnectedClients.Contains(SelectedClient))
             {
                 ClientConnectionUptime = _mqttBroker.GetClientConnectionUptime(SelectedClient);
                 ClientMessagesSent = _mqttBroker.ClientMessagesSent[SelectedClient];
