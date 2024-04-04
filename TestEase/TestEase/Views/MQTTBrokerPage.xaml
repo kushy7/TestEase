@@ -34,8 +34,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Ellipse WidthRequest="50" HeightRequest="50" BackgroundColor="Red" VerticalOptions="Start" />
-                <Label Text="Offline" Grid.Row="1" VerticalOptions="Center" Margin="10,0,0,0" />
             </Grid>
         </Frame>
 
@@ -79,7 +77,9 @@
                Padding="10"
                IsVisible="{Binding IsClientSelected}">
             <StackLayout>
-                <Label Text="Client Info" FontSize="Title" HorizontalOptions="Center" />
+                <Frame BorderColor="Black" Padding="5" Margin="0,0,0,10">
+                    <Label Text="Client Info" FontSize="Title" HorizontalOptions="Center" />
+                </Frame>
                 <Label Text="{Binding SelectedClient}" HorizontalOptions="Center" />
                 <Label Text="{Binding ClientConnectionUptime, StringFormat='Uptime: {0:hh\\:mm\\:ss}'}" HorizontalOptions="Start" />
                 <Label Text="{Binding ClientMessagesSent, StringFormat='Messages Sent: {0}'}" HorizontalOptions="Start" />
