@@ -14,6 +14,7 @@ public class MqttBrokerModel : INotifyPropertyChanged
     private int _disconnectCount;
 
     public event PropertyChangedEventHandler? PropertyChanged;
+    public event EventHandler<string>? ClientDisconnected;
 
     public ObservableCollection<string> ConnectedClients { get; private set; }
     public ObservableCollection<string> ReceivedMessages { get; private set; }
@@ -78,6 +79,7 @@ public class MqttBrokerModel : INotifyPropertyChanged
                 ConnectedClients.Remove(e.ClientId);
                 ClientMessagesSent.Remove(e.ClientId);
                 ClientConnectionStartTimes.Remove(e.ClientId);
+                ClientDisconnected?.Invoke(this, e.ClientId);
 
             });
         });
@@ -126,6 +128,8 @@ public class MqttBrokerModel : INotifyPropertyChanged
             return ConnectedClients.Count;
         }
     }
+
+
 
     public TimeSpan GetClientConnectionUptime(string clientId)
     {

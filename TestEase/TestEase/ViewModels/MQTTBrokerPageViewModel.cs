@@ -51,6 +51,8 @@ namespace TestEase.ViewModels
             }
         }
 
+
+
         public bool IsClientSelected => !string.IsNullOrEmpty(SelectedClient);
 
         public string SelectedClientInfo
@@ -137,6 +139,13 @@ namespace TestEase.ViewModels
             {
                 OnPropertyChanged(nameof(ConnectCount));
                 OnPropertyChanged(nameof(DisconnectCount));
+            };
+            _mqttBroker.ClientDisconnected += (sender, client) =>
+            {
+                if (SelectedClient == client)
+                {
+                    SelectedClient = ""; // Set SelectedClient to empty string
+                }
             };
 
             _updateTimer = new System.Timers.Timer(1000);
