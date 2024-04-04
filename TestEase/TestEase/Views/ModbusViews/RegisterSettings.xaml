@@ -164,7 +164,7 @@
 
                     <Grid x:Name="StartingValueInput" ColumnDefinitions="50*, 50*"
                     IsVisible="{Binding SelectedServer.IsCurveSelected}">
-                        <Label Text="Start Value" VerticalTextAlignment="Center"
+                        <Label Text="Lower Value" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="startval"
                         Placeholder="Enter Value"
@@ -176,7 +176,7 @@
 
                     <Grid x:Name="EndingValueInput" ColumnDefinitions="50*, 50*"
                     IsVisible="{Binding SelectedServer.IsCurveSelected}">
-                        <Label Text="End Value" VerticalTextAlignment="Center"
+                        <Label Text="Upper Value" VerticalTextAlignment="Center"
                         Grid.Column="0"/>
                         <Entry x:Name="endval"
                         Placeholder="Enter Value"
@@ -209,20 +209,23 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Text="Start Value" Grid.Row="0" VerticalTextAlignment="Center"/>
+                        <Label Text="Lower Value" Grid.Row="0" VerticalTextAlignment="Center"/>
                         <Entry x:Name="LinearStartValueEntry"
+                               Text="{Binding LinearLowerEntryText}"
                Placeholder="Enter Start Value"
                Grid.Row="0" Grid.Column="1"
                Keyboard="Numeric"/>
 
-                        <Label Text="End Value" Grid.Row="1" VerticalTextAlignment="Center"/>
+                        <Label Text="Upper Value" Grid.Row="1" VerticalTextAlignment="Center"/>
                         <Entry x:Name="LinearEndValueEntry"
+                               Text="{Binding LinearUpperEntryText}"
                Placeholder="Enter End Value"
                Grid.Row="1" Grid.Column="1"
                Keyboard="Numeric"/>
 
                         <Label Text="Increment" Grid.Row="2" VerticalTextAlignment="Center"/>
                         <Entry x:Name="LinearIncrementEntry"
+                               Text="{Binding LinearIncrementEntryText}"
                Placeholder="Enter Increment"
                Grid.Row="2" Grid.Column="1"
                Keyboard="Numeric"/>

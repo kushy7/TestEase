@@ -134,6 +134,9 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.StartValText = "";
                         viewModel.EndValText = "";
                         viewModel.PeriodText = "";
+                        viewModel.LinearLowerEntryText = "";
+                        viewModel.LinearUpperEntryText = "";
+                        viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Fixed<float> fixedFloatRegister)
                     {
                         viewModel.FixedEntryText = fixedFloatRegister.Value.ToString();
@@ -142,6 +145,9 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.StartValText = "";
                         viewModel.EndValText = "";
                         viewModel.PeriodText = "";
+                        viewModel.LinearLowerEntryText = "";
+                        viewModel.LinearUpperEntryText = "";
+                        viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Random<short> randomShortRegister)
                     {
                         viewModel.FixedEntryText = "";
@@ -150,6 +156,9 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.StartValText = "";
                         viewModel.EndValText = "";
                         viewModel.PeriodText = "";
+                        viewModel.LinearLowerEntryText = "";
+                        viewModel.LinearUpperEntryText = "";
+                        viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Random<float> randomFloatRegister)
                     {
                         viewModel.FixedEntryText = "";
@@ -158,11 +167,17 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.StartValText = "";
                         viewModel.EndValText = "";
                         viewModel.PeriodText = "";
+                        viewModel.LinearLowerEntryText = "";
+                        viewModel.LinearUpperEntryText = "";
+                        viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Curve<short> curveShortRegister)
                     {
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
+                        viewModel.LinearLowerEntryText = "";
+                        viewModel.LinearUpperEntryText = "";
+                        viewModel.LinearIncrementEntryText = "";
                         viewModel.StartValText = curveShortRegister.StartValue.ToString();
                         viewModel.EndValText = curveShortRegister.EndValue.ToString();
                         viewModel.PeriodText = curveShortRegister.Period.ToString();
@@ -171,9 +186,36 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
+                        viewModel.LinearLowerEntryText = "";
+                        viewModel.LinearUpperEntryText = "";
+                        viewModel.LinearIncrementEntryText = "";
                         viewModel.StartValText = curveFloatRegister.StartValue.ToString();
                         viewModel.EndValText = curveFloatRegister.EndValue.ToString();
                         viewModel.PeriodText = curveFloatRegister.Period.ToString();
+                    }
+                    else if (modifiedRegister is Linear<float> LinearFloatRegister)
+                    {
+                        viewModel.FixedEntryText = "";
+                        viewModel.LowerRangeText = "";
+                        viewModel.UpperRangeText = "";
+                        viewModel.LinearLowerEntryText = LinearFloatRegister.StartValue.ToString();
+                        viewModel.LinearUpperEntryText = LinearFloatRegister.EndValue.ToString();
+                        viewModel.LinearIncrementEntryText = LinearFloatRegister.Increment.ToString();
+                        viewModel.StartValText = "";
+                        viewModel.EndValText = "";
+                        viewModel.PeriodText = "";
+                    }
+                    else if (modifiedRegister is Linear<short> LinearShortRegister)
+                    {
+                        viewModel.FixedEntryText = "";
+                        viewModel.LowerRangeText = "";
+                        viewModel.UpperRangeText = "";
+                        viewModel.LinearLowerEntryText = LinearShortRegister.StartValue.ToString();
+                        viewModel.LinearUpperEntryText = LinearShortRegister.EndValue.ToString();
+                        viewModel.LinearIncrementEntryText = LinearShortRegister.Increment.ToString();
+                        viewModel.StartValText = "";
+                        viewModel.EndValText = "";
+                        viewModel.PeriodText = "";
                     }
                 } else
                 {
@@ -183,6 +225,9 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                     viewModel.StartValText = "";
                     viewModel.EndValText = "";
                     viewModel.PeriodText = "";
+                    viewModel.LinearLowerEntryText = "";
+                    viewModel.LinearUpperEntryText = "";
+                    viewModel.LinearIncrementEntryText = "";
                 }
 
             } else if (selectedRegister.RegisterType == Models.RegisterType.DiscreteInput || selectedRegister.RegisterType == Models.RegisterType.Coil)

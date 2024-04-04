@@ -138,6 +138,50 @@ namespace TestEase.ViewModels
         // -----------------------
         // ENTRY TEXTS
 
+
+
+        private string _linearLowerEntryText;
+        public string LinearLowerEntryText
+        {
+            get => _linearLowerEntryText;
+            set
+            {
+                if (_linearLowerEntryText != value)
+                {
+                    _linearLowerEntryText = value;
+                    OnPropertyChanged(nameof(LinearLowerEntryText));
+                }
+            }
+        }
+
+        private string _linearUpperEntryText;
+        public string LinearUpperEntryText
+        {
+            get => _linearUpperEntryText;
+            set
+            {
+                if (_linearUpperEntryText != value)
+                {
+                    _linearUpperEntryText = value;
+                    OnPropertyChanged(nameof(LinearUpperEntryText));
+                }
+            }
+        }
+
+        private string _linearIncrementEntryText;
+        public string LinearIncrementEntryText
+        {
+            get => _linearIncrementEntryText;
+            set
+            {
+                if (_linearIncrementEntryText != value)
+                {
+                    _linearIncrementEntryText = value;
+                    OnPropertyChanged(nameof(LinearIncrementEntryText));
+                }
+            }
+        }
+
         private string _fixedEntryText;
         public string FixedEntryText
         {
