@@ -138,6 +138,11 @@
                                                      Value="True">
                                             <Setter Property="BackgroundColor" Value="OliveDrab"/>
                                         </DataTrigger>
+                                        <DataTrigger TargetType="Grid"
+                                                     Binding="{Binding IsFloatHelper}"
+                                                     Value="True">
+                                            <Setter Property="BackgroundColor" Value="DarkSlateGrey"/>
+                                        </DataTrigger>
                                         <MultiTrigger TargetType="Grid">
                                             <MultiTrigger.Conditions>
                                                 <BindingCondition Binding="{Binding IsModified}" Value="true" />
@@ -147,7 +152,6 @@
                                                 <Setter Property="BackgroundColor" Value="Coral" />
                                             </MultiTrigger.Setters>
                                         </MultiTrigger>
-                                        
                                     </Style.Triggers>
                                 </Style>
                             </Grid.Style>
