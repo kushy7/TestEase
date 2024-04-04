@@ -44,12 +44,15 @@ public partial class RegisterSettings : ContentView
                     break;
                 case "Random":
                     LowerValueInput.IsVisible = UpperValueInput.IsVisible = isRandomSelected;
+                    RangeFloatConfiguration.IsVisible = isRangeSelected;
                     break;
                 case "Curve":
                     StartingValueInput.IsVisible = EndingValueInput.IsVisible = PeriodEntry.IsVisible = CurveConfiguration.IsVisible = isCurveSelected;
+                    RangeFloatConfiguration.IsVisible = isRangeSelected;
                     break;
                 case "Linear":
                     LinearConfiguration.IsVisible = isLineaerSelected;
+                    RangeFloatConfiguration.IsVisible = isRangeSelected;
                     break;
             }
         }
