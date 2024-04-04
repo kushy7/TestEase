@@ -59,7 +59,7 @@
                 <Label Text="{Binding ConnectCount, StringFormat='Number of connects: {0}'}" />
                 <Label Text="{Binding DisconnectCount, StringFormat='Number of disconnects: {0}'}" />
                 <ListView ItemsSource="{Binding ConnectedClients}"
-                          SelectedItem="{Binding SelectedClient, Mode=OneWayToSource}">
+                          SelectedItem="{Binding SelectedClient, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding}" />
