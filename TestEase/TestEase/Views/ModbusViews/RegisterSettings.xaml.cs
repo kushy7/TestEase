@@ -99,7 +99,7 @@ public partial class RegisterSettings : ContentView
             vm.SelectedServer.IsNotSaved = true;
             return; // this is dumb
         }
-        else if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x) && FixedValueEntry.Text.Contains('.'))
+        else if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x))
         {
             // FIXED FLOAT
             short[] lowHighBits = ValueGenerators.GenerateShortArrayFromFloat(x);
@@ -139,7 +139,7 @@ public partial class RegisterSettings : ContentView
             }
 
         }
-        else if (RandomRadioButton.IsChecked && RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && float.TryParse(lowerrange.Text, out float lrf) && float.TryParse(upperrange.Text, out float urf) && lowerrange.Text.Contains('.') && upperrange.Text.Contains('.'))
+        else if (RandomRadioButton.IsChecked && RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && float.TryParse(lowerrange.Text, out float lrf) && float.TryParse(upperrange.Text, out float urf))
         {
             // RANDOM FLOAT
             float randomValue = ValueGenerators.GenerateRandomValueFloat(lrf, urf);
@@ -328,7 +328,7 @@ public partial class RegisterSettings : ContentView
         }
         else if (CurveRadioButton.IsChecked && RangeRadioButton.IsChecked && RangeFloatConfigurationCheck.IsChecked && 
             float.TryParse(startval.Text, out float lowerRF) && float.TryParse(endval.Text, out float upperRF) 
-            && int.TryParse(PeriodEntry.Text, out int periodRF) && startval.Text.Contains('.') && endval.Text.Contains('.'))
+            && int.TryParse(PeriodEntry.Text, out int periodRF))
         {
             // CURVE FLOAT
             float nextValue = ValueGenerators.GetNextSineValueFloat(lowerRF, upperRF, 0, periodRF);
