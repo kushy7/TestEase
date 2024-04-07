@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -24,12 +25,16 @@ namespace TestEase.ViewModels
 
         private async Task CheckForUpdates()
         {
-            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            var isUpdateAvailable = _updateService.checkForUpdate(currentVersion);
 
-            if (isUpdateAvailable)
+            if (_updateService.isUpdateAvailable())
             {
-                await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Update Available!", "Download?", "Yes", "No");
+                bool ans = await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Update Available!", "There is a new version of TestEase available, click the 'Update' button to install.", "Later", "Update");
+                if (!ans)
+                {
+                    await _updateService.DownloadGitHubReleaseAsset(_updateService.getAssetUrl());
+                    _updateService.ExtractZipFile();
+                    _updateService.OpenExeFile();
+                }
             }
             else
             {

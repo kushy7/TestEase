@@ -28,7 +28,7 @@ namespace TestEase
             MainPage.Title = $"Test Ease v{Assembly.GetExecutingAssembly().GetName().Version}";
 
             var updateService = serviceProvider.GetService<UpdateService>();
-            updateService.checkForUpdate("Version");
+            updateService.checkForUpdate();
 
         }
 
