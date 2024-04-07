@@ -6,6 +6,7 @@
     xmlns:local="using:TestEase.WinUI">
 
     <maui:MauiWinUIApplication.Resources>
+
         <DataTemplate x:Key="MauiAppTitleBarTemplate">
             <Grid ColumnSpacing="10" Margin="10, 5, 0, 5">
                 <Grid.ColumnDefinitions>

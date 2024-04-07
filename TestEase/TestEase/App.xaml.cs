@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Platform;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text.Json;
 using TestEase.Models;
 using TestEase.Services;
@@ -24,8 +25,13 @@ namespace TestEase
             Application.Current.UserAppTheme = themePreference == "Dark" ? AppTheme.Dark : AppTheme.Light;
 
             MainPage = new AppShell() { BindingContext = appViewModel };
+            MainPage.Title = $"Test Ease v{Assembly.GetExecutingAssembly().GetName().Version}";
+
+            var updateService = serviceProvider.GetService<UpdateService>();
+            updateService.checkForUpdate("Version");
 
         }
+
 
         public async Task LoadConfigurations()
         {

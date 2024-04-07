@@ -13,7 +13,13 @@
                     HorizontalOptions="Center" VerticalOptions="Center"
                     IsToggled="True" />
         </HorizontalStackLayout>
-
+        
+        <Button Text="Check for Updates"
+                Command="{Binding CheckForUpdatesCommand}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                Margin="0,20,0,0" />
+        
     </VerticalStackLayout>
     
     
