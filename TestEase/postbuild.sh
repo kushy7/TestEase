@@ -7,7 +7,7 @@ set GITHUB_API=https://github.ncsu.edu/api/v3/
 set GITHUB_UPLOAD_API=https://github.ncsu.edu/api/
 set REPO=2024SpringTeam31-Hitachi-2
 set ORG=engr-csc-sdc
-set TAG=v0
+set TAG=v2
 set NAME=TestEase
 
 echo Create the release and capture the release ID
