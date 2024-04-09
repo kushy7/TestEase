@@ -11,7 +11,7 @@ namespace TestEase.ViewModels
     {
         private ObservableCollection<string> _configurationFiles = new ObservableCollection<string>();
         private FileSystemWatcher _fileSystemWatcher;
-
+        //gets and sets list of strings for the configuration files available
         public ObservableCollection<string> ConfigurationFiles
         {
             get => _configurationFiles;

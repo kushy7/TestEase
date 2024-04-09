@@ -21,7 +21,7 @@ namespace TestEase.ViewModels
 {
     public partial class ModbusPageViewModel: ObservableObject
     {
-
+        //server model that is currently in use
         private ModbusServerModel _selectedServer;
 
         public ModbusServerModel SelectedServer
@@ -42,7 +42,7 @@ namespace TestEase.ViewModels
             }
         }
 
-
+        //Sets the working configuration for the server in use to a new config model
         public void CreateNewConfiguration()
         {
             //Reset the current server's configuration
@@ -91,7 +91,7 @@ namespace TestEase.ViewModels
         }
 
 
-
+        // sets and gets the configuration files to be viewed
         public class SavedConfigurationsViewModel : INotifyPropertyChanged
         {
             private ObservableCollection<string> _configurationFiles;
@@ -139,7 +139,7 @@ namespace TestEase.ViewModels
         // ENTRY TEXTS
 
 
-
+        // Lower entry text value for handling a linear lower bound
         private string _linearLowerEntryText;
         public string LinearLowerEntryText
         {
@@ -154,6 +154,7 @@ namespace TestEase.ViewModels
             }
         }
 
+        // Upper entry text value for handling a linear upper bound
         private string _linearUpperEntryText;
         public string LinearUpperEntryText
         {
@@ -168,6 +169,8 @@ namespace TestEase.ViewModels
             }
         }
 
+        // Increment entry text value for handling how much you want to increment between the bounds by with
+        // each step
         private string _linearIncrementEntryText;
         public string LinearIncrementEntryText
         {
@@ -182,6 +185,7 @@ namespace TestEase.ViewModels
             }
         }
 
+        // fixed value entry text 
         private string _fixedEntryText;
         public string FixedEntryText
         {
@@ -196,6 +200,7 @@ namespace TestEase.ViewModels
             }
         }
 
+        //lower range value entry text for random inputs
         private string _lowerRangeText;
         public string LowerRangeText
         {
@@ -210,6 +215,7 @@ namespace TestEase.ViewModels
             }
         }
 
+        //upper range value entry text for random inputs
         private string _upperRangeText;
         public string UpperRangeText
         {
@@ -223,7 +229,7 @@ namespace TestEase.ViewModels
                 }
             }
         }
-
+        //start value entry text for curve inputs
         private string _startValText;
         public string StartValText
         {
@@ -237,7 +243,7 @@ namespace TestEase.ViewModels
                 }
             }
         }
-
+        //end value entry text for curve inputs
         private string _endValText;
         public string EndValText
         {
@@ -252,6 +258,7 @@ namespace TestEase.ViewModels
             }
         }
 
+        //period entry value text for curve input 
         private string _periodText;
         public string PeriodText
         {
@@ -286,22 +293,28 @@ namespace TestEase.ViewModels
             AppViewModel = appViewModel;
 
             Trace.WriteLine("Started server"); // DELETE
+            //sets the selected server with the port number
             SelectedServer = new ModbusServerModel(502);
+            //starts the server to make it active
             SelectedServer.StartServer();
+            //lets the app know that the server is running
             SelectedServer.IsRunning = true;
+            //add the selected server thats started to the list of modbus servers
             AppViewModel.ModbusServers.Add(SelectedServer);
-
+            //loads all configurations that have been saved to pull from later once server is started
             LoadConfigurations();
 
         }
-
+        //loads all configurations from my documents to be loaded in later 
         public async Task LoadConfigurations()
         {
+            //creates a new configuration service
             var service = new ConfigurationService();
-
+            //gets the folder path from the service, mydocuments
             string folderPath = service.GetFolderPath();
+            //gets all the files from the my documents path and saves them to a list of strings
             string[] files = Directory.GetFiles(folderPath, "*.json");
-
+            //takes each file and adds configs to configurations to be pulled from later
             foreach (string file in files)
             {
                 try

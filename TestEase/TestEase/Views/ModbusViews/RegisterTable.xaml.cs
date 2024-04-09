@@ -13,6 +13,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
 	{
 		InitializeComponent();
     }
+    //handles each time a radiobutton is checked based on what register type you're dealing with
     private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         var rButton = sender as RadioButton;        
@@ -26,6 +27,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                 return;
             } else
             {
+                //depending on which radio button is checked, it sets the tabname to display which tab for which radio button
                 string tabName = "";
 
                 if (rButton == DiscreteInputsRadioButton)
@@ -251,7 +253,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
         var viewModel = this.BindingContext as ModbusPageViewModel;
         viewModel?.SelectedServer.FilterModifiedRegisters(e.Value);
     }
-
+    //handles when you right click a register and pause/play 
     private void PlayClicked(object sender, EventArgs e)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
