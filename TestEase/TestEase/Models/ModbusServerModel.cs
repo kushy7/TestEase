@@ -12,6 +12,7 @@ using static EasyModbus.ModbusServer;
 
 namespace TestEase.Models
 {
+    //various fields for the overall modbus server
     public class ModbusServerModel : INotifyPropertyChanged
     {
         public int Port { get; set; }
@@ -32,6 +33,7 @@ namespace TestEase.Models
 
         public ModbusServer Server { get; set; }
 
+        //initiates a new config for each server
         public ConfigurationModel _workingConfiguration = new ConfigurationModel();
         public ConfigurationModel WorkingConfiguration
         {
@@ -46,6 +48,8 @@ namespace TestEase.Models
             }
         }
 
+
+        //keeps track for if the config has been saved yet
         public bool _isNotSaved = true;
 
         public bool IsNotSaved
@@ -61,8 +65,7 @@ namespace TestEase.Models
             }
         }
 
-        // public ConfigurationModel WorkingConfiguration { get; set; } = new ConfigurationModel();
-
+        //creates and initializes all the registers
         public ModbusServerModel(int port)
         {
             this.Port = port;
@@ -258,6 +261,7 @@ namespace TestEase.Models
             };
         }
 
+        //clear and then repopulate the items (when loading a config)
         public void UpdateRegisterCollections()
         {
 
@@ -401,6 +405,7 @@ namespace TestEase.Models
             }
         }
 
+        //switches which regsiter type is being shown in the table while also keeping track of if the "only configured" option is selected
         public void SwitchTab(string tabName)
         {
             CurrentTabName = tabName; // Keep track of the current tab

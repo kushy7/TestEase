@@ -10,7 +10,7 @@ using System.Xml.Linq;
 namespace TestEase.Models
 {
 
-    // [JsonDerivedType(typeof(RegisterModel), typeDiscriminator: "base")]
+    //this is how the json files for configs know how to label each register type
     [JsonDerivedType(typeof(CoilOrDiscrete), typeDiscriminator: "coilOrDiscrete")]
     [JsonDerivedType(typeof(Fixed<short>), typeDiscriminator: "fixedShort")]
     [JsonDerivedType(typeof(Fixed<float>), typeDiscriminator: "fixedFloat")]
