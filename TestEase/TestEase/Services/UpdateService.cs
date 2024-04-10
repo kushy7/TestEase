@@ -23,11 +23,18 @@ namespace TestEase.Services
         private const string repo = "2024SpringTeam31-Hitachi-2";
         private string gitHubReleaseUrl = $"{gitHubEndpoint}/repos/{org}/{repo}/releases/latest";
         private string gitHubAssetUrl = $"{gitHubEndpoint}/repos/{org}/{repo}/releases/assets/";
+        private string gitHubUpdaterUrl = $"{gitHubEndpoint}/repos/{org}/{repo}/releases/assets/270";
         private readonly HttpClient _httpClient;
         private bool updateAvailable = false;
         private static string parentPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).FullName;
-        private readonly string outputPath = Path.Combine(parentPath, "publish.zip");
+        private readonly string outputPathAsset = Path.Combine(parentPath, "publish.zip");
+        private readonly string outputPathUpdater = Path.Combine(parentPath, "updater.zip");
+
         private readonly string executablePath = Path.Combine(parentPath, "publish\\TestEase.exe");
+        private readonly string executableUpdater = Path.Combine(parentPath, "updater\\updater\\TestEaseUpdater.exe");
+
+
+        private string gitHubReleaseVersion = "";
         
         public UpdateService()
         {
@@ -55,6 +62,7 @@ namespace TestEase.Services
                     if (root.TryGetProperty("tag_name", out JsonElement tagNameElement))
                     {
                         string tagName = tagNameElement.GetString();
+                        gitHubReleaseVersion = tagName;
                         if (tagName.StartsWith("v"))
                         {
                             tagName = tagName.Substring(1);
@@ -105,7 +113,34 @@ namespace TestEase.Services
             getLatestVersion();
             return updateAvailable;
         }
+        public async Task DownloadUpdater()
+        {
+            var currentAcceptHeader = _httpClient.DefaultRequestHeaders.Accept.FirstOrDefault();
 
+
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/octet-stream"));
+            var response = await _httpClient.GetAsync(gitHubUpdaterUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                using (var fileStream = File.Create(outputPathUpdater))
+                using (var httpStream = await response.Content.ReadAsStreamAsync())
+                {
+                    await httpStream.CopyToAsync(fileStream);
+                }
+                Trace.WriteLine("Download Success", outputPathUpdater);
+            }
+            else
+            {
+                throw new Exception($"Failed to download file. HTTP response code: {response.StatusCode}");
+            }
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            if (currentAcceptHeader != null)
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Add(currentAcceptHeader);
+            }
+        }
         public async Task DownloadGitHubReleaseAsset(string assetUrl)
         {
 
@@ -118,12 +153,12 @@ namespace TestEase.Services
 
             if (response.IsSuccessStatusCode)
             {
-                using (var fileStream = File.Create(outputPath))
+                using (var fileStream = File.Create(outputPathAsset))
                 using (var httpStream = await response.Content.ReadAsStreamAsync())
                 {
                     await httpStream.CopyToAsync(fileStream);
                 }
-                Trace.WriteLine("Download Success", outputPath);
+                Trace.WriteLine("Download Success", outputPathAsset);
             }
             else
             {
@@ -139,12 +174,43 @@ namespace TestEase.Services
 
         public void ExtractZipFile()
         {
-            System.IO.Compression.ZipFile.ExtractToDirectory(outputPath, Path.Combine(parentPath, "publish"));
+            if(!Directory.Exists(Path.Combine(parentPath, "publish")))
+            {
+                System.IO.Compression.ZipFile.ExtractToDirectory(outputPathAsset, Path.Combine(parentPath, "publish"));
+            } else
+            {
+                Trace.WriteLine("Publish already exists");
+            }
+
+            if (!Directory.Exists(Path.Combine(parentPath, "updater")))
+            {
+                System.IO.Compression.ZipFile.ExtractToDirectory(outputPathUpdater, Path.Combine(parentPath, "updater"));
+            }
+            else
+            {
+                Trace.WriteLine("Updater already exists");
+            }
+
+
         }
 
-        public void OpenExeFile()
+
+
+        public void performUpdate()
         {
-            System.Diagnostics.Process.Start(executablePath);
+            var startInfo = new ProcessStartInfo
+            {
+               FileName = executableUpdater,
+                Arguments = executablePath,
+
+            };
+        
+        
+            Process.Start(startInfo);
+
+            Application.Current.Quit();
+
+
         }
 
         public bool isUpdateAvailable()
@@ -157,13 +223,18 @@ namespace TestEase.Services
             return gitHubAssetUrl;
         }
 
-        
+        public string getGitHubReleaseVersion()
+        {
+            return gitHubReleaseVersion;
+        }
 
-        
-
-        
 
 
-        
+
+
+
+
+
+
     }
 }

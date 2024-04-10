@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TestEase.Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TestEase.ViewModels
 {
@@ -23,17 +24,30 @@ namespace TestEase.ViewModels
 
         public ICommand CheckForUpdatesCommand { get; }
 
+        public string AppVersion
+        {
+            get
+            {
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                return $"Version {version.Major}.{version.Minor}.{version.Build}";
+            }
+        }
+
+
         private async Task CheckForUpdates()
         {
 
             if (_updateService.isUpdateAvailable())
             {
-                bool ans = await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Update Available!", "There is a new version of TestEase available, click the 'Update' button to install.", "Later", "Update");
+                string version = _updateService.getGitHubReleaseVersion();
+                bool ans = await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Update Available!", $"There is a new version {version} of TestEase available, click the 'Update' button to install.", "Later", "Update");
                 if (!ans)
                 {
                     await _updateService.DownloadGitHubReleaseAsset(_updateService.getAssetUrl());
+                    await _updateService.DownloadUpdater();
                     _updateService.ExtractZipFile();
-                    _updateService.OpenExeFile();
+                    _updateService.performUpdate();
+
                 }
             }
             else
