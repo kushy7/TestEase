@@ -45,6 +45,7 @@ namespace TestEase.Services
             updateAvailable = checkForUpdate();
         }
 
+        //This method polls the github release section of the repo and checks for the latest release. It will then check that latest release version against the current application version to see if an update is available
         public async void getLatestVersion()
         {
             var response = await _httpClient.GetAsync(gitHubReleaseUrl);
@@ -67,17 +68,37 @@ namespace TestEase.Services
                         {
                             tagName = tagName.Substring(1);
                         }
-                        String current = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString();
 
-                        Trace.WriteLine("RELEASE TAG " + tagName);
-                        Trace.WriteLine("CURRENT TAG " + current);
-
-                        int releaseVersion = Convert.ToInt32(tagName);
-                        int currentVersion = Convert.ToInt32(current);
-                        if (releaseVersion > currentVersion)
+                        // Fills the version string to have at least a major and minor version so that it can be converted to a version object
+                        string[] versionParts = tagName.Split('.');
+                        while (versionParts.Length < 2)
                         {
-                            updateAvailable = true;
+                            tagName += ".0";
+                            versionParts = tagName.Split('.');
                         }
+
+                        Version current = Assembly.GetExecutingAssembly().GetName().Version;
+                        Version releaseVersion = new Version(tagName);
+
+
+                        Trace.WriteLine("RELEASE TAG " + releaseVersion.ToString());
+                        Trace.WriteLine("CURRENT TAG " + current.ToString());
+
+                        //int releaseVersion = Convert.ToInt32(tagName);
+                        //int currentVersion = Convert.ToInt32(current);
+                        //if (releaseVersion > currentVersion)
+                        //{
+                        //    updateAvailable = true;
+                        //}
+
+                        int comparison = current.CompareTo(releaseVersion);
+                        if (comparison < 0)
+                        {
+                            // Current version is less than the release version
+                            updateAvailable = true;
+                            Trace.WriteLine("Update AVAIALABLE YESSS");
+                        }
+                      
                     }
                     else
                     {
@@ -107,12 +128,15 @@ namespace TestEase.Services
             }
         }
 
+        // Returns whether update is available or not
         public bool checkForUpdate()
         {
             Trace.WriteLine("Is update available: " + updateAvailable);
             getLatestVersion();
             return updateAvailable;
         }
+
+        // Downlaods the seperate updater application that aids in the transfer from old to new TestEase Application
         public async Task DownloadUpdater()
         {
             var currentAcceptHeader = _httpClient.DefaultRequestHeaders.Accept.FirstOrDefault();
@@ -141,6 +165,8 @@ namespace TestEase.Services
                 _httpClient.DefaultRequestHeaders.Accept.Add(currentAcceptHeader);
             }
         }
+
+        // Downloads the latest version of TestEase from github release
         public async Task DownloadGitHubReleaseAsset(string assetUrl)
         {
 
@@ -172,6 +198,7 @@ namespace TestEase.Services
 
         }
 
+        // Extracts both the TestEase zip file and the TestEaseUpdater zip file after they are downloaded
         public void ExtractZipFile()
         {
             if(!Directory.Exists(Path.Combine(parentPath, "publish")))
@@ -195,7 +222,7 @@ namespace TestEase.Services
         }
 
 
-
+        // Starts the updater application which will handle the opening of the new TestEase Version
         public void performUpdate()
         {
             var startInfo = new ProcessStartInfo
