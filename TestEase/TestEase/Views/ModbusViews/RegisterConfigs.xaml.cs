@@ -11,6 +11,7 @@ public partial class RegisterConfigs : ContentView
         InitializeComponent();
     }
 
+    //clears the current configurations options and gives a blank slate of registers to work with
     private async void New_Clicked(object sender, EventArgs e)
     {
         // Assuming your ViewModel is bound as the DataContext or BindingContext
@@ -18,6 +19,7 @@ public partial class RegisterConfigs : ContentView
 
         if (viewModel.SelectedServer.IsNotSaved)
         {
+            //notifies user if the config isnt saved
             bool isUserSure = await Application.Current.MainPage.DisplayAlert("Confirmation", "Your working configuration has not yet been saved, continue?", "Yes", "No");
             if (!isUserSure)
                 return;
@@ -28,6 +30,7 @@ public partial class RegisterConfigs : ContentView
         viewModel.SelectedServer.ResetRegistersToDefault();
     }
 
+    //saves the config as "new config" since no name is specified
     private async void Save_Clicked(object sender, EventArgs e)
     {
         var viewModel = this.BindingContext as ModbusPageViewModel;
@@ -62,7 +65,7 @@ public partial class RegisterConfigs : ContentView
         }
     }
 
-
+    //saves the config as whatever the user specifies when prompted
     private async void SaveAs_Clicked(object sender, EventArgs e)
     {
         var viewModel = this.BindingContext as ModbusPageViewModel;

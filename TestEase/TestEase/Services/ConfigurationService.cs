@@ -10,6 +10,7 @@ using TestEase.Models;
 using TestEase.ViewModels;
 
 
+//file that allows for the saving and opening of the configuration files
 namespace TestEase.Services
 {
     public class ConfigurationService
@@ -17,6 +18,7 @@ namespace TestEase.Services
 
         private static JsonSerializerOptions _options;
 
+        //overall setting for the json serialization
         static ConfigurationService()
         {
             _options = new JsonSerializerOptions
@@ -26,6 +28,7 @@ namespace TestEase.Services
             };
         }
 
+        //ensure or create the folder path for saving the config files exists
         public string GetFolderPath()
         {
             string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Test Ease");
@@ -36,6 +39,7 @@ namespace TestEase.Services
             return folderPath;
         }
 
+        //saves the config in json
         public async Task SaveConfigurationAsync<T>(T configuration, string filename)
         {
             string fullPath = Path.Combine(GetFolderPath(), filename);
@@ -43,6 +47,7 @@ namespace TestEase.Services
             await File.WriteAllTextAsync(fullPath, json);
         }
 
+        //desearlizes the json back into register objects
         public async Task<T> LoadConfigurationAsync<T>(string filename)
         {
             string fullPath = Path.Combine(GetFolderPath(), filename);
@@ -54,35 +59,10 @@ namespace TestEase.Services
 
             return default;
 
-            //var service = new ConfigurationService();
-
-            //string folderPath = service.GetFolderPath();
-            //string[] files = Directory.GetFiles(folderPath, "*.json");
-
-            //foreach (string file in files)
-            //{
-            //    try
-            //    {
-            //        string jsonContent = await File.ReadAllTextAsync(file);
-            //        ConfigurationModel config = JsonSerializer.Deserialize<ConfigurationModel>(jsonContent);
-            //        if (config != null)
-            //        {
-            //            appViewModel.Configurations.Add(config);
-            //        }
-            //    }
-            //    catch (JsonException jsonEx)
-            //    {
-            //        // Handle JSON-specific exceptions, e.g., malformed JSON
-            //        await Current.MainPage.DisplayAlert("Error", $"JSON Error from file {file}: {jsonEx.Message}", "OK");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        // Handle other exceptions, e.g., file read errors
-            //        await Current.MainPage.DisplayAlert("Error", $"Error loading configuration from file {file}: {ex.Message}", "OK");
-            //    }
-            //}
+            
         }
 
+        //the "folder" button in the top right of the saved configurations list
         public void OpenConfigurationFolderInExplorer()
         {
             string folderPath = GetFolderPath();
