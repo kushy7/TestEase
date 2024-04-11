@@ -35,9 +35,9 @@
     <Color x:Key="HitachiRed">#EC001E</Color>
     
     <!-- Dark mode -->
-    <Color x:Key="BgDark">#222831</Color>
+    <Color x:Key="BgDark">#CE33FF</Color>
     <Color x:Key="BorderDark">#00ADB5</Color>
-    <Color x:Key="ContainerDark">#393E46</Color>
+    <Color x:Key="ContainerDark">#5F1078</Color>
 
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
