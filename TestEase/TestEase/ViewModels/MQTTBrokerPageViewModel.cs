@@ -182,6 +182,18 @@ namespace TestEase.ViewModels
             }
         }
 
+        public void ClearMessages()
+        {
+            _mqttBroker.ReceivedMessages.Clear();
+            FilterMessages();
+        }
+
+        public void DeleteMessage(string m)
+        {
+            _mqttBroker.ReceivedMessages.Remove(m);
+            FilterMessages();
+        }
+
         public void ToggleCommand(CustomColor greenColor, CustomColor redColor)
         {
             if (IsBrokerRunning)
