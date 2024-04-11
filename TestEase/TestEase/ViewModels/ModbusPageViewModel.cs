@@ -33,10 +33,6 @@ namespace TestEase.ViewModels
                 {
                     _selectedServer = value;
                     OnPropertyChanged(nameof(SelectedServer));
-                    //if (CurrentItems != null)
-                    //{
-                    //    UpdateRegisterCollections();
-                    //}
                     
                 }
             }
