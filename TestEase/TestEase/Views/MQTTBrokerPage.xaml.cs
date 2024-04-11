@@ -45,5 +45,28 @@ namespace TestEase.Views
             var redColor = new CustomColor(255, 0, 0);
             _viewModel.ToggleCommand(greenColor, redColor);
         }
+
+        // Delete method (appears when message is right clicked), deletes selected message
+        private void OnDeleteClicked(object sender, EventArgs e)
+        {
+            var vm = this.BindingContext as MQTTBrokerPageViewModel;
+            var menuItem = (MenuItem)sender;
+            var item = (string)menuItem.BindingContext;
+
+            if (item != null)
+            {
+                // vm.AppViewModel.ModbusServers.Remove(vm.AppViewModel.ModbusServers.FirstOrDefault(s => s.Port == item.Port));
+                vm.DeleteMessage(item);
+            }
+        }
+
+        // Clear button method, deletes the entire list of messages
+        private void OnClearClicked(object sender, EventArgs e)
+        {
+            var vm = this.BindingContext as MQTTBrokerPageViewModel;
+            vm.ClearMessages();
+        }
+
+
     }
 }
