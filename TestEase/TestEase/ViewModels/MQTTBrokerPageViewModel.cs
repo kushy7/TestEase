@@ -191,6 +191,20 @@ namespace TestEase.ViewModels
                 FilteredMessages = new ObservableCollection<string>(filtered);
             }
         }
+
+
+        public void ClearMessages()
+        {
+            _mqttBroker.ReceivedMessages.Clear();
+            FilterMessages();
+        }
+
+        public void DeleteMessage(string m)
+        {
+            _mqttBroker.ReceivedMessages.Remove(m);
+            FilterMessages();
+        }
+        
         //starts or stops the broker depending on when the button is clicked and raises event to change color
         //of the ellipse based on whether it is on or off
         public void ToggleCommand(CustomColor greenColor, CustomColor redColor)

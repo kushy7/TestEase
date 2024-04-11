@@ -89,8 +89,8 @@ public class MqttBrokerModel : INotifyPropertyChanged
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                ReceivedMessages.Add($"[{DateTime.Now}] {e.ClientId}:\n{e.ApplicationMessage.Topic}\n{System.Text.Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
-
+                // Add messages to the top
+                ReceivedMessages.Insert(0, $"[{DateTime.Now}] {e.ClientId}:\n{e.ApplicationMessage.Topic}\n{System.Text.Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
                 // Increment client message count
                 int currentCount;
                 ClientMessagesSent.TryGetValue(e.ClientId, out currentCount);

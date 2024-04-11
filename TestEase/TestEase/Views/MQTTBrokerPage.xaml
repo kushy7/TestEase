@@ -97,14 +97,26 @@
                 <Frame BorderColor="Black" Padding="5" Margin="0,0,0,10">
                     <Label Text="Messages" FontSize="Title" HorizontalOptions="Center" />
                 </Frame>
-                <SearchBar Placeholder="Filter messages" Text="{Binding SearchText, Mode=TwoWay}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <SearchBar Placeholder="Filter messages" Text="{Binding SearchText, Mode=TwoWay}" Grid.Column="0"/>
+                    <Button Text="Clear" Clicked="OnClearClicked" Grid.Column="1"/>
+                </Grid>
+                
                 <ListView Grid.Column="1" Grid.ColumnSpan="4"
                     Grid.Row="0" Grid.RowSpan="4"
                     BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
                     ItemsSource="{Binding FilteredMessages}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding}" />
+                            <TextCell Text="{Binding}">
+                                <TextCell.ContextActions>
+                                    <MenuItem Text="Delete" Clicked="OnDeleteClicked" />
+                                </TextCell.ContextActions>
+                            </TextCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
