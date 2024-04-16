@@ -285,11 +285,17 @@ namespace TestEase.ViewModels
         {
             AppViewModel = appViewModel;
 
-            Trace.WriteLine("Started server"); // DELETE
-            SelectedServer = new ModbusServerModel(502);
-            SelectedServer.StartServer();
-            SelectedServer.IsRunning = true;
-            AppViewModel.ModbusServers.Add(SelectedServer);
+            if (AppViewModel.ModbusServers.Count == 0)
+            {
+                SelectedServer = new ModbusServerModel(502);
+                SelectedServer.StartServer();
+                SelectedServer.IsRunning = true;
+                AppViewModel.ModbusServers.Add(SelectedServer);
+            } else
+            {
+                SelectedServer = AppViewModel.ModbusServers[0];
+            }
+            
 
             LoadConfigurations();
 

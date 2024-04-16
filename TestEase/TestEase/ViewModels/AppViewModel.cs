@@ -56,7 +56,10 @@ namespace TestEase.ViewModels
 
         public void SaveServers(string filePath)
         {
-            var jsonString = JsonSerializer.Serialize(ModbusServers);
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            options.Converters.Add(new ModbusServerModelConverter());
+
+            string jsonString = JsonSerializer.Serialize(ModbusServers, options);
             File.WriteAllText(filePath, jsonString);
         }
 
@@ -65,7 +68,9 @@ namespace TestEase.ViewModels
             if (File.Exists(filePath))
             {
                 var jsonString = File.ReadAllText(filePath);
-                var servers = JsonSerializer.Deserialize<ObservableCollection<ModbusServerModel>>(jsonString);
+                var options = new JsonSerializerOptions();
+                options.Converters.Add(new ModbusServerModelConverter());
+                var servers = JsonSerializer.Deserialize<ObservableCollection<ModbusServerModel>>(jsonString, options);
                 if (servers != null)
                 {
                     ModbusServers.Clear();

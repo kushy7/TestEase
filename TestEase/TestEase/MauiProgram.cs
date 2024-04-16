@@ -11,11 +11,14 @@ using System.Runtime.CompilerServices;
 using Microsoft.Maui.Hosting;
 using Microsoft.UI.Xaml;
 using System.Diagnostics;
+using Microsoft.UI.Windowing;
 
 namespace TestEase
 {
     public static class MauiProgram
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -27,7 +30,7 @@ namespace TestEase
 
 
 
-            //code to maximize application on startup
+            //code to maximize application on startup and save server info 
 #if WINDOWS
             builder.ConfigureLifecycleEvents(events =>
             {
@@ -42,9 +45,9 @@ namespace TestEase
                         {
                             p.Maximize();
                         }
+                        // ON APP CLOSE, SAVE SERVERS AND THEIR CONFIGS
                         window.AppWindow.Closing += (o, e) =>
                         {
-                            Trace.WriteLine("EXITING!");
                             OnAppStopping(o, e);
                         };
                     });
@@ -72,32 +75,32 @@ namespace TestEase
 
             var app = builder.Build();
 
+            ServiceProvider = app.Services; // Storing the service provider
+
+            // Load the servers from local json
+            // Located somewhere like this: C:\Users\<name>\AppData\Local\Packages\com.companyname.testease_9zz4h110yvjzm\LocalState
+            OnAppStarting();
+
             return app;
         }
 
-        private static void OnAppStopping(object sender, Microsoft.UI.Windowing.AppWindowClosingEventArgs e)
+        private static void OnAppStopping(object sender, AppWindowClosingEventArgs e)
         {
-            Trace.WriteLine("EXITING possibly?");
-            Trace.WriteLine(sender);
-            if (sender is MauiApp app2)
+            var appViewModel = MauiProgram.ServiceProvider.GetService<AppViewModel>();
+            if (appViewModel != null)
             {
-                Trace.WriteLine("EXITING maybe?");
-                var appViewModel = app2.Services.GetService<AppViewModel>();
                 string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
-                appViewModel?.SaveServers(filePath);
-                Trace.WriteLine(filePath);
-                Trace.WriteLine("EXITING FOR REAL!");
-                Process.Start("explorer.exe", filePath);
+                appViewModel.SaveServers(filePath);
             }
-            if (sender is Microsoft.UI.Windowing.AppWindow app)
+        }
+
+        private static void OnAppStarting()
+        {
+            var appViewModel = MauiProgram.ServiceProvider.GetService<AppViewModel>();
+            if (appViewModel != null)
             {
-                Trace.WriteLine("EXITING maybe?");
-                var appViewModel = app.Services.GetService<AppViewModel>();
                 string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
-                appViewModel?.SaveServers(filePath);
-                Trace.WriteLine(filePath);
-                Trace.WriteLine("EXITING FOR REAL!");
-                Process.Start("explorer.exe", filePath);
+                appViewModel.LoadServers(filePath);
             }
         }
     }
