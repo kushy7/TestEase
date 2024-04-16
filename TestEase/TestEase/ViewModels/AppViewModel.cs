@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestEase.Models;
+using System.Text.Json;
 
 namespace TestEase.ViewModels
 {
@@ -49,6 +50,29 @@ namespace TestEase.ViewModels
                 {
                     _configurations = value;
                     OnPropertyChanged(nameof(Configurations));
+                }
+            }
+        }
+
+        public void SaveServers(string filePath)
+        {
+            var jsonString = JsonSerializer.Serialize(ModbusServers);
+            File.WriteAllText(filePath, jsonString);
+        }
+
+        public void LoadServers(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                var jsonString = File.ReadAllText(filePath);
+                var servers = JsonSerializer.Deserialize<ObservableCollection<ModbusServerModel>>(jsonString);
+                if (servers != null)
+                {
+                    ModbusServers.Clear();
+                    foreach (var server in servers)
+                    {
+                        ModbusServers.Add(server);
+                    }
                 }
             }
         }

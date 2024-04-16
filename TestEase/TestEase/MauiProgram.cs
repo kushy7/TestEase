@@ -5,6 +5,12 @@ using CommunityToolkit.Maui;
 using TestEase.Services;
 using Microsoft.Maui.Platform;
 using Microsoft.Maui.LifecycleEvents;
+using TestEase.WinUI;
+using Moq;
+using System.Runtime.CompilerServices;
+using Microsoft.Maui.Hosting;
+using Microsoft.UI.Xaml;
+using System.Diagnostics;
 
 namespace TestEase
 {
@@ -36,6 +42,11 @@ namespace TestEase
                         {
                             p.Maximize();
                         }
+                        window.AppWindow.Closing += (o, e) =>
+                        {
+                            Trace.WriteLine("EXITING!");
+                            OnAppStopping(o, e);
+                        };
                     });
                 });
             });
@@ -58,7 +69,36 @@ namespace TestEase
             builder.Services.AddTransient<MQTTBrokerPage>();
             builder.Services.AddTransient<AboutPageViewModel>();
             builder.Services.AddTransient<AboutPage>();
-            return builder.Build();
+
+            var app = builder.Build();
+
+            return app;
+        }
+
+        private static void OnAppStopping(object sender, Microsoft.UI.Windowing.AppWindowClosingEventArgs e)
+        {
+            Trace.WriteLine("EXITING possibly?");
+            Trace.WriteLine(sender);
+            if (sender is MauiApp app2)
+            {
+                Trace.WriteLine("EXITING maybe?");
+                var appViewModel = app2.Services.GetService<AppViewModel>();
+                string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
+                appViewModel?.SaveServers(filePath);
+                Trace.WriteLine(filePath);
+                Trace.WriteLine("EXITING FOR REAL!");
+                Process.Start("explorer.exe", filePath);
+            }
+            if (sender is Microsoft.UI.Windowing.AppWindow app)
+            {
+                Trace.WriteLine("EXITING maybe?");
+                var appViewModel = app.Services.GetService<AppViewModel>();
+                string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
+                appViewModel?.SaveServers(filePath);
+                Trace.WriteLine(filePath);
+                Trace.WriteLine("EXITING FOR REAL!");
+                Process.Start("explorer.exe", filePath);
+            }
         }
     }
 }
