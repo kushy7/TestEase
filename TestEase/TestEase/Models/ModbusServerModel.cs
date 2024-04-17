@@ -14,7 +14,20 @@ namespace TestEase.Models
 {
     public class ModbusServerModel : INotifyPropertyChanged
     {
-        public int Port { get; set; }
+        private int _port;
+        public int Port
+        {
+            get => _port;
+            set
+            {
+                if (_port != value)
+                {
+                    _port = value;
+                    Server.Port = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private bool _isRunning = false;
         public bool IsRunning
@@ -65,8 +78,9 @@ namespace TestEase.Models
 
         public ModbusServerModel(int port)
         {
+
+            this.Server = new ModbusServer();
             this.Port = port;
-            this.Server = new ModbusServer() { Port = port };
 
             for (int i = 1; i < 65535; i++)
             {

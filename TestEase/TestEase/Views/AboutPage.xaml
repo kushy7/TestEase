@@ -14,6 +14,9 @@
                     IsToggled="True" />
         </HorizontalStackLayout>
 
+
+        <Button Text="Local Session Storage" Clicked="OpenFileExplorer" HorizontalOptions="Center"/>
+
     </VerticalStackLayout>
     
     

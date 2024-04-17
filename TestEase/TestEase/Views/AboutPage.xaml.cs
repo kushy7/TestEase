@@ -1,4 +1,5 @@
 
+using System.Diagnostics;
 using TestEase.ViewModels;
 
 
@@ -24,6 +25,11 @@ public partial class AboutPage : ContentPage
             Application.Current.UserAppTheme = AppTheme.Light;
             Preferences.Set("AppTheme", "Light");
         }
+    }
+
+    private void OpenFileExplorer(object sender, EventArgs e)
+    {
+        Process.Start("explorer.exe", FileSystem.AppDataDirectory);
     }
 
 }
