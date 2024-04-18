@@ -64,6 +64,7 @@ namespace TestEase
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<AppViewModel>();
             builder.Services.AddSingleton<ModbusService>();
+            builder.Services.AddSingleton<UpdateService>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<ModbusPageViewModel>();
