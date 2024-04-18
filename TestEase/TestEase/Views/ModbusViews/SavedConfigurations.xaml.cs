@@ -21,6 +21,7 @@ public partial class SavedConfigurations : ContentView
         s.OpenConfigurationFolderInExplorer();
     }
 
+    //triggers a new config to be loaded into the menu
     private async void OnOpenClicked(object sender, EventArgs e)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
@@ -35,6 +36,7 @@ public partial class SavedConfigurations : ContentView
         var menuItem = (MenuItem)sender;
         var item = (ConfigurationModel) menuItem.BindingContext;
 
+        //clear and populate the new config
         if (item != null)
         {
             vm.SelectedServer.clearServerRegisters();

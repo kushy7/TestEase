@@ -10,7 +10,7 @@ using System.Xml.Linq;
 namespace TestEase.Models
 {
 
-    // [JsonDerivedType(typeof(RegisterModel), typeDiscriminator: "base")]
+    //this is how the json files for configs knows how to label each register type
     [JsonDerivedType(typeof(CoilOrDiscrete), typeDiscriminator: "coilOrDiscrete")]
     [JsonDerivedType(typeof(Fixed<short>), typeDiscriminator: "fixedShort")]
     [JsonDerivedType(typeof(Fixed<float>), typeDiscriminator: "fixedFloat")]
@@ -20,6 +20,8 @@ namespace TestEase.Models
     [JsonDerivedType(typeof(Curve<float>), typeDiscriminator: "curveFloat")]
     [JsonDerivedType(typeof(Linear<short>), typeDiscriminator: "LinearShort")]
     [JsonDerivedType(typeof(Linear<float>), typeDiscriminator: "LinearFloat")]
+
+    //the common fields for all the registers
     public abstract class RegisterModel(int address, RegisterType type, string name)
     {
         public int Address { get; set; } = address;
@@ -28,6 +30,9 @@ namespace TestEase.Models
         public bool IsPlaying { get; set; } = true;
     }
 
+
+
+    //coil and discrete only takes a boolean value
     public class CoilOrDiscrete(int address, RegisterType type, string name, bool value) : RegisterModel(address, type, name)
     {
         public bool Value { get; set; } = value;
@@ -53,6 +58,8 @@ namespace TestEase.Models
     {
     }
 
+
+    //linear increase model that increases up to the upper limit and then back down to the lower limit
     public class Linear<T> : Range<T> where T : IComparable, IConvertible
     {
         public T Increment { get; set; }
@@ -102,7 +109,7 @@ namespace TestEase.Models
         }
     }
 
-
+    //curve model has a period that determines how fast "one" curve takes to complete
     public class Curve<T> : Range<T>
     {
         private int _iterationStep;

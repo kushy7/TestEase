@@ -64,21 +64,5 @@ namespace TestEase
                 }
             }
         }
-
-        //protected override Window CreateWindow(IActivationState activationState)
-        //{
-        //    var window = base.CreateWindow(activationState);
-
-        //    const int newWidth = 1920;
-        //    const int newHeight = 1080;
-
-        //    window.Width = newWidth;
-        //    window.Height = newHeight;
-
-        //    window.X = 0;
-        //    window.Y = 0;
-
-        //    return window;
-        //}
     }
 }

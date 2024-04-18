@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestEase.Models
 {
+    //enum for the four different register types
     public enum RegisterType
     {
         Coil,

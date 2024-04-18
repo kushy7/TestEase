@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace TestEase.Models
 {
+    //each configuration file has a list of the models and a name
     public class ConfigurationModel : INotifyPropertyChanged
     {
         public List<RegisterModel> RegisterModels { get; set; }
@@ -24,12 +25,14 @@ namespace TestEase.Models
             }
         }
 
+        //defaults the name to new config
         public ConfigurationModel()
         {
             RegisterModels = new List<RegisterModel>();
             Name = "new config";
         }
 
+        //this lets the user set the name
         public ConfigurationModel(string name)
         {
             RegisterModels = new List<RegisterModel>();
@@ -42,6 +45,7 @@ namespace TestEase.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        //adds all the registers options/settings into the config
         public ConfigurationModel DeepCopy()
         {
             ConfigurationModel copy = new ConfigurationModel(Name);

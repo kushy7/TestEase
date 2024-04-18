@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestEase.Helpers
 {
+
+    //Value generators that aids in the register settings gernation of linear, random, and curve
     public class ValueGenerators
     {
-
+        //random values 
         private static readonly Random random = new Random();
 
         public static short GenerateRandomValueShort(short lowerBound, short upperBound)
@@ -22,44 +24,20 @@ namespace TestEase.Helpers
         }
 
 
+        //creates the two arrays needed for converting floats into two shorts for CoreTec
         public static short[] GenerateShortArrayFromFloat(float floatInput)
         {
             byte[] floatBytes = BitConverter.GetBytes(floatInput);
             short firstShort = BitConverter.ToInt16(floatBytes, 0);
             short secondShort = BitConverter.ToInt16(floatBytes, 2);
             short[] shortArray = new short[2];
+            //flip these values if you want to flip what registers the values go into (since coretec wants them flipped)
             shortArray[0] = firstShort;
             shortArray[1] = secondShort;
             return shortArray;
         }
 
-        //public static short GetNextSineValue(short currentValue, short startValue, short endValue, int interval)
-        //{
-        //    // Calculate the amplitude of the sine wave
-        //    double amplitude = (endValue - startValue) / 2.0;
-
-        //    // Calculate the midpoint of the sine wave
-        //    double midPoint = (startValue + endValue) / 2.0;
-
-        //    // Calculate the angular frequency (omega)
-        //    double omega = 2 * Math.PI / interval;
-
-        //    // Calculate the current phase theta based on the current value
-        //    // This involves reverse calculation from the sine wave formula: currentValue = midPoint + amplitude * sin(theta)
-        //    double theta = Math.Asin((currentValue - midPoint) / amplitude);
-
-        //    // Increment the phase by omega to get the next point
-        //    theta += omega;
-
-        //    // Calculate the next value using the sine wave formula
-        //    short nextValue = (short)(midPoint + amplitude * Math.Sin(theta));
-
-        //    // Ensure the next value is within the limits
-        //    nextValue = (short)Math.Max(startValue, Math.Min(endValue, nextValue));
-
-        //    return nextValue;
-        //}
-
+        //curve value generation
         public static short GenerateNextSinValue(double startValue, double endValue, int iterationStep, int iterationTotal)
         {
 
@@ -86,6 +64,7 @@ namespace TestEase.Helpers
             return result;
         }
 
+        //linear values
         public static short GenerateLinearValue(int current, int start, int end, int increment, ref bool increasing)
         {
             if (increasing)

@@ -13,6 +13,8 @@ public partial class AboutPage : ContentPage
 		this.BindingContext = vm;
 	}
 
+
+    //theme selector that saves the users prefrence to local storage for future sessions
     private void OnTogged(object sender, ToggledEventArgs e)
     {
         if (e.Value)

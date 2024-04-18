@@ -7,6 +7,8 @@ using MauiGraphicsColor = Microsoft.Maui.Graphics.Color;
 
 namespace TestEase.Helpers
 {
+
+    //custom color helper for the on/off function of the modbus broker
     public class CustomColor
     {
         public byte R { get; set; }
