@@ -493,6 +493,7 @@ namespace TestEase.Models
                 discreteInput.Name = "";
                 discreteInput.IsModified = false; // Assuming you want to reset modification status as well
                 discreteInput.IsPlaying = false;
+                discreteInput.IsFloatHelper = false;
             }
 
             foreach (var coil in Coils)
@@ -501,6 +502,7 @@ namespace TestEase.Models
                 coil.Name = "";
                 coil.IsModified = false;
                 coil.IsPlaying = false;
+                coil.IsFloatHelper = false;
             }
 
             // Reset InputRegisters and HoldingRegisters to 0
@@ -510,6 +512,7 @@ namespace TestEase.Models
                 inputRegister.Name = "";
                 inputRegister.IsModified = false;
                 inputRegister.IsPlaying = false;
+                inputRegister.IsFloatHelper = false;
             }
 
             foreach (var holdingRegister in HoldingRegisters)
@@ -518,6 +521,7 @@ namespace TestEase.Models
                 holdingRegister.Name = "";
                 holdingRegister.IsModified = false;
                 holdingRegister.IsPlaying = false;
+                holdingRegister.IsFloatHelper = false;
             }
 
             // Notify the UI if necessary
