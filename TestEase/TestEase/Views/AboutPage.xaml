@@ -30,4 +30,8 @@
         </VerticalStackLayout>
     </Grid>
 
+        <Button Text="Local Session Storage" Clicked="OpenFileExplorer" HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+
 </ContentPage>

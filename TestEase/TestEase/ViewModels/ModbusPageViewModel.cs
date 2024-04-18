@@ -288,16 +288,19 @@ namespace TestEase.ViewModels
         {
             AppViewModel = appViewModel;
 
-            Trace.WriteLine("Started server"); // DELETE
-            //sets the selected server with the port number
-            SelectedServer = new ModbusServerModel(502);
-            //starts the server to make it active
-            SelectedServer.StartServer();
-            //lets the app know that the server is running
-            SelectedServer.IsRunning = true;
-            //add the selected server thats started to the list of modbus servers
-            AppViewModel.ModbusServers.Add(SelectedServer);
-            //loads all configurations that have been saved to pull from later once server is started
+            if (AppViewModel.ModbusServers.Count == 0)
+            {
+                SelectedServer = new ModbusServerModel(502);
+                SelectedServer.StartServer();
+                SelectedServer.IsRunning = true;
+                AppViewModel.ModbusServers.Add(SelectedServer);
+            } else
+            {
+                SelectedServer = AppViewModel.ModbusServers[0];
+            }
+            
+
+
             LoadConfigurations();
 
         }
