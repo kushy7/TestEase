@@ -5,11 +5,20 @@ using CommunityToolkit.Maui;
 using TestEase.Services;
 using Microsoft.Maui.Platform;
 using Microsoft.Maui.LifecycleEvents;
+using TestEase.WinUI;
+using Moq;
+using System.Runtime.CompilerServices;
+using Microsoft.Maui.Hosting;
+using Microsoft.UI.Xaml;
+using System.Diagnostics;
+using Microsoft.UI.Windowing;
 
 namespace TestEase
 {
     public static class MauiProgram
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -21,7 +30,7 @@ namespace TestEase
 
 
 
-            //code to maximize application on startup
+            //code to maximize application on startup and save server info 
 #if WINDOWS
             builder.ConfigureLifecycleEvents(events =>
             {
@@ -36,6 +45,11 @@ namespace TestEase
                         {
                             p.Maximize();
                         }
+                        // ON APP CLOSE, SAVE SERVERS AND THEIR CONFIGS
+                        window.AppWindow.Closing += (o, e) =>
+                        {
+                            OnAppStopping(o, e);
+                        };
                     });
                 });
             });
@@ -59,7 +73,36 @@ namespace TestEase
             builder.Services.AddTransient<MQTTBrokerPage>();
             builder.Services.AddTransient<AboutPageViewModel>();
             builder.Services.AddTransient<AboutPage>();
-            return builder.Build();
+
+            var app = builder.Build();
+
+            ServiceProvider = app.Services; // Storing the service provider
+
+            // Load the servers from local json
+            // Located somewhere like this: C:\Users\<name>\AppData\Local\Packages\com.companyname.testease_9zz4h110yvjzm\LocalState
+            OnAppStarting();
+
+            return app;
+        }
+
+        private static void OnAppStopping(object sender, AppWindowClosingEventArgs e)
+        {
+            var appViewModel = MauiProgram.ServiceProvider.GetService<AppViewModel>();
+            if (appViewModel != null)
+            {
+                string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
+                appViewModel.SaveServers(filePath);
+            }
+        }
+
+        private static void OnAppStarting()
+        {
+            var appViewModel = MauiProgram.ServiceProvider.GetService<AppViewModel>();
+            if (appViewModel != null)
+            {
+                string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
+                appViewModel.LoadServers(filePath);
+            }
         }
     }
 }
