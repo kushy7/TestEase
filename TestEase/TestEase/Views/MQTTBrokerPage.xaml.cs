@@ -27,6 +27,7 @@ namespace TestEase.Views
             });
         }
 
+        //creates the circle to display the current running status of the broker
         private Grid CreateStatusIndicator(CustomColor color, string text)
         {
             return new Grid
@@ -39,6 +40,7 @@ namespace TestEase.Views
             };
         }
 
+        //changes the color of the mqtt broker status circle to green when it is turned on
         public void ToggleCommand(object sender, EventArgs e)
         {
             var greenColor = new CustomColor(0, 255, 0);

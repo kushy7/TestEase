@@ -9,8 +9,9 @@ using EasyModbus;
 using TestEase.Helpers;
 using TestEase.Models;
 using TestEase.ViewModels;
-//using Windows.Graphics.Printing3D;
 
+
+//this is the service that updates the values for each register every 3 seconds
 namespace TestEase.Services
 {
     public class ModbusService(AppViewModel appViewModel)
@@ -21,7 +22,7 @@ namespace TestEase.Services
         private int _iterationStep = 0;
 
 
-
+        //updates the values depending on the "interval" passed into this function
         public void StartPeriodicUpdate(TimeSpan interval)
         {
             _updateTimer = new Timer(UpdateRegistersCallback, null, TimeSpan.Zero, interval);

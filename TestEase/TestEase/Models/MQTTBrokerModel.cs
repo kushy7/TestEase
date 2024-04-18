@@ -7,6 +7,8 @@ using MQTTnet;
 using MQTTnet.Client.Receiving;
 using MQTTnet.Server;
 
+
+//each broker keeps track of clients, messages, and client connect start time
 public class MqttBrokerModel : INotifyPropertyChanged
 {
     private IMqttServer mqttServer;

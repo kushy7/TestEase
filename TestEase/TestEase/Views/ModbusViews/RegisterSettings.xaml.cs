@@ -12,6 +12,8 @@ public partial class RegisterSettings : ContentView
         InitializeComponent();
     }
 
+
+    //manages the register settings that show up depending on the radiobutton selected
     private void OnRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         if (sender is RadioButton rb && rb.IsChecked)
@@ -21,7 +23,7 @@ public partial class RegisterSettings : ContentView
             LowerValueInput.IsVisible = UpperValueInput.IsVisible = false;
             StartingValueInput.IsVisible = EndingValueInput.IsVisible = PeriodEntry.IsVisible = false;
             LinearConfiguration.IsVisible = false;
-            CurveConfiguration.IsVisible = false; // Ensure this is controlled as well
+            CurveConfiguration.IsVisible = false; 
 
             // Hide or show range-specific radio buttons based on the selection
             var isRangeSelected = RangeRadioButton.IsChecked;
@@ -59,7 +61,7 @@ public partial class RegisterSettings : ContentView
     }
 
 
-
+    //save the registers settings after configuring the options
     private void OnSaveButtonClick(object sender, EventArgs args)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
@@ -97,7 +99,7 @@ public partial class RegisterSettings : ContentView
             }
             // Display to user that changes have been made and the config will need saved
             vm.SelectedServer.IsNotSaved = true;
-            return; // this is dumb
+            return;
         }
         else if (FixedRadioButton.IsChecked && FixedFloatConfiguration.IsChecked && float.TryParse(FixedValueEntry.Text, out float x))
         {

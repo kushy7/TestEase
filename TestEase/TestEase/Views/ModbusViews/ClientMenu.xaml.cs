@@ -11,6 +11,7 @@ public partial class ClientMenu : ContentView
 		InitializeComponent();
     }
 
+    //adds a server with a port of +1 from the last port used
 	private void AddServer(object sender, EventArgs args)
 	{
         var vm = this.BindingContext as ModbusPageViewModel;
@@ -24,6 +25,7 @@ public partial class ClientMenu : ContentView
 		}
 	}
 
+    //functionality to turn off the server when right clicked
     private void OnTurnOnOffClicked(object sender, EventArgs e)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
@@ -46,6 +48,7 @@ public partial class ClientMenu : ContentView
         }
     }
 
+    //deletes the server
     private void OnDeleteClicked(object sender, EventArgs e)
     {
         var vm = this.BindingContext as ModbusPageViewModel;

@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace TestEase.Helpers
 {
-    
+        
+
+        //converter for xaml boolean conversion in the RegisterSettings.xaml file
         public class InverseBooleanConverter : IValueConverter
         {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

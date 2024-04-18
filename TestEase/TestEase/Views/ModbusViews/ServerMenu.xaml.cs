@@ -11,6 +11,8 @@ public partial class ServerMenu : ContentView
 		InitializeComponent();
     }
 
+
+    //adding a new server will make any subsequent servers port to be the last port + 1
 	private void AddServer(object sender, EventArgs args)
 	{
         var vm = this.BindingContext as ModbusPageViewModel;
@@ -46,6 +48,7 @@ public partial class ServerMenu : ContentView
         }
     }
 
+    //delete the server functionality
     private void OnDeleteClicked(object sender, EventArgs e)
     {
         var vm = this.BindingContext as ModbusPageViewModel;
