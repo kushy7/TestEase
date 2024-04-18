@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestEase.Views.AboutPage">
 
-    <Grid>
+    <Grid RowSpacing="10" ColumnSpacing="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -11,9 +11,12 @@
 
         <Label Grid.Row="0" Text="{Binding AppVersion}" HorizontalOptions="End" Margin="0,10,10,0"/>
 
-        <VerticalStackLayout Grid.Row="1">
-
-            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" Spacing="10" Grid.Row="0">
                 <Label Text="Light/Dark"
                     HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Switch Toggled="OnTogged"
@@ -21,17 +24,21 @@
                     IsToggled="True" />
             </HorizontalStackLayout>
 
-            <Button Text="Check for Updates"
-                Command="{Binding CheckForUpdatesCommand}"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"
-                Margin="0,20,0,0" />
+            <VerticalStackLayout Spacing="10" Grid.Row="1" VerticalOptions="End">
+                <Button Text="Check for Updates"
+                        Command="{Binding CheckForUpdatesCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Margin="0,20,0,0" />
 
-        </VerticalStackLayout>
+                <Button Text="Local Session Storage" Clicked="OpenFileExplorer" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            
+
+        </Grid>
     </Grid>
 
-        <Button Text="Local Session Storage" Clicked="OpenFileExplorer" HorizontalOptions="Center"/>
+        
 
-    </VerticalStackLayout>
 
 </ContentPage>
