@@ -130,6 +130,9 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                     var modifiedRegister = viewModel.SelectedServer.WorkingConfiguration.RegisterModels.Find(x => x.Address == selectedRegister.Address);
                     if (modifiedRegister is Fixed<short> fixedShortRegister)
                     {
+                        viewModel.IsFixedSelected = true;
+                        viewModel.IsRangeSelected = false;
+
                         viewModel.FixedEntryText = fixedShortRegister.Value.ToString();
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
@@ -141,6 +144,9 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Fixed<float> fixedFloatRegister)
                     {
+                        viewModel.IsFixedSelected = true;
+                        viewModel.IsRangeSelected = false;
+
                         viewModel.FixedEntryText = fixedFloatRegister.Value.ToString();
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
@@ -152,6 +158,10 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Random<short> randomShortRegister)
                     {
+                        viewModel.IsFixedSelected = false;
+                        viewModel.IsRangeSelected = true;
+                        viewModel.SelectedServer.IsRandomSelected = true;
+
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = randomShortRegister.StartValue.ToString();
                         viewModel.UpperRangeText = randomShortRegister.EndValue.ToString();
@@ -163,6 +173,10 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Random<float> randomFloatRegister)
                     {
+                        viewModel.IsFixedSelected = false;
+                        viewModel.IsRangeSelected = true;
+                        viewModel.SelectedServer.IsRandomSelected = true;
+
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = randomFloatRegister.StartValue.ToString();
                         viewModel.UpperRangeText = randomFloatRegister.EndValue.ToString();
@@ -174,6 +188,10 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.LinearIncrementEntryText = "";
                     } else if (modifiedRegister is Curve<short> curveShortRegister)
                     {
+                        viewModel.IsFixedSelected = false;
+                        viewModel.IsRangeSelected = true;
+                        viewModel.SelectedServer.IsCurveSelected = true;
+
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
@@ -185,6 +203,10 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.PeriodText = curveShortRegister.Period.ToString();
                     } else if (modifiedRegister is Curve<float> curveFloatRegister)
                     {
+                        viewModel.IsFixedSelected = false;
+                        viewModel.IsRangeSelected = true;
+                        viewModel.SelectedServer.IsCurveSelected = true;
+
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
@@ -197,6 +219,10 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                     }
                     else if (modifiedRegister is Linear<float> LinearFloatRegister)
                     {
+                        viewModel.IsFixedSelected = false;
+                        viewModel.IsRangeSelected = true;
+                        viewModel.SelectedServer.IsLinearSelected = true;
+
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";
@@ -209,6 +235,10 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                     }
                     else if (modifiedRegister is Linear<short> LinearShortRegister)
                     {
+                        viewModel.IsFixedSelected = false;
+                        viewModel.IsRangeSelected = true;
+                        viewModel.SelectedServer.IsLinearSelected = true;
+
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
                         viewModel.UpperRangeText = "";

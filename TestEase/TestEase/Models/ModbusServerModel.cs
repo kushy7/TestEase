@@ -191,6 +191,20 @@ namespace TestEase.Models
             // set => _isBooleanRegisterSelected = value;
         }
 
+        private bool _isLinearSelected;
+        public bool IsLinearSelected
+        {
+            get { return _isLinearSelected; }
+            set
+            {
+                if (_isLinearSelected != value)
+                {
+                    _isLinearSelected = value;
+                    OnPropertyChanged(nameof(IsLinearSelected));
+                }
+            }
+        }
+
         private bool _isCurveSelected;
         public bool IsCurveSelected
         {
