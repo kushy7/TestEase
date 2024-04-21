@@ -83,10 +83,11 @@
                     <HorizontalStackLayout IsVisible="{Binding SelectedServer.IsRegisterSelected}">
                         <RadioButton x:Name="FixedRadioButton"
                                      Content="Fixed"
-                                     IsChecked="True"
+                                     IsChecked="{Binding IsFixedSelected}"
                                      CheckedChanged="OnRadioButtonCheckedChanged"/>
                         <RadioButton x:Name="RangeRadioButton"
                                      Content="Range"
+                                     IsChecked="{Binding IsRangeSelected}"
                                      CheckedChanged="OnRadioButtonCheckedChanged"/>
 
                     </HorizontalStackLayout>
@@ -121,21 +122,22 @@
 
                     <HorizontalStackLayout>
                         <RadioButton x:Name="LinearRadioButton"
-                         Content="Linear"
-                        CheckedChanged="OnRadioButtonCheckedChanged"
-                        IsVisible="{Binding Source={x:Reference RangeRadioButton}, Path=IsChecked}" />
+                                     Content="Linear"
+                                     IsChecked="{Binding SelectedServer.IsLinearSelected, Mode=TwoWay}"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"
+                                     IsVisible="{Binding Source={x:Reference RangeRadioButton}, Path=IsChecked}" />
                         <RadioButton x:Name="CurveRadioButton"
-                        IsVisible="false"
-                        Content="Curve"
-                        IsChecked="{Binding SelectedServer.IsCurveSelected, Mode=TwoWay}"
-                        IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>  
+                                     IsVisible="false"
+                                     Content="Curve"
+                                     IsChecked="{Binding SelectedServer.IsCurveSelected, Mode=TwoWay}"
+                                     IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>  
                         <RadioButton x:Name="RandomRadioButton"
-                        IsVisible="false"
-                        Content="Random"
-                        IsChecked="{Binding SelectedServer.IsRandomSelected, Mode=TwoWay}"
-                        IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
-                        CheckedChanged="OnRadioButtonCheckedChanged"/>
+                                     IsVisible="false"
+                                     Content="Random"
+                                     IsChecked="{Binding SelectedServer.IsRandomSelected, Mode=TwoWay}"
+                                     IsEnabled="{Binding Source={x:Reference FixedRadioButton}, Path=IsChecked, Converter={StaticResource InverseBooleanConverter}}"
+                                     CheckedChanged="OnRadioButtonCheckedChanged"/>
                     </HorizontalStackLayout>
 
                     <Grid x:Name="LowerValueInput" ColumnDefinitions="50*, 50*"

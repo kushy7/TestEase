@@ -283,6 +283,34 @@ namespace TestEase.ViewModels
             }
         }
 
+        private bool  _isFixedSelected = false;
+        public bool IsFixedSelected
+        {
+            get => _isFixedSelected;
+            set
+            {
+                if (_isFixedSelected != value)
+                {
+                    _isFixedSelected = value;
+                    OnPropertyChanged(nameof(IsFixedSelected));
+                }
+            }
+        }
+
+        private bool _isRangeSelected = true;
+        public bool IsRangeSelected
+        {
+            get => _isRangeSelected;
+            set
+            {
+                if (_isRangeSelected != value)
+                {
+                    _isRangeSelected = value;
+                    OnPropertyChanged(nameof(IsRangeSelected));
+                }
+            }
+        }
+
         public AppViewModel AppViewModel { get; }
         public ModbusPageViewModel(AppViewModel appViewModel)
         {
