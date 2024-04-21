@@ -77,6 +77,7 @@ namespace TestEase.ViewModels
                     foreach (var server in servers)
                     {
                         ModbusServers.Add(server);
+                        server.UpdateRegisterCollections();
                     }
                 }
             }
