@@ -23,7 +23,7 @@ namespace TestEase.Services
         private const string repo = "2024SpringTeam31-Hitachi-2";
         private string gitHubReleaseUrl = $"{gitHubEndpoint}/repos/{org}/{repo}/releases/latest";
         private string gitHubAssetUrl = $"{gitHubEndpoint}/repos/{org}/{repo}/releases/assets/";
-        private string gitHubUpdaterUrl = $"{gitHubEndpoint}/repos/{org}/{repo}/releases/assets/270";
+        private string gitHubUpdaterUrl = $"{gitHubEndpoint}/repos/{org}/{repo}/releases/assets/280";
         private readonly HttpClient _httpClient;
         private bool updateAvailable = false;
         private static string parentPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).FullName;
@@ -169,6 +169,7 @@ namespace TestEase.Services
         // Downloads the latest version of TestEase from github release
         public async Task DownloadGitHubReleaseAsset(string assetUrl)
         {
+            Trace.WriteLine("This is the latest", assetUrl);
 
             var currentAcceptHeader = _httpClient.DefaultRequestHeaders.Accept.FirstOrDefault();
 
