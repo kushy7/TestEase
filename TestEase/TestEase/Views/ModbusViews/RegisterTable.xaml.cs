@@ -132,6 +132,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                     {
                         viewModel.IsFixedSelected = true;
                         viewModel.IsRangeSelected = false;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = false;
 
                         viewModel.FixedEntryText = fixedShortRegister.Value.ToString();
                         viewModel.LowerRangeText = "";
@@ -146,6 +147,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                     {
                         viewModel.IsFixedSelected = true;
                         viewModel.IsRangeSelected = false;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = true;
 
                         viewModel.FixedEntryText = fixedFloatRegister.Value.ToString();
                         viewModel.LowerRangeText = "";
@@ -161,6 +163,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.IsFixedSelected = false;
                         viewModel.IsRangeSelected = true;
                         viewModel.SelectedServer.IsRandomSelected = true;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = false;
 
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = randomShortRegister.StartValue.ToString();
@@ -176,6 +179,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.IsFixedSelected = false;
                         viewModel.IsRangeSelected = true;
                         viewModel.SelectedServer.IsRandomSelected = true;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = true;
 
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = randomFloatRegister.StartValue.ToString();
@@ -191,6 +195,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.IsFixedSelected = false;
                         viewModel.IsRangeSelected = true;
                         viewModel.SelectedServer.IsCurveSelected = true;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = false;
 
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
@@ -206,6 +211,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.IsFixedSelected = false;
                         viewModel.IsRangeSelected = true;
                         viewModel.SelectedServer.IsCurveSelected = true;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = true;
 
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
@@ -222,6 +228,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.IsFixedSelected = false;
                         viewModel.IsRangeSelected = true;
                         viewModel.SelectedServer.IsLinearSelected = true;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = true;
 
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
@@ -238,6 +245,7 @@ public partial class RegisterTable : Microsoft.Maui.Controls.ContentView
                         viewModel.IsFixedSelected = false;
                         viewModel.IsRangeSelected = true;
                         viewModel.SelectedServer.IsLinearSelected = true;
+                        viewModel.SelectedServer.IsFloatConfigurationChecked = false;
 
                         viewModel.FixedEntryText = "";
                         viewModel.LowerRangeText = "";
