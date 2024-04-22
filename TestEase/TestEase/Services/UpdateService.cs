@@ -129,6 +129,7 @@ namespace TestEase.Services
         }
 
         // Returns whether update is available or not
+        // Testing changelog
         public bool checkForUpdate()
         {
             Trace.WriteLine("Is update available: " + updateAvailable);
