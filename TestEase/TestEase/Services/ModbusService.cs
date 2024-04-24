@@ -198,8 +198,8 @@ namespace TestEase.Services
                                 short current = la.GetCurrentValue();
                                 bool increasing = true;
                                 var val = ValueGenerators.GenerateLinearValue(current, la.StartValue, la.EndValue, la.Increment, ref increasing);
-                                server.WriteHoldingRegister(register.Address, val);
-                                server.HoldingRegisters[register.Address - 1].Value = val;
+                                server.WriteInputRegister(register.Address, val);
+                                server.InputRegisters[register.Address - 1].Value = val;
                             }
                             else if (register is Linear<float> laf)
                             {
@@ -211,11 +211,11 @@ namespace TestEase.Services
                                 short lowBits = lowHighBits[0];
                                 short highBits = lowHighBits[1];
 
-                                server.WriteHoldingRegister(register.Address, lowBits);
-                                server.WriteHoldingRegister(register.Address + 1, highBits);
-                                server.HoldingRegisters[register.Address - 1].Value = lowBits;
-                                server.HoldingRegisters[register.Address].Value = highBits;
-                                server.HoldingRegisters[register.Address].IsFloatHelper = true;
+                                server.WriteInputRegister(register.Address, lowBits);
+                                server.WriteInputRegister(register.Address + 1, highBits);
+                                server.InputRegisters[register.Address - 1].Value = lowBits;
+                                server.InputRegisters[register.Address].Value = highBits;
+                                server.InputRegisters[register.Address].IsFloatHelper = true;
                             }
                         }
                         // DISCRETE INPUTS
