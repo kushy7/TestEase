@@ -76,3 +76,6 @@ ehthumbs.db
 local.testsettings
 *.local.settings.json
 /TestEase/TestEase/bin/Debug/net8.0-windows10.0.19041.0/win10-x64/resources.pri
+
+# Ommit node_modules
+node_modules/
