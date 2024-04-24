@@ -238,20 +238,29 @@
 
         </ScrollView>
 
+        <Grid Grid.Row="3" ColumnDefinitions="*, *, *">
+            <Grid IsVisible="{Binding SelectedServer.IsRegisterSelected}"
+                  Grid.Column="0">
+                <Button Text="Clear"
+                        Pressed="OnClearButtonClick"
+                        HorizontalOptions="Start"/>
+            </Grid>
 
-        <Grid IsVisible="{Binding SelectedServer.IsRegisterSelected}"
-              Grid.Row="3">
-            <Button Text="Save"
-                    Pressed="OnSaveButtonClick"
-                    HorizontalOptions="Center"/>
-        </Grid>
+            <Grid IsVisible="{Binding SelectedServer.IsRegisterSelected}"
+                  Grid.Column="1">
+                <Button Text="Save"
+                        Pressed="OnSaveButtonClick"
+                        HorizontalOptions="Center"/>
+            </Grid>
 
-        <Grid IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}"
-            Grid.Row="3">
-            <Button Text="Save"
-            Pressed="OnSaveButtonClick"
-            HorizontalOptions="Center"/>
+            <Grid IsVisible="{Binding SelectedServer.IsBooleanRegisterSelected}"
+                  Grid.Column="1">
+                <Button Text="Save"
+                        Pressed="OnSaveButtonClick"
+                        HorizontalOptions="Center"/>
+            </Grid>
         </Grid>
+        
 
 
     </Grid>

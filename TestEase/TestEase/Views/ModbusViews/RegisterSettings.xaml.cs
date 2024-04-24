@@ -1,6 +1,8 @@
 using TestEase.Models;
 using TestEase.ViewModels;
 using TestEase.Helpers;
+using Microsoft.Maui.Platform;
+using System.Diagnostics;
 
 namespace TestEase.Views.ModbusViews;
 
@@ -456,4 +458,77 @@ public partial class RegisterSettings : ContentView
         // Display to user that changes have been made and the config will need saved
         vm.SelectedServer.IsNotSaved = true;
     }
+
+    private async void OnClearButtonClick(object sender, EventArgs args)
+    {
+        bool isUserSure = await Application.Current.MainPage.DisplayAlert("Confirmation", "Are you sure you want to clear this register?", "Yes", "No");
+        if (!isUserSure)
+            return;
+
+        var vm = this.BindingContext as ModbusPageViewModel;
+        var register = vm.SelectedServer.SelectedRegister;
+
+        // Find the index of the existing register, if it exists, remove it.
+        int index = vm.SelectedServer.WorkingConfiguration.RegisterModels
+            .FindIndex(r => r.Address == register.Address && r.Type == register.RegisterType);
+        if (index != -1)
+        {
+            vm.SelectedServer.WorkingConfiguration.RegisterModels.RemoveAt(index);
+        }
+
+        if (register.RegisterType == RegisterType.InputRegister)
+        {
+            if (vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper)
+            {
+                // Clear the helper register from table
+                vm.SelectedServer.InputRegisters[register.Address].Name = "";
+                vm.SelectedServer.InputRegisters[register.Address].Value = (short) 0;
+                vm.SelectedServer.InputRegisters[register.Address].IsFloatHelper = false;
+                vm.SelectedServer.InputRegisters[register.Address].IsModified = false;
+                vm.SelectedServer.InputRegisters[register.Address].IsPlaying = false;
+
+                // Reset the helper to 0 in modbus
+                vm.SelectedServer.WriteInputRegister(register.Address + 1, (short) 0);
+            }
+            // Clear the selected register from table
+            register.Name = "";
+            register.Value = (short) 0;
+            register.IsFloatHelper = false;
+            register.IsModified = false;
+            register.IsPlaying = false;
+
+            // Reset the selected register to 0 in modbus
+            vm.SelectedServer.WriteInputRegister(register.Address, 0);
+        } else if (register.RegisterType == RegisterType.HoldingRegister)
+        {
+            if (vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper)
+            {
+                // Clear the helper register from table
+                vm.SelectedServer.HoldingRegisters[register.Address].Name = "";
+                vm.SelectedServer.HoldingRegisters[register.Address].Value = (short) 0;
+                vm.SelectedServer.HoldingRegisters[register.Address].IsFloatHelper = false;
+                vm.SelectedServer.HoldingRegisters[register.Address].IsModified = false;
+                vm.SelectedServer.HoldingRegisters[register.Address].IsPlaying = false;
+
+                // Reset the helper to 0 in modbus
+                vm.SelectedServer.WriteHoldingRegister(register.Address + 1, (short) 0);
+            }
+            // Clear the selected register from table
+            register.Name = "";
+            register.Value = (short) 0;
+            register.IsFloatHelper = false;
+            register.IsModified = false;
+            register.IsPlaying = false;
+
+            // Reset the selected register to 0 in modbus
+            vm.SelectedServer.WriteHoldingRegister(register.Address, (short) 0);
+        }
+
+        // Display to user that changes have been made and the config will need saved
+        vm.SelectedServer.IsNotSaved = true;
+
+        // Selected register set to nothing
+        vm.SelectedServer.SelectedRegister = null;
+    }
+
 }
