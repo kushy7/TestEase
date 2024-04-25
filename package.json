@@ -1,0 +1,17 @@
+{
+  "name": "TestEase",
+  "version": "1.1.0",
+  "description": "TestEase Hitachi Energy 2 project",
+  "scripts": {
+    "changelog": "npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "devDependencies": {
+    "conventional-changelog-cli": "^4.1.0",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
