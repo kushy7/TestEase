@@ -90,7 +90,9 @@ namespace TestEase
             var appViewModel = MauiProgram.ServiceProvider.GetService<AppViewModel>();
             if (appViewModel != null)
             {
-                string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
+                ConfigurationService cs = new ConfigurationService();
+                Directory.CreateDirectory(Path.Combine(cs.GetFolderPath(), "session"));
+                string filePath = Path.Combine(cs.GetFolderPath(), "session", "servers.json");
                 appViewModel.SaveServers(filePath);
             }
         }
@@ -100,7 +102,8 @@ namespace TestEase
             var appViewModel = MauiProgram.ServiceProvider.GetService<AppViewModel>();
             if (appViewModel != null)
             {
-                string filePath = Path.Combine(FileSystem.AppDataDirectory, "servers.json");
+                ConfigurationService cs = new ConfigurationService();
+                string filePath = Path.Combine(cs.GetFolderPath(), "session",  "servers.json");
                 appViewModel.LoadServers(filePath);
             }
         }

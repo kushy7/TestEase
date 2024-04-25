@@ -1,5 +1,6 @@
 
 using System.Diagnostics;
+using TestEase.Services;
 using TestEase.ViewModels;
 
 
@@ -31,7 +32,9 @@ public partial class AboutPage : ContentPage
 
     private void OpenFileExplorer(object sender, EventArgs e)
     {
-        Process.Start("explorer.exe", FileSystem.AppDataDirectory);
+        ConfigurationService cs = new ConfigurationService();
+        Directory.CreateDirectory(Path.Combine(cs.GetFolderPath(), "session"));
+        Process.Start("explorer.exe", Path.Combine(cs.GetFolderPath(), "session"));
     }
 
 }
