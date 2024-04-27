@@ -3,13 +3,21 @@
     x:Class="TestEase.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:TestEase"
-    Shell.FlyoutBehavior="Disabled"
-    Title="TestEase">
+    xmlns:local="clr-namespace:TestEase.Views"
+    xmlns:views="clr-namespace:TestEase.Views"
+    Title="Test Ease">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="Modbus">
+            <ShellContent ContentTemplate="{DataTemplate views:ModbusPage}" />
+        </Tab>
+        <Tab Title="MQTT Broker">
+            <ShellContent ContentTemplate="{DataTemplate views:MQTTBrokerPage}" />
+        </Tab>
+        <Tab Title="About">
+            <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" />
+        </Tab>
+    </TabBar>
+
 
 </Shell>

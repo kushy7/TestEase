@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestEase.Views.ModbusViews.RegisterTable"
+             >
+
+    <Grid Margin="20"
+          RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+          ColumnDefinitions="*">
+
+        <Border Margin="-22,-22,-22,0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+                Grid.Row="0">
+            <StackLayout>
+                <Label Text="Register Table"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </Border>
+
+
+        <Grid ColumnDefinitions="50*, 50*"
+              Grid.Row="1">
+            <Label Text="Only Configured Registers" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <CheckBox Grid.Column="1"
+                      CheckedChanged="OnCheckBoxCheckedChanged"/>
+        </Grid>
+
+        <Grid ColumnDefinitions="50*, 50*"
+              Grid.Row="2">
+            <Label Text="Move to Address" VerticalTextAlignment="Center"
+                   Grid.Column="0"/>
+            <SearchBar x:Name="AddressEntry"
+                       Placeholder="Enter Address"
+                       Keyboard="Numeric"
+                       SearchButtonPressed="OnJumpButtonClicked"
+                       Grid.Column="1" />
+        </Grid>
+
+        
+
+        <Grid ColumnDefinitions="*,*,*,*"
+                     Grid.Row="3" >
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="0">
+                <RadioButton x:Name="DiscreteInputsRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Discrete Inputs" HorizontalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="1">
+                <RadioButton x:Name="CoilsRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Coils" HorizontalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="2">
+                <RadioButton x:Name="InputRegistersRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Input Registers" HorizontalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center"
+                         Grid.Column="3">
+                <RadioButton x:Name="HoldingRegistersRadioButton"
+                             GroupName="RegisterGroup"
+                             HorizontalOptions="Center"
+                             IsChecked="True"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <Label Text="Holding Registers" HorizontalOptions="Center" />
+            </StackLayout>
+        </Grid>
+
+        <Grid ColumnDefinitions="*, *, *"
+              BackgroundColor="Grey"
+              Grid.Row="4">
+            <Label Text="Address" Grid.Column="0"/>
+            <Label Text="Value" Grid.Column="1"/>
+            <Label Text="Name" Grid.Column="2"/>
+        </Grid>
+
+        <ListView x:Name="AddressesListView"
+                  ItemsSource="{Binding SelectedServer.CurrentItems}"
+                  ItemTapped="OnItemTapped"
+                  VerticalScrollBarVisibility="Always"
+                  VerticalOptions="Start"
+                  SelectionMode="Single"
+                  BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource ContainerDark}}"
+                  Grid.Row="5" >
+            <ListView.Resources>
+                <Style TargetType="Grid">
+                    <Setter Property="VisualStateManager.VisualStateGroups">
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Focused">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor"
+                                                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor"
+                                                Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource MidnightBlue}}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </Setter>
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Play/Pause"
+                                      Clicked="PlayClicked" />
+                        </ViewCell.ContextActions>
+                        <Grid ColumnDefinitions="*,*,*"
+                              BackgroundColor="Transparent">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="Grid"
+                                                     Binding="{Binding IsModified}"
+                                                     Value="True">
+                                            <Setter Property="BackgroundColor" Value="OliveDrab"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Grid"
+                                                     Binding="{Binding IsFloatHelper}"
+                                                     Value="True">
+                                            <Setter Property="BackgroundColor" Value="DarkSlateGrey"/>
+                                        </DataTrigger>
+                                        <MultiTrigger TargetType="Grid">
+                                            <MultiTrigger.Conditions>
+                                                <BindingCondition Binding="{Binding IsModified}" Value="true" />
+                                                <BindingCondition Binding="{Binding IsPlaying}" Value="false" />
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="BackgroundColor" Value="Coral" />
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Label Text="{Binding Address}" 
+                                    Grid.Column="0"/>
+                            <Label Text="{Binding Value}" 
+                                    Grid.Column="1"/>
+                            <Label Text="{Binding Name}" 
+                                    Grid.Column="2"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentView>

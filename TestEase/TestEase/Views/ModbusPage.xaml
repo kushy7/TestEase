@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:TestEase.Views.ModbusViews"
+             x:Class="TestEase.Views.ModbusPage"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             >
+
+    <Grid 
+        RowSpacing="10" 
+        ColumnSpacing="10"
+        Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <local:ServerMenu 
+            BackgroundColor="Transparent"
+            Grid.Row="0" Grid.Column="0"
+            Margin="-20,0,0,0"/>
+
+        <Border Grid.Row="0" Grid.Column="1" 
+                Grid.ColumnSpan="3">
+            <local:RegisterConfigs />
+        </Border>
+        
+    </Grid>
+
+
+</ContentPage>

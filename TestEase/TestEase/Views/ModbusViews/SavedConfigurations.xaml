@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestEase.Views.ModbusViews.SavedConfigurations">
+
+    <Grid Margin="20"
+          RowDefinitions="Auto,Auto,*"
+          ColumnDefinitions="*">
+
+        <Border Margin="-22,-22,-22,0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource ContainerDark}}"
+                Grid.Row="0">
+            <StackLayout>
+                <Label Text="Saved Configurations"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </Border>
+
+        <Grid ColumnDefinitions="*, Auto" Grid.Row="1">
+            <Button Text="Folder" Clicked="OpenFileExplorer" Grid.Column="1" HorizontalOptions="End" />
+        </Grid>
+
+        <!-- ListView for displaying the list of configuration files -->
+        <ListView x:Name="ConfigurationsListView"
+          ItemsSource="{Binding AppViewModel.Configurations}"
+          VerticalScrollBarVisibility="Always"
+          VerticalOptions="Start"
+          Grid.Row="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Open" Clicked="OnOpenClicked"/>
+                        </ViewCell.ContextActions>
+                        <StackLayout Padding="5,10,0,10" Margin="10">
+                            <Label Text="{Binding Name}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </Grid>
+</ContentView>
