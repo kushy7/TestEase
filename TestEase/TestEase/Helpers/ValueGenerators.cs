@@ -32,8 +32,8 @@ namespace TestEase.Helpers
             short secondShort = BitConverter.ToInt16(floatBytes, 2);
             short[] shortArray = new short[2];
             //flip these values if you want to flip what registers the values go into (since coretec wants them flipped)
-            shortArray[0] = firstShort;
-            shortArray[1] = secondShort;
+            shortArray[1] = firstShort;
+            shortArray[0] = secondShort;
             return shortArray;
         }
 
